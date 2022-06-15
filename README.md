@@ -1,8 +1,56 @@
-# Sample GitLab Project
+# 한다
 
-This sample project shows how a project in GitLab looks for demonstration purposes. It contains issues, merge requests and Markdown files in many branches,
-named and filled with lorem ipsum.
+> 한솔 임직원들의 목표 달성 동기부여를 위한 챌린지 서비스
+> 
 
-You can look around to get an idea how to structure your project and, when done, you can safely delete this project.
+## 프로젝트 개요
 
-[Learn more about creating GitLab projects.](https://docs.gitlab.com/ee/gitlab-basics/create-project.html)
+- 개발 동기
+    - 혼자서 시작하기 힘든 자기계발을 회사의 동료들과 같이 목표를 달성하는 것이 어떨까?
+- 기대효과
+    - 취미측면, 자기계발 측면을 통해서 성취감을 얻을 수 있다.
+    - 공동의 목표를 통해서 유대감을 형성할 수 있다.
+    - 자율적이고 창의적인 조직 문화 형성이 가능하다.
+    
+
+## 구현기능
+
+- 회원가입 , 로그인
+    - 회원정보 (ID, 비밀번호, 이름)
+    - 부서 (조직도에서 선택)
+    - 프로필 이미지
+    - 전화번호
+    - e-mail
+    - 성별
+    - 직급
+- 챌린지 CRUD
+    - 챌린지 이름
+    - 썸네일 이미지 (API를 통해 키워드 검색)
+    - 카테고리
+        - 취미
+            - 영화, 모임, 등산
+        - 자기계발
+            - 독서, 자격증, 개발
+    - 직급, 성별, 부서 제한
+    - 챌린지 설명
+    - 챌린지 기간 설정
+- 댓글 CRUD
+- 마이페이지
+    - 참여한 챌린지
+    - 개설한 챌린지
+        - 모집을 제한할 수 있음
+    - 회원정보 수정
+    - 챌린지 일정 확인
+
+## 역할분담
+
+- 최원준
+    - 로그인, 회원가입
+    - 마이페이지 일정기능, 회원정보 수정
+- 전현정
+    - 메인페이지 (검색, 정렬포함)
+    - 마이페이지 (챌린지 종류별 리스트)
+- 이고은
+    - 챌린지 상세
+    - 챌린지 참여 제한 설정 여부
+    - 챌린지 CRUD
