@@ -1,72 +1,131 @@
 <!DOCTYPE html>
-<html
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{layout/layout}"
->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
 <div layout:fragment="content">
-   <main id="main">
-  
-  <!-- ======= Breadcrumbs ======= -->
-  	<div class="breadcrumbs">
-      <div class="page-header d-flex align-items-center" style="background-image: url('assets/img/page-header.jpg');">
-        <div class="container position-relative">
-          <div class="row d-flex justify-content-center">
-            <div class="col-lg-6 text-center">
-              <h2>Login</h2>
-              <p>원하는 챌린지에 참여해보세요.</p>
-            </div>
-          </div>
-        </div>
-      </div>
+	<main id="main">
 
-      <nav>
-        <div class="container">
-          <ol>
-            <li><a href="index.html">홈</a></li>
-            <li>회원가입</li>
-          </ol>
-        </div>
-      </nav>
-    </div> <!-- End Breadcrumbs -->
+		<!-- ======= Breadcrumbs ======= -->
+		<div class="breadcrumbs">
+			<div class="page-header d-flex align-items-center"
+				style="background-image: url('assets/img/page-header.jpg');">
+				<div class="container position-relative">
+					<div class="row d-flex justify-content-center">
+						<div class="col-lg-6 text-center">
+							<h2>Register</h2>
+							<p>원하는 챌린지에 참여해보세요.</p>
+						</div>
+					</div>
+				</div>
+			</div>
 
-    <section class="sample-page">
-      <div class="container" data-aos="fade-up">
-      </div>
-    </section>
+			<nav>
+				<div class="container">
+					<ol>
+						<li><a href="index.html">홈</a></li>
+						<li>회원가입</li>
+					</ol>
+				</div>
+			</nav>
+		</div> <!-- End Breadcrumbs -->
 
-    <!-- ======= Services Section ======= -->
-    <section id="service" class="services pt-0">
-      <div class="container" data-aos="fade-up">
+		<section class="sample-page" style="padding-top: 0">
+			<div class="container" data-aos="fade-up">
+			</div>
+		</section>
 
-        <div class="section-header">
-          <span>회원가입</span>
-          <h2>회원가입</h2>
-        </div>
-		<section id="contact" class="contact">
-      		<div class="text-center">
-	          <div class="login-div">
-	            <form action="" method="post" role="form" class="php-email-form">
-	              <div class="row">
-	                <div class="form-group mt-3 memberid-div">
-	                	<label class="login-label"><b>아이디</b></label>
-	                  <input type="text" name="memberid" class="form-control" id="memberid" placeholder="아이디" required="">
-	                </div>
-	                <div class="form-group mt-3">
-	                	<label class="login-label"><b>비밀번호</b></label>
-	                  <input type="password" class="form-control" name="password" id="password" placeholder="비밀번호" required="">
-	                </div>
-	              </div>
-	              <div class="text-center login-btn-div"><button type="submit">회원가입</button></div>
-	            </form>
-	          </div><!-- End Contact Form -->
+		<!-- ======= Services Section ======= -->
+		<section id="service" class="services pt-0">
+			<div class="container" data-aos="fade-up">
 
-        </div>
-    	</section>
-      </div>
-     	
-    </section><!-- End Services Section -->
-    
-  </main><!-- End #main --> 
+				<div class="section-header">
+					<span>회원가입</span>
+					<h2>회원가입</h2>
+				</div>
+				<section id="contact" class="contact">
+					<div class="text-center">
+						<div class="login-div">
+							<form action="" method="post" role="form" class="php-email-form">
+								<div class="row">
+									<div class="form-group mt-3">
+										<label class="login-label"><b>아이디</b></label>
+										<input type="text" name="memberid" class="form-control" id="memberid"
+											placeholder="아이디" required="">
+									</div>
+									<div class="form-group mt-3">
+										<label class="login-label"><b>비밀번호</b></label>
+										<input type="password" class="form-control" name="password" id="password"
+											placeholder="비밀번호" required="">
+									</div>
+									<div class="form-group mt-3">
+										<label class="login-label"><b>전화번호</b></label>
+										<input type="text" class="form-control" id="member-call" placeholder="전화번호"
+											required="">
+									</div>
+									<div class="form-group mt-3">
+										<label class="login-label"><b>e-mail</b></label>
+										<input type="text" class="form-control" id="e-mail" placeholder="e-mail"
+											required="">
+									</div>
+									<label class="login-label"><b>성별</b></label>
+									<div class="form-check">
+										<input class="form-check-input" type="radio" name="flexRadioDefault"
+											id="flexRadioDefault1">
+										<label class="form-check-label" for="flexRadioDefault1"
+											style="padding-top:10px">
+											Default radio
+										</label>
+									</div>
+									<div class="form-check">
+										<input class="form-check-input" type="radio" name="flexRadioDefault"
+											id="flexRadioDefault2" checked>
+										<label class="form-check-label" for="flexRadioDefault2"
+											style="padding-top:10px">
+											Default checked radio
+										</label>
+									</div>
+									<div class="d-flex">
+										<label class="login-label"><b>e-mail</b></label>
+										<div class="dropdown me-1">
+											<button type="button" class="btn btn-secondary dropdown-toggle"
+												id="dropdownMenuOffset" data-bs-toggle="dropdown" aria-expanded="false"
+												data-bs-offset="10,20">
+												Offset
+											</button>
+											<ul class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+												<li><a class="dropdown-item" href="#">Action</a></li>
+												<li><a class="dropdown-item" href="#">Another action</a></li>
+												<li><a class="dropdown-item" href="#">Something else here</a></li>
+											</ul>
+										</div>
+										<label class="login-label"><b>e-mail</b></label>
+										<div class="dropdown me-1">
+											<button type="button" class="btn btn-secondary dropdown-toggle"
+												id="dropdownMenuOffset" data-bs-toggle="dropdown" aria-expanded="false"
+												data-bs-offset="10,20">
+												Offset
+											</button>
+											<ul class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+												<li><a class="dropdown-item" href="#">Action</a></li>
+												<li><a class="dropdown-item" href="#">Another action</a></li>
+												<li><a class="dropdown-item" href="#">Something else here</a></li>
+											</ul>
+										</div>
+									</div>
+									<div class="custom-file">
+											<input type="file" class="custom-file-input" id="customFile">
+											<label class="custom-file-label" for="customFile">파일선택</label>
+										</div>
+								</div>
+								<div class="text-center login-btn-div"><button type="submit">회원가입</button></div>
+							</form>
+						</div><!-- End Contact Form -->
+
+					</div>
+				</section>
+			</div>
+		</section><!-- End Services Section -->
+
+	</main><!-- End #main -->
 </div>
+
 </html>
