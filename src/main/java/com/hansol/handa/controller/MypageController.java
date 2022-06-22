@@ -1,5 +1,17 @@
 package com.hansol.handa.controller;
 
-public class MypageController {
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+@Controller
+@RequestMapping("mypage")
+public class MypageController {
+	
+	@GetMapping("memberdetail")
+	public String memberDatail() {
+		System.out.println("memberDetail-------------------------------");
+		return "/mypage/memberDetail";
+	}
+	 
 }

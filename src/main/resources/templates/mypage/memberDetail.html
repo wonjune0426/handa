@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout/layout}"
+>
+<div layout:fragment="content">
+   <main id="main">
+  
+  <!-- ======= Breadcrumbs ======= -->
+  	<div class="breadcrumbs">
+      <div class="page-header d-flex align-items-center" style="background-image: url('../assets/img/page-header.jpg');">
+        <div class="container position-relative">
+          <div class="row d-flex justify-content-center">
+            <div class="col-lg-6 text-center">
+              <h2>My Page</h2>
+              <!--<p>원하는 챌린지에 참여해보세요.</p>-->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <nav>
+        <div class="container">
+          <ol>
+            <li><a href="/">홈</a></li>
+            <li><a href="/mypage/memberdetail">마이페이지</a></li>
+            <li>내 정보</li>
+          </ol>
+        </div>
+      </nav>
+    </div> <!-- End Breadcrumbs -->
+
+    <section class="sample-page">
+      <div class="container" data-aos="fade-up">
+      </div>
+    </section>
+
+    <!-- ======= Services Section ======= -->
+    <section id="service" class="services pt-0">
+      <div class="container" data-aos="fade-up">
+        
+		<section id="contact" class="contact">
+			<section id="service-details" class="service-details">
+      	<div class="container aos-init aos-animate" data-aos="fade-up">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-4">
+            <div class="services-list">
+              <a href="#" class="active">Storage</a>
+              <a href="#">Logistics</a>
+              <a href="#">Cargo</a>
+              <a href="#">Trucking</a>
+              <a href="#">Packaging</a>
+              <a href="#">Warehousing</a>
+            </div>
+
+            <h4>Enim qui eos rerum in delectus</h4>
+            <p>Nam voluptatem quasi numquam quas fugiat ex temporibus quo est. Quia aut quam quod facere ut non occaecati ut aut. Nesciunt mollitia illum tempore corrupti sed eum reiciendis. Maxime modi rerum.</p>
+          </div>
+
+          <div class="col-lg-8">
+            <img src="assets/img/service-details.jpg" alt="" class="img-fluid services-img">
+            
+          </div>
+
+        </div>
+
+      </div>
+    	</section>
+    	</section>
+      </div>
+    </section><!-- End Services Section -->
+    
+  </main><!-- End #main --> 
+</div>
+</html>
