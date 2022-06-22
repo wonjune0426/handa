@@ -2,6 +2,7 @@ package com.hansol.handa.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @Controller
@@ -28,12 +29,6 @@ public class ChallengeController {
 	public String detail() {
 		System.out.println("detail---------------------------------------");
 		return "detail";
-	}
-	
-	@GetMapping("/login")
-	public String login() {
-		System.out.println("login---------------------------------------");
-		return "login";
 	}
 	
 }

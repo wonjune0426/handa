@@ -78,6 +78,34 @@
     background-color: #fff;
 }
 .login-div {
-	width: 60%;
+	width: 40%;
 	display: inline-block;
+}
+
+.login-label {
+	margin-bottom: 10px;
+}
+
+.memberid-div {
+	margin-top: 15px;
+}
+
+.login-btn-div {
+	margin-top: 30px;
+}
+
+.login-btn-div button {
+	width: 100%;
+}
+
+.member-join-div {
+	font-size: 14px;
+	margin-top: 15px;
+}
+
+@media (max-width: 900px) {
+	.login-div {
+		width: 90%;
+		display: inline-block;
+	}
 }
