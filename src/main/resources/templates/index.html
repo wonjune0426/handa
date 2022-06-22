@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout/layout}"
+>
+<div layout:fragment="content">
+   <main id="main">
+  
+  <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs">
+      <div class="page-header d-flex align-items-center" style="background-image: url('assets/img/page-header.jpg');">
+        <div class="container position-relative">
+          <div class="row d-flex justify-content-center">
+            <div class="col-lg-6 text-center">
+              <h2>Challenge List</h2>
+              <p>원하는 챌린지에 참여해보세요.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <nav>
+        <div class="container">
+          <ol>
+            <li><a href="index.html">홈</a></li>
+            <li>챌린지 리스트</li>
+          </ol>
+        </div>
+      </nav>
+    </div><!-- End Breadcrumbs -->
+
+    <section class="sample-page">
+      <div class="container" data-aos="fade-up">
+        
+      </div>
+    </section>
+
+    <!-- ======= Services Section ======= -->
+    <section id="service" class="services pt-0">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+          <span>챌린지 리스트</span>
+          <h2>챌린지 리스트</h2>
+			
+        </div>
+
+        <div class="row gy-4">
+		
+		<div class="create-challenge-div">
+			<a href="/create" class="btn-1">챌린지 생성</a>
+		</div>
+		<div class="row gy-4">
+			<div class="btn-group order-div col-md-2">
+				<select class="form-control">
+				  <option>최신순</option>
+				  <option>오래된순</option>
+				  <option>참여인원순</option>
+				</select>
+			</div>
+			<div class="col-md-6"></div>
+			<div class="search-div col-md-4">
+				<form action="#" class="form-search d-flex align-items-stretch mb-3 aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
+		            <input type="text" class="form-control" placeholder="검색어를 입력하세요.">
+		            <button type="submit" class="btn btn-primary handa-outline-btn">검색</button>
+		         </form>
+			</div>
+		
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="card challenge-item">
+              <div class="card-img">
+                <img src="assets/img/storage-service.jpg" alt="" class="img-fluid">
+              </div>
+              <h3><a href="service-details.html" class="stretched-link">정보처리기사 공부 챌린지</a></h3>
+              <p>2022.06.20 ~ 2022.06.30</p>
+            </div>
+          </div><!-- End Card Item -->
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="card challenge-item">
+              <div class="card-img">
+                <img src="assets/img/logistics-service.jpg" alt="" class="img-fluid">
+              </div>
+              <h3><a href="service-details.html" class="stretched-link">정보처리기사 공부 챌린지</a></h3>
+              <p>2022.06.20 ~ 2022.06.30</p>
+            </div>
+          </div><!-- End Card Item -->
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="card challenge-item">
+              <div class="card-img">
+                <img src="assets/img/cargo-service.jpg" alt="" class="img-fluid">
+              </div>
+              <h3><a href="service-details.html" class="stretched-link">정보처리기사 공부 챌린지</a></h3>
+              <p>2022.06.20 ~ 2022.06.30</p>
+            </div>
+          </div><!-- End Card Item -->
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="card challenge-item">
+              <div class="card-img">
+                <img src="assets/img/trucking-service.jpg" alt="" class="img-fluid">
+              </div>
+              <h3><a href="service-details.html" class="stretched-link">정보처리기사 공부 챌린지</a></h3>
+              <p>2022.06.20 ~ 2022.06.30</p>
+            </div>
+          </div><!-- End Card Item -->
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+            <div class="card challenge-item">
+              <div class="card-img">
+                <img src="assets/img/packaging-service.jpg" alt="" class="img-fluid">
+              </div>
+              <h3><a href="service-details.html" class="stretched-link">정보처리기사 공부 챌린지</a></h3>
+              <p>2022.06.20 ~ 2022.06.30</p>
+            </div>
+          </div><!-- End Card Item -->
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+            <div class="card challenge-item">
+              <div class="card-img">
+                <img src="assets/img/warehousing-service.jpg" alt="" class="img-fluid">
+              </div>
+              <h3><a href="service-details.html" class="stretched-link">정보처리기사 공부 챌린지</a></h3>
+              <p>2022.06.20 ~ 2022.06.30</p>
+            </div>
+          </div><!-- End Card Item -->
+		  
+		  <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="card challenge-item">
+              <div class="card-img">
+                <img src="assets/img/trucking-service.jpg" alt="" class="img-fluid">
+              </div>
+              <h3><a href="service-details.html" class="stretched-link">정보처리기사 공부 챌린지</a></h3>
+              <p>2022.06.20 ~ 2022.06.30</p>
+            </div>
+          </div><!-- End Card Item -->
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+            <div class="card challenge-item">
+              <div class="card-img">
+                <img src="assets/img/packaging-service.jpg" alt="" class="img-fluid">
+              </div>
+              <h3><a href="service-details.html" class="stretched-link">정보처리기사 공부 챌린지</a></h3>
+              <p>2022.06.20 ~ 2022.06.30</p>
+            </div>
+          </div><!-- End Card Item -->
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+            <div class="card challenge-item">
+              <div class="card-img">
+                <img src="assets/img/warehousing-service.jpg" alt="" class="img-fluid">
+              </div>
+              <h3><a href="service-details.html" class="stretched-link">정보처리기사 공부 챌린지</a></h3>
+              <p>2022.06.20 ~ 2022.06.30</p>
+            </div>
+          </div><!-- End Card Item -->
+
+        </div>
+		
+		<div class="page-nav-div">
+		<nav aria-label="Page navigation example">
+		  <ul class="pagination justify-content-center">
+			<li class="page-item">
+			  <a class="page-link" href="#" aria-label="Previous">
+				<span aria-hidden="true">&laquo;</span>
+				<span class="sr-only">Previous</span>
+			  </a>
+			</li>
+			<li class="page-item"><a class="page-link" href="#">1</a></li>
+			<li class="page-item"><a class="page-link" href="#">2</a></li>
+			<li class="page-item"><a class="page-link" href="#">3</a></li>
+			<li class="page-item">
+			  <a class="page-link" href="#" aria-label="Next">
+				<span aria-hidden="true">&raquo;</span>
+				<span class="sr-only">Next</span>
+			  </a>
+			</li>
+		  </ul>
+		</nav>
+		</div>
+
+      </div>
+    </section><!-- End Services Section -->
+  </main><!-- End #main --> 
+</div>
+</html>
