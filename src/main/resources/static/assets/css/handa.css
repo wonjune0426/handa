@@ -103,6 +103,22 @@
 	margin-top: 15px;
 }
 
+.challenge-detail-tab a.active {
+    font-weight: 700;
+    border-color: var(--color-primary);
+}
+.challenge-detail-tab a {
+	display: inline-block;
+	text-align: center;
+	width: 120px;
+    line-height: 1;
+    padding: 8px 15px 8px 15px;
+    border-bottom: 3px solid #c2cbdf;
+    margin: 20px 0;
+    color: var(--color-secondary);
+    transition: 0.3s;
+}
+
 @media (max-width: 900px) {
 	.login-div {
 		width: 90%;

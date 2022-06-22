@@ -16,19 +16,19 @@ public class ChallengeController {
 	@GetMapping({"/", "/list"})
 	public String list() {
 		System.out.println("index---------------------------------------");
-		return "index";
+		return "challenge/list";
 	}
 	
 	@GetMapping("/create")
 	public String create() {
 		System.out.println("create---------------------------------------");
-		return "create";
+		return "challenge/create";
 	}
 	
 	@GetMapping("/detail")
 	public String detail() {
 		System.out.println("detail---------------------------------------");
-		return "detail";
+		return "challenge/detail";
 	}
 	
 }
