@@ -14,6 +14,7 @@ public class MypageController {
 	
 	@GetMapping("/memberdetail")
 	public String memberDatail() {
+<<<<<<< HEAD
 		logger.info("memberDetail-------------------------------");
 		return "mypage/memberDetail";
 	}
@@ -22,6 +23,10 @@ public class MypageController {
 	public String challengeProduce() {
 		logger.info("challenge-produce-------------------------");
 		return "mypage/challengeProduce";
+=======
+		System.out.println("memberDetail-------------------------------");
+		return "mypage/memberDetail";
+>>>>>>> 95dfc686c3c2e783e3e85c24ec92930b681cd992
 	}
 	 
 }
