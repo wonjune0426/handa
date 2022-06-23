@@ -11,7 +11,7 @@ public class MypageController {
 	@GetMapping("memberdetail")
 	public String memberDatail() {
 		System.out.println("memberDetail-------------------------------");
-		return "/mypage/memberDetail";
+		return "mypage/memberDetail";
 	}
 	 
 }
