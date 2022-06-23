@@ -20,4 +20,10 @@ public class UserController {
 		return "member/register";
 	}
 	
+	@GetMapping("/amend")
+	public String amendmember() {
+		System.out.print("amend--------------------------------------------");
+		return "member/amend";
+	}
+	
 }
