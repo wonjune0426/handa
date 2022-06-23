@@ -35,13 +35,34 @@
 }
 .search-div {
 	display: inline-block;
-	padding: 0px;
+	padding: 0px 15px;
 	text-align: right;
 }
 
 .search-div input {
 	display: inline-block;
 	width: initial;
+	height: 100%;
+	vertical-align: middle;
+	border-radius: 3px 0px 0px p3x !important;
+}
+
+.list-search-btn {
+	margin-left: -10px;
+	vertical-align: middle;
+	border-radius: 0px 3px 3px 0px !important; 
+	height: 100%; 
+}
+
+.handa-list-select {
+	appearance: auto;
+	-moz-appearance: auto;
+	-webkit-appearance: auto;
+}
+
+.handa-search-form {
+	height: 36px;
+	vertical-align: middle;
 }
 
 .main-category {
