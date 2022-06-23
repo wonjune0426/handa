@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("mypage")
 public class MypageController {
 	
-	@GetMapping("memberdetail")
+	@GetMapping("/memberdetail")
 	public String memberDatail() {
 		System.out.println("memberDetail-------------------------------");
-		return "/mypage/memberDetail";
+		return "mypage/memberDetail";
 	}
 	 
 }
