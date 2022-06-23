@@ -38,6 +38,10 @@
     border: 1px solid var(--color-primary);
 }
 
+.buy-btn:hover {
+  background: var(--color-primary);
+  color: #fff;
+}
 
 .profile-img {
 	border-radius: 100%;
@@ -65,7 +69,7 @@
 				<div class="container">
 					<ol>
 						<li><a href="/">홈</a></li>
-            			<li><a href="/mypage/memberdetail">마이페이지</a></li>
+            			<li>마이페이지</li>
             			<li>내 정보</li>
 					</ol>
 				</div>
@@ -78,10 +82,10 @@
 				<div class="row gy-4">
 					<div class="col-lg-12">
 						<div class="challenge-detail-tab">
-							<a href="/detail" class="active">내 정보</a> 
+							<a href="/mypage/memberdetail" class="active">내 정보</a> 
 							<a href="/mypage/challenge-produce">생성 챌린지</a>
-							<a href="/comment">참여 챌린지</a>
-							<a href="/comment">일정 관리</a>
+							<a href="/mypage/challenge-part">참여 챌린지</a>
+							<a href="">일정 관리</a>
 						</div>
 					</div>
 					
@@ -90,23 +94,22 @@
 						<div class="row gy-4 align-items-center features-item aos-init aos-animate" data-aos="fade-up">
           					<div class="profile col-md-5 text-center">
             					<img src="../assets/img/features-1.jpg" class="profile-img img-fluid" alt="">
-            					<!--<h3>ID: hansol333</h3>-->
           					</div>
           					<div class="col-md-7">
             					<h3>hansol333 / OOO 선임</h3>
             					<p class="fst-italic">hansol@hansol.com</p>
             					<ul>
               						<li><i class="bi bi-check"></i> 한솔 인티큐브</li>
-              						<li><i class="bi bi-check"></i> 내가 생성한 챌린지 : <a href="/mypage/challenge-produce">3</a><li>
-              						<li><i class="bi bi-check"></i> 참여한 챌린지 : 10개</li>
+              						<li></li>
+              						<li><i class="bi bi-check"></i> 내가 생성한 챌린지 : <a href="/mypage/challenge-produce">&nbsp 3</a>개<li>
+              						<li><i class="bi bi-check"></i> 내가 참여한 챌린지 : <a href="/mypage/challenge-produce">&nbsp 10</a>개</li>
             					</ul>
           					</div>
         				</div>
 					</div>
 				</div>
 			</div>
-			
-			<div class="text-center"><a href="#" class="buy-btn align-items-center margin: 10px">정보 수정하기</a></div>
+			<div class="pricing-item text-center"><a href="#" class="buy-btn align-items-center">정보 수정하기</a></div>
 		</section>
 	</main>
 	<!-- End #main -->

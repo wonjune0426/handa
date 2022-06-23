@@ -23,7 +23,12 @@ public class MypageController {
 	public String challengeProduce() {
 		logger.info("challenge-produce-------------------------");
 		return "mypage/challengeProduce";
-
+	}
+	
+	@GetMapping("/challenge-part")
+	public String challengePart() {
+		logger.info("challenge-part-----------------");
+		return "mypage/challengePart";
 	}
 	 
 }
