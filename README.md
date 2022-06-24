@@ -15,13 +15,13 @@
 
 ## 와이어프레임
 
-![와이어프레임.PNG](/uploads/7c58b7d1d693148fc19f34442140cf23/와이어프레임.PNG.png)
+![와프](/uploads/31db09f423133c7668c6c56ddc358be2/와프.PNG)
 
 ## ERD
 
 [HansolHanda (erdcloud.com)](https://www.erdcloud.com/d/mmLojnftsdFF4n3SR)
 
-![ERD.PNG](/uploads/fe0b1324216606ab2527d308588b1cb2/ERD.PNG.png)
+![ERD](/uploads/8c5fc2755f09c19194d63d37116d8e73/ERD.PNG)
 
 ## 구현기능
 
@@ -69,11 +69,11 @@
     - 각 카테고리별 시간순, 참여인원수 정렬
 - 댓글 CRUD
     - 댓글은 50자 이내로 제한하며 대댓글 기능은 없음
+    - 댓글은 해당 챌린지에 참여한 사람만 달 수 있음
 - 마이페이지
     - 간단한 프로필 정보
     - 참여한 챌린지
     - 개설한 챌린지
-        - 모집을 제한할 수 있음
     - 회원정보 수정
     - 챌린지 일정 확인
 
@@ -96,8 +96,6 @@
 
 ## 개발환경
 
-(상세 버전 미정)
-
 - **Back-End**
     - Spring Boot 2.6.8
     - Java 8
@@ -105,11 +103,11 @@
     - Gradle
     - mariaDB 10.6.8
     - Spring Security
+    - CentOS 7
 
 - **Front-End**
     - HTML, CSS, JS
     - Bootstrap
-    - JQuery
     - Thymeleaf
 
 - **APIs**
@@ -128,3 +126,11 @@
 ## WBS
 
 [https://docs.google.com/spreadsheets/d/1pTb7TWnkoVZI2LFhVo_q-zKbTDVSNS_8CK5rVLtv7k0/edit#gid=0](https://docs.google.com/spreadsheets/d/1pTb7TWnkoVZI2LFhVo_q-zKbTDVSNS_8CK5rVLtv7k0/edit#gid=0)
+
+## 작업일지
+
+[api 명세서](https://www.notion.so/a3c99f845cb94dcca0528298cd931620)
+
+[일정관리](https://www.notion.so/8539fd4b0b24472e8c2603bb26e6d0b7)
+
+[Commit message Guide](https://www.notion.so/Commit-message-Guide-1739b1b800fb4c6f9e44b1366da00446)
