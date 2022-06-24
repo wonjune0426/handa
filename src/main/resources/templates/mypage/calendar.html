@@ -6,40 +6,16 @@
 <head>
 	<title>일정 관리</title>    
 	
-    <!-- fullcalendar CDN -->  
-    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css' rel='stylesheet' />  
-    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js'></script>
-    
-<!--     <script src='https://unpkg.com/popper.js/dist/umd/popper.min.js'></script> -->
-<!-- 	<script src='https://unpkg.com/tooltip.js/dist/umd/tooltip.min.js'></script> -->
-	
-	<script src='../assets/js/calendar.js'></script>
+	<!-- include CSS File -->
+	<th:block layout:fragment="css">
+		<!-- fullcalendar CSS link -->
+		<link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css' rel='stylesheet' />
+		<!-- Handa Challenge CSS File -->
+		<link th:href="@{/assets/css/mypage.css}" rel="stylesheet">
+	</th:block>
 </head>
 
 <div layout:fragment="content">
-
-<style>
-
-/* 마이페이지 탭 활성화될 경우*/
-.mypage-detail-tab a.active {
-    font-weight: 700;
-    border-color: var(--color-primary);
-}
-
-/* 마이페이지 탭  */
-.mypage-detail-tab a {
-	display: inline-block;
-	text-align: center;
-	width: 120px;
-    line-height: 1;
-    padding: 8px 15px 8px 15px;
-    border-bottom: 3px solid #C2CBDF;
-    margin: 20px 0;
-    color: var(--color-secondary);
-    transition: 0.3s;
-}
-
-</style>
 	<main id="main">
 		<!-- ======= Breadcrumbs ======= -->
 		<div class="breadcrumbs">
@@ -86,4 +62,14 @@
 	<!-- End #main -->
 	
 </div>
+
+	<!-- include JS Script -->
+	<th:block layout:fragment="javascript">   
+	    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js'></script>
+	    
+	<!--     <script src='https://unpkg.com/popper.js/dist/umd/popper.min.js'></script> -->
+	<!-- 	<script src='https://unpkg.com/tooltip.js/dist/umd/tooltip.min.js'></script> -->
+		
+		<script src='../assets/js/calendar.js'></script>
+	</th:block>
 </html>

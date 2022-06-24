@@ -1,0 +1,291 @@
+/* ------------챌린지 리스트 (challenge/list.html)-------------- */
+/* 챌린지 생성 버튼 */
+.create-challenge-btn {
+	display: inline-block;
+	padding: 12px 40px;
+	border-radius: 4px;
+	color: #fff;
+	background-color: #0d42ff;
+	border: 2px solid #0d42ff;
+	transition: none;
+	font-size: 16px;
+	font-weight: 500;
+	transition: 0.3s;
+	font-family: var(- -font-primary);
+}
+
+/* 챌린지 생성 버튼 감싸는 div */
+.create-challenge-div {
+	text-align: right;
+}
+
+/* 리스트 정렬 select 태그 감싸는 div */
+.order-div {
+	display: inline-block;
+}
+
+/* 리스트 정렬 select 태그 */
+.handa-list-select {
+	appearance: auto;
+	-moz-appearance: auto;
+	-webkit-appearance: auto;
+}
+
+/* 리스트 검색 form 태그 감싸는 div */
+.search-div {
+	display: inline-block;
+	padding: 0px 15px;
+	text-align: right;
+}
+
+/* 리스트 검색창 */
+.search-div input {
+	display: inline-block;
+	width: initial;
+	height: 100%;
+	vertical-align: middle;
+	border-radius: 3px 0px 0px p3x !important;
+}
+
+/* 리스트 검색 버튼 */
+.list-search-btn {
+	margin-left: -10px;
+	vertical-align: middle;
+	border-radius: 0px 3px 3px 0px !important;
+	height: 100%;
+}
+
+/* 리스트 검색 form 태그 */
+.handa-search-form {
+	height: 36px;
+	vertical-align: middle;
+}
+
+/* 리스트 검색 버튼 (파란테두리 흰배경) */
+.handa-outline-btn {
+	display: inline-block;
+	padding: 6px 12px;
+	border-radius: 4px;
+	color: #0d42ff;
+	transition: none;
+	font-size: 14px;
+	font-weight: 500;
+	font-family: var(- -font-primary);
+	transition: 0.3s;
+	border: 1px solid #0d42ff;
+	background-color: #fff;
+}
+
+/* ------------ 챌린지 생성 (challenge/create.html)-------------- */
+/* 카테고리 대분류 */
+.main-category {
+	display: block;
+	width: 100%;
+	padding: 0.7rem 0.9rem;
+	line-height: 1.5;
+	color: #212529;
+	background-color: #fff;
+	background-clip: padding-box;
+	border: 1px solid #ced4da;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	border-radius: 0 !important;
+	transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+	font-size: 14px;
+}
+
+/* 챌린지 생성버튼 감싸는 div */
+.create-challenge {
+	margin-top: 50px;
+}
+
+/* ------------ 챌린지 상세 (기본정보 페이지 challenge/detail.html) -------------- */
+/* 챌린지 상세 탭 (기본정보, 댓글) */
+.challenge-detail-tab a.active {
+	font-weight: 700;
+	border-color: #0d42ff;
+}
+
+.challenge-detail-tab a {
+	display: inline-block;
+	text-align: center;
+	width: 120px;
+	line-height: 1;
+	padding: 8px 15px 8px 15px;
+	border-bottom: 3px solid #c2cbdf;
+	margin: 20px 0;
+	color: #000;
+	transition: 0.3s;
+}
+
+/* 챌린지 제목 h3 태그 */
+.ch-detail-title {
+	margin-bottom: 28px;
+}
+
+/* 챌린지 썸네일 img 태그 */
+.ch-detail-thumb {
+	height: 300px;
+}
+
+/* 참여인원 p 태그 */
+.join-member-text {
+	padding: 8px 8px 0px 8px;
+	font-weight: bold;
+}
+
+/* 참여인원 명 수 span 태그 */
+.join-member-num {
+	font-weight: normal;
+	font-size: 14px;
+}
+
+/* 참여인원 */
+.challenge-join-member {
+	border: 1px solid #afafaf;
+	border-radius: 8px;
+	height: 300px;
+	padding: 12px;
+	overflow-y: scroll;
+	margin-bottom: 25px;
+}
+
+/* 참여인원 목록 */
+.ch-j-detail-div {
+	border: 1px solid #afafaf;
+	border-radius: 8px;
+	padding: 10px 12px;
+	margin: 5px 0px;
+}
+
+.ch-j-detail-div:hover {
+	background-color: #e7f1f5;
+}
+
+.ch-j-detail {
+	display: inline-block;
+	margin: 0px;
+}
+
+.ch-user-icon {
+	font-size: 12px;
+	color: #8a8a8a;
+	margin-right: 5px;
+}
+
+.ch-detail-position {
+	font-size: 13px !important;
+}
+
+.ch-detail-aff {
+	font-size: 12px !important;
+	color: #818181;
+}
+
+/* 챌린지 목록 이동 버튼 감싸는 div */
+.ch-detail-to-list-btn {
+	text-align: right;
+	margin-top: 30px;
+}
+
+/* 챌린지 상세(기본정보) 반응형 css */
+@media ( max-width : 600px) {
+	.ch-detail-thumb {
+		width: 100%;
+		display: block;
+	}
+	.challenge-join-member {
+		width: 94%;
+		margin: 2% 3%;
+	}
+}
+
+/* ------------ 챌린지 상세 (댓글 페이지 challenge/comment.html) -------------- */
+/* 댓글 작성하기 버튼 */
+.comment-btn {
+	background: #0d42ff;
+	border: 0;
+	padding: 10px 30px;
+	color: #fff;
+	transition: 0.4s;
+	border-radius: 4px;
+	width: 10%;
+}
+
+.ch-comment-input-content {
+	margin-top: 25px;	
+}
+
+.ch-comment-create-div {
+	text-align: right;
+}
+
+/* 댓글 목록 css */
+.comment-content .card {
+	border: none;
+	box-shadow: 5px 6px 6px 2px #e9ecef;
+	border-radius: 4px;
+}
+
+.comment-content .dots {
+	height: 4px;
+	width: 4px;
+	margin-bottom: 2px;
+	background-color: #bbb;
+	border-radius: 50%;
+	display: inline-block;
+}
+
+.comment-content .badge {
+	padding: 7px;
+	padding-right: 9px;
+	padding-left: 16px;
+	box-shadow: 5px 6px 6px 2px #e9ecef;
+}
+
+.comment-content .user-img {
+	margin-top: 4px;
+	margin-right: 10px;
+}
+
+.comment-content .check-icon {
+	font-size: 17px;
+	color: #c3bfbf;
+	top: 1px;
+	position: relative;
+	margin-left: 3px;
+}
+
+.comment-content .form-check-input {
+	margin-top: 6px;
+	margin-left: -24px !important;
+	cursor: pointer;
+}
+
+.comment-content .form-check-input:focus {
+	box-shadow: none;
+}
+
+.comment-content .icons i {
+	margin-left: 8px;
+}
+
+.comment-content .reply {
+	margin-left: 12px;
+}
+
+.comment-content .reply small {
+	color: #b7b4b4;
+}
+
+.comment-content .reply small:hover {
+	color: blue;
+	cursor: pointer;
+}
+
+.comment-content .comment-list-position {
+	font-size: 12px;
+	margin-right: 10px;
+}
+/* 댓글 목록 css end */

@@ -2,8 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/layout}">
+	
+<!-- include CSS File -->
+<th:block layout:fragment="css">
+	<!-- Handa Challenge CSS File -->
+	<link th:href="@{/assets/css/challenge.css}" rel="stylesheet">
+</th:block>
+
 <div layout:fragment="content">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
 	<main id="main">
 
 		<!-- ======= Breadcrumbs ======= -->
@@ -49,6 +55,7 @@
 						<img src="assets/img/study-thumb.jpg" alt=""
 							class="img-fluid services-img col-4 ch-detail-thumb">
 						<div class="col-8 challenge-join-member">
+							<p class="join-member-text">참여 인원 <span class="join-member-num">(8 명)</span></p>
 							<div class="ch-j-detail-div">
 								<p class="ch-j-detail">
 									<i alt="" class="ch-user-icon fa-solid fa-user"></i>
@@ -109,12 +116,47 @@
 								<P class="ch-j-detail ch-detail-position">인턴</P> 
 								<p class="ch-j-detail ch-detail-aff">한솔 인티큐브</p> 
 							</div>
+							<div class="ch-j-detail-div">
+								<p class="ch-j-detail">
+									<i alt="" class="ch-user-icon fa-solid fa-user"></i>
+								</p> 							
+								<p class="ch-j-detail">
+								<b>이고은</b>
+								</p> 
+								<P class="ch-j-detail ch-detail-position">인턴</P> 
+								<p class="ch-j-detail ch-detail-aff">한솔 인티큐브</p> 
+							</div>
+							<div class="ch-j-detail-div">
+								<p class="ch-j-detail">
+									<i alt="" class="ch-user-icon fa-solid fa-user"></i>
+								</p> 							
+								<p class="ch-j-detail">
+								<b>이고은</b>
+								</p> 
+								<P class="ch-j-detail ch-detail-position">인턴</P> 
+								<p class="ch-j-detail ch-detail-aff">한솔 인티큐브</p> 
+							</div>
+							<div class="ch-j-detail-div">
+								<p class="ch-j-detail">
+									<i alt="" class="ch-user-icon fa-solid fa-user"></i>
+								</p> 							
+								<p class="ch-j-detail">
+								<b>이고은</b>
+								</p> 
+								<P class="ch-j-detail ch-detail-position">인턴</P> 
+								<p class="ch-j-detail ch-detail-aff">한솔 인티큐브</p> 
+							</div>
 						</div>
 						</div>
 						
+						<hr/>
+						
+						<div>
 						<b>챌린지 진행기간</b>
 						<p>2022.06.14 ~ 2022.07.28</p>
+						</div>
 						
+						<div>
 						<b>챌린지 설명</b>
 						<p>
 						Est reprehenderit voluptatem necessitatibus asperiores
@@ -130,6 +172,9 @@
 							pariatur autem ad non cumque nesciunt qui maxime. Sunt eum quia
 							impedit dolore alias explicabo ea.</p>
 							
+						</div>	
+							
+						<div>
 						<b>챌린지 주의사항</b>
 						<ul>
 							<li><i class="bi bi-check-circle"></i> <span>이 부분은 모든 챌린지에 고정적으로 들어가는 부분입니다.</span></li>
@@ -138,6 +183,11 @@
 							<li><i class="bi bi-check-circle"></i> <span>Ullamco
 									laboris nisi ut aliquip ex ea</span></li>
 						</ul>
+						</div>
+						
+						<div class="ch-detail-to-list-btn">
+							<button type="submit" class="comment-btn">목록</button>
+						</div>
 					</div>
 
 				</div>
