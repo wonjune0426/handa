@@ -10,11 +10,15 @@
 <div layout:fragment="content">
 
 <style>
-.challenge-detail-tab a.active {
+
+/* 마이페이지 탭 활성화될 경우 */
+.mypage-detail-tab a.active {
     font-weight: 700;
     border-color: var(--color-primary);
 }
-.challenge-detail-tab a {
+
+/* 마이페이지 탭  */
+.mypage-detail-tab a {
 	display: inline-block;
 	text-align: center;
 	width: 120px;
@@ -26,7 +30,8 @@
     transition: 0.3s;
 }
 
-.buy-btn {
+/* 버튼 (탬플릿 클래스 적용 막기 위해 not 생성자 사용) */
+.mypage-btn:not(.card challenge-item) {
     display: inline-block;
     padding: 12px 35px;
     border-radius: 4px;
@@ -39,17 +44,20 @@
     border: 1px solid var(--color-primary);
 }
 
-.buy-btn:hover {
+/* 버튼 마우스 올라갈 경우(탬플릿 클래스 적용 막기 위해 not 생성자 사용) */
+.mypage-btn:hover:not(.card challenge-item) {
   background: var(--color-primary);
   color: #fff;
 }
 
-.mypage-btn a{
+/* 버튼 오른쪽으로 배치 */
+.mypage-btn-div a{
 	float: right;
 	margin: 10px;
 }	
 
 </style>
+
 	<main id="main">
 		<!-- ======= Breadcrumbs ======= -->
 		<div class="breadcrumbs">
@@ -80,56 +88,42 @@
 			<div class="container aos-init aos-animate" data-aos="fade-up">
 				<div class="row gy-4">
 					<div class="col-lg-12">
-						<div class="challenge-detail-tab">
+						<!-- 마이페이지 메뉴 탭 -->
+						<div class="mypage-detail-tab">
 							<a href="/mypage/memberdetail">내 정보</a> 
 							<a href="/mypage/challenge-produce">생성 챌린지</a>
-							<a href="/mypage/chaellenge-part" class="active">참여 챌린지</a>
-							<a href="">일정 관리</a>
+							<a href="/mypage/challenge-part" class="active">참여 챌린지</a>
+							<a href="/mypage/calendar">일정 관리</a>
 						</div>
 					</div>
-					
-					<div class="row gy-4">
-						<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-							<div class="card challenge-item">
-								<div class="card-img">
-									<img src="../assets/img/storage-service.jpg" alt="" class="img-fluid">
-              					</div>
-              					<h3><a href="service-details.html">정보처리기사 공부 챌린지</a></h3>
-              					<p>2022.06.20 ~ 2022.06.30</p>
-              					<div class="pricing-item mypage-btn">
-              					<!-- 흰색 큰 버튼 -->
-              						<a href="" class="buy-btn align-items-center">탈퇴</a>
-              					</div>
-              					
-              					
-              					
-            				</div>
-          				</div><!-- End Card Item -->
+				<div class="row gy-4">
+					<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+					<!-- 여기서 문제 발생 -->
+						<div class="card">
+							<!-- 챌린지 썸네일 -->
+							<div class="card-img">
+								<img id="challenge-thum" src="../assets/img/storage-service.jpg" alt="" class="img-fluid">
+              				</div>
+              				<!-- 챌린지 정보(이름, 기간) -->
+              				<h3><a href=" ">정보처리기사 공부 챌린지</a></h3>
+              				<p>2022.06.20 ~ 2022.06.30</p>
+              				<!-- 챌린지 탈퇴 버튼 -->
+              				<div class="pricing-item mypage-btn-div">
+              					<a id="challenge-secession" href="" class="mypage-btn align-items-center">탈퇴</a>
+              				</div>
+            			</div>
+          			</div><!-- End Card Item -->
 
-						<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+					<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
 							<div class="card challenge-item">
 								<div class="card-img">
 									<img src="../assets/img/storage-service.jpg" alt="" class="img-fluid">
               					</div>
-              					<h3><a href="service-details.html">정보처리기사 공부 챌린지</a></h3>
+              					<h3><a href=" ">정보처리기사 공부 챌린지</a></h3>
               					<p>2022.06.20 ~ 2022.06.30</p>
-              					<div class="mypage-btn">
+              					<div class="pricing-item mypage-btn-div">
               					<!-- 흰색 큰 버튼 -->
-              						<a href="" class="buy-btn">탈퇴</a>
-              					</div>
-            				</div>
-          				</div><!-- End Card Item -->
-
-						<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-							<div class="card challenge-item">
-								<div class="card-img">
-									<img src="../assets/img/storage-service.jpg" alt="" class="img-fluid">
-              					</div>
-              					<h3><a href="service-details.html">정보처리기사 공부 챌린지</a></h3>
-              					<p>2022.06.20 ~ 2022.06.30</p>
-              					<div class="mypage-btn">
-              					<!-- 흰색 큰 버튼 -->
-              						<a href="" class="buy-btn">탈퇴</a>
+              						<a href="" class="mypage-btn align-items-center">탈퇴</a>
               					</div>
             				</div>
           				</div><!-- End Card Item -->
@@ -139,11 +133,11 @@
 								<div class="card-img">
 									<img src="../assets/img/storage-service.jpg" alt="" class="img-fluid">
               					</div>
-              					<h3><a href="service-details.html">정보처리기사 공부 챌린지</a></h3>
+              					<h3><a href="">정보처리기사 공부 챌린지</a></h3>
               					<p>2022.06.20 ~ 2022.06.30</p>
-              					<div class="mypage-btn">
+              					<div class="pricing-item mypage-btn-div">
               					<!-- 흰색 큰 버튼 -->
-              						<a href="" class="buy-btn">탈퇴</a>
+              						<a href="" class="mypage-btn align-items-center">탈퇴</a>
               					</div>
             				</div>
           				</div><!-- End Card Item -->
@@ -153,11 +147,11 @@
 								<div class="card-img">
 									<img src="../assets/img/storage-service.jpg" alt="" class="img-fluid">
               					</div>
-              					<h3><a href="service-details.html">정보처리기사 공부 챌린지</a></h3>
+              					<h3><a href="">정보처리기사 공부 챌린지</a></h3>
               					<p>2022.06.20 ~ 2022.06.30</p>
-              					<div class="mypage-btn">
+              					<div class="pricing-item mypage-btn-div">
               					<!-- 흰색 큰 버튼 -->
-              						<a href="" class="buy-btn">탈퇴</a>
+              						<a href="" class="mypage-btn align-items-center">탈퇴</a>
               					</div>
             				</div>
           				</div><!-- End Card Item -->
@@ -167,11 +161,25 @@
 								<div class="card-img">
 									<img src="../assets/img/storage-service.jpg" alt="" class="img-fluid">
               					</div>
-              					<h3><a href="service-details.html">정보처리기사 공부 챌린지</a></h3>
+              					<h3><a href="">정보처리기사 공부 챌린지</a></h3>
               					<p>2022.06.20 ~ 2022.06.30</p>
-              					<div class="mypage-btn">
+              					<div class="pricing-item mypage-btn-div">
               					<!-- 흰색 큰 버튼 -->
-              						<a href="" class="buy-btn">탈퇴</a>
+              						<a href="" class="mypage-btn align-items-center">탈퇴</a>
+              					</div>
+            				</div>
+          				</div><!-- End Card Item -->
+
+						<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+							<div class="card challenge-item">
+								<div class="card-img">
+									<img src="../assets/img/storage-service.jpg" alt="" class="img-fluid">
+              					</div>
+              					<h3><a href="">정보처리기사 공부 챌린지</a></h3>
+              					<p>2022.06.20 ~ 2022.06.30</p>
+              					<div class="pricing-item mypage-btn-div">
+              					<!-- 흰색 큰 버튼 -->
+              						<a href="" class="mypage-btn align-items-center">탈퇴</a>
               					</div>
             				</div>
           				</div><!-- End Card Item -->
@@ -181,11 +189,11 @@
 								<div class="card-img">
 									<img src="../assets/img/storage-service.jpg" alt="" class="img-fluid">
               					</div>
-              					<h3><a href="service-details.html">정보처리기사 공부 챌린지</a></h3>
+              					<h3><a href="">정보처리기사 공부 챌린지</a></h3>
               					<p>2022.06.20 ~ 2022.06.30</p>
-              					<div class="mypage-btn">
+              					<div class="pricing-item mypage-btn-div">
               					<!-- 흰색 큰 버튼 -->
-              						<a href="" class="buy-btn">탈퇴</a>
+              						<a href="" class="mypage-btn align-items-center">탈퇴</a>
               					</div>
             				</div>
           				</div><!-- End Card Item -->
@@ -195,11 +203,11 @@
 								<div class="card-img">
 									<img src="../assets/img/storage-service.jpg" alt="" class="img-fluid">
               					</div>
-              					<h3><a href="service-details.html">정보처리기사 공부 챌린지</a></h3>
+              					<h3><a href="">정보처리기사 공부 챌린지</a></h3>
               					<p>2022.06.20 ~ 2022.06.30</p>
-              					<div class="mypage-btn">
+              					<div class="pricing-item mypage-btn-div">
               					<!-- 흰색 큰 버튼 -->
-              						<a href="" class="buy-btn">탈퇴</a>
+              						<a href="" class="mypage-btn align-items-center">탈퇴</a>
               					</div>
             				</div>
           				</div><!-- End Card Item -->
@@ -209,11 +217,11 @@
 								<div class="card-img">
 									<img src="../assets/img/storage-service.jpg" alt="" class="img-fluid">
               					</div>
-              					<h3><a href="service-details.html">정보처리기사 공부 챌린지</a></h3>
+              					<h3><a href="">정보처리기사 공부 챌린지</a></h3>
               					<p>2022.06.20 ~ 2022.06.30</p>
-              					<div class="mypage-btn">
+              					<div class="pricing-item mypage-btn-div">
               					<!-- 흰색 큰 버튼 -->
-              						<a href="" class="buy-btn">탈퇴</a>
+              						<a href="" class="mypage-btn align-items-center">탈퇴</a>
               					</div>
             				</div>
           				</div><!-- End Card Item -->

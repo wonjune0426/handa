@@ -9,6 +9,7 @@ import ch.qos.logback.classic.Logger;
 
 @Controller
 @RequestMapping("mypage")
+// API 형식으로 변경할 예정? 
 public class MypageController {
 	private final Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 	
@@ -29,6 +30,12 @@ public class MypageController {
 	public String challengePart() {
 		logger.info("challenge-part-----------------");
 		return "mypage/challengePart";
+	}
+	
+	@GetMapping("/calendar")
+	public String getCalendar() {
+		logger.info("calendar-------------------");
+		return "mypage/calendar";
 	}
 	 
 }

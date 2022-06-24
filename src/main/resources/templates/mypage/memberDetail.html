@@ -10,11 +10,14 @@
 <div layout:fragment="content">
 
 <style>
-.challenge-detail-tab a.active {
+/* 마이페이지 탭 활성화될 경우 */
+.mypage-detail-tab a.active {
     font-weight: 700;
     border-color: var(--color-primary);
 }
-.challenge-detail-tab a {
+
+/* 마이페이지 탭  */
+.mypage-detail-tab a {
 	display: inline-block;
 	text-align: center;
 	width: 120px;
@@ -25,7 +28,9 @@
     color: var(--color-secondary);
     transition: 0.3s;
 }
-.buy-btn {
+
+/* 버튼 */
+.mypage-btn {
     display: inline-block;
     padding: 12px 35px;
     border-radius: 4px;
@@ -38,11 +43,13 @@
     border: 1px solid var(--color-primary);
 }
 
-.buy-btn:hover {
+/* 버튼 마우스 올라갈 경우 */
+.mypage-btn:hover {
   background: var(--color-primary);
   color: #fff;
 }
 
+/* 프로필 이미지 */
 .profile-img {
 	border-radius: 100%;
 	width:300px;
@@ -81,26 +88,29 @@
 			<div class="container aos-init aos-animate" data-aos="fade-up">
 				<div class="row gy-4">
 					<div class="col-lg-12">
-						<div class="challenge-detail-tab">
+						<!-- 마이페이지 메뉴 탭 -->
+						<div class="mypage-detail-tab">
 							<a href="/mypage/memberdetail" class="active">내 정보</a> 
 							<a href="/mypage/challenge-produce">생성 챌린지</a>
 							<a href="/mypage/challenge-part">참여 챌린지</a>
-							<a href="">일정 관리</a>
+							<a href="/mypage/calendar">일정 관리</a>
 						</div>
 					</div>
 					
 					<div class="row gy-4"/>
 					<div class="col-lg-12">
 						<div class="row gy-4 align-items-center features-item aos-init aos-animate" data-aos="fade-up">
+							<!-- 프로필 사진 -->
           					<div class="profile col-md-5 text-center">
-            					<img src="../assets/img/features-1.jpg" class="profile-img img-fluid" alt="">
+            					<img id="profile" src="../assets/img/features-1.jpg" class="profile-img img-fluid" alt="">
           					</div>
+          					<!-- 회원 정보 -->
           					<div class="col-md-7">
             					<h3>hansol333 / OOO 선임</h3>
             					<p class="fst-italic">hansol@hansol.com</p>
             					<ul>
-              						<li><i class="bi bi-check"></i> 한솔 인티큐브</li>
-              						<li></li>
+              						<li><i class="bi bi-check"></i> 한솔 인티큐브</li><li></li>
+              						<!-- 숫자 클릭 시 해당 페이지로 이동 -->
               						<li><i class="bi bi-check"></i> 내가 생성한 챌린지 : <a href="/mypage/challenge-produce">&nbsp 3</a>개<li>
               						<li><i class="bi bi-check"></i> 내가 참여한 챌린지 : <a href="/mypage/challenge-produce">&nbsp 10</a>개</li>
             					</ul>
@@ -109,7 +119,9 @@
 					</div>
 				</div>
 			</div>
-			<div class="pricing-item text-center"><a href="#" class="buy-btn align-items-center">정보 수정하기</a></div>
+			
+			<!-- 정보 수정 버튼 -->>
+			<div class="pricing-item text-center"><a href="#" class="mypage-btn align-items-center">정보 수정하기</a></div>
 		</section>
 	</main>
 	<!-- End #main -->
