@@ -4,7 +4,9 @@
 	layout:decorate="~{layout/layout}">
 
 <head>
+
 <style>
+/*  파일업로드 관련 css */
 .filebox input[type="file"] {
 	position: absolute;
 	width: 1px;
@@ -48,6 +50,38 @@
 	-moz-appearance: none;
 	appearance: none;
 }
+/* 파일 업로그 관련 css  */
+
+/* 회원가입 화면 css */
+.register-padding-top-0 {
+	padding-top: 0
+}
+
+.register-padding-top-30px {
+	padding-top: 30px
+}
+
+.register-width100 {
+	width: 100%
+}
+
+.register-button-width {
+	width: 140px
+}
+
+.register-label-style {
+	float: left;
+	padding: 10px 0 0 10px;
+}
+
+.register-gender-button{
+	width:200px;
+	padding-top:10px;
+}
+
+.register-float-right {
+	float:right;
+}
 </style>
 </head>
 
@@ -63,7 +97,7 @@
 						<div class="row d-flex justify-content-center">
 							<div class="col-lg-6 text-center">
 								<h2>Register</h2>
-								<p>정보를 입력해 주세요.</p>
+								<p>정보를 입력해 주세요</p>
 							</div>
 						</div>
 					</div>
@@ -80,7 +114,7 @@
 			</div>
 			<!-- End Breadcrumbs -->
 
-			<section class="sample-page" style="padding-top: 0">
+			<section class="sample-page register-padding-top-0">
 				<div class="container" data-aos="fade-up"></div>
 			</section>
 
@@ -92,93 +126,88 @@
 						<span>회원가입</span>
 						<h2>회원가입</h2>
 					</div>
-					<section id="contact" class="contact" style="padding-top: 30px;">
+					<section id="contact" class="contact register-padding-top-30px">
 						<div class="text-center">
 							<div class="login-div">
 								<form action="" method="post" role="form" class="php-email-form">
 									<div class="row">
 										<div class="form-group mt-3">
-										<label class="login-label"><b>아이디</b></label>
-											<table style="width:100%">
+											<div class="register-label-style">
+												<label class="login-label"><b>아이디</b></label>
+											</div>
+											<table class="register-width100">
 												<tr>
-													<td style="width:100%"> 
-													 <input
-														type="text" name="memberid" class="form-control"
-														id="memberid" placeholder="아이디" required=""></td>
+													<td class="register-width100"><input type="text"
+														name="memberid" class="form-control" id="memberid"
+														placeholder="아이디" required=""></td>
 													<td>
-													<button class="btn btn-primary" type="submit">중복확인</button>
+														<button class="btn btn-primary register-button-width">중복확인</button>
 													</td>
 											</table>
 										</div>
 										<div class="form-group mt-3">
-											<label class="login-label"><b>비밀번호</b></label> <input
-												type="password" class="form-control" name="password"
+											<div class="register-label-style">
+												<label class="login-label"><b>비밀번호</b></label>
+											</div>
+											<input type="password" class="form-control" name="password"
 												id="password" placeholder="비밀번호" required="">
-										</div>
-										<div class="form-group mt-3">
-											<label class="login-label"><b>비밀번호확인</b></label> <input
-												type="password" class="form-control" name="password"
+										</div>										<div class="form-group mt-3">
+											<div class="register-label-style">
+												<label class="login-label"><b>비밀번호확인</b></label>
+											</div>
+											<input type="password" class="form-control" name="password"
 												id="password" placeholder="비밀번호확인" required="">
 										</div>
+
 										<div class="form-group mt-3">
-											<label class="login-label"><b>전화번호</b></label> <input
-												type="text" class="form-control" id="member-call"
+											<div class="register-label-style">
+												<label class="login-label"><b>전화번호</b></label>
+											</div>
+											<input type="text" class="form-control" id="member-call"
 												placeholder="전화번호" required="">
 										</div>
 										<div class="form-group mt-3">
-											<label class="login-label"><b>e-mail</b></label> <input
-												type="text" class="form-control" id="e-mail"
+											<div class="register-label-style">
+												<label class="login-label"><b>e-mail</b></label>
+											</div>
+											<input type="text" class="form-control" id="e-mail"
 												placeholder="e-mail" required="">
 										</div>
 										<div class="form-group mt-3">
-											<table style="width: 100%;">
-												<tr>
-													<td><label class="login-label"><b>성별</b></label></td>
-													<td><label class="login-label"><b>부서</b></label></td>
-													<td><label class="login-label"><b>직급</b></label></td>
-												</tr>
-											</table>
+											<div class="register-label-style">
+												<label class="login-label"><b>성별</b></label>
+											</div>
+											<div class="register-float-right">
+												<button class="btn btn-primary register-gender-button" type="button">남</button>
+												<button class="btn btn-primary register-gender-button" type="button">여</button>
+											</div>
 										</div>
 										<div class="form-group mt-3">
-											<table style="width: 100%;">
+											<table class="register-width100">
 												<tr>
-													<td>
-														<button type="button"
-															class="btn btn-primary dropdown-toggle"
-															data-bs-toggle="dropdown" aria-expanded="false"
-															style="width: 80%;">성별</button>
-														<ul class="dropdown-menu">
-															<li><a class="dropdown-item">남</a></li>
-															<li><a class="dropdown-item">여</a></li>
-
-														</ul>
-													</td>
-													<td>
-														<button type="button"
-															class="btn btn-primary dropdown-toggle"
-															data-bs-toggle="dropdown" aria-expanded="false"
-															style="width: 80%;">부서</button>
-														<ul class="dropdown-menu">
-															<li><a class="dropdown-item" href="#">Action</a></li>
-															<li><a class="dropdown-item" href="#">Another
-																	action</a></li>
-															<li><a class="dropdown-item" href="#">Something
-																	else here</a></li>
-															<li><a class="dropdown-item" href="#">Separated
-																	link</a></li>
-														</ul>
-													</td>
-													<td>
-														<button type="button"
-															class="btn btn-primary dropdown-toggle"
-															data-bs-toggle="dropdown" aria-expanded="false"
-															style="width: 80%;">직급</button>
-														<ul class="dropdown-menu">
-															<li><a class="dropdown-item">선임</a></li>
-															<li><a class="dropdown-item">책임</a></li>
-															<li><a class="dropdown-item">수석</a></li>
-														</ul>
-													</td>
+													<td><label class="login-label register-label-style"><b>부서</b></label></td>
+													<td><label class="login-label register-label-style"><b>직급</b></label></td>
+												</tr>
+												<tr>
+													<td><select class="form-control handa-list-select">
+															<option>한솔 인티큐브</option>
+															<option>한솔 제지</option>
+															<option>한솔 테크닉스</option>
+															<option>한솔 페이퍼택</option>
+															<option>한솔 홀딩스</option>
+															<option>한솔 문화재단</option>
+															<option>한솔 케미칼</option>
+															<option>한솔 홈데코</option>
+															<option>한솔 코에버</option>
+															<option>한솔 BS</option>
+															<option>한솔 PNS</option>
+															<option>한솔 로지스틱스</option>
+													</select></td>
+													<td><select class="form-control handa-list-select">
+															<option>수석</option>
+															<option>책임</option>
+															<option>선임</option>
+													</select></td>
 												</tr>
 											</table>
 										</div>
