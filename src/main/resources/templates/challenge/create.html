@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/layout}">
+	
+<!-- include CSS File -->
+<th:block layout:fragment="css">
+	<!-- Handa Challenge CSS File -->
+	<link th:href="@{/assets/css/challenge.css}" rel="stylesheet">
+</th:block>
+
 <div layout:fragment="content">
 	<main id="main">
 		<!-- ======= Breadcrumbs ======= -->
@@ -41,9 +48,6 @@
 						<div class="row g-0">
 							<div class="">
 								<form action="forms/quote.php" method="post" class="php-email-form">
-									<!-- <h3>Get a quote</h3>
-	              <p>Vel nobis odio laboriosam et hic voluptatem. Inventore vitae totam. Rerum repellendus enim linead sero park flows.</p>
-	              -->
 									<div class="row gy-4">
 										<div class="form-group">
 											<label>
