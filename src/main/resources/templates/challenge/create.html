@@ -1,7 +1,14 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/layout}">
-	
+
+<head>
+<script type="text/javascript"
+	src="/smarteditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript"
+	src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+</head>
 <!-- include CSS File -->
 <th:block layout:fragment="css">
 	<!-- Handa Challenge CSS File -->
@@ -31,10 +38,10 @@
 					</ol>
 				</div>
 			</nav>
-		</div> <!-- End Breadcrumbs -->
+		</div>
+		<!-- End Breadcrumbs -->
 		<section class="sample-page">
-			<div class="container" data-aos="fade-up">
-			</div>
+			<div class="container" data-aos="fade-up"></div>
 		</section>
 		<!-- ======= Services Section ======= -->
 		<section id="service" class="services pt-0">
@@ -47,27 +54,47 @@
 					<div class="container aos-init aos-animate" data-aos="fade-up">
 						<div class="row g-0">
 							<div class="">
-								<form action="forms/quote.php" method="post" class="php-email-form">
+								<form action="forms/quote.php" method="post"
+									class="php-email-form">
 									<div class="row gy-4">
 										<div class="form-group">
 											<label>
 												<h3>이름</h3>
-											</label>
-											<input type="text" name="departure" class="form-control " placeholder="이름"
-												required="">
+											</label> <input type="text" name="departure" class="form-control "
+												placeholder="이름" required="">
 										</div>
 										<div class="col-md-12">
 											<label>
 												<h3>설명</h3>
 											</label>
-											<textarea class="form-control" name="message" rows="6" placeholder="설명"
-												required="">에디터로 변경?</textarea>
+											<textarea id="txtContent" rows="10" cols="100"
+												style="width: 100%;"></textarea>
+											<!-- textarea 밑에 script 작성하기 -->
+											<script id="smartEditor" type="text/javascript">
+												var oEditors = [];
+												nhn.husky.EZCreator
+														.createInIFrame({
+															oAppRef : oEditors,
+															elPlaceHolder : "txtContent", //textarea ID 입력
+															sSkinURI : "/smarteditor/SmartEditor2Skin.html", //martEditor2Skin.html 경로 입력
+															fCreator : "createSEditor2",
+															htParams : {
+																// 툴바 사용 여부 (true:사용/ false:사용하지 않음) 
+																bUseToolbar : true,
+																// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음) 
+																bUseVerticalResizer : false,
+																// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음) 
+																bUseModeChanger : false
+															}
+														});
+											</script>
+
 										</div>
 										<div class="col-md-6">
 											<label for="main-category">
 												<h3>카테고리 (대)</h3>
-											</label>
-											<select class="form-control main-category" id="main-category">
+											</label> <select class="form-control main-category"
+												id="main-category">
 												<option>취미</option>
 												<option>자기계발</option>
 											</select>
@@ -75,8 +102,8 @@
 										<div class="col-md-6">
 											<label for="main-category">
 												<h3>카테고리 (소)</h3>
-											</label>
-											<select class="form-control main-category" id="main-category">
+											</label> <select class="form-control main-category"
+												id="main-category">
 												<option>영화</option>
 												<option>모임</option>
 												<option>등산</option>
@@ -85,33 +112,32 @@
 										<div class="col-md-6">
 											<label for="main-category">
 												<h3>시작날짜</h3>
-											</label>
-											<input type="date" name="startdate" class="form-control" placeholder="시작날짜"
-												required="">
+											</label> <input type="date" name="startdate" class="form-control"
+												placeholder="시작날짜" required="">
 										</div>
 										<div class="col-md-6">
 											<label for="main-category">
 												<h3>종료날짜</h3>
-											</label>
-											<input type="date" class="form-control" name="enddate" placeholder="종료날짜"
-												required="">
+											</label> <input type="date" class="form-control" name="enddate"
+												placeholder="종료날짜" required="">
 										</div>
 										<!-- Button trigger modal -->
-										<button type="button" class="btn btn-primary" data-toggle="modal"
-											data-target="#exampleModal">
-											모달
-										</button>
+										<button type="button" class="btn btn-primary"
+											data-toggle="modal" data-target="#exampleModal">모달</button>
 										<div class="col-md-12 text-center create-challenge">
 											<button type="submit">챌린지 생성</button>
 										</div>
 									</div>
 								</form>
-							</div><!-- End Quote Form -->
+							</div>
+							<!-- End Quote Form -->
 						</div>
 					</div>
 				</section>
 			</div>
-		</section><!-- End Services Section -->
-	</main><!-- End #main -->
+		</section>
+		<!-- End Services Section -->
+	</main>
+	<!-- End #main -->
 </div>
 </html>
