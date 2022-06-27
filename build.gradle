@@ -2,11 +2,27 @@ plugins {
 	id 'org.springframework.boot' version '2.6.8'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	//id 'war'
 }
 
-group = 'com.hansol.handa'
+group = 'com.hansol'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
+
+apply plugin: 'war'
+
+bootWar{
+	archiveName="ROOT.war"
+	archiveBaseName="ROOT"
+    archiveVersion="0.0.1-SNAPSHOT"
+}
+war{
+	archiveName="ROOT.war"
+	archiveBaseName="ROOT"
+}
+
+bootWar.enabled = false
+war.enabled = true
 
 configurations {
 	compileOnly {
@@ -23,6 +39,10 @@ dependencies {
 	//implementation 'org.springframework.boot:spring-boot-starter-security'
 	//implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
 	//implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+	
+	// 배포
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	//runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
@@ -33,7 +53,6 @@ dependencies {
 	// Thymeleaf
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:2.7.0'
 	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.1.0'
-	
 }
 
 tasks.named('test') {
