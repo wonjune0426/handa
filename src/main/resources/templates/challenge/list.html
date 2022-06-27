@@ -71,7 +71,23 @@
 							</form>
 						</div>
 						<div class="col-md-12"></div>
-						<div class="col-lg-4 col-md-6" data-aos="fade-up"
+						
+							<div class="col-lg-4 col-md-6" data-aos="fade-up"
+							data-aos-delay="100" th:each="challenge : ${challengeList}">
+							<div class="card challenge-item">
+								<div class="card-img">
+									<img th:src="${challenge.thumbnail}" alt=""
+										class="img-fluid">
+								</div>
+								<h3>
+									<a href="/detail" class="stretched-link" th:text=${challenge.challenge_name}></a>
+								</h3>
+								<p th:text="${challenge.startdate} + ' ~ ' + ${challenge.enddate}"></p>
+							</div>
+						</div>
+						<!-- End Card Item -->
+						
+<!-- 						<div class="col-lg-4 col-md-6" data-aos="fade-up"
 							data-aos-delay="100">
 							<div class="card challenge-item">
 								<div class="card-img">
@@ -84,9 +100,9 @@
 								<p>2022.06.20 ~ 2022.06.30</p>
 							</div>
 						</div>
-						<!-- End Card Item -->
+						End Card Item -->
 
-						<div class="col-lg-4 col-md-6" data-aos="fade-up"
+<!-- 						<div class="col-lg-4 col-md-6" data-aos="fade-up"
 							data-aos-delay="200">
 							<div class="card challenge-item">
 								<div class="card-img">
@@ -99,7 +115,7 @@
 								<p>2022.06.20 ~ 2022.06.30</p>
 							</div>
 						</div>
-						<!-- End Card Item -->
+						End Card Item
 
 						<div class="col-lg-4 col-md-6" data-aos="fade-up"
 							data-aos-delay="300">
@@ -114,7 +130,7 @@
 								<p>2022.06.20 ~ 2022.06.30</p>
 							</div>
 						</div>
-						<!-- End Card Item -->
+						End Card Item
 
 						<div class="col-lg-4 col-md-6" data-aos="fade-up"
 							data-aos-delay="400">
@@ -129,7 +145,7 @@
 								<p>2022.06.20 ~ 2022.06.30</p>
 							</div>
 						</div>
-						<!-- End Card Item -->
+						End Card Item
 
 						<div class="col-lg-4 col-md-6" data-aos="fade-up"
 							data-aos-delay="500">
@@ -144,7 +160,7 @@
 								<p>2022.06.20 ~ 2022.06.30</p>
 							</div>
 						</div>
-						<!-- End Card Item -->
+						End Card Item
 
 						<div class="col-lg-4 col-md-6" data-aos="fade-up"
 							data-aos-delay="600">
@@ -159,7 +175,7 @@
 								<p>2022.06.20 ~ 2022.06.30</p>
 							</div>
 						</div>
-						<!-- End Card Item -->
+						End Card Item
 
 						<div class="col-lg-4 col-md-6" data-aos="fade-up"
 							data-aos-delay="400">
@@ -174,7 +190,7 @@
 								<p>2022.06.20 ~ 2022.06.30</p>
 							</div>
 						</div>
-						<!-- End Card Item -->
+						End Card Item
 
 						<div class="col-lg-4 col-md-6" data-aos="fade-up"
 							data-aos-delay="500">
@@ -189,7 +205,7 @@
 								<p>2022.06.20 ~ 2022.06.30</p>
 							</div>
 						</div>
-						<!-- End Card Item -->
+						End Card Item
 
 						<div class="col-lg-4 col-md-6" data-aos="fade-up"
 							data-aos-delay="600">
@@ -204,7 +220,7 @@
 								<p>2022.06.20 ~ 2022.06.30</p>
 							</div>
 						</div>
-						<!-- End Card Item -->
+						End Card Item -->
 
 					</div>
 				</div>
