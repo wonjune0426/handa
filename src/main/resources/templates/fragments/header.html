@@ -1,40 +1,75 @@
 <!DOCTYPE html>
-<html 	lagn="ko"
-        xmlns:th="http://www.thymeleaf.org">
+<html lagn="ko" xmlns:th="http://www.thymeleaf.org">
 <div th:fragment="header">
-    <header id="header" class="header d-flex align-items-center fixed-top">
-    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+	<header id="header" class="header d-flex align-items-center fixed-top">
+		<div
+			class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
-      <a href="/" class="logo d-flex align-items-center">
-        <!-- Uncomment the line below if you also wish to use an image logo -->
-        <!-- <img src="assets/img/logo.png" alt=""> -->
-        <h1>Handa</h1>
-      </a>
+			<a href="/" class="logo d-flex align-items-center"> <!-- Uncomment the line below if you also wish to use an image logo -->
+				<!-- <img src="assets/img/logo.png" alt=""> -->
+				<h1>Handa</h1>
+			</a> <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i> <i
+				class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+			<nav id="navbar" class="navbar">
+				<ul>
+					<li class="dropdown"><a href="/"><span>취미</span> <i
+							class="bi bi-chevron-down dropdown-indicator"></i></a>
+						<ul>
+							<li><a href="/">영화</a></li>
+							<li><a href="/">모임</a></li>
+							<li><a href="/">등산</a></li>
+						</ul></li>
+					<li class="dropdown"><a href="/"><span>자기계발</span> <i
+							class="bi bi-chevron-down dropdown-indicator"></i></a>
+						<ul>
+							<li><a href="/">독서</a></li>
+							<li><a href="/">자격증</a></li>
+							<li><a href="/">외국어</a></li>
+						</ul></li>
 
-      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
-      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li class="dropdown"><a href="/"><span>취미</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-            <ul>
-              <li><a href="/">영화</a></li>
-              <li><a href="/">모임</a></li>
-              <li><a href="/">등산</a></li>
-            </ul>
-          </li>
-           <li class="dropdown"><a href="/"><span>자기계발</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-            <ul>
-              <li><a href="/">독서</a></li>
-              <li><a href="/">자격증</a></li>
-              <li><a href="/">외국어</a></li>
-            </ul>
-          </li>
-          <li><a class="get-a-quote" href="/member/login">로그인</a></li>
-        </ul>
-      </nav><!-- .navbar -->
+					<!-- 회원인 경우 -->
+					<th:block sec:authorize="isAuthenticated()">
+						<!-- <th:block th:if="${#authentication.principal.member != null}">
+							<li><span sec:authentication="principal.member.userid"></span>
+								님</li>
+						</th:block> -->
+						<li><a href="/mypage/memberdetail" class="nav-link">마이페이지</a></li>
+						<!-- <li>
+							<form action="/customLogout" method="post" id="logoutForm1">
+								<input type="hidden" name="${_csrf.parameterName}"
+									value="${_csrf.token}" />
+							</form> <a href="#" class="nav-link logout" id="logoutBtn"> Logout </a>
+						</li> -->
+						<form action="/member/logout" method="post" id="logoutForm">
+								<!-- <input type="text" name="${_csrf.parameterName}"
+									value="${_csrf.token}" /> -->
+						<li><a class="get-a-quote" href="#">로그아웃</a></li>
+						<!-- <button class="logout-btn" type="submit">로그아웃 버튼</button> -->
+						</form>
+					</th:block>
 
-    </div>
-  </header><!-- End Header -->
-  <!-- End Header -->
+					<!-- 비회원인 경우 -->
+					<th:block sec:authorize="isAnonymous()">
+						<li><a class="get-a-quote" href="/member/login">로그인</a></li>
+					</th:block>
+				</ul>
+			</nav>
+			<!-- .navbar -->
+
+		</div>
+	</header>
+	<!-- End Header -->
+	<!-- End Header -->
 </div>
+<!-- include JS Script -->
+<th:block layout:fragment="javascript">
+<script>
+	$(".logout-btn").on("click", function (e) {
+
+        e.preventDefault();
+        console.log('logout');
+       /*  $("#logoutForm").submit(); */
+    });
+</script>
+</th:block>
 </html>

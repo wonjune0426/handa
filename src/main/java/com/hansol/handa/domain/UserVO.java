@@ -1,21 +1,24 @@
 package com.hansol.handa.domain;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
 public class UserVO {
 
-	String member_id;
-	String password;
-	String member_name;
-	String member_call;
-	String e_mail;
-	String gender;
-	int affiliates_id;
-	String profile_name;
-	String profile_path;
-	String profile_type;
-	String createdate;
-	String position_id;
-	
+	private String member_id;
+	private String password;
+	private String member_name;
+	private String member_call;
+	private String e_mail;
+	private String gender;
+	private int affiliates_id;
+	private String profile_name;
+	private String profile_path;
+	private String profile_type;
+	private String createdate;
+	private String position_id;
+
+	private List<AuthVO> authList;
 }

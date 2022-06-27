@@ -52,11 +52,11 @@
 				<section id="contact" class="contact login-section">
 					<div class="text-center">
 						<div class="login-div">
-							<form action="" method="post" role="form" class="php-email-form">
+							<form th:action="@{/login}" method="post" role="form" class="php-email-form">
 								<div class="row">
 									<div class="form-group mt-3 memberid-div">
 										<label class="login-label"><b>아이디</b></label> <input
-											type="text" name="memberid" class="form-control"
+											type="text" name="username" class="form-control"
 											id="memberid" placeholder="아이디" required="">
 									</div>
 									<div class="form-group mt-3">
@@ -66,7 +66,7 @@
 									</div>
 								</div>
 								<div class="text-center login-btn-div">
-									<button type="submit">로그인</button>
+									<button class="login-btn" type="submit">로그인</button>
 								</div>
 								<div class="text-center member-join-div">
 									<a href="/member/register">회원가입 하기</a>
@@ -85,4 +85,14 @@
 	</main>
 	<!-- End #main -->
 </div>
+<!-- include JS Script -->
+<th:block layout:fragment="javascript">
+<script>
+	$(".login-btn").on("click", function (e) {
+
+        e.preventDefault();
+        $(".php-email-form").submit();
+    });
+	</script>
+</th:block>
 </html>
