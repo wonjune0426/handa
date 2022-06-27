@@ -1,7 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/layout}">
+
+<head>
+
+</head>
 
 <!-- include CSS File -->
 <th:block layout:fragment="css">
@@ -34,7 +37,7 @@
 			</nav>
 		</div>
 		<!-- End Breadcrumbs -->
-		<section class="sample-page">
+		<section class="sample-page" style="padding-top:20px">
 			<div class="container" data-aos="fade-up"></div>
 		</section>
 		<!-- ======= Services Section ======= -->
@@ -48,8 +51,7 @@
 					<div class="container aos-init aos-animate" data-aos="fade-up">
 						<div class="row g-0">
 							<div class="">
-								<form action="forms/quote.php" method="post"
-									class="php-email-form">
+								<form action="forms/quote.php" method="post" class="php-email-form">
 									<div class="row gy-4">
 										<div class="form-group">
 											<label>
@@ -61,16 +63,14 @@
 											<label>
 												<h3>설명</h3>
 											</label>
-											<textarea id="txtContent" rows="10" cols="100"
-												style="width: 100%;"></textarea>
-											<!-- textarea 밑에 script 작성하기 -->
+											<div id="editor">
+											</div>
 
 										</div>
 										<div class="col-md-6">
 											<label for="main-category">
 												<h3>카테고리 (대)</h3>
-											</label> <select class="form-control main-category"
-												id="main-category">
+											</label> <select class="form-control main-category" id="main-category">
 												<option>취미</option>
 												<option>자기계발</option>
 											</select>
@@ -78,8 +78,7 @@
 										<div class="col-md-6">
 											<label for="main-category">
 												<h3>카테고리 (소)</h3>
-											</label> <select class="form-control main-category"
-												id="main-category">
+											</label> <select class="form-control main-category" id="main-category">
 												<option>영화</option>
 												<option>모임</option>
 												<option>등산</option>
@@ -97,11 +96,37 @@
 											</label> <input type="date" class="form-control" name="enddate"
 												placeholder="종료날짜" required="">
 										</div>
-										<!-- Button trigger modal -->
-										<button type="button" class="btn btn-primary"
-											data-toggle="modal" data-target="#exampleModal">모달</button>
+
+
+										<div class="modal">
+											<div class="modal_body">
+												<div style="text-align: right;">
+													<button type="button" class="btn-close" aria-label="Close"></button>
+												</div>
+												<div style="padding:5px 30px 30px 30px">
+													<label for="main-category">
+														<h3>이미지 검색</h3>
+													</label>
+												</div>
+												<div class="input-group mb-3" style="padding:0px 30% 30px 30%">
+													<input type="text" class="form-control" placeholder="검색어를 입력해주세요"
+														aria-label="검색어를 입력해주세요" aria-describedby="basic-addon2">
+													<div class="input-group-append">
+														<button class="btn btn-primary" type="button"
+															style="height: 50px;">검색</button>
+													</div>
+												</div>
+												<div>
+													이미지 들어갈 곳
+												</div>
+											</div>
+
+										</div>
+										<button type="button" id="modal-btn" class="btn btn-primary" data-toggle="modal"
+											data-target="#exampleModal">Thumbnail</button>
+
 										<div class="col-md-12 text-center create-challenge">
-											<button type="submit">챌린지 생성</button>
+											<button type="button" class="btn btn-primary">챌린지 생성</button>
 										</div>
 									</div>
 								</form>
@@ -116,4 +141,28 @@
 	</main>
 	<!-- End #main -->
 </div>
+<th:block layout:fragment="javascript">
+	<script src="build/ckeditor.js"></script>
+	<script>
+		ClassicEditor
+			.create(document.querySelector('#editor'))
+			.catch(error => {
+				console.error(error);
+			});
+	</script>
+	<script>
+
+		const body = document.querySelector('body');
+		const modal = document.querySelector('.modal');
+		const btnOpenPopup = document.getElementById('modal-btn');
+
+		btnOpenPopup.addEventListener('click', () => {
+			modal.classList.toggle('show');
+		});
+
+
+
+	</script>
+</th:block>
+
 </html>
