@@ -32,8 +32,8 @@
 						<li>챌린지 리스트</li>
 						
 						<!-- 카테고리 조회일 경우에만 표시 -->
-						<li th:if="${mainCategory != null}" th:text=${mainCategoryName}></li>
-						<li th:if="${subCategory != null}"th:text=${subCategoryName}></li>
+						<li th:if="${not #strings.isEmpty(mainCategoryName)}" th:text=${mainCategoryName}></li>
+						<li th:if="${not #strings.isEmpty(subCategoryName)}"th:text=${subCategoryName}></li>
 					</ol>
 				</div>
 			</nav>
@@ -57,9 +57,9 @@
 					</div>
 					<div class="row gy-4">
 						<div class="btn-group order-div col-2">
-							<select class="form-control handa-list-select">
-								<option>최신순</option>
-								<option>오래된순</option>
+							<select class="form-control handa-list-select" onchange="if(this.value) location.href=(this.value);">
+								<option th:value="@{/list?sortType=0}" th:text="최신순"></option>
+								<option th:value="@{/list?sortType=1}" th:text="오래된순"></option>
 								<option>참여인원순</option>
 							</select>
 						</div>

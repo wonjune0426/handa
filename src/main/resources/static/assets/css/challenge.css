@@ -102,6 +102,13 @@
 
 /* ------------ 챌린지 상세 (기본정보 페이지 challenge/detail.html) -------------- */
 /* 챌린지 상세 탭 (기본정보, 댓글) */
+
+.challenge-detail-tab{
+	position: fixed;
+	right: 50px; top: 50%; z-index: 100; width: 128px;  margin: -220px 0 0 0; 	
+
+}
+
 .challenge-detail-tab a.active {
 	font-weight: 700;
 	border-color: #0d42ff;
@@ -331,5 +338,13 @@
   box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
 
   transform: translateX(-50%) translateY(-50%);
+}
+
+#period, #explanation, #caution, #comment{
+	scroll-margin-top: 5em;
+}
+
+#challenge_tab{
+	
 }
 
