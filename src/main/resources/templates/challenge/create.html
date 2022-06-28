@@ -50,59 +50,53 @@
 							<div class="">
 								<form action="forms/quote.php" method="post" class="php-email-form">
 									<div class="row gy-4">
-										<div class="col-md-6">
-											<label>
-												<h3>이름</h3>
-											</label> <input type="text" name="departure" class="form-control "
-												placeholder="이름" required="">
-										</div>
+
 										<div class="col-md-6">
 											<label for="main-category">
 												<h3>Thumbnail</h3>
 											</label>
 											<br>
-											<div
-												style="width:100px; height:100px; background-color: white; display:none;">
-											</div>
-											<div style="display: inline-block; height: 100px; vertical-align: top;">
-												<button type="button" id="modal-btn" class="btn btn-primary"
-													data-toggle="modal" data-target="#exampleModal"
-													style="width:120px;">이미지
-													검색</button>
+											<div style="display: inline-block; height: 100%; vertical-align: top; width:100%">
+												<button type="button" id="modal-btn" 
+													class="profile-btn"
+													data-toggle="modal"><img id="profile-img"src="/assets/img/about.jpg"></button>
 											</div>
 										</div>
-
 										<div class="col-md-6">
-											<label for="main-category">
-												<h3>카테고리 (대)</h3>
-											</label> <select class="form-control main-category" id="main-category">
-												<option>취미</option>
-												<option>자기계발</option>
-											</select>
+											<label>
+												<h3>이름</h3>
+											</label> <input type="text" name="departure" class="form-control "
+												placeholder="이름" required="">
+											<div class="col-md-6 width-100" >
+												<label for="main-category">
+													<h3>카테고리 (대)</h3>
+												</label> <select class="form-control main-category" id="main-category">
+													<option>취미</option>
+													<option>자기계발</option>
+												</select>
+											</div>
+											<div class="col-md-6 width-100">
+												<label for="main-category">
+													<h3>카테고리 (소)</h3>
+												</label> <select class="form-control main-category" id="main-category">
+													<option>영화</option>
+													<option>모임</option>
+													<option>등산</option>
+												</select>
+											</div>
+											<div class="col-md-6 width-100">
+												<label for="main-category">
+													<h3>시작날짜</h3>
+												</label> <input type="date" name="startdate" class="form-control"
+													placeholder="시작날짜" required="">
+											</div>
+											<div class="col-md-6 width-100">
+												<label for="main-category">
+													<h3>종료날짜</h3>
+												</label> <input type="date" class="form-control" name="enddate"
+													placeholder="종료날짜" required="">
+											</div>
 										</div>
-										<div class="col-md-6">
-											<label for="main-category">
-												<h3>카테고리 (소)</h3>
-											</label> <select class="form-control main-category" id="main-category">
-												<option>영화</option>
-												<option>모임</option>
-												<option>등산</option>
-											</select>
-										</div>
-										<div class="col-md-6">
-											<label for="main-category">
-												<h3>시작날짜</h3>
-											</label> <input type="date" name="startdate" class="form-control"
-												placeholder="시작날짜" required="">
-										</div>
-										<div class="col-md-6">
-											<label for="main-category">
-												<h3>종료날짜</h3>
-											</label> <input type="date" class="form-control" name="enddate"
-												placeholder="종료날짜" required="">
-										</div>
-
-
 										<div class="modal">
 											<div class="modal_body">
 												<div style="text-align: right;">
@@ -181,10 +175,10 @@
 			console.log(word);
 			$.ajax({ // ajax 기본형태
 				//////////////////// send(가는것)
-				url: "https://dapi.kakao.com/v2/search/image?query="+word,
+				url: "https://dapi.kakao.com/v2/search/image?query=" + word,
 				type: "GET",
-				headers:{'Authorization':'KakaoAK 58ed99abf99f1f7fe96b1231ca5eb36e'},
-				
+				headers: {'Authorization': 'KakaoAK 58ed99abf99f1f7fe96b1231ca5eb36e'},
+
 				//////////////////// recv
 				success: function (data) { // status, xhr 생략가능 
 					console.log(data);

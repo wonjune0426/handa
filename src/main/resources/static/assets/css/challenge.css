@@ -296,7 +296,6 @@
 }
 
 /* modal 관련 css */
-
 .modal {
   position: absolute;
   top: 0;
@@ -331,5 +330,23 @@
   box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
 
   transform: translateX(-50%) translateY(-50%);
+}
+/* modal 관련 css */
+
+/* 챌린지 생성화면 css */
+.width-100{
+	width:100%;
+}
+
+.profile-btn{
+	width:100%;
+	height:93%;
+	border: 0;
+}
+#profile-img{
+	width:480px;
+	height: 350px;
+	display: block; 
+	margin: 0px auto;
 }
 
