@@ -10,4 +10,9 @@
 	<select id="selectChallengeList" parameterType="int" resultType="ChallengeVO">
 		select * from challenge WHERE subcategory_id = #{subcategory_id};
 	</select>
+	
+	<select id="selectCategoryName" parameterType="int" resultType="map">
+		select sub_category.sub_category_name, main_category.main_category_name FROM sub_category, main_category 
+			WHERE sub_category_id = #{subcategory_id} AND sub_category.main_category_id = main_category.main_category_id;
+	</select>
 </mapper>
