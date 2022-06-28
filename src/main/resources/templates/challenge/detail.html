@@ -151,12 +151,12 @@
 						<!-- <hr/> --> <br><hr><br>
 							</div>
 						<div>
-						<b id="period">챌린지 진행기간</b>
+						<b id="period scroll">챌린지 진행기간</b>
 						<p>2022.06.14 ~ 2022.07.28</p>
 						</div>
 						
 						<div>
-						<b id="explanation">챌린지 설명</b>
+						<b id="explanation scroll">챌린지 설명</b>
 						<p>
 						Est reprehenderit voluptatem necessitatibus asperiores
 							neque sed ea illo. Deleniti quam sequi optio iste veniam repellat
@@ -174,7 +174,7 @@
 						</div>	
 							
 						<div>
-						<b id="caution">챌린지 주의사항</b>
+						<b id="caution scroll">챌린지 주의사항</b>
 						<ul>
 							<li><i class="bi bi-check-circle"></i> <span>이 부분은 모든 챌린지에 고정적으로 들어가는 부분입니다.</span></li>
 							<li><i class="bi bi-check-circle"></i> <span>Assumenda
@@ -189,7 +189,7 @@
 
 			</div>
 		</section>
-		<section id="comment" class="service-details">
+		<section id="comment scroll" class="service-details">
 			<div class="container aos-init aos-animate" data-aos="fade-up">
 
 				<div class="row gy-4">
@@ -330,7 +330,7 @@
 						<!-- 댓글 card 끝 -->
 					</div>
 				</div>
-																														
+						<br><br>																	
 						<div class="ch-detail-to-list-btn">
 							<a th:href="@{/list?sortType=0}" class="comment-btn">목록</a>
 						</div>
@@ -339,4 +339,8 @@
 	</main>
 	<!-- End #main -->
 </div>
+	<!-- include JS Script -->
+	<th:block layout:fragment="javascript">   
+		<script src='../assets/js/scrollMenu.js'></script>
+	</th:block>
 </html>
