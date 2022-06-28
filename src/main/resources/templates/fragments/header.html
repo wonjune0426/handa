@@ -29,22 +29,14 @@
 
 					<!-- 회원인 경우 -->
 					<th:block sec:authorize="isAuthenticated()">
-						<!-- <th:block th:if="${#authentication.principal.member != null}">
-							<li><span sec:authentication="principal.member.userid"></span>
-								님</li>
-						</th:block> -->
+						
+						<li><a href="#" class="nav-link" sec:authentication="principal.Username"></a>
+						</li>
+						
 						<li><a href="/mypage/memberdetail" class="nav-link">마이페이지</a></li>
-						<!-- <li>
-							<form action="/customLogout" method="post" id="logoutForm1">
-								<input type="hidden" name="${_csrf.parameterName}"
-									value="${_csrf.token}" />
-							</form> <a href="#" class="nav-link logout" id="logoutBtn"> Logout </a>
-						</li> -->
+						
 						<form action="/member/logout" method="post" id="logoutForm">
-								<!-- <input type="text" name="${_csrf.parameterName}"
-									value="${_csrf.token}" /> -->
-						<li><a class="get-a-quote" href="#">로그아웃</a></li>
-						<!-- <button class="logout-btn" type="submit">로그아웃 버튼</button> -->
+							<li><a class="get-a-quote logout-btn" href="#">로그아웃</a></li>
 						</form>
 					</th:block>
 
@@ -61,15 +53,4 @@
 	<!-- End Header -->
 	<!-- End Header -->
 </div>
-<!-- include JS Script -->
-<th:block layout:fragment="javascript">
-<script>
-	$(".logout-btn").on("click", function (e) {
-
-        e.preventDefault();
-        console.log('logout');
-       /*  $("#logoutForm").submit(); */
-    });
-</script>
-</th:block>
 </html>

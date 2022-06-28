@@ -81,6 +81,15 @@
 	<!-- Template Main JS File -->
 	<script th:src="@{/assets/js/main.js}"></script>
 
+	<!-- logout 처리 JS -->
+	<script>
+		$(".logout-btn").on("click", function(e) {
+
+			e.preventDefault();
+			console.log('logout');
+			$("#logoutForm").submit();
+		});
+	</script>
 
 	<!-- include JS Script -->
 	<th:block layout:fragment="javascript">

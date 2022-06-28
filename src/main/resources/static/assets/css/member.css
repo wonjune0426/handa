@@ -42,6 +42,10 @@
 	-webkit-appearance: auto;
 }
 
+.login-error {
+	color: #ce6868;
+}
+
 /* ------------ 회원가입 (member/register.html) -------------- */
 /*  파일업로드 관련 css */
 .filebox input[type="file"] {

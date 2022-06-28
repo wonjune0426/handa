@@ -17,12 +17,16 @@ public class PasswordEncoderTests {
 
     @Test
     public void testEncode() {
-        String str = "dl7542";
+        String str = "wjs7542";
         String enStr = pwEncoder.encode(str);
         
         log.info("test----------------------------------------------------------------");
 
-        // dl7542: $2a$10$h105Nqwm6h/DHqhG6auwhuwyoiZ13VZ00ib50XBMjms6kBe9xX/Pe
+        // goeunlee hyunjilee dl7542: $2a$10$h105Nqwm6h/DHqhG6auwhuwyoiZ13VZ00ib50XBMjms6kBe9xX/Pe
+        // wonjune0426 dnjs7542 : $2a$10$tFoxHLR0yP3Ff.utec/w5Oy0rk/QGIyna0LXiBtRVBFl6g4B3TTGe
+        // taeeunkim rla7542 : $2a$10$ops0Q8IwiAJK8UFgAGgO6uYqOAHqe4De9tCUQPYIYeJk7C.peF.Wi
+        // hyeonjeong wjs7542 : $2a$10$fR7j.CG97i7nKC8DkB4E0ezuvJs9uOMxQJFL02gFE2WItn5eS9aiu
+        
         log.info(enStr);
     }
 

@@ -55,15 +55,20 @@
 							<form th:action="@{/login}" method="post" role="form" class="php-email-form">
 								<div class="row">
 									<div class="form-group mt-3 memberid-div">
-										<label class="login-label"><b>아이디</b></label> <input
+										<label class="login-label"><b>아이디</b></label> 
+										<input
 											type="text" name="username" class="form-control"
-											id="memberid" placeholder="아이디" required="">
+											id="memberid" placeholder="아이디">
 									</div>
 									<div class="form-group mt-3">
-										<label class="login-label"><b>비밀번호</b></label> <input
+										<label class="login-label"><b>비밀번호</b></label> 
+										<input
 											type="password" class="form-control" name="password"
-											id="password" placeholder="비밀번호" required="">
+											id="password" placeholder="비밀번호">
 									</div>
+								</div>
+								<div class="text-center member-join-div login-error">
+								 	<p th:text="${error}"></p>
 								</div>
 								<div class="text-center login-btn-div">
 									<button class="login-btn" type="submit">로그인</button>
@@ -87,11 +92,36 @@
 </div>
 <!-- include JS Script -->
 <th:block layout:fragment="javascript">
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 	$(".login-btn").on("click", function (e) {
+				
+		const memberId = $("#memberid");
+        const password = $("#password");
+        
 
         e.preventDefault();
+        
+        // console.log("버튼", memberId.val(), ", ", password.val())
+        
+        if (!memberId.val()) {
+        	
+        	$(".login-error p").text("아이디를 입력하세요.");
+        	memberId.focus();
+        	
+        	return false;
+        }
+        
+        if (!password.val()) {
+        	
+        	$(".login-error p").text("비밀번호를 입력하세요.");
+        	password.focus();
+        	
+        	return false;
+        }
+        
         $(".php-email-form").submit();
+        
     });
 	</script>
 </th:block>
