@@ -2,9 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/layout}">
 
-<head>
-
-</head>
 
 <!-- include CSS File -->
 <th:block layout:fragment="css">
@@ -53,20 +50,28 @@
 							<div class="">
 								<form action="forms/quote.php" method="post" class="php-email-form">
 									<div class="row gy-4">
-										<div class="form-group">
+										<div class="col-md-6">
 											<label>
 												<h3>이름</h3>
 											</label> <input type="text" name="departure" class="form-control "
 												placeholder="이름" required="">
 										</div>
-										<div class="col-md-12">
-											<label>
-												<h3>설명</h3>
+										<div class="col-md-6">
+											<label for="main-category">
+												<h3>Thumbnail</h3>
 											</label>
-											<div id="editor">
+											<br>
+											<div
+												style="width:100px; height:100px; background-color: white; display:none;">
 											</div>
-
+											<div style="display: inline-block; height: 100px; vertical-align: top;">
+												<button type="button" id="modal-btn" class="btn btn-primary"
+													data-toggle="modal" data-target="#exampleModal"
+													style="width:120px;">이미지
+													검색</button>
+											</div>
 										</div>
+
 										<div class="col-md-6">
 											<label for="main-category">
 												<h3>카테고리 (대)</h3>
@@ -101,7 +106,8 @@
 										<div class="modal">
 											<div class="modal_body">
 												<div style="text-align: right;">
-													<button type="button" class="btn-close" aria-label="Close"></button>
+													<button type="button" class="btn-close" aria-label="Close"
+														id="modal-close"></button>
 												</div>
 												<div style="padding:5px 30px 30px 30px">
 													<label for="main-category">
@@ -110,10 +116,11 @@
 												</div>
 												<div class="input-group mb-3" style="padding:0px 30% 30px 30%">
 													<input type="text" class="form-control" placeholder="검색어를 입력해주세요"
-														aria-label="검색어를 입력해주세요" aria-describedby="basic-addon2">
+														aria-label="검색어를 입력해주세요" aria-describedby="basic-addon2"
+														id="search-word">
 													<div class="input-group-append">
 														<button class="btn btn-primary" type="button"
-															style="height: 50px;">검색</button>
+															style="height: 50px;" id="image-search-btn">검색</button>
 													</div>
 												</div>
 												<div>
@@ -122,8 +129,15 @@
 											</div>
 
 										</div>
-										<button type="button" id="modal-btn" class="btn btn-primary" data-toggle="modal"
-											data-target="#exampleModal">Thumbnail</button>
+
+										<div class="col-md-12">
+											<label>
+												<h3>설명</h3>
+											</label>
+											<div id="editor">
+											</div>
+
+										</div>
 
 										<div class="col-md-12 text-center create-challenge">
 											<button type="button" class="btn btn-primary">챌린지 생성</button>
@@ -149,19 +163,41 @@
 			.catch(error => {
 				console.error(error);
 			});
-	</script>
-	<script>
-
 		const body = document.querySelector('body');
 		const modal = document.querySelector('.modal');
 		const btnOpenPopup = document.getElementById('modal-btn');
+		const closeBtn = document.getElementById('modal-close')
 
 		btnOpenPopup.addEventListener('click', () => {
 			modal.classList.toggle('show');
 		});
 
+		closeBtn.addEventListener('click', () => {
+			modal.classList.toggle('show');
+		});
 
-
+		$('#image-search-btn').click(function () {
+			var word = $('#search-word').val();
+			console.log(word);
+			$.ajax({ // ajax 기본형태
+				//////////////////// send(가는것)
+				url: "https://dapi.kakao.com/v2/search/image?query="+word,
+				type: "GET",
+				headers:{'Authorization':'KakaoAK 58ed99abf99f1f7fe96b1231ca5eb36e'},
+				
+				//////////////////// recv
+				success: function (data) { // status, xhr 생략가능 
+					console.log(data);
+				},
+				error: function (xhr, status, error) { // (파라미터 생략가능)
+					alert("error");
+				},
+				complete: function (xhr, status) { // (파라미터 생략가능)
+					alert("통신종료");
+				}
+				////////////////////
+			});
+		});
 	</script>
 </th:block>
 
