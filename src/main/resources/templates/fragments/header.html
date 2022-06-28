@@ -12,19 +12,20 @@
 				class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
 			<nav id="navbar" class="navbar">
 				<ul>
-					<li class="dropdown"><a href="/"><span>취미</span> <i
+					<!-- 카테고리 별 링크 적용 -->
+					<li class="dropdown"><a href="/list?category=1&sortType=0"><span>취미</span> <i
 							class="bi bi-chevron-down dropdown-indicator"></i></a>
 						<ul>
-							<li><a href="/">영화</a></li>
-							<li><a href="/">모임</a></li>
-							<li><a href="/">등산</a></li>
+							<li><a th:href="@{/list?category=1&sortType=0}">영화</a></li>
+							<li><a th:href="@{/list?category=2&sortType=0}">모임</a></li>
+							<li><a th:href="@{/list?category=3&sortType=0}">등산</a></li>
 						</ul></li>
-					<li class="dropdown"><a href="/"><span>자기계발</span> <i
+					<li class="dropdown"><a href="/list?category=4&sortType=0"><span>자기계발</span> <i
 							class="bi bi-chevron-down dropdown-indicator"></i></a>
 						<ul>
-							<li><a href="/">독서</a></li>
-							<li><a href="/">자격증</a></li>
-							<li><a href="/">외국어</a></li>
+							<li><a th:href="@{/list?category=4&sortType=0}">독서</a></li>
+							<li><a th:href="@{/list?category=5&sortType=0}">자격증</a></li>
+							<li><a th:href="@{/list?category=6&sortType=0}">외국어</a></li>
 						</ul></li>
 
 					<!-- 회원인 경우 -->
