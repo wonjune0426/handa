@@ -56,10 +56,11 @@
 												<h3>Thumbnail</h3>
 											</label>
 											<br>
-											<div style="display: inline-block; height: 100%; vertical-align: top; width:100%">
-												<button type="button" id="modal-btn" 
-													class="profile-btn"
-													data-toggle="modal"><img id="profile-img"src="/assets/img/about.jpg"></button>
+											<div
+												style="display: inline-block; height: 100%; vertical-align: top; width:100%">
+												<button type="button" id="modal-btn" class="profile-btn"
+													data-toggle="modal"><img id="profile-img"
+														src="/assets/img/about.jpg"></button>
 											</div>
 										</div>
 										<div class="col-md-6">
@@ -67,7 +68,7 @@
 												<h3>이름</h3>
 											</label> <input type="text" name="departure" class="form-control "
 												placeholder="이름" required="">
-											<div class="col-md-6 width-100" >
+											<div class="col-md-6 width-100">
 												<label for="main-category">
 													<h3>카테고리 (대)</h3>
 												</label> <select class="form-control main-category" id="main-category">
@@ -96,7 +97,7 @@
 												</label> <input type="date" class="form-control" name="enddate"
 													placeholder="종료날짜" required="">
 											</div>
-												<div class="col-md-6 width-100">
+											<div class="col-md-6 width-100">
 												<label for="main-category">
 													<h3>유형</h3>
 												</label> <select class="form-control main-category" id="main-category">
@@ -125,8 +126,8 @@
 															style="height: 50px;" id="image-search-btn">검색</button>
 													</div>
 												</div>
-												<div>
-													이미지 들어갈 곳
+												<div id="img-list">
+
 												</div>
 											</div>
 
@@ -179,26 +180,30 @@
 		});
 
 		$('#image-search-btn').click(function () {
-			var word = $('#search-word').val();
-			console.log(word);
-			$.ajax({ // ajax 기본형태
-				//////////////////// send(가는것)
-				url: "https://dapi.kakao.com/v2/search/image?query=" + word,
-				type: "GET",
-				headers: {'Authorization': 'KakaoAK 58ed99abf99f1f7fe96b1231ca5eb36e'},
-
-				//////////////////// recv
-				success: function (data) { // status, xhr 생략가능 
-					console.log(data);
-				},
-				error: function (xhr, status, error) { // (파라미터 생략가능)
-					alert("error");
-				},
-				complete: function (xhr, status) { // (파라미터 생략가능)
-					alert("통신종료");
-				}
-				////////////////////
-			});
+			var searchWord = $('#search-word').val();
+			$('#img-list').empty();
+			if (searchWord.trim() == "") {
+				alert('검색어를 입력해주세요');
+			} else {
+				$.ajax({ // ajax 기본형태
+					//////////////////// send(가는것)
+					url: "/imagelist/" + searchWord,
+					type: "GET",
+					//////////////////// recv
+					success: function (data) { // status, xhr 생략가능 
+						for(var i=0;i<data.length;i++){
+							$('#img-list').append(
+								`<button class="img-btn">
+								<img class="img-list" src="`+data[i]+`"></button>`
+								)
+						}
+					},
+					error: function (xhr, status, error) { // (파라미터 생략가능)
+						alert("error");
+					},
+					////////////////////
+				});
+			}
 		});
 	</script>
 </th:block>

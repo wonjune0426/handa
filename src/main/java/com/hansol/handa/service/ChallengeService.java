@@ -9,4 +9,5 @@ public interface ChallengeService {
 	public List<ChallengeVO> selectAllChallenge();
 	public List<ChallengeVO> selectChallengeList(int category_id);
 	public Map<String, String> selectCategoryName(int sub_category_id);
+	public List<String> getimagelist(String searchWord);
 }

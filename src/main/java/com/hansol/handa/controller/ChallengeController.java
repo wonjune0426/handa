@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.hansol.handa.domain.ChallengeVO;
 import com.hansol.handa.service.ChallengeService;
 
@@ -55,6 +58,12 @@ public class ChallengeController {
 		model.addAttribute("mainCategoryName", categoryName.get("main_category_name"));
 		
 		return "challenge/list";
+	}
+	
+	@GetMapping("/imagelist/{searchWord}")
+	@ResponseBody
+	public List<String> imageList(@PathVariable String searchWord){
+		return challengeService.getimagelist(searchWord);
 	}
 	
 	@GetMapping("/create")
