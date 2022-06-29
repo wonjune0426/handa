@@ -17,4 +17,5 @@ public class ChallengeVO {
 	  String member_id; 
 	  int subcategory_id;
 	 
+	  private JoinVO joinVO;
 }
