@@ -13,7 +13,7 @@
 	<main id="main">
 
 		<!-- ======= Breadcrumbs ======= -->
-		<div class="breadcrumbs">
+<!-- 		<div class="breadcrumbs">
 			<div class="page-header d-flex align-items-center"
 				style="background-image: url('assets/img/page-header.jpg');">
 				<div class="container position-relative">
@@ -34,29 +34,30 @@
 					</ol>
 				</div>
 			</nav>
-		</div>
+		</div> -->
 		<!-- End Breadcrumbs -->
-
+		
+		<!-- 챌린지 상세보기 메뉴 탭 -->
+		<div id="scrollMenu" class="challenge-detail-tab">
+			<a th:href="@{#period}">챌린지 기간</a>
+			<a th:href="@{#explanation}">챌린지 설명</a>
+			<a th:href="@{#caution}">주의사항</a>
+			<a th:href="@{#comment}">댓글</a>
+		</div>
+		
 		<!-- ======= Services Section ======= -->
-		<section id="service-details" class="service-details">
+		<section id="service-details" class="service-details" style="position: relative">
 			<div class="container aos-init aos-animate" data-aos="fade-up">
-
-				<div class="row gy-4">
-
-					<div class="col-lg-12">
-						<div class="challenge-detail-tab">
-							<a href="/detail" class="active">기본정보</a> <a href="/comment">댓글</a>
-						</div>
-					</div>
-
-					<div class="col-lg-12">
-						<h3 class="ch-detail-title">정보처리기사 챌린지</h3>
-						<div class="row">
-						<img src="assets/img/study-thumb.jpg" alt=""
-							class="img-fluid services-img col-4 ch-detail-thumb">
-						<div class="col-8 challenge-join-member">
-							<p class="join-member-text">참여 인원 <span class="join-member-num">(8 명)</span></p>
-							<div class="ch-j-detail-div">
+				<div class="col-lg-12"><hr/><br>
+					<div class="row gy-4">
+						<div class="col-lg-12">
+							<h3 class="ch-detail-title">정보처리기사 챌린지</h3>
+							<div class="row">
+								<img src="assets/img/study-thumb.jpg" alt=""
+									class="img-fluid services-img col-4 ch-detail-thumb">
+								<div class="col-8 challenge-join-member">
+										<p class="join-member-text">참여 인원 <span class="join-member-num">(8 명)</span></p>
+								<div class="ch-j-detail-div">
 								<p class="ch-j-detail">
 									<i alt="" class="ch-user-icon fa-solid fa-user"></i>
 								</p> 							
@@ -148,17 +149,28 @@
 							</div>
 						</div>
 						</div>
-						
-						<hr/>
-						
+
 						<div>
-						<b>챌린지 진행기간</b>
-						<p>2022.06.14 ~ 2022.07.28</p>
+							<b id="period">챌린지 진행기간</b>
+							<p>2022.06.14 ~ 2022.07.28</p>
 						</div>
 						
 						<div>
-						<b>챌린지 설명</b>
+						<b id="explanation">챌린지 설명</b>
 						<p>
+						Est reprehenderit voluptatem necessitatibus asperiores
+							neque sed ea illo. Deleniti quam sequi optio iste veniam repellat
+							odit. Aut pariatur itaque nesciunt fuga.</p>
+						<p>Sunt rem odit accusantium omnis perspiciatis officia.
+							Laboriosam aut consequuntur recusandae mollitia doloremque est
+							architecto cupiditate ullam. Quia est ut occaecati fuga.
+							Distinctio ex repellendus eveniet velit sint quia sapiente
+							cumque. Et ipsa perferendis ut nihil. Laboriosam vel voluptates
+							tenetur nostrum. Eaque iusto cupiditate et totam et quia dolorum
+							in. Sunt molestiae ipsum at consequatur vero. Architecto ut
+							pariatur autem ad non cumque nesciunt qui maxime. Sunt eum quia
+							impedit dolore alias explicabo ea.</p>
+										<p>
 						Est reprehenderit voluptatem necessitatibus asperiores
 							neque sed ea illo. Deleniti quam sequi optio iste veniam repellat
 							odit. Aut pariatur itaque nesciunt fuga.</p>
@@ -175,7 +187,7 @@
 						</div>	
 							
 						<div>
-						<b>챌린지 주의사항</b>
+						<b id="caution">챌린지 주의사항</b>
 						<ul>
 							<li><i class="bi bi-check-circle"></i> <span>이 부분은 모든 챌린지에 고정적으로 들어가는 부분입니다.</span></li>
 							<li><i class="bi bi-check-circle"></i> <span>Assumenda
@@ -184,17 +196,164 @@
 									laboris nisi ut aliquip ex ea</span></li>
 						</ul>
 						</div>
-						
-						<div class="ch-detail-to-list-btn">
-							<a href="/list" class="comment-btn">목록</a>
+					</div>
+
+				</div>
+
+			</div><hr>
+		</section>
+		
+		<section class="service-details"><br><br><br>
+			<div class="container aos-init aos-animate" data-aos="fade-up">
+				<div class="row gy-4">
+					<div class="row ch-comment-input-content">
+						<div class="col-lg-12">
+							<p id="comment" >댓글 작성하기</p>
+							<div class="form-group mt-3">
+								<textarea class="form-control" name="message" rows="3"
+									placeholder="댓글을 작성하세요." required=""></textarea>
+							</div>
+						</div>
+						<div class="col-lg-12">
+							<div class="form-group mt-3">
+								<div class="text-right ch-comment-create-div">
+									<button type="submit" class="comment-btn">작성하기</button>
+								</div>
+							</div>
 						</div>
 					</div>
 
 				</div>
 
 			</div>
+
+			<!-- 댓글 목록 -->
+			<div class="container mt-5">
+
+				<div class="row  d-flex justify-content-center comment-content">
+					<div class="col-md-12">
+						<div
+							class="headings d-flex justify-content-between align-items-center mb-3">
+							<h5>댓글(4)</h5>
+						</div>
+
+						<!-- --------------댓글 목록 부분------------ -->
+						<!-- 댓글 card 시작 -->
+						<div class="card p-3 mt-2">
+							<div class="d-flex justify-content-between align-items-center">
+
+								<div class="user d-flex flex-row align-items-center">
+
+									<img src="https://i.imgur.com/hczKIze.jpg" width="30"
+										class="user-img rounded-circle mr-2"> <span> <small
+										class="font-weight-bold text-primary">김한솔</small> <small
+										class="comment-list-position">선임</small> <small
+										class="font-weight-bold">추천합니다.</small>
+									</span>
+
+								</div>
+								<small>2022.06.14</small>
+							</div>
+							<div
+								class="action d-flex justify-content-between mt-2 align-items-center">
+
+								<div class="reply px-4">
+									<small>수정하기</small> <span class="dots"></span> <small>삭제하기</small>
+								</div>
+							</div>
+						</div>
+						<!-- 댓글 card 끝 -->
+
+						<!-- 댓글 card 시작 -->
+						<div class="card p-3 mt-2">
+							<div class="d-flex justify-content-between align-items-center">
+
+								<div class="user d-flex flex-row align-items-center">
+
+									<img src="https://i.imgur.com/C4egmYM.jpg" width="30"
+										class="user-img rounded-circle mr-2"> <span> <small
+										class="font-weight-bold text-primary">김한솔</small> <small
+										class="comment-list-position">선임</small> <small
+										class="font-weight-bold">추천합니다.</small>
+									</span>
+
+								</div>
+								<small>2022.06.14</small>
+							</div>
+							<div
+								class="action d-flex justify-content-between mt-2 align-items-center">
+
+								<div class="reply px-4">
+									<small>수정하기</small> <span class="dots"></span> <small>삭제하기</small>
+								</div>
+							</div>
+						</div>
+						<!-- 댓글 card 끝 -->
+
+						<!-- 댓글 card 시작 -->
+						<div class="card p-3 mt-2">
+							<div class="d-flex justify-content-between align-items-center">
+
+								<div class="user d-flex flex-row align-items-center">
+
+									<img src="https://i.imgur.com/hczKIze.jpg" width="30"
+										class="user-img rounded-circle mr-2"> <span> <small
+										class="font-weight-bold text-primary">김한솔</small> <small
+										class="comment-list-position">선임</small> <small
+										class="font-weight-bold">추천합니다.</small>
+									</span>
+
+								</div>
+								<small>2022.06.14</small>
+							</div>
+							<div
+								class="action d-flex justify-content-between mt-2 align-items-center">
+
+								<div class="reply px-4">
+									<small>수정하기</small> <span class="dots"></span> <small>삭제하기</small>
+								</div>
+							</div>
+						</div>
+						<!-- 댓글 card 끝 -->
+						
+						<!-- 댓글 card 시작 -->
+						<div class="card p-3 mt-2">
+							<div class="d-flex justify-content-between align-items-center">
+
+								<div class="user d-flex flex-row align-items-center">
+
+									<img src="https://i.imgur.com/ZSkeqnd.jpg" width="30"
+										class="user-img rounded-circle mr-2"> <span> <small
+										class="font-weight-bold text-primary">김한솔</small> <small
+										class="comment-list-position">선임</small> <small
+										class="font-weight-bold">추천합니다.</small>
+									</span>
+
+								</div>
+								<small>2022.06.14</small>
+							</div>
+							<div
+								class="action d-flex justify-content-between mt-2 align-items-center">
+
+								<div class="reply px-4">
+									<small>수정하기</small> <span class="dots"></span> <small>삭제하기</small>
+								</div>
+							</div>
+						</div>
+						<!-- 댓글 card 끝 -->
+					</div>
+				</div>
+						<br><br>																	
+						<div class="ch-detail-to-list-btn">
+							<a th:href="@{/list?sortType=0}" class="comment-btn">목록</a>
+						</div>
+			</div>
 		</section>
 	</main>
 	<!-- End #main -->
 </div>
+	<!-- include JS Script -->
+	<th:block layout:fragment="javascript">   
+		<script src='../assets/js/scroll_menu.js'></script>
+	</th:block>
 </html>

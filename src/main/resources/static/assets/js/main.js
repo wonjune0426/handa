@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
    * Sticky header on scroll
    */
   const selectHeader = document.querySelector('#header');
+
   /*
   if (selectHeader) {
     document.addEventListener('scroll', () => {
@@ -28,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   */
+
 
   /**
    * Scroll top button

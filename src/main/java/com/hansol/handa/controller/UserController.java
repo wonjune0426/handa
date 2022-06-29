@@ -120,5 +120,4 @@ public class UserController {
 		// 챌린지 컨트롤러로 옮겨야함
 		return "challenge/index";
 	}
-
 }

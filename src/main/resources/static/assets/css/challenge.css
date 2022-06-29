@@ -102,6 +102,29 @@
 
 /* ------------ 챌린지 상세 (기본정보 페이지 challenge/detail.html) -------------- */
 /* 챌린지 상세 탭 (기본정보, 댓글) */
+
+/* 챌린지 상세보기 메뉴 탭 */
+#scrollMenu{
+	left: 6em;
+	margin-top: 5em;
+}
+
+/* 챌린지 상세보기 메뉴 탭 스크롤 시 */
+#scrollMenu.fixed{
+	position:fixed;
+	left: 6em;
+	z-index: 1000;
+	top: -1em;
+	width: 100%;
+	height: 5em;
+}
+
+.challenge-detail-tab{
+	position: relative;
+	border-bottom: 0;
+	background-color: #fff
+}
+
 .challenge-detail-tab a.active {
 	font-weight: 700;
 	border-color: #0d42ff;
@@ -351,6 +374,12 @@
 	height: 100%;
 	display: block; 
 	margin: 0px auto;
+}
+
+
+/* 스크롤 탭 관련 css */
+#period, #explanation, #caution, #comment{
+	scroll-margin-top: 10em;
 }
 
 .img-btn{
