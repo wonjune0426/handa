@@ -44,7 +44,7 @@ public class CustomUser extends User {
     			.map(auth -> new SimpleGrantedAuthority(auth.getAuth()))
     			.collect(Collectors.toList()));
     	
-        log.info("CustomUSer - " + vo.toString());
+//        log.info("CustomUSer - " + vo.toString());
 
         this.user = vo;
     }

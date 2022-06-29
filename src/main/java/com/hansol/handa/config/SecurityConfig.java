@@ -48,7 +48,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     	
     	// URL 별 권한관리 설정
         http.authorizeRequests()
-        .antMatchers("/", "/list", "/detail", "/comment", "/member/login", "/member/register", "/assets/**", "/smarteditor/**").permitAll()
+        .antMatchers(
+        		"/", "/list", "/detail", "/comment", "/member/login", 
+        		"/member/register", "/assets/**", "/smarteditor/**",
+        		"/member/index").permitAll()
         .antMatchers("/mypage/**", "/create").authenticated();
         // .access("hasRole('ROLE_USER')")
 //        .anyRequest().authenticated();

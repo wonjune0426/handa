@@ -21,11 +21,13 @@ document.addEventListener('DOMContentLoaded', () => {
    * Sticky header on scroll
    */
   const selectHeader = document.querySelector('#header');
+  /*
   if (selectHeader) {
     document.addEventListener('scroll', () => {
       window.scrollY > 100 ? selectHeader.classList.add('sticked') : selectHeader.classList.remove('sticked');
     });
   }
+  */
 
   /**
    * Scroll top button
@@ -147,5 +149,14 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('load', () => {
     aos_init();
   });
+  
+  /* 배너 이미지 변경 */
+  const activeBanner = document.querySelector('.swiper-slide-duplicate-active');
+  const bannerImg = activeBanner.dataset.bannerImg;
+  const changeBanner = document.querySelector('.testimonials');
+  
+  console.log(activeBanner, bannerImg, changeBanner);
+  
+  changeBanner.style.backgroundImage = 'url(' + bannerImg + ')';
 
 });
