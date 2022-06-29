@@ -70,4 +70,9 @@ public class UserController {
 
 	}
 
+	@GetMapping("/index")
+	public String index() {
+		// 챌린지 컨트롤러로 옮겨야함
+		return "challenge/index";
+	}
 }

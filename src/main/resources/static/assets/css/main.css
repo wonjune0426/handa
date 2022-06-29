@@ -11,21 +11,26 @@
 --------------------------------------------------------------*/
 /* Fonts */
 :root {
-  --font-default: Open Sans, system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-  --font-primary: Inter, sans-serif;
+  --font-default: 'Noto Sans KR', sans-serif;
+  --font-primary: 'Noto Sans KR', sans-serif;
   --font-secondary: Poppins, sans-serif;
 }
 
 /* Colors */
 :root {
   --color-default: #0a0d13;
-  --color-primary: #0d42ff;
+  /* --color-primary: #0d42ff; */
+  --color-primary: #86a0e6;
   --color-secondary: #0e1d34;
 }
 
 /* Smooth scroll behavior */
 :root {
   scroll-behavior: smooth;
+}
+
+.handa-logo {
+	font-family: Inter, sans-serif !important;
 }
 
 /*--------------------------------------------------------------
@@ -129,17 +134,21 @@ section {
 /*--------------------------------------------------------------
 # Breadcrumbs
 --------------------------------------------------------------*/
+.breadcrumbs {
+  
+}
 .breadcrumbs .page-header {
-  padding: 140px 0 80px 0;
+  padding: 15px 0;
   position: relative;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  height: 74px;
 }
 
 .breadcrumbs .page-header:before {
   content: "";
-  background-color: rgba(14, 29, 52, 0.8);
+  /* background-color: rgb(128, 255, 128); */
   position: absolute;
   inset: 0;
 }
@@ -303,14 +312,16 @@ section {
 --------------------------------------------------------------*/
 .header {
   transition: all 0.5s;
-  z-index: 997;
+  /* z-index: 997; */
   padding: 30px 0;
 }
 
 .header.sticked {
-  background: rgba(14, 29, 52, 0.9);
+  /* background: rgba(14, 29, 52, 0.9); */
+  background: #fff;
   padding: 15px 0;
-  box-shadow: 0px 2px 20px rgba(14, 29, 52, 0.1);
+  /* box-shadow: 0px 2px 20px rgba(14, 29, 52, 0.1); */
+  border-bottom: 1px solid #eee;
 }
 
 .header .logo img {
@@ -322,7 +333,8 @@ section {
   font-size: 30px;
   margin: 0;
   font-weight: 700;
-  color: #fff;
+  /* color: #fff; */
+  color: #5d5d5d;
   font-family: var(--font-primary);
 }
 
@@ -355,7 +367,8 @@ section {
     font-family: var(--font-primary);
     font-size: 16px;
     font-weight: 400;
-    color: rgba(255, 255, 255, 0.6);
+    /* color: #fff; */
+    color: #5d5d5d;
     white-space: nowrap;
     transition: 0.3s;
   }
@@ -371,7 +384,8 @@ section {
   .navbar .active,
   .navbar .active:focus,
   .navbar li:hover>a {
-    color: #fff;
+    /* color: #fff; */
+    color: #5d5d5d;
   }
 
   .navbar .get-a-quote,
@@ -469,6 +483,9 @@ section {
 # Mobile Navigation
 --------------------------------------------------------------*/
 @media (max-width: 1279px) {
+	.breadcrumbs .page-header {
+	  height: 60px;
+	}
   .navbar {
     position: fixed;
     top: 0;
@@ -477,7 +494,7 @@ section {
     max-width: 400px;
     bottom: 0;
     transition: 0.3s;
-    z-index: 9997;
+    /* z-index: 9997; */
   }
 
   .navbar ul {
@@ -488,7 +505,7 @@ section {
     background: rgba(14, 29, 52, 0.9);
     overflow-y: auto;
     transition: 0.3s;
-    z-index: 9998;
+    /* z-index: 9998; */
   }
 
   .navbar a,
@@ -555,7 +572,7 @@ section {
     cursor: pointer;
     line-height: 0;
     transition: 0.5s;
-    z-index: 9999;
+    /* z-index: 9999; */
     margin-right: 10px;
   }
 
@@ -568,7 +585,7 @@ section {
     position: fixed;
     right: 20px;
     top: 20px;
-    z-index: 9999;
+    /* z-index: 9999; */
   }
 
   .mobile-nav-active {
@@ -584,7 +601,7 @@ section {
     position: fixed;
     inset: 0;
     background: rgba(14, 29, 52, 0.8);
-    z-index: 9996;
+    /* z-index: 9996; */
   }
 }
 
@@ -1106,7 +1123,7 @@ section {
 --------------------------------------------------------------*/
 .testimonials {
   padding: 80px 0;
-  background: url("../img/testimonials-bg.jpg") no-repeat;
+  /* background: url("../img/testimonials-bg.jpg") no-repeat; */
   background-position: center center;
   background-size: cover;
   position: relative;
