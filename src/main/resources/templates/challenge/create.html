@@ -191,8 +191,8 @@
 					url: "/imagelist/" + $('#search-word').val(),
 					type: "GET",
 					//////////////////// recv
-					success: function (data) { // status, xhr 생략가능 
-						if (!data == "") {
+					success: function (data) { // status, xhr 생략가능
+						if (data.length!=0) {
 							for (var i = 0; i < data.length; i++) {
 								$('#img-list').append(
 									`<button type="button" class="img-btn">
@@ -220,8 +220,10 @@
 		
 		$(document).on("click",".img-btn",function(){
 			var ch=$(this).find('.img-lists').attr("src")
-			$('.modal').toggleClass( 'show' )
-			$('#profile-img').attr("src",ch)
+			$('.modal').toggleClass( 'show' );
+			$('#img-list').empty();
+			$('#search-word').val("");
+			$('#profile-img').attr("src",ch);
 		});
 	</script>
 	<!--api 호출-->
