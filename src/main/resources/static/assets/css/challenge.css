@@ -376,7 +376,22 @@
 	margin: 0px auto;
 }
 
+
 /* 스크롤 탭 관련 css */
 #period, #explanation, #caution, #comment{
 	scroll-margin-top: 10em;
 }
+
+.img-btn{
+	width:200px;
+	height:200px;
+	border:0;
+	outline: 0;
+	background-color:white;
+}
+
+.img-list{
+	width: 100%;
+	height: 100%;
+}
+

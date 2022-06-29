@@ -21,13 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
    * Sticky header on scroll
    */
   const selectHeader = document.querySelector('#header');
-<<<<<<< HEAD
- /* if (selectHeader) {
-    document.addEventListener('scroll', () => {
-      window.scrollY > 100 ? selectHeader.classList.add('sticked') : selectHeader.classList.remove('sticked');
-    });
-  }*/
-=======
+
   /*
   if (selectHeader) {
     document.addEventListener('scroll', () => {
@@ -35,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   */
->>>>>>> d249f82ec940503da10736b0ea806996cd3d07e0
+
 
   /**
    * Scroll top button
