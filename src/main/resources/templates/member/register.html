@@ -51,7 +51,7 @@
 		<section id="contact" class="contact register-padding-top-30px">
 			<div class="text-center">
 				<div class="login-div">
-					<form th:action="@{/member/register}" method="post" role="form" class="php-email-form">
+					<form action="" method="post" role="form" class="php-email-form">
 						<div class="row">
 							<div class="form-group mt-3">
 								<div class="register-label-style">
@@ -63,7 +63,7 @@
 											name="member_id" class="form-control" id="memberid"
 											placeholder="아이디" required></td>
 										<td>
-											<button class="btn btn-primary register-button-width">중복확인</button>
+											<button class="btn btn-primary register-button-width id-check">중복확인</button>
 										</td>
 								</table>
 							</div>
@@ -184,6 +184,64 @@
 <th:block layout:fragment="javascript">
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script>
+	
+	$(document).ready(function(){
+		// console.log($('#memberid').val());
+			let idCheckConfirm = false;
+		
+	$(".id-check").on("click", function (e) {
+		
+	        
+	        e.preventDefault();
+	        
+	        // console.log("버튼 쿨릭 테스트")
+	        
+	        const memberId = $('#memberid').val();
+	        
+	        if (memberId == "") {
+				Swal.fire({
+					  icon: 'error',
+					  text: '아이디를 입력하세요.'
+				})
+				return;
+	        }
+	        
+		$.ajax({
+			type: 'post',
+			url: "/member/idcheck",
+			data: { 'member_id': memberId },
+			success: function (data) {
+				// 0 : 가입 가능, 1 : 가입 불가 (중복 O)
+				if (data === 1) {
+					Swal.fire({
+						  icon: 'error',
+						  text: '이미 존재하는 아이디입니다.'
+					})
+					$('#memberid').val("");
+					
+					idCheckConfirm = false;
+				}
+			
+				if (data === 0) {
+					Swal.fire({
+						  icon: 'success',
+						  text: '사용할 수 있는 아이디입니다.'
+					})
+					
+					idCheckConfirm = true;
+				}
+			}
+		});
+	});
+		
+		
+	if ($(".register-result").val() === "register-fail") {			
+		Swal.fire({
+			  icon: 'error',
+			  text: '가입을 다시 진행해주세요.'
+		})
+	}
+	
 	$(".login-btn-div button").on("click", function (e) {
         
 
@@ -191,20 +249,25 @@
         
         // console.log("버튼 쿨릭 테스트")
         
-        $(".php-email-form").submit();
+        $(".php-email-form").attr("action", "/member/register");
         
+		
+    	if (idCheckConfirm === false) {
+    		// console.log("아이디 중복 미체크");
+    		Swal.fire({
+				  icon: 'error',
+				  text: '아이디 중복확인을 해주세요.'
+			})
+    		return;	
+    	}
+    	
+        $(".php-email-form").submit();
     });
-	$(document).ready(function(){
+	
+
 		
-		
-	if ($(".register-result").val() === "register-fail") {			
-	Swal.fire({
-		  icon: 'error',
-		  text: '가입을 다시 진행해주세요.'
-		})
-	}
-	});
-	</script>
+});
+</script>
 </th:block>
 
 </html>

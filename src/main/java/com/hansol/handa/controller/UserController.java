@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hansol.handa.domain.UserVO;
@@ -88,6 +89,19 @@ public class UserController {
 			return "redirect:/member/register";
 		}
 		
+	}
+	
+	@ResponseBody
+	@PostMapping("/idcheck")
+	public int idcheck(String member_id) {
+		
+		log.info("아이디 체크-----------------------------------" + member_id);
+		
+		log.info("아이디 체크 결과 : " + userService.idcheck(member_id));
+		
+		// 0 : 가입 가능, 1 : 가입 불가 (중복 O)
+		
+		return userService.idcheck(member_id);
 	}
 
 	@GetMapping("/amend")

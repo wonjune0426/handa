@@ -30,4 +30,9 @@ public class UserServiceImpl implements UserService {
 		
 	}
 
+	@Override
+	public int idcheck(String member_id) {
+		// 0 : 가입 가능, 1 : 가입 불가 (중복 O)
+		return userMapper.read(member_id) == null ? 0 : 1;
+	}
 }
