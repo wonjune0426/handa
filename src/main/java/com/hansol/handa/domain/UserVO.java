@@ -18,7 +18,7 @@ public class UserVO {
 	private String profile_path;
 	private String profile_type;
 	private String createdate;
-	private String position_id;
+	private int position_id;
 
 	private List<AuthVO> authList;
 }

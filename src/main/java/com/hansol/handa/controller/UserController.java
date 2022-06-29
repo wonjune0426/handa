@@ -1,20 +1,32 @@
 package com.hansol.handa.controller;
 
+import java.sql.SQLException;
+
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hansol.handa.domain.UserVO;
+import com.hansol.handa.mapper.UserMapper;
+import com.hansol.handa.service.UserService;
+
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
 @RequestMapping("/member")
 public class UserController {
+
+	@Setter(onMethod_ = { @Autowired })
+	private UserService userService;
 
 	@GetMapping("/login")
 	public String login(String error, String logout, Model model, RedirectAttributes rttr, HttpServletRequest request) {
@@ -50,6 +62,34 @@ public class UserController {
 		return "member/register";
 	}
 
+	@PostMapping("/register")
+	public String registerPOST(UserVO userVO, RedirectAttributes rttr) {
+
+		log.info("register post--------------------");
+
+
+		try {
+			int result = userService.register(userVO);
+			
+			rttr.addFlashAttribute("msg", "register-success");
+
+			log.info("가입 성공-----------------------------");
+
+			return "redirect:/member/login";
+			
+			
+		} catch (Exception e) {
+			
+			log.info("가입 실패-----------------------------------");
+			e.printStackTrace();
+			
+			rttr.addFlashAttribute("msg", "register-fail");
+
+			return "redirect:/member/register";
+		}
+		
+	}
+
 	@GetMapping("/amend")
 	public String amendmember() {
 		log.info("amend--------------------------------------------");
@@ -74,7 +114,7 @@ public class UserController {
 	public String securitySample() {
 		return "sample/security-sample";
 	}
-	
+
 	@GetMapping("/index")
 	public String index() {
 		// 챌린지 컨트롤러로 옮겨야함

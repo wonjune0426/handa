@@ -8,4 +8,6 @@ import com.hansol.handa.domain.UserVO;
 public interface UserMapper {
 
 	UserVO read(String username); 
+	
+	int register(UserVO userVO);
 }
