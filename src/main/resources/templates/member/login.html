@@ -75,9 +75,11 @@
 								</div>
 								<div class="text-center member-join-div">
 									<a href="/member/register">회원가입 하기</a>
+									<input type="hidden" th:value="${msg}" class="register-result"/>
 								</div>
 							</form>
 						</div>
+
 						<!-- End Contact Form -->
 
 					</div>
@@ -89,6 +91,7 @@
 
 	</main>
 	<!-- End #main -->
+	
 </div>
 <!-- include JS Script -->
 <th:block layout:fragment="javascript">
@@ -123,6 +126,16 @@
         $(".php-email-form").submit();
         
     });
+	
+	$(document).ready(function(){
+		if ($(".register-result").val() === "register-success") {			
+			Swal.fire({
+				  icon: 'success',
+				  text: '가입이 완료되었습니다.'
+				})
+			}
+			
+	});
 	</script>
 </th:block>
 </html>

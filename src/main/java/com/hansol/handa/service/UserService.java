@@ -1,5 +1,8 @@
 package com.hansol.handa.service;
 
-public interface UserService {
+import com.hansol.handa.domain.UserVO;
 
+public interface UserService {
+	
+	int register(UserVO userVO);
 }

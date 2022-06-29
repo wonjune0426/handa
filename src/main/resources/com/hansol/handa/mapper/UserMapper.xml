@@ -6,4 +6,12 @@
 	<select id="read" resultType="UserVO">
 		select * from member where member_id = #{username}
 	</select>
+	<insert id="register">
+		INSERT INTO member 
+			(member_id, password, member_name, member_call, 
+			e_mail, gender, affiliates_id, position_id)
+		VALUES
+			(#{member_id}, #{password},#{member_name}, #{member_call},
+			#{e_mail}, #{gender}, #{affiliates_id}, #{position_id})
+	</insert>
 </mapper>
