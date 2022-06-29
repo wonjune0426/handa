@@ -132,7 +132,94 @@ document.addEventListener('DOMContentLoaded', () => {
     navigation: {
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
-    }
+    },
+    
+    on: {
+		slideChangeTransitionStart: function() {
+			//배너 이미지 변경 
+		  const activeBanner = document.querySelector('.swiper-slide-duplicate-active');
+		  const bannerImg = activeBanner.dataset.bannerImg;
+		  const changeBanner = document.querySelector('.main-banner .swiper-slide-active');
+		  
+		  console.log(activeBanner, bannerImg, changeBanner);
+		  
+		  changeBanner.style.background = 'url(' + bannerImg + ') no-repeat';
+		  changeBanner.style.backgroundSize = 'cover';
+		  changeBanner.style.backgroundPosition = 'center';
+		  changeBanner.style.transition = 'background-image 0.5s ease-out';
+		  // changeBanner.style.opacity = '0.3';
+		   
+		},
+		/*
+		slideChangeTransitionEnd: function() {
+			//배너 이미지 변경 
+		  const activeBanner = document.querySelector('.swiper-slide-duplicate-active');
+		  const bannerImg = activeBanner.dataset.bannerImg;
+		  const changeBanner = document.querySelector('.testimonials');
+		  
+		  changeBanner.style.background = 'url(' + bannerImg + ') no-repeat';
+		  changeBanner.style.backgroundSize = 'cover';
+		  changeBanner.style.backgroundPosition = 'center';
+		  changeBanner.style.transition = 'background-image opacity 0.5s ease';
+		  changeBanner.style.opacity = '1';
+		   
+		},
+		*/
+	}
+	
+  });
+
+	new Swiper('.slides-2', {
+    speed: 600,
+    loop: true,
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false
+    },
+    slidesPerView: 'auto',
+    pagination: {
+      el: '.swiper-pagination',
+      type: 'bullets',
+      clickable: true
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    
+    on: {
+		slideChangeTransitionStart: function() {
+			//배너 이미지 변경 
+		  const activeBanner = document.querySelector('.swiper-slide-duplicate-active');
+		  const bannerImg = activeBanner.dataset.bannerImg;
+		  const changeBanner = document.querySelector('.main-banner .swiper-slide-active');
+		  
+		  console.log(activeBanner, bannerImg, changeBanner);
+		  
+		  changeBanner.style.background = 'url(' + bannerImg + ') no-repeat';
+		  changeBanner.style.backgroundSize = 'cover';
+		  changeBanner.style.backgroundPosition = 'center';
+		  changeBanner.style.transition = 'background-image 0.5s ease-out';
+		  // changeBanner.style.opacity = '0.3';
+		   
+		},
+		/*
+		slideChangeTransitionEnd: function() {
+			//배너 이미지 변경 
+		  const activeBanner = document.querySelector('.swiper-slide-duplicate-active');
+		  const bannerImg = activeBanner.dataset.bannerImg;
+		  const changeBanner = document.querySelector('.testimonials');
+		  
+		  changeBanner.style.background = 'url(' + bannerImg + ') no-repeat';
+		  changeBanner.style.backgroundSize = 'cover';
+		  changeBanner.style.backgroundPosition = 'center';
+		  changeBanner.style.transition = 'background-image opacity 0.5s ease';
+		  changeBanner.style.opacity = '1';
+		   
+		},
+		*/
+	}
+	
   });
 
   /**
@@ -150,13 +237,6 @@ document.addEventListener('DOMContentLoaded', () => {
     aos_init();
   });
   
-  /* 배너 이미지 변경 */
-  const activeBanner = document.querySelector('.swiper-slide-duplicate-active');
-  const bannerImg = activeBanner.dataset.bannerImg;
-  const changeBanner = document.querySelector('.testimonials');
   
-  console.log(activeBanner, bannerImg, changeBanner);
-  
-  changeBanner.style.backgroundImage = 'url(' + bannerImg + ')';
 
 });

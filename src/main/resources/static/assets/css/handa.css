@@ -5,7 +5,9 @@
 .testimonials {
 	background: none;
 	padding: 160px 0;
-	/* background: url(../img/banner/banner-1.png) no-repeat; */
+	/* background: url(../img/banner/banner-1.jpg) no-repeat; */
+	background-size: cover; /* 백그라운드 이미지 꽉차게 */
+	background-position: center;
 }
 
 .testimonials::before {
@@ -29,7 +31,7 @@
 	color: #616161!important;
 }
 
-.testimonials .swiper-pagination .swiper-pagination-bullet {
+.main-banner .swiper-pagination .swiper-pagination-bullet {
     width: 12px;
     height: 12px;
     background-color: rgba(0, 0, 0, 0.4);
@@ -39,7 +41,53 @@
     height: 2px;
 }
 
-.testimonials .swiper-pagination .swiper-pagination-bullet-active {
+.main-banner .swiper-pagination .swiper-pagination-bullet-active {
+    background-color: #616161;
+    opacity: 1;
+}
+
+.main-banner {
+	padding: 0px;
+	height: 430px;
+}
+
+.main-banner .testimonial-item {
+	padding: 10% 20%;
+	height: 430px;
+	width: 100%;
+}
+
+.main-banner .swiper-container {
+	height: 430px;
+	vertical-align: middle;
+	width: 100%;
+}
+
+.main-banner .swiper-slide {
+	width: 100%;
+}
+
+.main-banner .swiper-container .slides-1 {
+	vertical-align: middle;
+	display: inline-block;
+	height: 430px;	
+}
+
+.event-banner {
+	background-color:  #eff3fc;
+	padding: 20px 0px;
+	margin-bottom: 50px;
+}
+
+.event-banner .swiper-pagination .swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    background-color: rgba(0, 0, 0, 0.4);
+    opacity: 0.5;
+    border-radius: 50px;
+}
+
+.event-banner .swiper-pagination .swiper-pagination-bullet-active {
     background-color: #616161;
     opacity: 1;
 }
@@ -120,6 +168,10 @@
 
 .services .card .card-img {
 	border-radius: 5px 5px 0 0;
+}
+
+.ch-menu-title {
+	margin-top: 50px;
 }
 
 .ch-menu-title h5 {
