@@ -37,7 +37,8 @@ public class ChallengeController {
 	public String list(ModelMap model) throws Exception{ 
 		List<ChallengeVO> challengeList = challengeService.selectAllChallenge();
 		model.addAttribute("challengeList", challengeList);
-	  
+		model.addAttribute("sortType", 0);
+		
 		return "challenge/list"; 
 	}
 
@@ -91,6 +92,7 @@ public class ChallengeController {
 
 		model.addAttribute("challengeList", challengeList);
 		model.addAttribute("isCategory", isCategory);
+		model.addAttribute("sortType", sortType);
 
 		return "challenge/list";
 	}
