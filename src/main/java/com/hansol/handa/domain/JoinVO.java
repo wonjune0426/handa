@@ -1,5 +1,8 @@
 package com.hansol.handa.domain;
 
-public class JoinVO {
+import lombok.Data;
 
+@Data
+public class JoinVO {
+	private int count;
 }
