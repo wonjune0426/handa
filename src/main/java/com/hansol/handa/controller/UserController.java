@@ -26,15 +26,15 @@ public class UserController {
 		if (error != null) {
 
 			rttr.addFlashAttribute("error", "아이디 또는 비밀번호를 잘못 입력했습니다.\n" + "입력하신 내용을 다시 확인해주세요.");
-			
+
 			return "redirect:/member/login";
 
 		}
-		
+
 		if (logout != null) {
 			model.addAttribute("logout", "Logout");
 		}
-		
+
 		// 로그인 후 이전 페이지로 이동 - 이전 페이지로 되돌아가기 위한 Refer 헤더 값을 세션의 prePage attribute 로 저장
 		String uri = request.getHeader("Refer");
 		if (uri != null && !uri.contains("/login")) {
@@ -70,6 +70,11 @@ public class UserController {
 
 	}
 
+	@GetMapping("sample")
+	public String securitySample() {
+		return "sample/security-sample";
+	}
+	
 	@GetMapping("/index")
 	public String index() {
 		// 챌린지 컨트롤러로 옮겨야함
