@@ -72,14 +72,15 @@
 									<label class="login-label"><b>비밀번호</b></label>
 								</div>
 								<input type="password" class="form-control" name="password"
-									id="password" placeholder="비밀번호" required="">
+									id="password" placeholder="비밀번호" required="" maxlength="13">
+									<span style="font-size: 13px; color: #777;">8~13자 영문, 숫자 조합을 사용하세요.</span>
 							</div>
 							<div class="form-group mt-3">
 								<div class="register-label-style">
-									<label class="login-label"><b>비밀번호확인</b></label>
+									<label class="login-label"><b>비밀번호 확인</b></label>
 								</div>
 								<input type="password" class="form-control"
-									id="password-check" placeholder="비밀번호확인" required="">
+									id="password-check" placeholder="비밀번호 확인" required="" maxlength="13">
 							</div>
 
 							<div class="form-group mt-3">
@@ -87,7 +88,7 @@
 									<label class="login-label"><b>이름</b></label>
 								</div>
 								<input type="text" class="form-control" id="member-name"
-									name="member_name" placeholder="이름" required="">
+									name="member_name" placeholder="이름" maxlength="10" required="">
 							</div>
 
 							<div class="form-group mt-3">
@@ -95,7 +96,7 @@
 									<label class="login-label"><b>전화번호</b></label>
 								</div>
 								<input type="text" class="form-control" id="member-call"
-									name="member_call" placeholder="전화번호" required="">
+									name="member_call" placeholder="전화번호" required="" maxlength="13">
 							</div>
 							<div class="form-group mt-3">
 								<div class="register-label-style">
@@ -108,24 +109,21 @@
 								<div class="register-label-style">
 									<label class="login-label"><b>성별</b></label>
 								</div>
-								<div class="register-float-right">
-									<button
-										class="btn register-gender-button register-gender-button-active"
-										type="button" data-gender="남">남</button>
-									<button class="btn register-gender-button" type="button"
-										data-gender="여">여</button>
-									<input type="text" name="gender" value="남">
+								<div class="register-float-right select">
+									 <input type="radio" id="select" name="gender" value="남"><label for="select">남</label>
+     								<input type="radio" id="select2" name="gender" value="여"><label for="select2">여</label>
 								</div>
 							</div>
 							<div class="form-group mt-3">
 								<table class="register-width100">
 									<tr>
-										<td><label class="login-label register-label-style"><b>부서</b></label></td>
+										<td><label class="login-label register-label-style"><b>회사</b></label></td>
 										<td><label class="login-label register-label-style"><b>직급</b></label></td>
 									</tr>
 									<tr>
 										<td><select class="form-control handa-list-select"
 											name="affiliates_id">
+												<option value="0">-- 선택 --</option>
 												<option value="1">한솔 인티큐브</option>
 												<option value="2">한솔 제지</option>
 												<option value="3">한솔 테크닉스</option>
@@ -141,6 +139,7 @@
 										</select></td>
 										<td><select class="form-control handa-list-select"
 											name="position_id">
+												<option value="0">-- 선택 --</option>
 												<option value="1">수석</option>
 												<option value="2">책임</option>
 												<option value="3">선임</option>
@@ -242,27 +241,135 @@
 		})
 	}
 	
+	function loadSwal(text) {
+		Swal.fire({
+			  icon: 'error',
+			  text: text
+		})
+/* 		setTimeout(function(){
+			focus.focus();
+   		}); */
+	}
+	
 	$(".login-btn-div button").on("click", function (e) {
         
-
         e.preventDefault();
         
         // console.log("버튼 쿨릭 테스트")
+        const memberId = $("#memberid");
+        const password = $("#password").val();
+        const passwordCheck = $("#password-check").val();
+        const memberName = $("#member-name").val();
+        const memberCall = $("#member-call").val();
+        const memberEmail = $("#e-mail").val();
+        const gender = $('input[name=gender]');
+        const affiliates = $('select[name=affiliates_id]');
+        const position = $('select[name=position_id]');
         
-        $(".php-email-form").attr("action", "/member/register");
-        
-		
+        // 회원가입 데이터 유효성 검사
+		// 아이디 중복 체크 여부 확인
     	if (idCheckConfirm === false) {
-    		// console.log("아이디 중복 미체크");
-    		Swal.fire({
-				  icon: 'error',
-				  text: '아이디 중복확인을 해주세요.'
-			})
+	
+    		loadSwal('아이디 중복확인을 해주세요.');
+	
     		return;	
     	}
-    	
+		
+		// 비밀번호 작성 여부 & 영문 + 숫자 13자리 이상
+		if (password == "") {
+			
+			loadSwal('비밀번호를 작성 해주세요.');
+			
+  			return;
+		}
+		
+		const regPassword = /^[A-Za-z0-9]{8,13}$/;
+		
+		if (!regPassword.test(password)) {
+			
+			loadSwal('8~13 자 영문, 숫자 조합을 사용하세요.');
+			
+  			return;
+		}
+		
+		// 비밀번호 확인 작성 여부 & 비밀번호와 확인이 일치하는지 확인
+		if (passwordCheck == "") {
+			
+			loadSwal('비밀번호 확인을 작성 해주세요.');
+			
+  			return;
+			
+		}
+		
+		if (passwordCheck != password) {
+			
+			loadSwal('비밀번호 확인을 다시 작성 해주세요.');
+			
+  			return;
+			
+		}
+		
+		// 이름 작성여부 확인 & 10자 이하
+		if (memberName == "") {
+			
+			loadSwal('이름을 작성 해주세요.');
+			
+  			return;
+			
+		}
+		
+		if (memberName.length > 10) {
+			
+			loadSwal('이름은 10자 이하만 가능합니다.');
+			
+  			return;
+			
+		}
+		
+		// 전화번호 작성여부 확인 & 중간에 '-' 표시 넣기
+		if (memberCall == "") {
+			
+			loadSwal('전화번호를 작성 해주세요.');
+			
+  			return;
+			
+		}
+		
+		// email 작성여부 확인 & 형식에 맞게 작성했는지 확인
+		if (memberEmail == "") {
+			
+			loadSwal('이메일을 작성 해주세요.');
+			
+  			return;
+			
+		}
+		
+		// 성별 버튼 클릭 안되어있으면 경고창 표시
+		if (!gender.is(":checked")) {
+			
+			loadSwal('성별을 선택 해주세요.');
+			
+  			return;
+			
+		}
+		
+		// 회사, 직급 선택여부 확인
+		if (affiliates.val() == 0 || position.val() == 0) {
+					
+			loadSwal('회사/직급 정보를 선택 해주세요.');
+			
+  			return;
+			
+		}
+		
+		
+		
+
+		// 폼 전송
+        $(".php-email-form").attr("action", "/member/register");
         $(".php-email-form").submit();
     });
+	
 	
 
 		

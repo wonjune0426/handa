@@ -162,6 +162,39 @@
 	float:right;
 }
 
+/* 성별 선택 라디오 버튼 */
+.select {
+    /* padding: 15px 10px; */
+}
+.select input[type=radio]{
+    display: none;
+}
+.select input[type=radio]+label{
+    display: inline-block;
+    cursor: pointer;
+   /*  height: 24px;
+    width: 90px;
+    border: 1px solid #333;
+    line-height: 24px;
+    text-align: center;
+    font-weight:bold;
+    font-size:13px; */
+    
+    width:200px;
+	background-color: #fff;
+	color: var(--color-primary);
+	border: 1px solid var(--color-primary);
+	height: 42px;
+	line-height: 42px;
+	vertical-align: middle;
+	border-radius: 0.375rem;
+	
+}
+.select input[type=radio]:checked+label{
+    background-color: var(--color-primary);
+	color: #fff;
+}
+
 /* ------------ 회원정보 수정 (member/amend.html) -------------- */
 /*  파일업로드 관련 css */
 .filebox input[type="file"] {
