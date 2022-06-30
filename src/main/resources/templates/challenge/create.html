@@ -47,152 +47,149 @@
 				<section id="get-a-quote" class="get-a-quote">
 					<div class="container aos-init aos-animate" data-aos="fade-up">
 						<div class="row g-0">
-							<div class="">
-								<form action="forms/quote.php" method="post" class="php-email-form">
-									<div class="row gy-4">
-
-										<div class="col-md-6">
-											<label for="main-category">
-												<h3>Thumbnail</h3>
-											</label>
-											<br>
-											<div
-												style="display: inline-block; height: 100%; vertical-align: top; width:100%">
-												<button type="button" id="modal-btn" class="profile-btn"
-													data-toggle="modal"><img id="profile-img"
-														src="/assets/img/about.jpg"></button>
-											</div>
-										</div>
-										<div class="col-md-6">
-											<label>
-												<h3>이름</h3>
-											</label> <input type="text" name="departure" class="form-control "
-												placeholder="이름" required="">
-											<div class="col-md-6 width-100">
-												<label for="main-category">
-													<h3>카테고리 (대)</h3>
-												</label> <select class="form-control main-category" id="main-category">
-													<option>취미</option>
-													<option>자기계발</option>
-												</select>
-											</div>
-											<div class="col-md-6 width-100">
-												<label for="main-category">
-													<h3>카테고리 (소)</h3>
-												</label> <select class="form-control main-category" id="main-category">
-													<option>영화</option>
-													<option>모임</option>
-													<option>등산</option>
-												</select>
-											</div>
-											<div class="col-md-6 width-100">
-												<label for="main-category">
-													<h3>시작날짜</h3>
-												</label> <input type="date" name="startdate" class="form-control"
-													placeholder="시작날짜" required="">
-											</div>
-											<div class="col-md-6 width-100">
-												<label for="main-category">
-													<h3>종료날짜</h3>
-												</label> <input type="date" class="form-control" name="enddate"
-													placeholder="종료날짜" required="">
-											</div>
-											<div class="col-md-6 width-100">
-												<label for="main-category">
-													<h3>유형</h3>
-												</label> <select class="form-control main-category" id="main-category">
-													<option>무료</option>
-													<option>유료</option>
-												</select>
-											</div>
-										</div>
-										<div class="modal">
-											<div class="modal_body">
-												<div style="text-align: right;">
-													<button type="button" class="btn-close" aria-label="Close"
-														id="modal-close"></button>
-												</div>
-												<div style="padding:5px 30px 30px 30px">
-													<label for="main-category">
-														<h3>이미지 검색</h3>
-													</label>
-												</div>
-												<div class="input-group mb-3" style="padding:0px 30% 30px 30%">
-													<input type="text" class="form-control" placeholder="검색어를 입력해주세요"
-														aria-label="검색어를 입력해주세요" aria-describedby="basic-addon2"
-														id="search-word">
-													<div class="input-group-append">
-														<button class="btn btn-primary" type="button"
-															style="height: 50px;" id="image-search-btn">검색</button>
-													</div>
-												</div>
-												<div id="img-list">
-
-												</div>
-											</div>
-
-										</div>
-
-										<div class="col-md-12">
-											<label>
-												<h3>설명</h3>
-											</label>
-											<div id="editor">
-											</div>
-
-										</div>
-
-										<div class="col-md-12 text-center create-challenge">
-											<button type="button" class="btn btn-primary">챌린지 생성</button>
+							<form action="/challenge" method="post" class="php-email-form" id="challengeForm">
+								<div class="row gy-4">
+									<div class="col-md-6">
+										<label for="main-category">
+											<h3>Thumbnail</h3>
+										</label>
+										<br>
+										<div
+											style="display: inline-block; height: 100%; vertical-align: top; width:100%">
+											<button type="button" id="modal-btn" class="profile-btn"
+												data-toggle="modal"><img name="thumbnail" id="profile-img"
+													src="/assets/img/about.jpg"></button>
 										</div>
 									</div>
-								</form>
-							</div>
-							<!-- End Quote Form -->
+									<div class="col-md-6">
+										<label>
+											<h3>챌린지 이름</h3>
+										</label>
+										<input type="text" name="challenge_name" class="form-control "
+											placeholder="챌린지 이름" required="">
+										<div class="col-md-6 width-100">
+											<label for="main-category">
+												<h3>카테고리 (대)</h3>
+											</label> <select class="form-control main-category" id="main-category">
+												<option>취미</option>
+												<option>자기계발</option>
+											</select>
+										</div>
+										<div class="col-md-6 width-100">
+											<label for="main-category">
+												<h3>카테고리 (소)</h3>
+											</label> <select class="form-control main-category" id="subcategory_id">
+												<option>영화</option>
+												<option>모임</option>
+												<option>등산</option>
+											</select>
+										</div>
+										<div class="col-md-6 width-100">
+											<label for="main-category">
+												<h3>시작날짜</h3>
+											</label> <input type="date" name="startdate" class="form-control"
+												placeholder="시작날짜" required="">
+										</div>
+										<div class="col-md-6 width-100">
+											<label for="main-category">
+												<h3>종료날짜</h3>
+											</label> <input type="date" class="form-control" name="enddate"
+												placeholder="종료날짜" required="">
+										</div>
+										<div class="col-md-6 width-100">
+											<label for="main-category">
+												<h3>유형</h3>
+											</label> <select class="form-control main-category" name="challenge_type"
+												id="challenge_type">
+												<option>무료</option>
+												<option>유료</option>
+											</select>
+										</div>
+									</div>
+									<div class="modal">
+										<div class="modal_body">
+											<div style="text-align: right;">
+												<button type="button" class="btn-close" aria-label="Close"
+													id="modal-close"></button>
+											</div>
+											<div style="padding:5px 30px 30px 30px">
+												<label for="main-category">
+													<h3>이미지 검색</h3>
+												</label>
+											</div>
+											<div class="input-group mb-3" style="padding:0px 30% 30px 30%">
+												<input type="text" class="form-control" placeholder="검색어를 입력해주세요"
+													aria-label="검색어를 입력해주세요" aria-describedby="basic-addon2"
+													id="search-word">
+												<div class="input-group-append">
+													<button class="btn btn-primary" type="button" style="height: 50px;"
+														id="image-search-btn">검색</button>
+												</div>
+											</div>
+											<div id="img-list">
+
+											</div>
+										</div>
+
+									</div>
+
+									<div class="col-md-12">
+										<label>
+											<h3>설명</h3>
+										</label>
+										<div>
+										<textarea id="editor"></textarea>
+										</div>
+									</div>
+
+									<div class="col-md-12 text-center create-challenge">
+										<button type="button" id="create-challenge" class="btn btn-primary">챌린지
+											생성</button>
+									</div>
+								</div>
+							</form>
 						</div>
+						<!-- End Quote Form -->
 					</div>
-				</section>
 			</div>
 		</section>
-		<!-- End Services Section -->
-	</main>
-	<!-- End #main -->
+</div>
+</section>
+<!-- End Services Section -->
+</main>
+<!-- End #main -->
 </div>
 <th:block layout:fragment="javascript">
-	<!--Editor-->
 	<script src="build/ckeditor.js"></script>
 	<script>
-			ClassicEditor
+	let editor;
+		ClassicEditor
 			.create(document.querySelector('#editor'))
+			.then(newEditor=>{
+				editor=newEditor;
+			})
 			.catch(error => {
 				console.error(error);
 			});
-	</script>
-	<!--Editor-->
 
-	<!--modal-->
-	<script>
-		$('#modal-btn').click(function(){
-			$('.modal').toggleClass( 'show' )
+		$('#modal-btn').click(function () {
+			$('.modal').toggleClass('show')
 		});
-		$('#modal-close').click(function(){
-			$('.modal').toggleClass( 'show' )
+		$('#modal-close').click(function () {
+			$('.modal').toggleClass('show')
 		});
-	</script>
-	<!--modal-->
 
-	<!--api 호출-->
-	<script>
+
 		var searchEvent = function () {
 			$('#img-list').empty();
 			if ($('#search-word').val() != '') {
 				$.ajax({ // ajax 기본형태
 					//////////////////// send(가는것)
 					url: "/imagelist/" + $('#search-word').val(),
-					type: "GET",
+					method: "GET",
 					//////////////////// recv
 					success: function (data) { // status, xhr 생략가능
-						if (data.length!=0) {
+						if (data.length != 0) {
 							for (var i = 0; i < data.length; i++) {
 								$('#img-list').append(
 									`<button type="button" class="img-btn">
@@ -217,22 +214,66 @@
 				searchEvent();
 			}
 		});
-		
-		$(document).on("click",".img-btn",function(){
-			var ch=$(this).find('.img-lists').attr("src")
-			$('.modal').toggleClass( 'show' );
+		$('#image-search-btn').click(function () {
+			searchEvent();
+		});
+
+		$(document).on("click", ".img-btn", function () {
+			var ch = $(this).find('.img-lists').attr("src")
+			$('.modal').toggleClass('show');
 			$('#img-list').empty();
 			$('#search-word').val("");
-			$('#profile-img').attr("src",ch);
+			$('#profile-img').attr("src", ch);
+		});
+		
+		$('#create-challenge').click(function () {
+			console.log(editor.getData())
+			var select_sub = $("#subcategory_id").val();
+			var subcategory_id;
+			switch (select_sub) {
+				case "영화":
+					subcategory_id = 1;
+					break
+				case "모임":
+					subcategory_id = 2;
+					break
+				case "등산":
+					subcategory_id = 3;
+					break
+				case "독서":
+					subcategory_id = 4;
+					break
+				case "자격증":
+					subcategory_id = 5;
+					break
+				case "외국어":
+					subcategory_id = 6;
+					break
+			}
+			$.ajax({
+				url: "/challenge",
+				method: "POST",
+				data: {
+					challenge_name: $("input[name=challenge_name]").val(),
+					thumbnail: $("#profile-img").attr("src"),
+					startdate: $("input[name=startdate]").val(),
+					enddate: $("input[name=enddate]").val(),
+					subcategory_id :subcategory_id,
+					description:editor.getData(),
+					challenge_type: $("select[name=challenge_type]").val()
+				},
+				dataType: "text",
+				//////////////////// recv
+				success: function (data) { // status, xhr 생략가
+					alert("성공");
+				},
+				error: function (xhr, status, error) { // (파라미터 생략가능)
+					alert("error");
+				}
+				////////////////////
+			})
 		});
 	</script>
-	<!--api 호출-->
-
-	<!--썸네일 변경-->
-	<script>
-	
-	</script>
-	<!--썸네일 변경-->
 </th:block>
 
 </html>

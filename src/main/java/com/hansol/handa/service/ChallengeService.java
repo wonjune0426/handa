@@ -20,4 +20,5 @@ public interface ChallengeService {
 	/* *************** */
 	
 	public List<String> getimagelist(String searchWord);
+	public void createChallenge(ChallengeVO challengeVO);
 }

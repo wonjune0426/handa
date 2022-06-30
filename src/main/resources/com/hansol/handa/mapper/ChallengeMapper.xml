@@ -69,4 +69,9 @@
 		select sub_category.sub_category_name, main_category.main_category_name FROM sub_category, main_category 
 			WHERE sub_category_id = #{subcategory_id} AND sub_category.main_category_id = main_category.main_category_id;
 	</select>
+	
+	<insert id="createChallenge" parameterType="ChallengeVO">
+		insert into challenge(challenge_name,thumbnail,startdate,enddate,description,member_id,subcategory_id,challenge_type)
+		values (#{challenge_name},#{thumbnail},#{startdate},#{enddate},#{description},#{member_id},#{subcategory_id},#{challenge_type})
+	</insert>
 </mapper>
