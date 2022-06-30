@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -103,8 +104,20 @@ public class ChallengeController {
 	
 	@GetMapping("/create")
 	public String create() {
-		System.out.println("create---------------------------------------");
 		return "challenge/create";
+	}
+	
+	@PostMapping("/challenge")
+	public String createChallenge(ChallengeVO challengeVO) {
+		System.out.println(challengeVO.getChallenge_name());
+		System.out.println(challengeVO.getThumbnail());
+		System.out.println(challengeVO.getStartdate());
+		System.out.println(challengeVO.getEnddate());
+		System.out.println(challengeVO.getDescription());
+		System.out.println(challengeVO.getSubcategory_id());
+		System.out.println(challengeVO.getChallenge_type());
+		challengeService.createChallenge(challengeVO);
+		return "redirect:/";
 	}
 	
 	@GetMapping("/detail")

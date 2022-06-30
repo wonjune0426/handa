@@ -12,4 +12,5 @@ public interface ChallengeService {
 	public List<ChallengeVO> selectChallengeListDesc(int category_id);
 	public Map<String, String> selectCategoryName(int sub_category_id);
 	public List<String> getimagelist(String searchWord);
+	public void createChallenge(ChallengeVO challengeVO);
 }

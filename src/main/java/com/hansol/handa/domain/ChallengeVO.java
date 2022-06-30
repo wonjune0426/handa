@@ -7,14 +7,15 @@ import lombok.Data;
 @Data
 public class ChallengeVO {
 	
-	  int challenge_id; 
-	  String challenge_name; 
-	  String thumbnail; 
-	  LocalDate startdate; 
-	  LocalDate enddate; 
-	  String description; 
-	  LocalDate createdate;
-	  String member_id; 
-	  int subcategory_id;
+	 private int challenge_id; 
+	 private String challenge_name; 
+	 private String thumbnail; 
+	 private String startdate; 
+	 private String enddate; 
+	 private String description; 
+	 private String createdate;
+	 private String member_id; 
+	 private int subcategory_id;
+	 private String challenge_type;
 	 
 }
