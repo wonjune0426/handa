@@ -83,7 +83,7 @@
 						<div class="col-md-12"></div>
 						
 							<!-- 챌린지 리스트 -->
-							<div class="col-lg-4 col-md-6" data-aos="fade-up"
+							<div class="card-container col-lg-4 col-md-6" data-aos="fade-up"
 							data-aos-delay="100" th:each="challenge : ${challengeList}">
 							<div class="card challenge-item">
 								<div class="card-img">
@@ -94,11 +94,10 @@
 									<a href="/detail" class="stretched-link" th:text=${challenge.challenge_name}></a>
 								</h3>
 								<p th:text="${challenge.startdate} + ' ~ ' + ${challenge.enddate}"></p>
-
+								
 								<p th:text="'생성날짜: ' + ${challenge.createdate}"></p>
 								<p th:text="'참여인원: ' + ${challenge.joinVO.count}"></p>
 							</div>
-							
 						</div>
 					</div>
 				</div>
@@ -108,4 +107,8 @@
 	</main>
 	<!-- End #main -->
 </div>
+	<!-- include JS Script -->
+	<th:block layout:fragment="javascript">   
+		<script src='../assets/js/infiniteScroll.js'></script>
+	</th:block>
 </html>

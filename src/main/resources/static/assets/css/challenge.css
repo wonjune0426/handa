@@ -123,12 +123,30 @@
 	background-color: #fff
 }
 
-.challenge-detail-tab a:active {
+.challenge-detail-tab a:hover{
+	color: #000;
+	border-color: #0d42ff;
+}
+
+.menuTab:active{
 	font-weight: 700;
 	border-color: #0d42ff;
 }
 
-.challenge-detail-tab a {
+.activeMenu{
+	font-weight: 700;
+	display: inline-block;
+	text-align: center;
+	width: 120px;
+	line-height: 1;
+	padding: 8px 15px 8px 15px;
+	border-bottom: 3px solid #0d42ff;
+	margin: 20px 0;
+	color: #000;
+	transition: 0.3s;
+}
+
+.menuTab{
 	display: inline-block;
 	text-align: center;
 	width: 120px;
