@@ -38,7 +38,8 @@ public class ChallengeController {
 	public String list(ModelMap model) throws Exception{ 
 		List<ChallengeVO> challengeList = challengeService.selectAllChallenge();
 		model.addAttribute("challengeList", challengeList);
-	  
+		model.addAttribute("sortType", 0);
+		
 		return "challenge/list"; 
 	}
 
@@ -67,10 +68,11 @@ public class ChallengeController {
 					challengeList = challengeService.selectAllChallengeDesc();
 					break;
 				case "2":	// 참여 인원 순
+					challengeList = challengeService.selectAllChallengeJoin();
 					break;
 			}
 		}
-		else {
+		else {	// 카테고리 별 리스트 조회일 경우
 			int categoryID = Integer.parseInt(category);
 			Map<String, String> categoryName = challengeService.selectCategoryName(categoryID);
 			
@@ -82,6 +84,7 @@ public class ChallengeController {
 					challengeList = challengeService.selectChallengeListDesc(categoryID);
 					break;
 				case "2":	// 참여 인원 순
+					challengeList = challengeService.selectChallengeListJoin(categoryID);
 					break;
 			}
 			
@@ -92,6 +95,7 @@ public class ChallengeController {
 
 		model.addAttribute("challengeList", challengeList);
 		model.addAttribute("isCategory", isCategory);
+		model.addAttribute("sortType", sortType);
 
 		return "challenge/list";
 	}

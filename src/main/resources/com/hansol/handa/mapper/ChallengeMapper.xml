@@ -3,24 +3,65 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hansol.handa.mapper.ChallengeMapper">
+
+	<!-- 참여인원 순 리스트 조회 resultMap -->
+	<resultMap id="joinVO" type="JoinVO">
+		<result column="count" property="count"></result>
+	</resultMap>
+	
+	<resultMap id="challengeMap" type="ChallengeVO">
+		<result column="challenge_id" property="challenge_id"></result>
+		<result column="challenge_name" property="challenge_name"></result>
+		<result column="thumbnail" property="thumbnail"></result>
+		<result column="startdate" property="startdate"></result>
+		<result column="enddate" property="enddate"></result>
+		<result column="description" property="description"></result>
+		<result column="createdate" property="createdate"></result>
+		<result column="member_id" property="member_id"></result>
+		<result column="subcategory_id" property="subcategory_id"></result>
+		<collection property="joinVO" resultMap="joinVO"/>
+	</resultMap>
+	
 	<!-- 전체 챌린지 리스트 조회 (최신 순) -->
-	<select id="selectAllChallenge" resultType="ChallengeVO">
-		select * from challenge order by createdate asc;
+	<select id="selectAllChallenge" resultMap="challengeMap">
+		SELECT *, COUNT(*) as count from challenge, challenge_join 
+			WHERE challenge.challenge_id = challenge_join.challenge_id 
+				GROUP BY challenge.challenge_id order by createdate desc;
 	</select>
 	
 	<!-- 전체 챌린지 리스트 조회 (오래된 순) -->
-	<select id="selectAllChallengeDesc" resultType="ChallengeVO">
-		select * from challenge order by createdate desc;
+	<select id="selectAllChallengeDesc" resultMap="challengeMap">
+		SELECT *, COUNT(*) as count from challenge, challenge_join 
+			WHERE challenge.challenge_id = challenge_join.challenge_id 
+				GROUP BY challenge.challenge_id order by createdate asc;
+	</select>
+	
+	<!-- 전체 챌린지 리스트 조회 (참여인원 순) -->
+	<select id="selectAllChallengeJoin" resultMap="challengeMap">
+		SELECT *, COUNT(*) as count from challenge, challenge_join 
+			WHERE challenge.challenge_id = challenge_join.challenge_id 
+				GROUP BY challenge.challenge_id order by COUNT desc;
 	</select>
 	
 	<!-- 카테고리 별 챌린지 리스트 조회 (최신 순) -->
-	<select id="selectChallengeList" parameterType="int" resultType="ChallengeVO">
-		select * from challenge WHERE subcategory_id = #{subcategory_id} order by createdate asc;
+	<select id="selectChallengeList" parameterType="int" resultMap="challengeMap">
+		SELECT *, COUNT(*) as count from challenge, challenge_join  
+			WHERE challenge.challenge_id = challenge_join.challenge_id and subcategory_id = #{subcategory_id}
+				 GROUP BY challenge.challenge_id order by createdate desc;
 	</select>
 	
 	<!-- 카테고리 별 챌린지 리스트 조회(오래된 순) -->
-	<select id="selectChallengeListDesc" parameterType="int" resultType="ChallengeVO">
-		select * from challenge WHERE subcategory_id = #{subcategory_id} order by createdate desc;
+	<select id="selectChallengeListDesc" parameterType="int" resultMap="challengeMap">
+		SELECT *, COUNT(*) as count from challenge, challenge_join  
+			WHERE challenge.challenge_id = challenge_join.challenge_id and subcategory_id = #{subcategory_id}
+				 GROUP BY challenge.challenge_id order by createdate asc;
+	</select>
+	
+	<!-- 카테고리 별 챌린지 리스트 조회 (참여인원 순) -->
+	<select id="selectChallengeListJoin" resultMap="challengeMap">
+		SELECT *, COUNT(*) as count from challenge, challenge_join 
+			WHERE challenge.challenge_id = challenge_join.challenge_id and subcategory_id = #{subcategory_id}
+				GROUP BY challenge.challenge_id order by COUNT desc;
 	</select>
 	
 	<!-- 카테고리 이름 조회 -->

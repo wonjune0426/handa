@@ -58,9 +58,17 @@
 					<div class="row gy-4">
 						<div class="btn-group order-div col-2">
 							<select class="form-control handa-list-select" onchange="if(this.value) location.href=(this.value);">
-								<option th:value="@{/list?sortType=0}" th:text="최신순"></option>
-								<option th:value="@{/list?sortType=1}" th:text="오래된순"></option>
-								<option>참여인원순</option>
+								<th:block th:if="${#strings.isEmpty(isCategory)} or ${!isCategory}">
+									<option th:value="@{/list?sortType=0}" th:text="최신순" th:selected="${sortType} == '0'"></option>
+									<option th:value="@{/list?sortType=1}" th:text="오래된순" th:selected="${sortType} == '1'"></option>
+									<option th:value="@{/list?sortType=2}" th:text="참여인원순" th:selected="${sortType} == '2'"></option>
+								</th:block>
+								
+								<th:block th:if="${isCategory}">
+									<option th:value="@{${'/list?category=' + {categoryID} + '&sortType=0'}}" th:text="최신순" th:selected="${sortType} == '0'"></option>
+									<option th:value="@{${'/list?category=' + {categoryID} + '&sortType=1'}}" th:text="오래된순" th:selected="${sortType} == '1'"></option>
+									<option th:value="@{${'/list?category=' + {categoryID} + '&sortType=2'}}" th:text="참여인원순" th:selected="${sortType} == '2'"></option>
+								</th:block>
 							</select>
 						</div>
 						<div class="col-6"></div>
@@ -86,6 +94,9 @@
 									<a href="/detail" class="stretched-link" th:text=${challenge.challenge_name}></a>
 								</h3>
 								<p th:text="${challenge.startdate} + ' ~ ' + ${challenge.enddate}"></p>
+
+								<p th:text="'생성날짜: ' + ${challenge.createdate}"></p>
+								<p th:text="'참여인원: ' + ${challenge.joinVO.count}"></p>
 							</div>
 							
 						</div>
