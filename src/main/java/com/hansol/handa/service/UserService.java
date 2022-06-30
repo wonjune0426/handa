@@ -7,4 +7,8 @@ public interface UserService {
 	int register(UserVO userVO);
 	
 	int idcheck(String member_id);
+	
+	UserVO read(String member_id);
+	
+	int amend(UserVO userVO);
 }

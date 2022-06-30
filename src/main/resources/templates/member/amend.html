@@ -31,7 +31,7 @@
 					<div class="container">
 						<ol>
 							<li><a href="/">홈</a></li>
-							<li>회원가입</li>
+							<li>회원 정보 수정</li>
 						</ol>
 					</div>
 				</nav>
@@ -47,75 +47,83 @@
 				<div class="container" data-aos="fade-up">
 
 					<div class="section-header">
-						<span>회원정보 수정</span>
-						<h2>회원정보 수정</h2>
+						<!-- <span>회원 정보 수정</span> -->
+						<h2>회원 정보 수정</h2>
 					</div>
 					<section id="contact" class="contact register-padding-top-10px">
 						<div class="text-center">
 							<div class="login-div">
 								<form action="" method="post" role="form" class="php-email-form">
 									<div class="row">
+									
+										<div class="form-group mt-3">
+											<img alt="프로필 이미지" class="profile-img" th:src="@{/assets/img/user.png}">
+											<h3 th:text="${user.member_name}">김한솔</h3> <p th:text="${'(' + user.member_id + ')'}">(hansol)</p> 
+											<input type="hidden" th:value="${user.member_id}" name="member_id" id="member_id">
+											<!-- <small>여</small> -->
+										</div>
+										<div class="form-group">
+											<div class="filebox">
+												<label for="ex_filename">프로필 수정</label> <input type="file"
+													id="ex_filename" class="upload-hidden">
+											</div>
+										</div>
+										<hr>
 										<div class="form-group mt-3">
 											<div class="register-label-style">
 												<label class="login-label"><b>전화번호</b></label>
 											</div>
-											<input type="text" class="form-control" id="member-call"
-												placeholder="전화번호" required="">
+											<input type="text" class="form-control" id="member-call" name="member_call"
+												placeholder="전화번호" th:value="${user.member_call}" required="">
 										</div>
 										<div class="form-group mt-3">
 											<div class="register-label-style">
 												<label class="login-label"><b>e-mail</b></label>
 											</div>
-											<input type="text" class="form-control" id="e-mail"
-												placeholder="e-mail" required="">
+											<input type="text" class="form-control" id="e-mail" name="e_mail"
+												placeholder="e-mail" th:value="${user.e_mail}" required="">
 										</div>
 										<div class="form-group mt-3">
 											<table class="register-width100">
 												<tr>
-													<td><label class="login-label register-label-style"><b>부서</b></label></td>
-													<td><label class="login-label register-label-style"><b>직급</b></label></td>
+													<td><label class="login-label register-label-style"><b>회사</b></label></td>
 												</tr>
 												<tr>
-													<td><select class="form-control handa-list-select">
-															<option>한솔 인티큐브</option>
-															<option>한솔 제지</option>
-															<option>한솔 테크닉스</option>
-															<option>한솔 페이퍼택</option>
-															<option>한솔 홀딩스</option>
-															<option>한솔 문화재단</option>
-															<option>한솔 케미칼</option>
-															<option>한솔 홈데코</option>
-															<option>한솔 코에버</option>
-															<option>한솔 BS</option>
-															<option>한솔 PNS</option>
-															<option>한솔 로지스틱스</option>
-													</select></td>
-													<td><select class="form-control handa-list-select">
-															<option>수석</option>
-															<option>책임</option>
-															<option>선임</option>
+													<td><select class="form-control handa-list-select" name="affiliates_id" th:value="${user.affiliates_id}">
+															<option value="1" th:selected="${user.affiliates_id}==1">한솔 인티큐브</option>
+															<option value="2" th:selected="${user.affiliates_id}==2">한솔 제지</option>
+															<option value="3" th:selected="${user.affiliates_id}==3">한솔 테크닉스</option>
+															<option value="4" th:selected="${user.affiliates_id}==4">한솔 페이퍼택</option>
+															<option value="5" th:selected="${user.affiliates_id}==5">한솔 홀딩스</option>
+															<option value="6" th:selected="${user.affiliates_id}==6">한솔 문화재단</option>
+															<option value="7" th:selected="${user.affiliates_id}==7">한솔 케미칼</option>
+															<option value="8" th:selected="${user.affiliates_id}==8">한솔 홈데코</option>
+															<option value="9" th:selected="${user.affiliates_id}==9">한솔 코에버</option>
+															<option value="10" th:selected="${user.affiliates_id}==10">한솔 BS</option>
+															<option value="11" th:selected="${user.affiliates_id}==11">한솔 PNS</option>
+															<option value="12" th:selected="${user.affiliates_id}==12">한솔 로지스틱스</option>
 													</select></td>
 												</tr>
 											</table>
 										</div>
 										<div class="form-group mt-3">
-											<label class="login-label"><b>프로필 이미지</b></label>
-										</div>
-										<div class="form-group mt-3">
-											<div class="filebox">
-												<input class="upload-name" value="파일선택" disabled="disabled">
-
-												<label for="ex_filename">업로드</label> <input type="file"
-													id="ex_filename" class="upload-hidden">
-											</div>
-										</div>
-										<div class="form-group mt-3">
-											<label class="login-label"><b>미리보기 들어갈 공간</b></label>
+											<table class="register-width100">
+												<tr>
+													<td><label class="login-label register-label-style"><b>직급</b></label></td>
+												</tr>
+												<tr>
+													<td><select class="form-control handa-list-select" name="position_id" th:value="${user.position_id}">
+															<option value="1"  th:selected="${user.position_id}==1">수석</option>
+															<option value="2"  th:selected="${user.position_id}==2">책임</option>
+															<option value="3"  th:selected="${user.position_id}==3">선임</option>
+													</select></td>
+												</tr>
+											</table>
 										</div>
 
 									</div>
 									<div class="text-center login-btn-div">
-										<button type="submit">회원가입</button>
+										<button type="submit">정보수정</button>
 									</div>
 								</form>
 							</div>
@@ -131,5 +139,79 @@
 		<!-- End #main -->
 	</div>
 </body>
+<th:block layout:fragment="javascript">
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script>
+	
+	$(document).ready(function(){	
+		
+	function loadSwal(text) {
+		Swal.fire({
+			  icon: 'error',
+			  text: text
+		})
+	}
+	
+	function loadSwal(text) {
+		Swal.fire({
+			  icon: 'error',
+			  text: text
+		})
+	}
+	
+	$(".login-btn-div button").on("click", function (e) {
+        
+        e.preventDefault();
+        
+        // console.log("버튼 쿨릭 테스트")
+        const memberId = $("#member_id").val();
+        const password = $("#password").val();
+        const passwordCheck = $("#password-check").val();
+        const memberName = $("#member-name").val();
+        const memberCall = $("#member-call").val();
+        const memberEmail = $("#e-mail").val();
+        const gender = $('input[name=gender]');
+        const affiliates = $('select[name=affiliates_id]');
+        const position = $('select[name=position_id]');
+        
+     // 전화번호 작성여부 확인 & 중간에 '-' 표시 넣기
+		if (memberCall == "") {
+			
+			loadSwal('전화번호를 작성 해주세요.');
+			
+  			return;
+			
+		}
+        
+     	// email 작성여부 확인 & 형식에 맞게 작성했는지 확인
+		if (memberEmail == "") {
+			
+			loadSwal('이메일을 작성 해주세요.');
+			
+  			return;
+			
+		}
+     	
+		// 회사, 직급 선택여부 확인
+		if (affiliates.val() == 0 || position.val() == 0) {
+					
+			loadSwal('회사/직급 정보를 선택 해주세요.');
+			
+  			return;
+			
+		}
+		
+		
 
+		// 폼 전송
+        $(".php-email-form").attr("action", "/member/amend/" + memberId);
+        $(".php-email-form").submit();
+    });
+	
+	
+
+		
+});
+</script>
+</th:block>
 </html>

@@ -211,15 +211,23 @@
 .filebox label {
 	display: inline-block;
 	padding: .5em .75em;
-	color: #999;
+	color: var(--color-primary);
 	font-size: inherit;
 	line-height: normal;
 	vertical-align: middle;
-	background-color: #fdfdfd;
+	background-color: #fff;
 	cursor: pointer;
-	border: 1px solid #ebebeb;
-	border-bottom-color: #e2e2e2;
+	border: 1px solid var(--color-primary); 
 	border-radius: .25em;
+}
+
+.filebox label:hover {
+	color: #fff;
+	background-color: var(--color-primary);
+	cursor: pointer;
+	border: 1px solid var(--color-primary);
+	border-radius: .25em;
+	transition: .5s;
 }
 
 /* named upload */
@@ -240,7 +248,7 @@
 	-moz-appearance: none;
 	appearance: none;
 }
-/* 파일 업로그 관련 css  */
+/* 파일 업로드 관련 css  */
 
 /* 회원가입 화면 css */
 .register-padding-top-0 {
@@ -275,4 +283,8 @@
 
 .register-float-right {
 	float:right;
+}
+
+.profile-img {
+	width: 30%;
 }

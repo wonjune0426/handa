@@ -1,21 +1,21 @@
 package com.hansol.handa.controller;
 
-import java.sql.SQLException;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hansol.handa.domain.UserVO;
-import com.hansol.handa.mapper.UserMapper;
 import com.hansol.handa.service.UserService;
 
 import lombok.Setter;
@@ -104,10 +104,30 @@ public class UserController {
 		return userService.idcheck(member_id);
 	}
 
-	@GetMapping("/amend")
-	public String amendmember() {
-		log.info("amend--------------------------------------------");
+	@PreAuthorize("principal.Username == #memberId")
+	@GetMapping("/amend/{memberId}")
+	public String amendmember(@PathVariable("memberId") String memberId, Model model) {
+	
+		
+		UserVO user = userService.read(memberId);
+
+		log.info("amend--------------------------------------------" + user);
+		
+		model.addAttribute("user", user);
+		
 		return "member/amend";
+	}
+	
+	
+	@PreAuthorize("principal.Username == #userVO.member_id")
+	@PostMapping("/amend/{memberId}")
+	public String amendmemberPOST(@PathVariable("memberId") String memberId, UserVO userVO) {
+
+		log.info("amend post--------------------------------------------" + userVO);
+		
+		userService.amend(userVO);
+		
+		return "redirect:/mypage/memberdetail";
 	}
 
 	@GetMapping("/logout")

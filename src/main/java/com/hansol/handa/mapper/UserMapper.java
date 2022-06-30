@@ -10,4 +10,6 @@ public interface UserMapper {
 	UserVO read(String username); 
 	
 	int register(UserVO userVO);
+	
+	int update(UserVO userVO);
 }
