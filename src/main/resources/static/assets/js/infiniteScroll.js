@@ -62,10 +62,31 @@ window.onload = () => {
 }
 */
 
-const $cards = document.querySelectorAll('.card')
+const $list = document.querySelector('.card-container');
+const itemArr = new Array(21).fill().map((_, index) => index+1);
+let [lastIndex, page] = [0,1];
+const io = new IntersectionObserver(((entries, observer) => {
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      if(Number(entry.target.dataset.index)===lastIndex){
+        render();
+      }
+      observer.unobserve(entry.target);
+      console.log(entry.target,'is unobserve');
 
-const observer = new IntersectionObserver(entries => {
-	console.log(entries)
-})
-// 1번째 요소 사라지거나 다시 나타날 때 객체 배열 출력
-observer.observe($cards[0])
+    }
+  })
+}));
+
+render();
+
+    function render(){
+        $list.innerHTML += itemArr.slice(lastIndex,lastIndex+6).map((item,index)=>`<div class="item page${page}" data-index="${index+1+lastIndex}">${item}</div>`).join('');
+        lastIndex+=6;
+
+        [...document.querySelectorAll(`.page${page}`)].forEach(elem=> {
+            if(Number(elem.dataset.index)===lastIndex) io.observe(elem);
+        });
+        page+=1;
+        console.log(lastIndex-6,'~',lastIndex,'items render');
+    }

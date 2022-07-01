@@ -35,7 +35,18 @@
 		<!-- End Breadcrumbs -->
 
 		<section class="sample-page" style="padding-top: 30px">
-			<div class="container" data-aos="fade-up"></div>
+			<div class="container" data-aos="fade-up">
+				<form action="/upload" method="post" enctype="multipart/form-data">
+					<ul>
+						<li>이름 <input type="text" name="itemName"></li>
+						<li>첨부파일<input type="file" name="uploadFile"></li>
+						<!-- <li>이미지 파일들<input type="file" multiple="multiple"
+							name="imageFiles"></li> -->
+					</ul>
+					<input type="submit" />
+				</form>
+				</form>
+			</div>
 		</section>
 
 		<!-- ======= Services Section ======= -->
