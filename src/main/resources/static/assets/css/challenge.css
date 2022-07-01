@@ -101,6 +101,9 @@
 }
 
 /* ------------ 챌린지 상세 (기본정보 페이지 challenge/detail.html) -------------- */
+.challenge-detail-section {
+	margin-top: 60px;
+}
 /* 챌린지 상세 탭 (기본정보, 댓글) */
 
 /* 챌린지 상세보기 메뉴 탭 */
@@ -116,7 +119,6 @@
 	width: 100%;
 	height: 5em;
 }
-
 .challenge-detail-tab{
 	position: relative;
 	border-bottom: 0;
@@ -125,25 +127,12 @@
 
 .challenge-detail-tab a:hover{
 	color: #000;
-	border-color: #0d42ff;
+	border-color: var(--color-primary);
 }
 
 .menuTab:active{
 	font-weight: 700;
-	border-color: #0d42ff;
-}
-
-.activeMenu{
-	font-weight: 700;
-	display: inline-block;
-	text-align: center;
-	width: 120px;
-	line-height: 1;
-	padding: 8px 15px 8px 15px;
-	border-bottom: 3px solid #0d42ff;
-	margin: 20px 0;
-	color: #000;
-	transition: 0.3s;
+	border-color: var(--color-primary);
 }
 
 .menuTab{
@@ -151,21 +140,59 @@
 	text-align: center;
 	width: 120px;
 	line-height: 1;
-	padding: 8px 15px 8px 15px;
+	padding: 8px 0px 15px 0px;
 	border-bottom: 3px solid #c2cbdf;
 	margin: 20px 0;
 	color: #000;
 	transition: 0.3s;
 }
+.activeMenu{
+	font-weight: 700;
+	display: inline-block;
+	text-align: center;
+	width: 120px;
+	line-height: 1;
+	padding: 8px 0px 15px 0px;
+	border-bottom: 3px solid var(--color-primary);
+	margin: 20px 0;
+	color: #000;
+	transition: 0.3s;
+}
+
 
 /* 챌린지 제목 h3 태그 */
 .ch-detail-title {
-	margin-bottom: 28px;
+	margin: 0;
+	margin-bottom: 18px;
+    font-size: 2rem;
+    color: #1e1e1e;
+    letter-spacing: -0.7px;
+    font-weight: bold;
+    line-height: 43px
+}
+
+.thumb-div {
+	height: 469px;
+	overflow: hidden;
+	/* border-radius: 6px;
+	z-index: 0;
+	isolation: isolate; */
 }
 
 /* 챌린지 썸네일 img 태그 */
 .ch-detail-thumb {
-	height: 300px;
+	/* height: 300px; */
+	/* --bs-gutter-x: initial; */
+	width: 100%;
+	/* border-radius: 6px; */
+}
+
+.challenge-summary {
+	/* height: 300px; */
+	padding: 12px;
+	margin-bottom: 25px;
+	padding-left: 4%;
+	margin-top: 10px;
 }
 
 /* 참여인원 p 태그 */
@@ -228,13 +255,124 @@
 	margin-top: 30px;
 }
 
+/* 참여하기 버튼 */
+.challenge-join-btn {
+    background: var(--color-primary);
+    padding: 12px 20px;
+    border-radius: 4px;
+    color: #fff;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.challenge-join-btn:hover {
+    background: #fff;
+    color: var(--color-primary);
+}
+
+.ch-detail-category {
+	font-size: 14px;
+	color: #999;
+}
+
+.challenge-summary .profile-img {
+	width: 8%;
+	border-radius: 50%;
+	margin-right: 4px;
+}
+
+.challenge-summary .create-user {
+	margin: 23px 0px; 
+}
+
+.challenge-summary .create-user small {
+	color: #777;
+}
+
+
+.challenge-summary .price-div {
+	margin: 30px 0px;
+}
+
+.challenge-summary .price {
+	font-size: 1.3rem;
+}
+
+.challenge-summary .kind {
+	font-size: 13px;
+	color: #999;
+	margin: 0px;
+}
+
+.ch-detail-etc {
+	
+}
+
+.ch-detail-etc .status {
+	font-size: 14px;
+	background-color: #eee;
+	border-radius: 3px;
+	padding: 4px 7px; 
+}
+
+.ch-detail-etc .share {
+	font-size: 14px;
+	background-color: #eee;
+	border-radius: 3px;
+	padding: 4px 7px;
+	right: 0;
+}
+
+.ch-detail-etc .share i {
+	font-size: 12px;
+	padding-right: 5px;
+}
+
+.ch-detail-etc .share a {
+	font-size: 14px;
+	background-color: #eee;
+	color: #0a0d13;
+}
+
+.ch-detail-etc .challenge-toast {
+	background-color: #000;
+	color: #fff;
+	opacity: 0.7;
+	border-radius: 6px;
+	padding: 5px 10px;
+	margin-top: 10px;
+	display: none;
+}
+
+
+.ch-detail-etc .share a:hover {
+	color: var(--color-primary);
+	text-decoration: underline;
+}
+
+.challenge-summary .date, .challenge-summary .num {
+	margin: 10px 0px; 
+}
+
+.challenge-summary .date {
+	margin-top: 30px; 
+}
+.challenge-summary .num {
+	margin-bottom: 30px; 
+}
+
 /* 챌린지 상세(기본정보) 반응형 css */
-@media ( max-width : 600px) {
+@media ( max-width : 1200px) {
 	.ch-detail-thumb {
 		width: 100%;
 		display: block;
 	}
 	.challenge-join-member {
+		width: 94%;
+		margin: 2% 3%;
+	}
+	.challenge-summary {
 		width: 94%;
 		margin: 2% 3%;
 	}
@@ -395,7 +533,7 @@
 
 /* 스크롤 탭 관련 css */
 #period, #explanation, #caution, #comment{
-	scroll-margin-top: 10em;
+	/* scroll-margin-top: 10em; */
 }
 
 .img-btn{

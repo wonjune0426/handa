@@ -146,7 +146,7 @@ public class UserController {
 
 	@GetMapping("sample")
 	public String securitySample() {
-		return "sample/security-sample";
+		return "sample/detail";
 	}
 
 	@GetMapping("/index")
