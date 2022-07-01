@@ -246,6 +246,9 @@
 
 		$('#create-challenge').click(function () {
 			var select_sub = $("#sub-category").val();
+			var startdate = $("input[name=startdate]").val()
+			var enddate = $("input[name=enddate]").val()
+			var dateRegexp = /[0-9]{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])/;
 			var subcategory_id;
 			switch (select_sub) {
 				case "영화":
@@ -275,6 +278,10 @@
 				alert("내용 입력 값 초과");
 			} else if (select_sub == "카테고리(소)") {
 				alert("카테고리 선택필수");
+			} else if (!dateRegexp.test(startdate) || !dateRegexp.test(enddate)) {
+				alert("날짜형식 오류")
+			} else if (startdate>enddate) {
+				alert("종료날짜 설정 오류")
 			} else {
 				$.ajax({
 					url: "/challenge",
@@ -282,8 +289,8 @@
 					data: {
 						challenge_name: $("input[name=challenge_name]").val(),
 						thumbnail: $("#profile-img").attr("src"),
-						startdate: $("input[name=startdate]").val(),
-						enddate: $("input[name=enddate]").val(),
+						startdate: startdate,
+						enddate: enddate,
 						subcategory_id: subcategory_id,
 						description: editor.getData(),
 						challenge_type: $("select[name=challenge_type]").val(),
@@ -291,7 +298,7 @@
 					},
 					dataType: "text",
 					//////////////////// recv
-					success:window.location.href="/list?category="+subcategory_id+"&sortType=0",
+					success: window.location.href = "/list?category=" + subcategory_id + "&sortType=0",
 					error: function (xhr, status, error) { // (파라미터 생략가능)
 						alert("error");
 					}

@@ -19,11 +19,5 @@ public class HandaChallengeMapperTest {
   private ChallengeMapper mapper; 
   private final Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
   
-  @Test 
-  public void selectAllChallengeTest() { 
-	  List<ChallengeVO> challenge = mapper.selectAllChallenge();
-  
-	  logger.info(challenge.toString()); 
-  } 
 }
  
