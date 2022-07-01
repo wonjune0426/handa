@@ -83,6 +83,7 @@
 						<div class="col-md-12"></div>
 						
 							<!-- 챌린지 리스트 -->
+							<div class="list-container row gy-4">
 							<div class="card-container col-lg-4 col-md-6" data-aos="fade-up"
 							data-aos-delay="100" th:each="challenge : ${challengeList}">
 							<div class="card challenge-item">
@@ -105,7 +106,8 @@
 									<div class="open-dt" th:text="${challenge.createdate} + ' 생성'"></div> 
 									<div class="state-label" th:text="${challenge.challenge_state}"></div>
 								</div>
-								
+								<div id ="endList"></div>
+							</div>
 							</div>
 						</div>
 					</div>
@@ -118,6 +120,16 @@
 </div>
 	<!-- include JS Script -->
 	<th:block layout:fragment="javascript">   
-		<script src='../assets/js/infiniteScroll.js'></script>
+		<!-- <script src='../assets/js/infiniteScroll.js'></script> -->
+		<script th:inline="javascript">
+			/*<![CDATA[*/
+				// 전체 리스트를 받고 리스트를 21개씩 화면에 보여주고 스크롤이 끝나면 추가로 그려줌
+				
+				// 카드 담는 객체
+				const $cardContainer = document.querySelector('.list-container');
+				
+			
+	    	/*]]>*/
+		</script>
 	</th:block>
 </html>

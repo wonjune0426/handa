@@ -61,7 +61,7 @@ window.onload = () => {
     })
 }
 */
-
+/*
 const $list = document.querySelector('.card-container');
 const itemArr = new Array(21).fill().map((_, index) => index+1);
 let [lastIndex, page] = [0,1];
@@ -90,3 +90,15 @@ render();
         page+=1;
         console.log(lastIndex-6,'~',lastIndex,'items render');
     }
+*/
+
+window.onload = function() {
+	$.ajax({
+		url: "/list",
+		type: "GET",
+		dataType: "text",
+		data: "sortType"
+	}).done(function(result){
+		console.log(result);
+	})
+};
