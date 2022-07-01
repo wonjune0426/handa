@@ -1,5 +1,9 @@
 package com.hansol.handa.controller;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +41,9 @@ public class ChallengeController {
 	// 맨 처음 화면은 전체 챌린지 리스트 최신 순 조회 
 	public String list(ModelMap model) throws Exception{ 
 		List<ChallengeVO> challengeList = challengeService.selectAllChallenge();
+		
+		challengeList = getChallengeState(challengeList);
+		
 		model.addAttribute("challengeList", challengeList);
 		model.addAttribute("sortType", 0);
 		
@@ -92,12 +99,45 @@ public class ChallengeController {
 			model.addAttribute("subCategoryName", categoryName.get("sub_category_name"));
 			model.addAttribute("mainCategoryName", categoryName.get("main_category_name"));
 		}
-
+		
+		challengeList = getChallengeState(challengeList);
+		
 		model.addAttribute("challengeList", challengeList);
 		model.addAttribute("isCategory", isCategory);
 		model.addAttribute("sortType", sortType);
 
+		
 		return "challenge/list";
+	}
+	
+	// 현재 날짜 기준으로 챌린지 상태 설정
+	public List<ChallengeVO> getChallengeState(List<ChallengeVO> list) {
+		
+		//'yyyy-MM-dd' 포맷 설정
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		
+		//오늘날짜
+		LocalDate today = LocalDate.now();
+		
+		for(int i = 0; i < list.size(); i++) {
+			ChallengeVO vo = list.get(i);
+			
+			//비교할 date를 데이터 포맷으로 변경
+			LocalDate startDate = LocalDate.parse(vo.getStartdate(), formatter);
+			LocalDate endDate = LocalDate.parse(vo.getEnddate(), formatter);
+			
+			// 현재 날짜가 시작 날짜 전이면 모집중
+			if(today.isBefore(startDate))
+				list.get(i).setChallenge_state("모집중");
+			// 현재 날짜가 종료 날짜 이후면 마감
+			else if(today.isAfter(endDate))
+				list.get(i).setChallenge_state("마감");
+			// 현재 날짜가 시작 날짜와 종료 날짜 사이면 진행중
+			else
+				list.get(i).setChallenge_state("진행중");
+		}
+		
+		return list;
 	}
 	
 	@GetMapping("/imagelist/{searchWord}")
