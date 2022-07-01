@@ -149,4 +149,10 @@ public class UserController {
 		
 		return "sample/security-sample";
 	}
+	
+	@GetMapping("detail")
+	public String detail() {
+		
+		return "sample/detail";
+	}
 }

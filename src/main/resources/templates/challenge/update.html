@@ -14,7 +14,7 @@
 		<!-- ======= Breadcrumbs ======= -->
 		<div class="breadcrumbs">
 			<div class="page-header d-flex align-items-center"
-				style="background-image: url('assets/img/page-header.jpg');">
+				style="background-image: url('/assets/img/page-header.jpg');">
 				<div class="container position-relative">
 					<div class="row d-flex justify-content-center">
 						<div class="col-lg-6 text-center">
@@ -28,7 +28,7 @@
 				<div class="container">
 					<ol>
 						<li><a href="/">홈</a></li>
-						<li>챌린지 생성</li>
+						<li>챌린지 수정</li>
 					</ol>
 				</div>
 			</nav>
@@ -41,8 +41,8 @@
 		<section id="service" class="services pt-0">
 			<div class="container" data-aos="fade-up">
 				<div class="section-header">
-					<span>챌린지 생성</span>
-					<h2>챌린지 생성</h2>
+					<span>챌린지 수정</span>
+					<h2>챌린지 수정</h2>
 				</div>
 				<section id="get-a-quote" class="get-a-quote">
 					<div class="container aos-init aos-animate" data-aos="fade-up" id="show_modal">
@@ -58,7 +58,7 @@
 											style="display: inline-block; height: 100%; vertical-align: top; width:100%">
 											<button type="button" id="modal-btn" class="profile-btn"
 												data-toggle="modal"><img name="thumbnail" id="profile-img"
-													src="/assets/img/about.jpg"></button>
+													th:src="${challenge.thumbnail}"></button>
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -66,40 +66,37 @@
 											<h3>챌린지 이름</h3>
 										</label>
 										<input type="text" name="challenge_name" class="form-control "
-											placeholder="챌린지 이름" required="">
+											placeholder="챌린지 이름" th:value="${challenge.challenge_name}">
 										<div class="col-md-6 width-100">
 											<label for="main-category">
 												<h3>카테고리 (대)</h3>
-											</label> <select class="form-control main-category" id="main-category">
-												<option>카테고리(대)</option>
-												<option name="main_1">취미</option>
-												<option name="main_2">자기계발</option>
-											</select>
+											</label><input type="text" name="main_category" class="form-control"
+												readonly>
 										</div>
 										<div class="col-md-6 width-100">
 											<label for="main-category">
 												<h3>카테고리 (소)</h3>
-											</label> <select class="form-control main-category" id="sub-category">
-												<option>카테고리(소)</option>
+											</label> <input type="text" name="sub_category" class="form-control"
+												readonly>
 											</select>
 										</div>
 										<div class="col-md-6 width-100">
 											<label for="main-category">
 												<h3>시작날짜</h3>
 											</label> <input type="date" name="startdate" class="form-control"
-												placeholder="시작날짜" required="">
+												placeholder="시작날짜" required="" th:value="${challenge.startdate}">
 										</div>
 										<div class="col-md-6 width-100">
 											<label for="main-category">
 												<h3>종료날짜</h3>
 											</label> <input type="date" class="form-control" name="enddate"
-												placeholder="종료날짜" required="">
+												placeholder="종료날짜" required="" th:value=${challenge.enddate}>
 										</div>
 										<div class="col-md-6 width-100">
 											<label for="main-category">
 												<h3>유형</h3>
 											</label> <select class="form-control main-category" name="challenge_type"
-												id="challenge_type">
+												id="challenge_type" th:value="${challenge.challenge_type}">
 												<option>무료</option>
 												<option>유료</option>
 											</select>
@@ -136,7 +133,7 @@
 											<h3>설명</h3>
 										</label>
 										<div>
-											<textarea id="editor"></textarea>
+											<textarea id="editor" th:text="${challenge.description}"></textarea>
 										</div>
 									</div>
 
@@ -160,8 +157,9 @@
 <!-- End #main -->
 </div>
 <th:block layout:fragment="javascript">
-	<script src="build/ckeditor.js"></script>
-	<script>
+	<script src="/build/ckeditor.js"></script>
+	<script th:inline="javascript">
+
 		let editor;
 		ClassicEditor
 			.create(document.querySelector('#editor'))
@@ -171,7 +169,38 @@
 			.catch(error => {
 				console.error(error);
 			});
-
+		$(document).ready(function () {
+			/*<![CDTATA[*/
+			var test =/*[[${challenge.subcategory_id}]]*/
+				/*]]>*/
+				console.log(test)
+			switch (test) {
+				case 1:
+					$("input[name=sub_category]").attr("value", "영화")
+					$("input[name=main_category]").attr("value","취미")
+					break;
+				case 2:
+					$("input[name=sub_category]").attr("value", "모임")
+					$("input[name=main_category]").attr("value","취미")
+					break;
+				case 3:
+					$("input[name=sub_category]").attr("value", "등산")
+					$("input[name=main_category]").attr("value","취미")
+					break;
+				case 4:
+					$("input[name=sub_category]").attr("value", "독서")
+					$("input[name=main_category]").attr("value","자기계발")
+					break;
+				case 5:
+					$("input[name=sub_category]").attr("value", "자격증")
+					$("input[name=main_category]").attr("value","자기계발")
+					break;
+				case 6:
+					$("input[name=sub_category]").attr("value", "외국어")
+					$("input[name=main_category]").attr("value","자기계발")
+					break;
+			}
+		})
 		$('#modal-btn').click(function () {
 			$('.modal').toggleClass('show')
 		});
@@ -280,7 +309,7 @@
 				alert("카테고리 선택필수");
 			} else if (!dateRegexp.test(startdate) || !dateRegexp.test(enddate)) {
 				alert("날짜형식 오류")
-			} else if (startdate>enddate) {
+			} else if (startdate > enddate) {
 				alert("종료날짜 설정 오류")
 			} else {
 				$.ajax({
@@ -298,7 +327,7 @@
 					},
 					dataType: "text",
 					//////////////////// recv
-					success:location.href = "/list?category=" + subcategory_id + "&sortType=0",
+					success: location.href = "/list?category=" + subcategory_id + "&sortType=0",
 					error: function (xhr, status, error) { // (파라미터 생략가능)
 						alert("error");
 					}
@@ -306,6 +335,7 @@
 				})
 			}
 		});
+
 	</script>
 </th:block>
 
