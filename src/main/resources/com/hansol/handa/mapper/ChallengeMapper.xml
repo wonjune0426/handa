@@ -71,9 +71,24 @@
 		values (#{challenge_name},IFNULL(#{thumbnail},NULL),IFNULL(#{startdate},NULL),IFNULL(#{enddate},NULL),IFNULL(#{description},NULL),#{member_id},#{subcategory_id},#{challenge_type},now())
 	</insert>
 	
+	<select id="getChallenge" resultType="ChallengeVO">
+		select * from challenge where challenge_id=#{challenge_id}
+	</select>
+	
 	<insert id="joinChallenge">
 		insert into challenge_join (challenge_id,member_id) values(#{challenge_id},#{member_id})
 	</insert>
+	
+	<update id="updateChallenge" parameterType="ChallengeVO">
+		update challenge 
+		set challenge_name=IFNULL(#{challenge_name},challenge_name),
+			thumbnail=IFNULL(#{thumbnail},thumbnail),
+			startdate=IFNULL(#{startdate},startdate),
+			enddate=IFNULL(#{enddate},enddate),
+			description=IFNULL(#{description},description),
+			challenge_type=IFNULL(#{challenge_type},challenge_type)
+		where challenge_id=#{challenge_id} and member_id=#{member_id}
+	</update>
 	
 	
 </mapper>

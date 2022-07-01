@@ -10,7 +10,9 @@ import java.util.Map;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -77,22 +79,42 @@ public class ChallengeController {
 		return "challenge/list";
 	}
 
-
+	
+//이미지 검색 api를 통한 이미지 검색
 	@GetMapping("/imagelist/{searchWord}")
 	@ResponseBody
 	public List<String> imageList(@PathVariable String searchWord) {
 		return challengeService.getimagelist(searchWord);
 	}
 
+//create 화면으로 이동
 	@GetMapping("/create")
 	public String create() {
 		return "challenge/create";
 	}
-
+	
+//challenge요청 데이터를 DB에 저장
 	@PostMapping("/challenge")
 	public @ResponseBody void createChallenge(ChallengeVO challengeVO) {
 		challengeService.createChallenge(challengeVO);
 	}
+
+	
+//challenge 수정화면 요청
+	@GetMapping("/challenge-amend/challenge_id={challenge_id}")
+	public String challengeGet(@PathVariable int challenge_id,Model model) {
+		ChallengeVO challengeVO=challengeService.getChallenge(challenge_id);
+		model.addAttribute("challenge",challengeVO);
+		return "challenge/update";
+	}
+	
+	
+//challenge 수정 요청
+	@PostMapping("/challenge-amend")
+	public @ResponseBody void updateChallenge(ChallengeVO challengeVO) {
+		challengeService.updateChallenge(challengeVO);
+	}
+	
 
 	@GetMapping("/detail")
 	public String detail() {
