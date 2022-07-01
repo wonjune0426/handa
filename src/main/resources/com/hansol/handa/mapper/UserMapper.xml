@@ -3,9 +3,11 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hansol.handa.mapper.UserMapper">
+	
 	<select id="read" resultType="UserVO">
 		select * from member where member_id = #{username}
 	</select>
+	
 	<insert id="register">
 		INSERT INTO member 
 			(member_id, password, member_name, member_call, 
@@ -14,4 +16,17 @@
 			(#{member_id}, #{password},#{member_name}, #{member_call},
 			#{e_mail}, #{gender}, #{affiliates_id}, #{position_id})
 	</insert>
+	
+	<update id="update">
+		UPDATE 
+			member 
+		SET
+			member_call = #{member_call},
+			e_mail = #{e_mail},
+			affiliates_id= #{affiliates_id},
+			position_id= #{position_id}
+		WHERE 
+			member_id = #{member_id}
+	</update>
+	
 </mapper>

@@ -28,7 +28,7 @@
 			<nav>
 				<div class="container">
 					<ol>
-						<li><a href="/">홈</a></li>
+						<li><a th:href="@{/list}">홈</a></li>
 						<li>챌린지 리스트</li>
 						
 						<!-- 카테고리 조회일 경우에만 표시 -->
@@ -83,22 +83,31 @@
 						<div class="col-md-12"></div>
 						
 							<!-- 챌린지 리스트 -->
-							<div class="col-lg-4 col-md-6" data-aos="fade-up"
+							<div class="card-container col-lg-4 col-md-6" data-aos="fade-up"
 							data-aos-delay="100" th:each="challenge : ${challengeList}">
 							<div class="card challenge-item">
 								<div class="card-img">
 									<img th:src="${challenge.thumbnail}" alt=""
-										class="img-fluid">
+										class="img-fluid challenge-thumbnail">
 								</div>
 								<h3>
-									<a href="/detail" class="stretched-link" th:text=${challenge.challenge_name}></a>
+									<th:block th:if="${#strings.isEmpty(isCategory)} or ${!isCategory}">
+										<a href="/detail" class="stretched-link" th:text="'[' + ${challenge.subcategory_name} + '] ' + ${challenge.challenge_name}"></a>
+									</th:block>
+									<th:block th:if="${isCategory}">
+										<a href="/detail" class="stretched-link" th:text="'[' + ${subCategoryName} + '] ' + ${challenge.challenge_name}"></a>
+									</th:block>
 								</h3>
-								<p th:text="${challenge.startdate} + ' ~ ' + ${challenge.enddate}"></p>
-
-								<p th:text="'생성날짜: ' + ${challenge.createdate}"></p>
-								<p th:text="'참여인원: ' + ${challenge.joinVO.count}"></p>
+								<!-- <p th:text="'생성날짜: ' + ${challenge.createdate}"></p> -->
+								<p id="card-p" th:text="${challenge.startdate} + ' ~ ' + ${challenge.enddate}"></p>
+								<p id="card-p" th:text="'참여인원 ' + ${challenge.joinVO.count} + '명'"></p>
+								
+								<div class="state">
+									<div class="open-dt" th:text="${challenge.createdate} + ' 생성'"></div> 
+									<div class="state-label" th:text="${challenge.challenge_state}"></div>
+								</div>
+								
 							</div>
-							
 						</div>
 					</div>
 				</div>
@@ -108,4 +117,8 @@
 	</main>
 	<!-- End #main -->
 </div>
+	<!-- include JS Script -->
+	<th:block layout:fragment="javascript">   
+		<script src='../assets/js/infiniteScroll.js'></script>
+	</th:block>
 </html>

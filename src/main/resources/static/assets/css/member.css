@@ -162,6 +162,39 @@
 	float:right;
 }
 
+/* 성별 선택 라디오 버튼 */
+.select {
+    /* padding: 15px 10px; */
+}
+.select input[type=radio]{
+    display: none;
+}
+.select input[type=radio]+label{
+    display: inline-block;
+    cursor: pointer;
+   /*  height: 24px;
+    width: 90px;
+    border: 1px solid #333;
+    line-height: 24px;
+    text-align: center;
+    font-weight:bold;
+    font-size:13px; */
+    
+    width:200px;
+	background-color: #fff;
+	color: var(--color-primary);
+	border: 1px solid var(--color-primary);
+	height: 42px;
+	line-height: 42px;
+	vertical-align: middle;
+	border-radius: 0.375rem;
+	
+}
+.select input[type=radio]:checked+label{
+    background-color: var(--color-primary);
+	color: #fff;
+}
+
 /* ------------ 회원정보 수정 (member/amend.html) -------------- */
 /*  파일업로드 관련 css */
 .filebox input[type="file"] {
@@ -178,15 +211,23 @@
 .filebox label {
 	display: inline-block;
 	padding: .5em .75em;
-	color: #999;
+	color: var(--color-primary);
 	font-size: inherit;
 	line-height: normal;
 	vertical-align: middle;
-	background-color: #fdfdfd;
+	background-color: #fff;
 	cursor: pointer;
-	border: 1px solid #ebebeb;
-	border-bottom-color: #e2e2e2;
+	border: 1px solid var(--color-primary); 
 	border-radius: .25em;
+}
+
+.filebox label:hover {
+	color: #fff;
+	background-color: var(--color-primary);
+	cursor: pointer;
+	border: 1px solid var(--color-primary);
+	border-radius: .25em;
+	transition: .5s;
 }
 
 /* named upload */
@@ -207,7 +248,7 @@
 	-moz-appearance: none;
 	appearance: none;
 }
-/* 파일 업로그 관련 css  */
+/* 파일 업로드 관련 css  */
 
 /* 회원가입 화면 css */
 .register-padding-top-0 {
@@ -242,4 +283,8 @@
 
 .register-float-right {
 	float:right;
+}
+
+.profile-img {
+	width: 30%;
 }

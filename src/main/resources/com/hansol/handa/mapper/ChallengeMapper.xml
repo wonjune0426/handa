@@ -15,65 +15,60 @@
 		<result column="thumbnail" property="thumbnail"></result>
 		<result column="startdate" property="startdate"></result>
 		<result column="enddate" property="enddate"></result>
-		<result column="description" property="description"></result>
-		<result column="createdate" property="createdate"></result>
+		<result column="createdatetime" property="createdate"></result>
 		<result column="member_id" property="member_id"></result>
 		<result column="subcategory_id" property="subcategory_id"></result>
+		<result column="challenge_type" property="challenge_type"></result>
+		<result column="sub_category_name" property="subcategory_name"></result>
 		<collection property="joinVO" resultMap="joinVO"/>
 	</resultMap>
 	
-	<!-- 전체 챌린지 리스트 조회 (최신 순) -->
-	<select id="selectAllChallenge" resultMap="challengeMap">
-		SELECT *, COUNT(*) as count from challenge, challenge_join 
-			WHERE challenge.challenge_id = challenge_join.challenge_id 
-				GROUP BY challenge.challenge_id order by createdate desc;
+	<!-- 전체 챌린지 리스트 조회 -->
+	<select id="selectChallengeList" parameterType="hashmap" resultMap="challengeMap">
+			SELECT challenge.challenge_id, challenge_name, thumbnail, startdate, enddate,  
+				date(createdate) AS createdatetime, challenge.member_id, subcategory_id, challenge_type, COUNT(*) as COUNT, sub_category_name  
+			from challenge, challenge_join, sub_category
+				WHERE challenge.challenge_id = challenge_join.challenge_id AND challenge.subcategory_id = sub_category.sub_category_id
+					GROUP BY challenge.challenge_id order by 
+				<choose>
+					<when test="sortCriteria == 'createdate'">createdate</when>
+					<when test="sortCriteria == 'count'">count</when>
+				</choose>
+				
+				<choose>
+					<when test="order == 'desc'">desc</when>
+					<when test="order == 'asc'">asc</when>
+				</choose>
 	</select>
 	
-	<!-- 전체 챌린지 리스트 조회 (오래된 순) -->
-	<select id="selectAllChallengeDesc" resultMap="challengeMap">
-		SELECT *, COUNT(*) as count from challenge, challenge_join 
-			WHERE challenge.challenge_id = challenge_join.challenge_id 
-				GROUP BY challenge.challenge_id order by createdate asc;
-	</select>
-	
-	<!-- 전체 챌린지 리스트 조회 (참여인원 순) -->
-	<select id="selectAllChallengeJoin" resultMap="challengeMap">
-		SELECT *, COUNT(*) as count from challenge, challenge_join 
-			WHERE challenge.challenge_id = challenge_join.challenge_id 
-				GROUP BY challenge.challenge_id order by COUNT desc;
-	</select>
-	
-	<!-- 카테고리 별 챌린지 리스트 조회 (최신 순) -->
-	<select id="selectChallengeList" parameterType="int" resultMap="challengeMap">
-		SELECT *, COUNT(*) as count from challenge, challenge_join  
+	<!-- 카테고리 별 리스트 조회 -->
+	<select id="selectChallegeListCategory" parameterType="hashmap" resultMap="challengeMap">
+		SELECT challenge.challenge_id, challenge_name, thumbnail, startdate, enddate, 
+			date(createdate) AS createdatetime, challenge.member_id, subcategory_id, challenge_type, COUNT(*) as count  
+		from challenge, challenge_join 
 			WHERE challenge.challenge_id = challenge_join.challenge_id and subcategory_id = #{subcategory_id}
-				 GROUP BY challenge.challenge_id order by createdate desc;
+				GROUP BY challenge.challenge_id order by 
+				<choose>
+					<when test="sortCriteria == 'createdate'">createdate</when>
+					<when test="sortCriteria == 'count'">count</when>
+				</choose>
+				
+				<choose>
+					<when test="order == 'desc'">desc</when>
+					<when test="order == 'asc'">asc</when>
+				</choose>
 	</select>
-	
-	<!-- 카테고리 별 챌린지 리스트 조회(오래된 순) -->
-	<select id="selectChallengeListDesc" parameterType="int" resultMap="challengeMap">
-		SELECT *, COUNT(*) as count from challenge, challenge_join  
-			WHERE challenge.challenge_id = challenge_join.challenge_id and subcategory_id = #{subcategory_id}
-				 GROUP BY challenge.challenge_id order by createdate asc;
-	</select>
-	
-	<!-- 카테고리 별 챌린지 리스트 조회 (참여인원 순) -->
-	<select id="selectChallengeListJoin" resultMap="challengeMap">
-		SELECT *, COUNT(*) as count from challenge, challenge_join 
-			WHERE challenge.challenge_id = challenge_join.challenge_id and subcategory_id = #{subcategory_id}
-				GROUP BY challenge.challenge_id order by COUNT desc;
-	</select>
-	
+	 
 	<!-- 카테고리 이름 조회 -->
 	<select id="selectCategoryName" parameterType="int" resultType="map">
 		select sub_category.sub_category_name, main_category.main_category_name FROM sub_category, main_category 
 			WHERE sub_category_id = #{subcategory_id} AND sub_category.main_category_id = main_category.main_category_id;
 	</select>
 	
+
 	<insert id="createChallenge" parameterType="ChallengeVO" useGeneratedKeys="true" keyProperty="challenge_id">	 
 		insert into challenge(challenge_name,thumbnail,startdate,enddate,description,member_id,subcategory_id,challenge_type,createdate)
 		values (#{challenge_name},IFNULL(#{thumbnail},NULL),IFNULL(#{startdate},NULL),IFNULL(#{enddate},NULL),IFNULL(#{description},NULL),#{member_id},#{subcategory_id},#{challenge_type},now())
-
 	</insert>
 	
 	<insert id="joinChallenge">

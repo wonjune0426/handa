@@ -25,9 +25,25 @@ public class UserServiceImpl implements UserService {
 		
 		userVO.setPassword(encoder.encode(userVO.getPassword()));
 		
-		
 		return userMapper.register(userVO);
 		
 	}
 
+	@Override
+	public int idcheck(String member_id) {
+		// 0 : 가입 가능, 1 : 가입 불가 (중복 O)
+		return userMapper.read(member_id) == null ? 0 : 1;
+	}
+
+	@Override
+	public UserVO read(String member_id) {
+		
+		return userMapper.read(member_id);
+	}
+
+	@Override
+	public int amend(UserVO userVO) {
+		
+		return userMapper.update(userVO);
+	}
 }

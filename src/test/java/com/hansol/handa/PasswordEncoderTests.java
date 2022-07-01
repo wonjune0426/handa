@@ -17,7 +17,7 @@ public class PasswordEncoderTests {
 
     @Test
     public void testEncode() {
-        String str = "wjs7542";
+        String str = "test";
         String enStr = pwEncoder.encode(str);
         
         log.info("test----------------------------------------------------------------");

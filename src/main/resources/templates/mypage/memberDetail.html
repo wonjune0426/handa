@@ -77,7 +77,9 @@
 			
 			<!-- 정보 수정 버튼 -->
 			<div class="pricing-item text-center">
-				<a href="/member/amend" class="mypage-btn align-items-center">정보 수정하기</a>
+				<th:block sec:authorize="isAuthenticated()"> 
+					<a th:href="@{/member/amend/} + ${#authentication.principal.Username}" class="mypage-btn align-items-center">정보 수정하기</a> 
+				<th:block>
 			</div>
 		</section>
 	</main>
