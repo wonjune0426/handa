@@ -26,15 +26,16 @@ import ch.qos.logback.classic.Logger;
 @Controller
 public class ChallengeController {
 
-	@Autowired 
+	@Autowired
 	private ChallengeService challengeService;
-	
+
 	private final Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
-	
+
 	@GetMapping("/test")
 	public String test() {
 		return "Hello World";
 	}
+
 	
 	
 	@GetMapping("/")
@@ -42,14 +43,13 @@ public class ChallengeController {
 	public String index() {
 		return "challenge/index";
 	}
-	 
 
 	/**
 	 * @param category : 카테고리 ID (1 ~ 6)
 	 * @param sortType : 정렬 타입 (0: 최신 순, 1: 오래된 순, 2: 참여 인원 순)
 	 * @return : 챌린지 리스트
 	 */
-	
+
 	@GetMapping("/list")
 	// 전체 리스트 정렬 & 각 카테고리 별 챌린지 리스트 조회, 정렬
 	// Model의 addAttribute 함수 사용이 안되어 ModelMap 사용
@@ -78,35 +78,28 @@ public class ChallengeController {
 		
 		return "challenge/list";
 	}
-	
+
+
 	@GetMapping("/imagelist/{searchWord}")
 	@ResponseBody
-	public List<String> imageList(@PathVariable String searchWord){
+	public List<String> imageList(@PathVariable String searchWord) {
 		return challengeService.getimagelist(searchWord);
 	}
-	
+
 	@GetMapping("/create")
 	public String create() {
 		return "challenge/create";
 	}
-	
+
 	@PostMapping("/challenge")
-	public String createChallenge(ChallengeVO challengeVO) {
-		System.out.println(challengeVO.getChallenge_name());
-		System.out.println(challengeVO.getThumbnail());
-		System.out.println(challengeVO.getStartdate());
-		System.out.println(challengeVO.getEnddate());
-		System.out.println(challengeVO.getDescription());
-		System.out.println(challengeVO.getSubcategory_id());
-		System.out.println(challengeVO.getChallenge_type());
+	public @ResponseBody void createChallenge(ChallengeVO challengeVO) {
 		challengeService.createChallenge(challengeVO);
-		return "redirect:/";
 	}
-	
+
 	@GetMapping("/detail")
 	public String detail() {
 		System.out.println("detail---------------------------------------");
 		return "challenge/detail";
 	}
-	
+
 }
