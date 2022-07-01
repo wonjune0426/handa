@@ -15,8 +15,7 @@
 
 			<!-- ======= Breadcrumbs ======= -->
 			<div class="breadcrumbs">
-				<div class="page-header d-flex align-items-center"
-					style="background-image: url('assets/img/page-header.jpg');">
+				<div class="page-header d-flex align-items-center">
 					<div class="container position-relative">
 						<div class="row d-flex justify-content-center">
 							<div class="col-lg-6 text-center">
@@ -57,15 +56,17 @@
 									<div class="row">
 									
 										<div class="form-group mt-3">
-											<img alt="프로필 이미지" class="profile-img" th:src="@{/assets/img/user.png}">
-											<h3 th:text="${user.member_name}">김한솔</h3> <p th:text="${'(' + user.member_id + ')'}">(hansol)</p> 
+											<div class="profile-img-div">											
+												<img alt="프로필 이미지" class="profile-img" th:src="@{/assets/img/user.png}">
+											</div>
+											<h3 th:text="${user.member_name}">김한솔</h3> <p th:text="${'(' + user.member_id + ')'}">(hansol)</p>
 											<input type="hidden" th:value="${user.member_id}" name="member_id" id="member_id">
 											<!-- <small>여</small> -->
 										</div>
 										<div class="form-group">
 											<div class="filebox">
-												<label for="ex_filename">프로필 수정</label> <input type="file"
-													id="ex_filename" class="upload-hidden">
+												<label for="ex_filename">프로필 편집</label> 
+												<input type="file" id="ex_filename" name="uploadFile" class="upload-hidden" />
 											</div>
 										</div>
 										<hr>
@@ -135,23 +136,18 @@
 			</section>
 			<!-- End Services Section -->
 
+			<form th:action="@{/upload}" method="post" enctype="multipart/form-data" id="uploadForm">
+			</form>
 		</main>
 		<!-- End #main -->
 	</div>
 </body>
 <th:block layout:fragment="javascript">
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-	<script>
+<script>
 	
-	$(document).ready(function(){	
+$(document).ready(function(){
 		
-	function loadSwal(text) {
-		Swal.fire({
-			  icon: 'error',
-			  text: text
-		})
-	}
-	
 	function loadSwal(text) {
 		Swal.fire({
 			  icon: 'error',
@@ -208,9 +204,41 @@
         $(".php-email-form").submit();
     });
 	
-	
-
+	$("#ex_filename").change(function(){
 		
+		const uploadFile = $('input[name=uploadFile]')[0].files[0];
+        
+        const form = $('#uploadForm')[0];
+        const formData = new FormData(form);
+        
+        formData.append("uploadFile", uploadFile);
+        
+        console.log(uploadFile);
+        
+        $.ajax({
+			type: "post",
+			url: "/upload",
+			data: formData,
+			contentType: false,
+			processData: false,
+			success: function (data) {
+				console.log(data);
+				console.log(data.profile_uuid);
+				console.log(data.profile_name);
+				console.log(data.profile_path);
+				
+				const uploadPath = data.profile_path.replace(/\\/gi,"/");
+				
+				console.log('uploadPath: ', uploadPath);
+				
+				const profileURL = "/viewFile?fname=" + uploadPath + "/" + data.profile_uuid + "_" + data.profile_name;
+				
+				console.log('profileURL: ', profileURL);
+				
+				$('.profile-img').attr("src", profileURL);
+			}
+        });
+	});
 });
 </script>
 </th:block>
