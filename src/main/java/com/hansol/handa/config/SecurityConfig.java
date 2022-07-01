@@ -53,7 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers(
         		"/", "/list", "/detail", "/comment", "/member/login", 
         		"/member/register", "/assets/**", "/smarteditor/**",
-        		"/member/index").permitAll()
+        		"/member/index", "/upload").permitAll()
         .antMatchers("/mypage/**", "/create", "/member/amend/**").authenticated();
         // .access("hasRole('ROLE_USER')")
 //        .anyRequest().authenticated();
