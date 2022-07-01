@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.hansol.handa.domain.ChallengeVO;
 
@@ -23,5 +24,6 @@ public interface ChallengeMapper {
 	Map<String, String> selectCategoryName(int sub_category_id);	// 카테고리 이름 조회
 
 	void createChallenge(ChallengeVO challengeVO);
+	void joinChallenge(@Param("member_id")String member_id,@Param("challenge_id") Integer challenge_id);
 
 }

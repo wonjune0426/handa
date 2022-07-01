@@ -21,26 +21,25 @@ import ch.qos.logback.classic.Logger;
 @Controller
 public class ChallengeController {
 
-	@Autowired 
+	@Autowired
 	private ChallengeService challengeService;
-	
+
 	private final Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
-	
+
 	@GetMapping("/test")
 	public String test() {
 		return "Hello World";
 	}
-	
-	
+
 	@GetMapping("/")
 	// Model의 addAttribute 함수 사용이 안되어 ModelMap 사용
-	// 맨 처음 화면은 전체 챌린지 리스트 최신 순 조회 
-	public String list(ModelMap model) throws Exception{ 
+	// 맨 처음 화면은 전체 챌린지 리스트 최신 순 조회
+	public String list(ModelMap model) throws Exception {
 		List<ChallengeVO> challengeList = challengeService.selectAllChallenge();
 		model.addAttribute("challengeList", challengeList);
 		model.addAttribute("sortType", 0);
-		
-		return "challenge/list"; 
+
+		return "challenge/list";
 	}
 
 	/**
@@ -48,46 +47,45 @@ public class ChallengeController {
 	 * @param sortType : 정렬 타입 (0: 최신 순, 1: 오래된 순, 2: 참여 인원 순)
 	 * @return : 챌린지 리스트
 	 */
-	
+
 	@GetMapping("/list")
 	// 전체 리스트 정렬 & 각 카테고리 별 챌린지 리스트 조회, 정렬
 	public String list(@RequestParam(required = false) String category, @RequestParam(required = false) String sortType,
-				ModelMap model) throws Exception{
-		
+			ModelMap model) throws Exception {
+
 		List<ChallengeVO> challengeList = null;
-		Boolean isCategory = true;	// 카테고리 리스트 조회 인지 아닌지
-		
-		if(category == null) {
-			isCategory = false;	// 전체 리스트 조회일 경우
-			
-			switch(sortType) {
-				case "0":	// 최신 순
-					challengeList = challengeService.selectAllChallenge();
-					break;
-				case "1":	// 오래된 순
-					challengeList = challengeService.selectAllChallengeDesc();
-					break;
-				case "2":	// 참여 인원 순
-					challengeList = challengeService.selectAllChallengeJoin();
-					break;
+		Boolean isCategory = true; // 카테고리 리스트 조회 인지 아닌지
+
+		if (category == null) {
+			isCategory = false; // 전체 리스트 조회일 경우
+
+			switch (sortType) {
+			case "0": // 최신 순
+				challengeList = challengeService.selectAllChallenge();
+				break;
+			case "1": // 오래된 순
+				challengeList = challengeService.selectAllChallengeDesc();
+				break;
+			case "2": // 참여 인원 순
+				challengeList = challengeService.selectAllChallengeJoin();
+				break;
 			}
-		}
-		else {	// 카테고리 별 리스트 조회일 경우
+		} else { // 카테고리 별 리스트 조회일 경우
 			int categoryID = Integer.parseInt(category);
 			Map<String, String> categoryName = challengeService.selectCategoryName(categoryID);
-			
-			switch(sortType) {
-				case "0":	// 최신 순
-					challengeList = challengeService.selectChallengeList(categoryID);
-					break;
-				case "1": 	// 오래된 순
-					challengeList = challengeService.selectChallengeListDesc(categoryID);
-					break;
-				case "2":	// 참여 인원 순
-					challengeList = challengeService.selectChallengeListJoin(categoryID);
-					break;
+
+			switch (sortType) {
+			case "0": // 최신 순
+				challengeList = challengeService.selectChallengeList(categoryID);
+				break;
+			case "1": // 오래된 순
+				challengeList = challengeService.selectChallengeListDesc(categoryID);
+				break;
+			case "2": // 참여 인원 순
+				challengeList = challengeService.selectChallengeListJoin(categoryID);
+				break;
 			}
-			
+
 			model.addAttribute("categoryID", categoryID);
 			model.addAttribute("subCategoryName", categoryName.get("sub_category_name"));
 			model.addAttribute("mainCategoryName", categoryName.get("main_category_name"));
@@ -99,35 +97,27 @@ public class ChallengeController {
 
 		return "challenge/list";
 	}
-	
+
 	@GetMapping("/imagelist/{searchWord}")
 	@ResponseBody
-	public List<String> imageList(@PathVariable String searchWord){
+	public List<String> imageList(@PathVariable String searchWord) {
 		return challengeService.getimagelist(searchWord);
 	}
-	
+
 	@GetMapping("/create")
 	public String create() {
 		return "challenge/create";
 	}
-	
+
 	@PostMapping("/challenge")
-	public String createChallenge(ChallengeVO challengeVO) {
-		System.out.println(challengeVO.getChallenge_name());
-		System.out.println(challengeVO.getThumbnail());
-		System.out.println(challengeVO.getStartdate());
-		System.out.println(challengeVO.getEnddate());
-		System.out.println(challengeVO.getDescription());
-		System.out.println(challengeVO.getSubcategory_id());
-		System.out.println(challengeVO.getChallenge_type());
+	public @ResponseBody void createChallenge(ChallengeVO challengeVO) {
 		challengeService.createChallenge(challengeVO);
-		return "redirect:/";
 	}
-	
+
 	@GetMapping("/detail")
 	public String detail() {
 		System.out.println("detail---------------------------------------");
 		return "challenge/detail";
 	}
-	
+
 }

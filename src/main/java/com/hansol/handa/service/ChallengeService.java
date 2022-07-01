@@ -21,4 +21,5 @@ public interface ChallengeService {
 	
 	public List<String> getimagelist(String searchWord);
 	public void createChallenge(ChallengeVO challengeVO);
+	public void joinChallenge(String member_id,Integer challenge_id);
 }

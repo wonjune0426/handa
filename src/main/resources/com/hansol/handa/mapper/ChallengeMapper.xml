@@ -70,8 +70,15 @@
 			WHERE sub_category_id = #{subcategory_id} AND sub_category.main_category_id = main_category.main_category_id;
 	</select>
 	
-	<insert id="createChallenge" parameterType="ChallengeVO">
-		insert into challenge(challenge_name,thumbnail,startdate,enddate,description,member_id,subcategory_id,challenge_type)
-		values (#{challenge_name},#{thumbnail},#{startdate},#{enddate},#{description},#{member_id},#{subcategory_id},#{challenge_type})
+	<insert id="createChallenge" parameterType="ChallengeVO" useGeneratedKeys="true" keyProperty="challenge_id">	 
+		insert into challenge(challenge_name,thumbnail,startdate,enddate,description,member_id,subcategory_id,challenge_type,createdate)
+		values (#{challenge_name},IFNULL(#{thumbnail},NULL),IFNULL(#{startdate},NULL),IFNULL(#{enddate},NULL),IFNULL(#{description},NULL),#{member_id},#{subcategory_id},#{challenge_type},now())
+
 	</insert>
+	
+	<insert id="joinChallenge">
+		insert into challenge_join (challenge_id,member_id) values(#{challenge_id},#{member_id})
+	</insert>
+	
+	
 </mapper>
