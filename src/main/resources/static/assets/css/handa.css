@@ -182,3 +182,7 @@
 :root {
     --swiper-theme-color: #808080;
 }
+
+.challenge-item {
+	width: auto;
+}

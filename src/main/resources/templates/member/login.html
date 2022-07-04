@@ -46,7 +46,6 @@
 			<div class="container" data-aos="fade-up">
 
 				<div class="section-header">
-					<span>로그인</span>
 					<h2>로그인</h2>
 				</div>
 				<section id="contact" class="contact login-section">
@@ -54,17 +53,26 @@
 						<div class="login-div">
 							<form th:action="@{/login}" method="post" role="form" class="php-email-form">
 								<div class="row">
-									<div class="form-group mt-3 memberid-div">
-										<label class="login-label"><b>아이디</b></label> 
+									<div class="form-group mt-3 memberid-div"> 
 										<input
 											type="text" name="username" class="form-control"
-											id="memberid" placeholder="아이디" value="goeunlee">
+											id="memberid" placeholder="아이디를 입력해주세요.">
 									</div>
-									<div class="form-group mt-3">
-										<label class="login-label"><b>비밀번호</b></label> 
+									<div class="form-group mt-3"> 
 										<input
 											type="password" class="form-control" name="password"
-											id="password" placeholder="비밀번호" value="dl7542">
+											id="password" placeholder="비밀번호를 입력해주세요.">
+									</div>
+									<div class="form-group mt-3 row">
+										<div class="col-6 remember-div">
+											<input
+											type="checkbox" class="form-control remember-me" id="remember" name="remember-me">
+											<label for="remember">아이디 저장</label>
+										</div>
+										<div class="col-6 find-div">
+											<a href="#">아이디 찾기</a> |
+											<a href="#">비밀번호 찾기</a>
+										</div>
 									</div>
 								</div>
 								<div class="text-center member-join-div login-error">
@@ -72,10 +80,7 @@
 								</div>
 								<div class="text-center login-btn-div">
 									<button class="login-btn" type="submit">로그인</button>
-								</div>
-								<div class="text-center member-join-div">
-									<a href="/member/register">회원가입 하기</a>
-									<input type="hidden" th:value="${msg}" class="register-result"/>
+									<button class="register-btn" type="button">회원가입</button>
 								</div>
 							</form>
 						</div>
@@ -97,6 +102,13 @@
 <th:block layout:fragment="javascript">
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+	$(".register-btn").on("click", function (e) {
+	
+	    e.preventDefault();
+	    
+	    location.href = "/member/register";
+	    	    
+	});
 	$(".login-btn").on("click", function (e) {
 				
 		const memberId = $("#memberid");

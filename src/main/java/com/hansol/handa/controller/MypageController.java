@@ -16,7 +16,7 @@ public class MypageController {
 	private final Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 	
 	@GetMapping("/memberdetail")
-	public String memberDatail(@RequestParam(required = true) String member_id,Model model) {
+	public String memberDatail() {
 
 		logger.info("memberDetail-------------------------------");
 		return "mypage/memberDetail";
