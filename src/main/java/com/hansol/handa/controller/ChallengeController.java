@@ -49,36 +49,80 @@ public class ChallengeController {
 	 * @param sortType : 정렬 타입 (0: 최신 순, 1: 오래된 순, 2: 참여 인원 순)
 	 * @return : 챌린지 리스트
 	 */
-
+	// 리스트 화면 호출
 	@GetMapping("/list")
-	// 전체 리스트 정렬 & 각 카테고리 별 챌린지 리스트 조회, 정렬
-	// Model의 addAttribute 함수 사용이 안되어 ModelMap 사용
 	public String list(@RequestParam(required = false) String category, @RequestParam(required = false) String sortType,
-				ModelMap model) throws Exception{
-
-		Boolean isCategory = true;
+			Model model) {
+		logger.info("화면 호출");
 		
-		if(sortType == null) sortType = "0";
+		Boolean isCategory = true;
 		
 		if(category == null) isCategory = false;
 		else{
 			int categoryID = Integer.parseInt(category);  
 			Map<String, String> categoryName = challengeService.selectCategoryName(categoryID);
-			
+				
 			model.addAttribute("categoryID", categoryID);
 			model.addAttribute("subCategoryName", categoryName.get("sub_category_name"));
 			model.addAttribute("mainCategoryName", categoryName.get("main_category_name"));
 		}
-		
-		List<ChallengeVO> challengeList = challengeService.selectChallegeList(category, sortType);
 
-		model.addAttribute("challengeList", challengeList);
 		model.addAttribute("isCategory", isCategory); 
 		model.addAttribute("sortType", sortType);
-		
+
 		return "challenge/list";
 	}
+		
+		
+	@ResponseBody
+	@GetMapping("/challenge-list")
+	// 전체 리스트 정렬 & 각 카테고리 별 챌린지 리스트 조회, 정렬
+	/*
+	 * public String list(@RequestParam(required = false) String
+	 * category, @RequestParam(required = false) String sortType, ModelMap model)
+	 * throws Exception{
+	 * 
+	 * Boolean isCategory = true;
+	 * 
+	 * if(sortType == null) sortType = "0";
+	 * 
+	 * if(category == null) isCategory = false; else{ int categoryID =
+	 * Integer.parseInt(category); Map<String, String> categoryName =
+	 * challengeService.selectCategoryName(categoryID);
+	 * 
+	 * model.addAttribute("categoryID", categoryID);
+	 * model.addAttribute("subCategoryName", categoryName.get("sub_category_name"));
+	 * model.addAttribute("mainCategoryName",
+	 * categoryName.get("main_category_name")); }
+	 * 
+	 * List<ChallengeVO> challengeList =
+	 * challengeService.selectChallegeList(category, sortType);
+	 * 
+	 * model.addAttribute("challengeList", challengeList);
+	 * model.addAttribute("isCategory", isCategory); model.addAttribute("sortType",
+	 * sortType);
+	 * 
+	 * return "challenge/list"; }
+	 */
+	public HashMap<String, Object> listView(@RequestParam(required = false) String category, @RequestParam(required = false) String sortType,
+			Model model) throws Exception{
+	
+	HashMap<String, Object> map = new HashMap<>();
+	logger.info("함수 호출");
+	
+	if(!category.equals("0")){
+		int categoryID = Integer.parseInt(category);  
+		Map<String, String> categoryName = challengeService.selectCategoryName(categoryID);
 
+		map.put("subCategoryName", categoryName.get("sub_category_name")); 
+	}
+	
+		List<ChallengeVO> challengeList = challengeService.selectChallegeList(category, sortType);
+		map.put("challengeList", challengeList);
+
+		return map;
+	}
+	
 	
 //이미지 검색 api를 통한 이미지 검색
 	@GetMapping("/imagelist/{searchWord}")
