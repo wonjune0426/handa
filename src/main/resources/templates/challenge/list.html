@@ -98,11 +98,11 @@
 									</div>
 									<h3>
 										<th:block th:if="${#strings.isEmpty(isCategory)} or ${!isCategory}">
-											<a href="/detail" class="stretched-link"
+											<a th:href="@{/challenge/detail(challenge_id=${challenge.challenge_id})}" class="stretched-link"
 												th:text="'[' + ${challenge.subcategory_name} + '] ' + ${challenge.challenge_name}"></a>
 										</th:block>
 										<th:block th:if="${isCategory}">
-											<a href="/detail" class="stretched-link"
+											<a th:href="@{/challenge/detail(challenge_id=${challenge.challenge_id})}" class="stretched-link"
 												th:text="'[' + ${subCategoryName} + '] ' + ${challenge.challenge_name}"></a>
 										</th:block>
 									</h3>

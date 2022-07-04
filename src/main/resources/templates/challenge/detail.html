@@ -21,25 +21,45 @@
 						<div class="col-lg-12">
 							<div class="row">
 								<div class="col-7 thumb-div">
-									<img th:src="@{/assets/img/study-thumb.jpg}" alt=""
+									<img th:src="${challengeDetail.thumbnail}" alt=""
 									class="ch-detail-thumb">
 								</div>
 								<div class="col-5 challenge-summary">
-									<span class="ch-detail-category">자기계발 > 자격증</span>
-									<h3 class="ch-detail-title">정보처리기사 챌린지</h3>
+									<span class="ch-detail-category" th:if="${challengeDetail.subcategory_id}==1">취미 > 영화</span>
+									<span class="ch-detail-category" th:if="${challengeDetail.subcategory_id}==2">취미 > 모임</span>
+									<span class="ch-detail-category" th:if="${challengeDetail.subcategory_id}==3">취미 > 등산</span>
+									<span class="ch-detail-category" th:if="${challengeDetail.subcategory_id}==4">자기계발 > 독서</span>
+									<span class="ch-detail-category" th:if="${challengeDetail.subcategory_id}==5">자기계발 > 자격증</span>
+									<span class="ch-detail-category" th:if="${challengeDetail.subcategory_id}==6">자기계발 > 외국어</span>
+									
+									<h3 class="ch-detail-title" th:text="${challengeDetail.challenge_name}"></h3>
 									<div class="create-user">
-										<img class="profile-img" th:src="@{/assets/img/user.png}">
-										<span>김한솔</span>
-										<small>선임</small>
-										<small>한솔 인티큐브</small>  
+										<img class="profile-img">
+										<span>[[${createMember.member_name}]]</span>
+										<small th:if="${createMember.position_id}==1">수석</small>
+										<small th:if="${createMember.position_id}==2">책임</small>
+										<small th:if="${createMember.position_id}==3">선임</small>
+										
+										<small th:if="${createMember.affiliates_id}==1">한솔 인티큐브</small>
+										<small th:if="${createMember.affiliates_id}==2">한솔 제지</small>
+										<small th:if="${createMember.affiliates_id}==3">한솔 테크닉스</small>
+										<small th:if="${createMember.affiliates_id}==4">한솔 페이퍼택</small>
+										<small th:if="${createMember.affiliates_id}==5">한솔 홀딩스</small>
+										<small th:if="${createMember.affiliates_id}==6">한솔 문화재단</small>
+										<small th:if="${createMember.affiliates_id}==7">한솔 케미칼</small>
+										<small th:if="${createMember.affiliates_id}==8">한솔 홈데코</small>
+										<small th:if="${createMember.affiliates_id}==9">한솔 코에버</small>
+										<small th:if="${createMember.affiliates_id}==10">한솔 BS</small>
+										<small th:if="${createMember.affiliates_id}==11">한솔 PNS</small>
+										<small th:if="${createMember.affiliates_id}==12">한솔 로지스틱스</small>  
 									</div>
 									<div class="date">
 										<small>기간</small> 
-										2022.06.24 ~ 2022.07.05
+										[[${challengeDetail.startdate}]] ~ [[${challengeDetail.enddate}]]
 									</div>
 									<div class="num">
 										<small>인원</small> 
-										8명
+										[[${challengeDetail.count}]]
 									</div>
 									<div class="ch-detail-etc">
 										<span class="status">모집중</span>
@@ -53,7 +73,8 @@
 									</div>
 									<div class="price-div">
 										<p class="kind">챌린지 유형</p>
-										<p class="price">무료 챌린지</p>
+										<p class="price" th:if="${challengeDetail.challenge_type}=='무료'">무료 챌린지</p>
+										<p class="price" th:if="${challengeDetail.challenge_type}=='유료'">유료 챌린지</p>
 									</div>
 									<button class="btn challenge-join-btn">참여하기</button>
 								</div>

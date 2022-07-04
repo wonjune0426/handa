@@ -24,5 +24,6 @@ public interface ChallengeMapper {
 	void updateChallenge(ChallengeVO challengeVO);
 	void deleteChallenge(ChallengeVO challengeVO);
 	void secessionChallenge(ChallengeVO challengeVO);
+	ChallengeVO detailChallenge(int challenge_id);
 
 }

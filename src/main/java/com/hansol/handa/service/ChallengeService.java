@@ -19,4 +19,5 @@ public interface ChallengeService {
 	public void updateChallenge(ChallengeVO challengeVO);
 	public void deleteChallenge(ChallengeVO challengeVO);
 	public void secessionChallenge(ChallengeVO challengeVO);
+	public ChallengeVO detailChallenge(int challenge_id);
 }

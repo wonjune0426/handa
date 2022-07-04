@@ -20,5 +20,6 @@ public class ChallengeVO {
 	 private String challenge_state;
 	 
 	 private String subcategory_name;
+	 private int count;
 	 private JoinVO joinVO;
 }

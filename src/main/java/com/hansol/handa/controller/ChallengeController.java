@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hansol.handa.domain.ChallengeVO;
 import com.hansol.handa.service.ChallengeService;
+import com.hansol.handa.service.UserService;
 
 import ch.qos.logback.classic.Logger;
 
@@ -30,6 +31,8 @@ public class ChallengeController {
 
 	@Autowired
 	private ChallengeService challengeService;
+	@Autowired
+	private UserService userService;
 
 	private final Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
@@ -134,9 +137,11 @@ public class ChallengeController {
 		challengeService.secessionChallenge(challengeVO);
 	}
 	
-	@GetMapping("/detail")
-	public String detail() {
-		System.out.println("detail---------------------------------------");
+	@GetMapping("/challenge/detail")
+	public String detail(@RequestParam(required = true) int challenge_id,Model model) {
+		ChallengeVO challengeVO=challengeService.detailChallenge(challenge_id);
+		model.addAttribute("challengeDetail",challengeVO);
+		model.addAttribute("createMember",userService.read(challengeVO.getMember_id()));
 		return "challenge/detail";
 	}
 
