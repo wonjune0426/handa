@@ -61,10 +61,33 @@
           					</div>
           					<!-- 회원 정보 -->
           					<div class="col-md-7">
-            					<h3>hansol333 / OOO 선임</h3>
-            					<p class="fst-italic">hansol@hansol.com</p>
+            					<h3>
+            					<th:block th:text="${#authentication.principal.Username}"></th:block> 
+            					/
+            					 <th:block th:text="${#authentication.principal.user.member_name}"></th:block>
+            					 <th:block th:if="${#authentication.principal.user.position_id==1}" th:text="수석"></th:block>
+            					 <th:block th:if="${#authentication.principal.user.position_id==2}" th:text="책임"></th:block>
+            					 <th:block th:if="${#authentication.principal.user.position_id==3}" th:text="선임"></th:block>
+            					 </h3>
+            					<p class="fst-italic"><th:block th:text="${#authentication.principal.user.e_mail}"></th:block></p>
             					<ul>
-              						<li><i class="bi bi-check"></i> 한솔 인티큐브</li><li></li>
+              						<li>
+              							<i class="bi bi-check"></i>
+										<!-- 계열사 (조인으로 가져오는 걸로 처리해도 됩니다. 임시로 if 문 처리) -->			              							
+              							<th:block th:if="${#authentication.principal.user.affiliates_id==1}">한솔 인티큐브</th:block>
+              							<th:block th:if="${#authentication.principal.user.affiliates_id==2}">한솔 제지</th:block>
+              							<th:block th:if="${#authentication.principal.user.affiliates_id==3}">한솔 테크닉스</th:block>
+              							<th:block th:if="${#authentication.principal.user.affiliates_id==4}">한솔 페이퍼택</th:block>
+              							<th:block th:if="${#authentication.principal.user.affiliates_id==5}">한솔 홀딩스</th:block>
+              							<th:block th:if="${#authentication.principal.user.affiliates_id==6}">한솔 문화재단</th:block>
+              							<th:block th:if="${#authentication.principal.user.affiliates_id==7}">한솔 케미칼</th:block>
+              							<th:block th:if="${#authentication.principal.user.affiliates_id==8}">한솔 홈데코</th:block>
+              							<th:block th:if="${#authentication.principal.user.affiliates_id==9}">한솔 코에버</th:block>
+              							<th:block th:if="${#authentication.principal.user.affiliates_id==10}">한솔 BS</th:block>
+              							<th:block th:if="${#authentication.principal.user.affiliates_id==11}">한솔 PNS</th:block>
+              							<th:block th:if="${#authentication.principal.user.affiliates_id==12}">한솔 로지스틱스</th:block>
+              						</li>
+              						<li></li>
               						<!-- 숫자 클릭 시 해당 페이지로 이동 -->
               						<li><i class="bi bi-check"></i> 내가 생성한 챌린지 : <a href="/mypage/challenge-produce">&nbsp 3</a>개<li>
               						<li><i class="bi bi-check"></i> 내가 참여한 챌린지 : <a href="/mypage/challenge-produce">&nbsp 10</a>개</li>

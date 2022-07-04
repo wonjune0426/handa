@@ -34,7 +34,7 @@
 		</div>
 		<!-- End Breadcrumbs -->
 
-		<section class="sample-page" style="padding-top: 30px">
+		<!-- <section class="sample-page" style="padding-top: 30px">
 			<div class="container" data-aos="fade-up">
 				<form th:action="@{/upload}" method="post" enctype="multipart/form-data" id="uploadForm">
 					<ul>
@@ -45,14 +45,16 @@
 				</form>
 				<img alt="" src="" class="profile-img" style="width: 200px; height: 200px;">
 			</div>
-		</section>
+		</section> -->
 
 		<!-- ======= Services Section ======= -->
 		<section id="service" class="services pt-0">
 		<th:block sec:authorize="isAuthenticated()">
 			<div class="container" data-aos="fade-up">
 				<p href="#" class="nav-link" sec:authentication="principal"></p>
-				<p th:text="${#authentication.principal.Username}"></p>
+				<p th:text="${#authentication}"></p>
+				<p th:text="${#authentication.principal.user}"></p>
+				<p href="#" class="nav-link" sec:authentication="principal"></p>
 				<a th:href="@{/member/amend/} + ${#authentication.principal.Username}" class="mypage-btn align-items-center">정보 수정하기</a>
 				<a th:href="@{/member/amend/} + ${#authentication.principal.Username}">정보 수정</a>
 			</div>
