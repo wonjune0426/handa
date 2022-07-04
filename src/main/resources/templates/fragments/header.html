@@ -32,19 +32,19 @@
 					<!-- 회원인 경우 -->
 					<th:block sec:authorize="isAuthenticated()">
 						
-						<li><a href="#" class="nav-link" sec:authentication="principal.Username"></a>
-						</li>
-						
-						<li><a href="/mypage/memberdetail" class="nav-link">마이페이지</a></li>
+						<li><a href="/mypage/memberdetail" class="nav-link" >
+						<i class="fa-solid fa-user" alt="마이페이지" title="마이페이지" ></i></a></li>
 						
 						<form action="/member/logout" method="post" id="logoutForm">
-							<li><a class="get-a-quote logout-btn" href="#">로그아웃</a></li>
+							<li><a class="logout-btn" href="#">
+							<i class="fa-solid fa-right-from-bracket"  alt="로그아웃" title="로그아웃"></i></a></li>
 						</form>
 					</th:block>
 
 					<!-- 비회원인 경우 -->
 					<th:block sec:authorize="isAnonymous()">
 						<li><a class="get-a-quote" href="/member/login">로그인</a></li>
+						<li><a class="" href="/member/register">회원가입</a></li>
 					</th:block>
 				</ul>
 			</nav>

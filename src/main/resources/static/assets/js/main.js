@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		  const bannerImg = activeBanner.dataset.bannerImg;
 		  const changeBanner = document.querySelector('.main-banner .swiper-slide-active');
 		  
-		  console.log(activeBanner, bannerImg, changeBanner);
+		  //console.log(activeBanner, bannerImg, changeBanner);
 		  
 		  changeBanner.style.background = 'url(' + bannerImg + ') no-repeat';
 		  changeBanner.style.backgroundSize = 'cover';
@@ -192,34 +192,21 @@ document.addEventListener('DOMContentLoaded', () => {
     on: {
 		slideChangeTransitionStart: function() {
 			//배너 이미지 변경 
-		  const activeBanner = document.querySelector('.swiper-slide-duplicate-active');
+		  const activeBanner = document.querySelector('.event-banner .swiper-slide-duplicate-active');
 		  const bannerImg = activeBanner.dataset.bannerImg;
-		  const changeBanner = document.querySelector('.main-banner .swiper-slide-active');
+		  const changeBanner = document.querySelector('.event-banner .swiper-slide-active');
+		  const activeBannerColor = document.querySelector('.event-banner .swiper-slide-duplicate-active .testimonial-item');
+		  const changeBannerColor = document.querySelector('.event-banner');
 		  
-		  console.log(activeBanner, bannerImg, changeBanner);
+		  console.log("change , ", activeBannerColor);
 		  
+		  changeBannerColor.style.background = activeBannerColor.dataset.bannerColor;
 		  changeBanner.style.background = 'url(' + bannerImg + ') no-repeat';
 		  changeBanner.style.backgroundSize = 'cover';
 		  changeBanner.style.backgroundPosition = 'center';
 		  changeBanner.style.transition = 'background-image 0.5s ease-out';
-		  // changeBanner.style.opacity = '0.3';
 		   
 		},
-		/*
-		slideChangeTransitionEnd: function() {
-			//배너 이미지 변경 
-		  const activeBanner = document.querySelector('.swiper-slide-duplicate-active');
-		  const bannerImg = activeBanner.dataset.bannerImg;
-		  const changeBanner = document.querySelector('.testimonials');
-		  
-		  changeBanner.style.background = 'url(' + bannerImg + ') no-repeat';
-		  changeBanner.style.backgroundSize = 'cover';
-		  changeBanner.style.backgroundPosition = 'center';
-		  changeBanner.style.transition = 'background-image opacity 0.5s ease';
-		  changeBanner.style.opacity = '1';
-		   
-		},
-		*/
 	}
 	
   });
