@@ -571,7 +571,8 @@ section {
   }
 
   .mobile-nav-show {
-    color: #fff;
+    /* color: #fff; */
+    color: #686868;
     font-size: 28px;
     cursor: pointer;
     line-height: 0;
@@ -589,7 +590,7 @@ section {
     position: fixed;
     right: 20px;
     top: 20px;
-    /* z-index: 9999; */
+    z-index: 9999;
   }
 
   .mobile-nav-active {
