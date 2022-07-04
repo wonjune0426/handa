@@ -90,5 +90,12 @@
 		where challenge_id=#{challenge_id} and member_id=#{member_id}
 	</update>
 	
+	<delete id="deleteChallenge" parameterType="ChallengeVO">
+		delete from challenge where challenge_id=#{challenge_id} and member_id=#{member_id}
+	</delete>
+	
+	<delete id="secessionChallenge" parameterType="ChallengeVO">
+		delete from challenge_join where challenge_id=#{challenge_id} and member_id=#{member_id}
+	</delete>
 	
 </mapper>

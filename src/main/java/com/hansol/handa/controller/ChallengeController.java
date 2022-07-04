@@ -115,7 +115,25 @@ public class ChallengeController {
 		challengeService.updateChallenge(challengeVO);
 	}
 	
-
+	
+//challenge 삭제
+	@PostMapping("/challenge-remove")
+	public @ResponseBody void deleteChallenge(ChallengeVO challengeVO) {
+		challengeService.deleteChallenge(challengeVO);
+	}
+	
+// challenge 참여하기
+	@PostMapping("/challenge/member")
+	public @ResponseBody void joinChallege(ChallengeVO challengeVO) {
+		challengeService.joinChallenge(challengeVO.getMember_id(), challengeVO.getChallenge_id());
+	}
+	
+// challenge 탈퇴하기
+	@PostMapping("/challenge/challenge-secession")
+	public @ResponseBody void secessionChallenge(ChallengeVO challengeVO) {
+		challengeService.secessionChallenge(challengeVO);
+	}
+	
 	@GetMapping("/detail")
 	public String detail() {
 		System.out.println("detail---------------------------------------");
