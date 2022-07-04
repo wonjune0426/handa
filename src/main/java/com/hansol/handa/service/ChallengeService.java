@@ -17,4 +17,6 @@ public interface ChallengeService {
 	public void joinChallenge(String member_id,Integer challenge_id);
 	public ChallengeVO getChallenge(int challenge_id);
 	public void updateChallenge(ChallengeVO challengeVO);
+	public void deleteChallenge(ChallengeVO challengeVO);
+	public void secessionChallenge(ChallengeVO challengeVO);
 }
