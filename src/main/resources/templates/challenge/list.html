@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/layout}">
-	
+
 <!-- include CSS File -->
 <th:block layout:fragment="css">
 	<!-- Handa Challenge CSS File -->
@@ -30,10 +29,10 @@
 					<ol>
 						<li><a th:href="@{/list}">홈</a></li>
 						<li>챌린지 리스트</li>
-						
+
 						<!-- 카테고리 조회일 경우에만 표시 -->
 						<li th:if="${not #strings.isEmpty(mainCategoryName)}" th:text=${mainCategoryName}></li>
-						<li th:if="${not #strings.isEmpty(subCategoryName)}"th:text=${subCategoryName}></li>
+						<li th:if="${not #strings.isEmpty(subCategoryName)}" th:text=${subCategoryName}></li>
 					</ol>
 				</div>
 			</nav>
@@ -57,57 +56,65 @@
 					</div>
 					<div class="row gy-4">
 						<div class="btn-group order-div col-2">
-							<select class="form-control handa-list-select" onchange="if(this.value) location.href=(this.value);">
+							<select class="form-control handa-list-select"
+								onchange="if(this.value) location.href=(this.value);">
 								<th:block th:if="${#strings.isEmpty(isCategory)} or ${!isCategory}">
-									<option th:value="@{/list?sortType=0}" th:text="최신순" th:selected="${sortType} == '0'"></option>
-									<option th:value="@{/list?sortType=1}" th:text="오래된순" th:selected="${sortType} == '1'"></option>
-									<option th:value="@{/list?sortType=2}" th:text="참여인원순" th:selected="${sortType} == '2'"></option>
+									<option th:value="@{/list?sortType=0}" th:text="최신순"
+										th:selected="${sortType} == '0'"></option>
+									<option th:value="@{/list?sortType=1}" th:text="오래된순"
+										th:selected="${sortType} == '1'"></option>
+									<option th:value="@{/list?sortType=2}" th:text="참여인원순"
+										th:selected="${sortType} == '2'"></option>
 								</th:block>
-								
+
 								<th:block th:if="${isCategory}">
-									<option th:value="@{${'/list?category=' + {categoryID} + '&sortType=0'}}" th:text="최신순" th:selected="${sortType} == '0'"></option>
-									<option th:value="@{${'/list?category=' + {categoryID} + '&sortType=1'}}" th:text="오래된순" th:selected="${sortType} == '1'"></option>
-									<option th:value="@{${'/list?category=' + {categoryID} + '&sortType=2'}}" th:text="참여인원순" th:selected="${sortType} == '2'"></option>
+									<option th:value="@{${'/list?category=' + {categoryID} + '&sortType=0'}}"
+										th:text="최신순" th:selected="${sortType} == '0'"></option>
+									<option th:value="@{${'/list?category=' + {categoryID} + '&sortType=1'}}"
+										th:text="오래된순" th:selected="${sortType} == '1'"></option>
+									<option th:value="@{${'/list?category=' + {categoryID} + '&sortType=2'}}"
+										th:text="참여인원순" th:selected="${sortType} == '2'"></option>
 								</th:block>
 							</select>
 						</div>
 						<div class="col-6"></div>
 						<div class="search-div col-4">
 							<form action="#" class="form-search handa-search-form">
-								<input type="text" class="form-control"
-									placeholder="검색어를 입력하세요.">
+								<input type="text" class="form-control" placeholder="검색어를 입력하세요.">
 								<button type="submit"
 									class="btn btn-primary handa-outline-btn list-search-btn">검색</button>
 							</form>
 						</div>
 						<div class="col-md-12"></div>
-						
-							<!-- 챌린지 리스트 -->
-							<div class="list-container row gy-4">
-							<div class="card-container col-lg-4 col-md-6" data-aos="fade-up"
-							data-aos-delay="100" th:each="challenge : ${challengeList}">
-							<div class="card challenge-item">
-								<div class="card-img">
-									<img th:src="${challenge.thumbnail}" alt=""
-										class="img-fluid challenge-thumbnail">
+
+						<!-- 챌린지 리스트 -->
+						<div class="list-container row gy-4">
+							<div class="card-container col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100"
+								th:each="challenge : ${challengeList}">
+								<div class="card challenge-item">
+									<div class="card-img">
+										<img th:src="${challenge.thumbnail}" alt=""
+											class="img-fluid challenge-thumbnail">
+									</div>
+									<h3>
+										<th:block th:if="${#strings.isEmpty(isCategory)} or ${!isCategory}">
+											<a href="/detail" class="stretched-link"
+												th:text="'[' + ${challenge.subcategory_name} + '] ' + ${challenge.challenge_name}"></a>
+										</th:block>
+										<th:block th:if="${isCategory}">
+											<a href="/detail" class="stretched-link"
+												th:text="'[' + ${subCategoryName} + '] ' + ${challenge.challenge_name}"></a>
+										</th:block>
+									</h3>
+									<p id="card-p" th:text="${challenge.startdate} + ' ~ ' + ${challenge.enddate}"></p>
+									<p id="card-p" th:text="'참여인원 ' + ${challenge.joinVO.count} + '명'"></p>
+
+									<div class="state">
+										<div class="open-dt" th:text="${challenge.createdate} + ' 생성'"></div>
+										<div class="state-label" th:text="${challenge.challenge_state}"></div>
+									</div>
+									<div id="endList"></div>
 								</div>
-								<h3>
-									<th:block th:if="${#strings.isEmpty(isCategory)} or ${!isCategory}">
-										<a href="/detail" class="stretched-link" th:text="'[' + ${challenge.subcategory_name} + '] ' + ${challenge.challenge_name}"></a>
-									</th:block>
-									<th:block th:if="${isCategory}">
-										<a href="/detail" class="stretched-link" th:text="'[' + ${subCategoryName} + '] ' + ${challenge.challenge_name}"></a>
-									</th:block>
-								</h3>
-								<p id="card-p" th:text="${challenge.startdate} + ' ~ ' + ${challenge.enddate}"></p>
-								<p id="card-p" th:text="'참여인원 ' + ${challenge.joinVO.count} + '명'"></p>
-								
-								<div class="state">
-									<div class="open-dt" th:text="${challenge.createdate} + ' 생성'"></div> 
-									<div class="state-label" th:text="${challenge.challenge_state}"></div>
-								</div>
-								<div id ="endList"></div>
-							</div>
 							</div>
 						</div>
 					</div>
@@ -118,18 +125,19 @@
 	</main>
 	<!-- End #main -->
 </div>
-	<!-- include JS Script -->
-	<th:block layout:fragment="javascript">   
-		<!-- <script src='../assets/js/infiniteScroll.js'></script> -->
-		<script th:inline="javascript">
-			/*<![CDATA[*/
-				// 전체 리스트를 받고 리스트를 21개씩 화면에 보여주고 스크롤이 끝나면 추가로 그려줌
-				
-				// 카드 담는 객체
-				const $cardContainer = document.querySelector('.list-container');
-				
-			
-	    	/*]]>*/
-		</script>
-	</th:block>
+<!-- include JS Script -->
+<th:block layout:fragment="javascript">
+	<!-- <script src='../assets/js/infiniteScroll.js'></script> -->
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+		// 전체 리스트를 받고 리스트를 21개씩 화면에 보여주고 스크롤이 끝나면 추가로 그려줌
+
+		// 카드 담는 객체
+		const $cardContainer = document.querySelector('.list-container');
+
+
+		/*]]>*/
+	</script>
+</th:block>
+
 </html>

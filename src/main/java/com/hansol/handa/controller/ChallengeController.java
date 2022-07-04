@@ -101,8 +101,8 @@ public class ChallengeController {
 
 	
 //challenge 수정화면 요청
-	@GetMapping("/challenge-amend/challenge_id={challenge_id}")
-	public String challengeGet(@PathVariable int challenge_id,Model model) {
+	@GetMapping("/challenge-amend")
+	public String challengeGet(@RequestParam(required = true) int challenge_id,Model model) {
 		ChallengeVO challengeVO=challengeService.getChallenge(challenge_id);
 		model.addAttribute("challenge",challengeVO);
 		return "challenge/update";

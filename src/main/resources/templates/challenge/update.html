@@ -96,9 +96,7 @@
 											<label for="main-category">
 												<h3>유형</h3>
 											</label> <select class="form-control main-category" name="challenge_type"
-												id="challenge_type" th:value="${challenge.challenge_type}">
-												<option>무료</option>
-												<option>유료</option>
+												id="challenge_type">
 											</select>
 										</div>
 									</div>
@@ -138,8 +136,7 @@
 									</div>
 
 									<div class="col-md-12 text-center create-challenge">
-										<button type="button" id="create-challenge" class="btn btn-primary">챌린지
-											생성</button>
+										<button type="button" id="update-challenge" class="btn btn-primary">챌린지 수정</button>
 									</div>
 									<input type="hidden" class="form-control price" name="member_id"
 										th:value='${#authentication.principal.Username}' readonly>
@@ -171,35 +168,45 @@
 			});
 		$(document).ready(function () {
 			/*<![CDTATA[*/
-			var test =/*[[${challenge.subcategory_id}]]*/
-				/*]]>*/
-				console.log(test)
-			switch (test) {
+			var sub_category =/*[[${challenge.subcategory_id}]]*/
+			challenge_type=/*[[${challenge.challenge_type}]]*/
+			/*]]>*/	
+			
+			switch (sub_category) {
 				case 1:
 					$("input[name=sub_category]").attr("value", "영화")
-					$("input[name=main_category]").attr("value","취미")
+					$("input[name=main_category]").attr("value", "취미")
 					break;
 				case 2:
 					$("input[name=sub_category]").attr("value", "모임")
-					$("input[name=main_category]").attr("value","취미")
+					$("input[name=main_category]").attr("value", "취미")
 					break;
 				case 3:
 					$("input[name=sub_category]").attr("value", "등산")
-					$("input[name=main_category]").attr("value","취미")
+					$("input[name=main_category]").attr("value", "취미")
 					break;
 				case 4:
 					$("input[name=sub_category]").attr("value", "독서")
-					$("input[name=main_category]").attr("value","자기계발")
+					$("input[name=main_category]").attr("value", "자기계발")
 					break;
 				case 5:
 					$("input[name=sub_category]").attr("value", "자격증")
-					$("input[name=main_category]").attr("value","자기계발")
+					$("input[name=main_category]").attr("value", "자기계발")
 					break;
 				case 6:
 					$("input[name=sub_category]").attr("value", "외국어")
-					$("input[name=main_category]").attr("value","자기계발")
+					$("input[name=main_category]").attr("value", "자기계발")
 					break;
 			}
+			switch (challenge_type) {
+				case "유료":
+					$("select[name=challenge_type]").append("<option>유료</option><option>무료</option>")
+					break;
+				case "무료":
+					$("select[name=challenge_type]").append("<option>무료</option><option>무료</option>")
+					break;
+			}
+
 		})
 		$('#modal-btn').click(function () {
 			$('.modal').toggleClass('show')
@@ -254,73 +261,29 @@
 			$('#profile-img').attr("src", ch);
 		});
 
-		$("#main-category").change(function () {
-			var main = $("#main-category").val();
-			if (main == "취미") {
-				$("#sub-category").empty();
-				$("#sub-category").append
-					(`<option>카테고리(소)</option>
-					<option>영화</option>
-					<option>모임</option>
-					<option>등산</option>`)
-			} else if (main == "자기계발") {
-				$("#sub-category").empty();
-				$("#sub-category").append
-					(`<option>카테고리(소)</option>
-					<option>독서</option>
-					<option>자격증</option>
-					<option>외국어</option>`)
-			}
-		})
-
-		$('#create-challenge').click(function () {
-			var select_sub = $("#sub-category").val();
+		$('#update-challenge').click(function () {
 			var startdate = $("input[name=startdate]").val()
 			var enddate = $("input[name=enddate]").val()
 			var dateRegexp = /[0-9]{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])/;
-			var subcategory_id;
-			switch (select_sub) {
-				case "영화":
-					subcategory_id = 1;
-					break
-				case "모임":
-					subcategory_id = 2;
-					break
-				case "등산":
-					subcategory_id = 3;
-					break
-				case "독서":
-					subcategory_id = 4;
-					break
-				case "자격증":
-					subcategory_id = 5;
-					break
-				case "외국어":
-					subcategory_id = 6;
-					break
-			}
 
 
 			if ($("input[name=challenge_name]").val() == null || $("input[name=challenge_name]").val() == "" || $("input[name=challenge_name]").val().length > 25) {
 				alert("제목없거나 너무 김");
 			} else if (editor.getData().length > 1000) {
 				alert("내용 입력 값 초과");
-			} else if (select_sub == "카테고리(소)") {
-				alert("카테고리 선택필수");
 			} else if (!dateRegexp.test(startdate) || !dateRegexp.test(enddate)) {
 				alert("날짜형식 오류")
 			} else if (startdate > enddate) {
 				alert("종료날짜 설정 오류")
 			} else {
 				$.ajax({
-					url: "/challenge",
+					url: "/challenge-amend",
 					method: "POST",
 					data: {
 						challenge_name: $("input[name=challenge_name]").val(),
 						thumbnail: $("#profile-img").attr("src"),
 						startdate: startdate,
 						enddate: enddate,
-						subcategory_id: subcategory_id,
 						description: editor.getData(),
 						challenge_type: $("select[name=challenge_type]").val(),
 						member_id: $("input[name=member_id]").val()
