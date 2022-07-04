@@ -2,8 +2,10 @@ package com.hansol.handa.controller;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import ch.qos.logback.classic.Logger;
 
@@ -14,7 +16,7 @@ public class MypageController {
 	private final Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 	
 	@GetMapping("/memberdetail")
-	public String memberDatail() {
+	public String memberDatail(@RequestParam(required = true) String member_id,Model model) {
 
 		logger.info("memberDetail-------------------------------");
 		return "mypage/memberDetail";

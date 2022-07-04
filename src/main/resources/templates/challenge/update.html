@@ -170,7 +170,9 @@
 			/*<![CDTATA[*/
 			var sub_category =/*[[${challenge.subcategory_id}]]*/
 			challenge_type=/*[[${challenge.challenge_type}]]*/
+			chaellenge_id=/*[[${challenge.challenge_id}]]*/
 			/*]]>*/	
+
 			
 			switch (sub_category) {
 				case 1:
@@ -262,6 +264,7 @@
 		});
 
 		$('#update-challenge').click(function () {
+			var member_id=$("input[name=member_id]").val();
 			var startdate = $("input[name=startdate]").val()
 			var enddate = $("input[name=enddate]").val()
 			var dateRegexp = /[0-9]{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])/;
@@ -280,17 +283,20 @@
 					url: "/challenge-amend",
 					method: "POST",
 					data: {
+						challenge_id:chaellenge_id,
 						challenge_name: $("input[name=challenge_name]").val(),
 						thumbnail: $("#profile-img").attr("src"),
 						startdate: startdate,
 						enddate: enddate,
 						description: editor.getData(),
 						challenge_type: $("select[name=challenge_type]").val(),
-						member_id: $("input[name=member_id]").val()
+						member_id:member_id
 					},
 					dataType: "text",
 					//////////////////// recv
-					success: location.href = "/list?category=" + subcategory_id + "&sortType=0",
+					success: function(){
+					window.location.href="/memberdetail?member_id="+member_id;						
+					}, 
 					error: function (xhr, status, error) { // (파라미터 생략가능)
 						alert("error");
 					}
