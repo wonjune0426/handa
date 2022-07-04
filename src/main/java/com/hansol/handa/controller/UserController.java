@@ -121,11 +121,19 @@ public class UserController {
 	
 	@PreAuthorize("principal.Username == #userVO.member_id")
 	@PostMapping("/amend/{memberId}")
-	public String amendmemberPOST(@PathVariable("memberId") String memberId, UserVO userVO) {
+	public String amendmemberPOST(@PathVariable("memberId") String memberId, UserVO userVO, RedirectAttributes rttr) {
 
 		log.info("amend post--------------------------------------------" + userVO);
 		
-		userService.amend(userVO);
+		int result = userService.amend(userVO);
+		
+		log.info("result: " + result);
+		
+		if (result == 1) {
+			rttr.addFlashAttribute("msg", "amend-success");
+		} else {
+			rttr.addFlashAttribute("msg", "amend-fail");
+		}
 		
 		return "redirect:/mypage/memberdetail";
 	}

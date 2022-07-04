@@ -61,12 +61,15 @@
 											</div>
 											<h3 th:text="${user.member_name}">김한솔</h3> <p th:text="${'(' + user.member_id + ')'}">(hansol)</p>
 											<input type="hidden" th:value="${user.member_id}" name="member_id" id="member_id">
+											<input type="hidden" name="profile_name"/>
+											<input type="hidden" name="profile_uuid"/>
+											<input type="hidden" name="profile_path"/>
 											<!-- <small>여</small> -->
 										</div>
 										<div class="form-group">
 											<div class="filebox">
 												<label for="ex_filename">프로필 편집</label> 
-												<input type="file" id="ex_filename" name="uploadFile" class="upload-hidden" />
+												<input type="file" id="ex_filename" name="uploadFile" class="upload-hidden"  accept=".gif, .jpg, .png" />
 											</div>
 										</div>
 										<hr>
@@ -148,9 +151,9 @@
 	
 $(document).ready(function(){
 		
-	function loadSwal(text) {
+	function loadSwal(type, text) {
 		Swal.fire({
-			  icon: 'error',
+			  icon: type,
 			  text: text
 		})
 	}
@@ -173,7 +176,7 @@ $(document).ready(function(){
      // 전화번호 작성여부 확인 & 중간에 '-' 표시 넣기
 		if (memberCall == "") {
 			
-			loadSwal('전화번호를 작성 해주세요.');
+			loadSwal('error', '전화번호를 작성 해주세요.');
 			
   			return;
 			
@@ -182,7 +185,7 @@ $(document).ready(function(){
      	// email 작성여부 확인 & 형식에 맞게 작성했는지 확인
 		if (memberEmail == "") {
 			
-			loadSwal('이메일을 작성 해주세요.');
+			loadSwal('error', '이메일을 작성 해주세요.');
 			
   			return;
 			
@@ -191,7 +194,7 @@ $(document).ready(function(){
 		// 회사, 직급 선택여부 확인
 		if (affiliates.val() == 0 || position.val() == 0) {
 					
-			loadSwal('회사/직급 정보를 선택 해주세요.');
+			loadSwal('error', '회사/직급 정보를 선택 해주세요.');
 			
   			return;
 			
@@ -211,9 +214,19 @@ $(document).ready(function(){
         const form = $('#uploadForm')[0];
         const formData = new FormData(form);
         
+        const profileName = $('input[name=profile_name]');
+        const profileUUID = $('input[name=profile_uuid]');
+        const profilePath = $('input[name=profile_path]');
+        
         formData.append("uploadFile", uploadFile);
         
         console.log(uploadFile);
+        console.log(uploadFile.type);
+        
+        if (!(uploadFile.type == "image/png" || uploadFile.type == "image/jpeg" || uploadFile.type == "image/jpg" || uploadFile.type == "image/gif")) {
+        	loadSwal('error', '이미지 파일만 업로드 하실 수 있습니다.');
+        	return;
+        }
         
         $.ajax({
 			type: "post",
@@ -236,6 +249,11 @@ $(document).ready(function(){
 				console.log('profileURL: ', profileURL);
 				
 				$('.profile-img').attr("src", profileURL);
+				
+				profileName.val(data.profile_name);
+				profileUUID.val(data.profile_uuid);
+				profilePath.val(uploadPath);
+				
 			}
         });
 	});
