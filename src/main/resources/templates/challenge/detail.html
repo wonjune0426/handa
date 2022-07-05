@@ -80,7 +80,7 @@
 										<p class="price" th:if="${challengeDetail.challenge_type}=='무료'">무료 챌린지</p>
 										<p class="price" th:if="${challengeDetail.challenge_type}=='유료'">유료 챌린지</p>
 									</div>
-									<button class="btn challenge-join-btn">참여하기</button>
+									<button id="challenge-join" class="btn challenge-join-btn">참여하기</button>
 								</div>
 							</div>
 
@@ -96,7 +96,10 @@
 								<p class="join-member-text">
 									참여 인원 <span class="join-member-num">([[${challengeDetail.count}]]명)</span>
 								</p>
+
 								<div th:each="joinMembers:${joinMembers}" class="ch-j-detail-div">
+									<input id="join_memberid" th:value="${joinMembers.member_id}"
+										style="display: none;">
 									<p class="ch-j-detail">
 										<i alt="" class="ch-user-icon fa-solid fa-user"></i>
 									</p>
@@ -174,19 +177,19 @@
 		<section class="service-details" style="padding: 0;">
 			<br> <br> <br>
 			<div class="container aos-init aos-animate" data-aos="fade-up">
-				<div class="row gy-4">
+				<div class="row gy-4" id="comment-input">
 					<div class="row ch-comment-input-content">
 						<div class="col-lg-12">
 							<p id="comment">댓글 작성하기</p>
 							<div class="form-group mt-3">
-								<textarea class="form-control" name="message" rows="3" placeholder="댓글을 작성하세요."
-									required=""></textarea>
+								<textarea id="comment_content" class="form-control" name="message" rows="3"
+									placeholder="댓글을 작성하세요." required=""></textarea>
 							</div>
 						</div>
 						<div class="col-lg-12">
 							<div class="form-group mt-3">
 								<div class="text-right ch-comment-create-div">
-									<button type="submit" class="comment-btn">작성하기</button>
+									<button id="commentWrite" type="button" class="comment-btn">작성하기</button>
 								</div>
 							</div>
 						</div>
@@ -202,18 +205,20 @@
 				<div class="row  d-flex justify-content-center comment-content">
 					<div class="col-md-12">
 						<div class="headings d-flex justify-content-between align-items-center mb-3">
-							<h5>댓글(4)</h5>
+							<h5 id="comment-count">댓글</h5>
 						</div>
 
 						<!-- --------------댓글 목록 부분------------ -->
 						<!-- 댓글 card 시작 -->
 						<div id="card-list">
-						
+
 						</div>
 						<!-- 댓글 card 끝 -->
 					</div>
 				</div>
 				<br> <br>
+				<input type="hidden" class="form-control price" name="member_id"
+					th:value='${#authentication.principal.Username}' readonly>
 				<div class="ch-detail-to-list-btn" style="display: none;">
 					<a th:href="@{/list?sortType=0}" class="comment-btn">목록</a>
 				</div>
@@ -228,23 +233,40 @@
 	<script th:inline="javascript">
 		$(document).ready(function () {
 			/*<![CDTATA[*/
-			var challenge_id =/*[[${challengeDetail.challenge_id}]]*/
+			var challenge_id =/*[[${challengeDetail.challenge_id}]]*/;
+				joinMembers =/*[[${joinMembers}]]*/;
 				/*]]>*/
+			var login_memberId=$("input[name='member_id']").val()
 
-				$.ajax({
-					url: "/comment?challenge_id=" + challenge_id,
-					method: "GET",
-					//////////////////// recv
-					success: function (result) {
-						for (var i = 0; i < result.commentList.length; i++) {
-							var position=""
-							if(result.memberList[i].position_id==1){
-								position="수석"
-							}else if(result.memberList[i].position_id==1){
-								position="책임"
-							}else if(result.memberList[i].position_id==1){
-								position="선임"
-							}
+
+			for(var i=0;i<joinMembers.length;i++){
+				if(joinMembers[i].member_id==login_memberId){
+					$("#challenge-join").css("display","none")
+					$("#comment-input").css("display","block")
+					break;
+				}else{
+					$("#challenge-join").css("display","block")
+					$("#comment-input").css("display","none")
+				}
+			}
+
+			$.ajax({
+				url: "/comment?challenge_id=" + challenge_id,
+				method: "GET",
+				//////////////////// recv
+				success: function (result) {
+					$("#comment-count").append(`(` + result.commentList.length + `)`)
+					for (var i = 0; i < result.commentList.length; i++) {
+						var position;
+						if (result.memberList[i].position_id == 1) {
+							position = "수석"
+						} else if (result.memberList[i].position_id == 2) {
+							position = "책임"
+						} else if (result.memberList[i].position_id == 3) {
+							position = "선임"
+						}
+
+						if (result.memberList[i].member_id == login_memberId) {
 							$("#card-list").append(
 								`<div class="card p-3 mt-2">
 										<div class="d-flex justify-content-between align-items-center">
@@ -252,16 +274,16 @@
 												<img src="https://i.imgur.com/hczKIze.jpg" width="30"
 														class="user-img rounded-circle mr-2"> 
 													<span> 
-														<small class="font-weight-bold text-primary">`+result.memberList[i].member_name+`</small>
-														<small class="font-weight-bold">`+position+`</small>
+														<small class="font-weight-bold text-primary">`+ result.memberList[i].member_name + `</small>
+														<small class="font-weight-bold">`+ position + `</small>
 														<div>
-														<small class="font-weight-bold">`+result.commentList[i].comment_content+`</small>
+														<small class="font-weight-bold">`+ result.commentList[i].comment_content + `</small>
 														</div>
 													</span>
 											</div>
-											<small>2022.06.14</small>
+											<small>`+ result.commentList[i].createdate + `</small>
 										</div>
-										<div class="action d-flex justify-content-between mt-2 align-items-center">
+									<div class="action d-flex justify-content-between mt-2 align-items-center">
 												<div class="reply px-4">
 													<small>수정하기</small> 
 														<span class="dots"></span> 
@@ -270,13 +292,87 @@
 										</div>
 									</div>`
 							)
+						} else {
+							$("#card-list").append(
+								`<div class="card p-3 mt-2">
+										<div class="d-flex justify-content-between align-items-center">
+											<div class="user d-flex flex-row align-items-center">
+												<img src="https://i.imgur.com/hczKIze.jpg" width="30"
+														class="user-img rounded-circle mr-2"> 
+													<span> 
+														<small class="font-weight-bold text-primary">`+ result.memberList[i].member_name + `</small>
+														<small class="font-weight-bold">`+ position + `</small>
+														<div>
+														<small class="font-weight-bold">`+ result.commentList[i].comment_content + `</small>
+														</div>
+													</span>
+											</div>
+											<small>`+ result.commentList[i].createdate + `</small>
+										</div>
+									</div>`
+							)
 						}
+					}
+				},
+				error: function (xhr, status, error) { // (파라미터 생략가능)
+					alert("error");
+				}
+				////////////////////
+			})
+
+
+
+			//참여하기 버튼
+			$("#challenge-join").click(function () {
+				$.ajax({
+					url: "/challenge/member",
+					method: "POST",
+					data: {
+						member_id: $("input[name='member_id']").val(),
+						challenge_id: challenge_id
+					},
+					//////////////////// recv
+					success: function () {
+						location.reload();
 					},
 					error: function (xhr, status, error) { // (파라미터 생략가능)
 						alert("error");
 					}
 					////////////////////
 				})
+
+			})
+
+			var comment_ajax = function () {
+				$.ajax({
+					url: "/comment",
+					method: "POST",
+					data: {
+						member_id: login_memberId,
+						challenge_id: challenge_id,
+						comment_content: $("#comment_content").val()
+					},
+					//////////////////// recv
+					success: function () {
+						location.reload();
+					},
+					error: function (xhr, status, error) { // (파라미터 생략가능)
+						alert("error");
+					}
+					////////////////////
+				})
+			}
+
+			//댓글 입력
+			$("#commentWrite").click(function () {
+				comment_ajax();
+			})
+			$("#comment_content").keydown(function (key) {
+				if (key.keyCode == 13) {
+					comment_ajax();
+				}
+			})
+
 
 			//url 공유하기 버튼 클릭
 			$(".share-link").on("click", function (e) {

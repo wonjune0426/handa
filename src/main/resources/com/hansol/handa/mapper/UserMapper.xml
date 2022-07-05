@@ -34,7 +34,7 @@
 	
 	<select id="joinMembers" resultType="UserVO">
 		SELECT * FROM member 
-		WHERE member_id=
+		WHERE member_id IN
 		(SELECT member_id FROM challenge_join WHERE challenge_id=#{challenge_id})
 	</select>
 	
