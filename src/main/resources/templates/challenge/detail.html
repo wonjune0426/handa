@@ -233,8 +233,8 @@
 	<script th:inline="javascript">
 		$(document).ready(function () {
 			/*<![CDTATA[*/
-			var challenge_id =/*[[${challengeDetail.challenge_id}]]*/;
-				joinMembers =/*[[${joinMembers}]]*/;
+			let challenge_id =/*[[${challengeDetail.challenge_id}]]*/'default';
+				joinMembers =/*[[${joinMembers}]]*/'default';
 				/*]]>*/
 			var login_memberId=$("input[name='member_id']").val()
 
