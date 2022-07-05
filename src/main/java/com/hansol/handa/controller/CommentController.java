@@ -1,5 +1,10 @@
 package com.hansol.handa.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,17 +14,30 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hansol.handa.domain.CommentVO;
+import com.hansol.handa.domain.UserVO;
 import com.hansol.handa.service.CommentService;
+import com.hansol.handa.service.UserService;
 
 @Controller
 public class CommentController {
 	
 	@Autowired
 	private CommentService commentService;
-	
+	@Autowired
+	private UserService userService;
+//댓글 조회
 	@GetMapping("/comment")
-	public @ResponseBody void getComment(@RequestParam(required = true) int challenge_id,Model model) {
-		model.addAttribute("comments",commentService.getComment(challenge_id));
+	public @ResponseBody Map<String,Object> getComment(@RequestParam(required = true) int challenge_id) {
+		Map<String,Object> returnMap=new HashMap<>();
+		List<CommentVO> commentList=commentService.getComment(challenge_id);
+		List<UserVO> memberList=new ArrayList<>();
+		for(CommentVO c:commentList) {
+			memberList.add(userService.read(c.getMember_id()));
+		}
+		returnMap.put("commentList", commentList);
+		returnMap.put("memberList", memberList);
+		
+		return returnMap;
 	}
 	
 // 댓글 작성

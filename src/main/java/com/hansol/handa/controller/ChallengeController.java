@@ -25,10 +25,11 @@ import com.hansol.handa.service.ChallengeService;
 import com.hansol.handa.service.UserService;
 
 import ch.qos.logback.classic.Logger;
+import lombok.RequiredArgsConstructor;
 
 @Controller
 public class ChallengeController {
-
+	
 	@Autowired
 	private ChallengeService challengeService;
 	@Autowired
@@ -142,6 +143,7 @@ public class ChallengeController {
 		ChallengeVO challengeVO=challengeService.detailChallenge(challenge_id);
 		model.addAttribute("challengeDetail",challengeVO);
 		model.addAttribute("createMember",userService.read(challengeVO.getMember_id()));
+		model.addAttribute("joinMembers",userService.joinMembers(challengeVO.getChallenge_id()));
 		return "challenge/detail";
 	}
 

@@ -5,7 +5,9 @@
 <mapper namespace="com.hansol.handa.mapper.CommentMapper">
 	
 	<select id="getComment" resultType="CommentVO">
-		select * from comment where challenge_id=#{challenge_id}
+		select *
+		from comment
+		where challenge_id=#{challenge_id}
 	</select>
 	
 	<insert id="createComment" parameterType="CommentVO">

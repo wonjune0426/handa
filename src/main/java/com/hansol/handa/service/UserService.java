@@ -1,5 +1,7 @@
 package com.hansol.handa.service;
 
+import java.util.List;
+
 import com.hansol.handa.domain.UserVO;
 
 public interface UserService {
@@ -11,4 +13,6 @@ public interface UserService {
 	UserVO read(String member_id);
 	
 	int amend(UserVO userVO);
+	
+	List<UserVO> joinMembers(int challenge_id);
 }

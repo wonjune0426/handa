@@ -32,4 +32,10 @@
 			member_id = #{member_id}
 	</update>
 	
+	<select id="joinMembers" resultType="UserVO">
+		SELECT * FROM member 
+		WHERE member_id=
+		(SELECT member_id FROM challenge_join WHERE challenge_id=101)
+	</select>
+	
 </mapper>
