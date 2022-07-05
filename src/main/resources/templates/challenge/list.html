@@ -44,8 +44,8 @@
 			<div class="container" data-aos="fade-up">
 
 				<div class="section-header">
-					 <span>챌린지 리스트</span>
-          			 <h2>챌린지 리스트</h2>
+<!-- 					 <span>챌린지 리스트</span>
+          			 <h2>챌린지 리스트</h2> -->
 				</div>
 
 				<div class="row gy-4">
@@ -83,13 +83,12 @@
 									class="btn btn-primary handa-outline-btn list-search-btn">검색</button>
 							</form>
 						</div>
-						<div class="col-md-12"></div>
+						<div id ="list-container" class="col-md-12"></div>
 
 							<!-- 챌린지 리스트 -->
-							<div id="list-container" class="row gy-4">
-							</div> 
+							<!-- <div id = "list-container" class="row gy-4"></div> -->
 							
-							<div id="end-list"></div>
+							<div id="end"></div>
 						</div>
 					</div>
 				</div>
@@ -102,23 +101,17 @@
 <th:block layout:fragment="javascript">
 	<script src='../assets/js/infiniteScroll.js'></script>
 	<script th:inline="javascript">
-		/*<![CDATA[*/
-		// 전체 리스트를 받고 리스트를 21개씩 화면에 보여주고 스크롤이 끝나면 추가로 그려줌
-
-		// 카드 담는 객체
-		const $cardContainer = document.querySelector('.list-container');
-		/*]]>*/
 		
 		$(document).ready(function(){
-			var category = "[[${categoryID}]]";		// 카테고리 ID
-			var sortType = "[[${sortType}]]";		// 정렬 타입
-			var createdate = "0";
+			var category = "[[${categoryID}]]";				// 카테고리 ID
+			var sortType = "[[${sortType}]]";				// 정렬 타입
+			var createdate = "0000-00-00 00:00:00";
 			var count = "0";
+			
+			if(category == "null") category = "0"; 			// 전체 조회의 경우
+			if(sortType == "null") sortType = "0"; 			// 정렬 타입 주어지지 않은 경우
 				
-			if(category == "null") category = "0"; 	// 전체 조회의 경우
-			if(sortType == "null") sortType = "0"; 	// 정렬 타입 주어지지 않은 경우
-				
-			getList(category, sortType, createdate, count);
+			infiniteScroll(category, sortType, createdate, count);
 		}); 
 		
 	</script>

@@ -93,8 +93,10 @@ render();
 */
 //var categoryID;
 //var sortTypeID;
+var challengeList = null;
+var challengeCount = null;
 
-function getList(category, sortType, createdate, count){
+function getList(element, category, sortType, createdate, count){
 	//categoryID = category;
 	//sortTypeID = sortType;
 	
@@ -110,11 +112,14 @@ function getList(category, sortType, createdate, count){
 		},  
 		contentType : 'application/json',
 		success: function(res){
-			const challengeList = res['challengeList'];
+			challengeList = res['challengeList'];
+			challengeCount = res['challengeCount'];
+			
 			const subCategoryName = res['subCategoryName'];
 
 			var data = "";
-						
+			data += "<div class='row gy-4'>";
+				
 			for(var i = 0; i < challengeList.length; i++){
 				data += "<div class='card-container col-lg-4 col-md-6' data-aos='fade-up' data-aos-delay='100'>";
 				data += "<div class='card challenge-item'>";
@@ -133,22 +138,24 @@ function getList(category, sortType, createdate, count){
 				data += "</h3>";
 		
 				data += "<p id='card-p'>" + challengeList[i]['startdate'] + " ~ " + challengeList[i]['enddate'] + "</p>";
-				data += "<p id='card-p'> 참여인원 " + challengeList[0]['joinVO']['count'] + "명 </p>";
+				data += "<p id='card-p'> 참여인원 " + challengeList[i]['joinVO']['count'] + "명 </p>";
 							
 				data += "<div class='state'>";
 				data += "<div class='open-dt'>" + challengeList[i]['createdate'].split(" ", 1) + " 생성 </div>"; 
 				data +=	"<div class='state-label'>" + challengeList[i]['challenge_state'] + "</div>";
 				data += "</div>";
 								
-				data += "<div id ='endlist'></div>";
 				data += "</div>";
 							
 				data += "</div>";
-				data += "</div>"; 
-
+				//data += "</div>";
 			}
-			
-			$("#list-container").html(data);		
+			data += "</div>";
+			data += "<div id ='end-list' class='row gy-4'></div>";
+				 
+			//$("#list-container").html(data);
+			$(element).html(data);
+			$(element).attr('id', 'list-container');	
 		},
 		error: function(){
 			alert('실패!');
@@ -156,11 +163,27 @@ function getList(category, sortType, createdate, count){
 	});
 }
 
-//window.onload = function(){
-	//const $listEnd = document.querySelector('#end-list');
-	//const observer = new IntersectionObserver(entries => {
-	//	getList(categoryID, sortTypeID, "2022-07-04 11:19:14", '1');
-	//})
+function infiniteScroll(category, sortType, createdate, count){
+	var page = 0;
+	var challenge = 12;
+	
+	const $listEnd = document.querySelector('#end');
+	const observer = new IntersectionObserver((entries) => {
+		if(page < 1){
+			getList("#list-container", category, sortType, createdate, count);
+		}else{
+			var pageTotal = (challengeCount % challenge == 0 ? challengeCount / challenge : hallengeCount / challenge + 1);
+			
+			if(page != pageTotal){
+				var length = challengeList.length;
+				
+				getList("#end-list", category, sortType, challengeList[length-1]['createdate'], challengeList[length-1]['count']);
+			}
+			else				
+				$('#end').hide();
+		}
+		page++;
+	})
 
-	//observer.observe($listEnd)
-//}
+	observer.observe($listEnd);
+}

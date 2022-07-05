@@ -90,17 +90,22 @@ public class ChallengeController {
 			@RequestParam(required = false) String createdate, @RequestParam(required = false) String count, Model model) {
 	
 		HashMap<String, Object> map = new HashMap<>();
+		int challengeCount = 0;
 		
 		if(!category.equals("0")){	// 카테고리 별 조회의 경우
 			int categoryID = Integer.parseInt(category);  
 			Map<String, String> categoryName = challengeService.selectCategoryName(categoryID);
-
+			challengeCount = challengeService.selectCount(categoryID);
+			
 			map.put("subCategoryName", categoryName.get("sub_category_name")); 
 		}
+		else challengeCount = challengeService.selectCount(0);
 		
 		List<ChallengeVO> challengeList = challengeService.selectChallegeList(category, sortType, createdate, count);
 		map.put("challengeList", challengeList);
 
+		map.put("challengeCount", challengeCount);
+		
 		return map;
 	}
 	

@@ -36,17 +36,17 @@
 			<choose>
 				<!-- 최신순 -->
 				<when test="sortType == 0">	
-					<if test="createdate != 0">  <![CDATA[ AND createdate < to_char(#{createdate}, "%Y-%m-%d %h:%i:%s")  ]]> </if>
+					<if test="createdate != '0000-00-00 00:00:00'"><![CDATA[ AND createdate < #{createdate} ]]></if>
 					GROUP BY challenge.challenge_id order by createdate DESC LIMIT 12;
 				</when>
 				<!-- 오래된순 -->
 				<when test="sortType == 1">
-					<if test="createdate != 0"> AND createdate > #{createdate}</if>
+					<if test="createdate != '0000-00-00 00:00:00'"> AND createdate > #{createdate}</if>
 					GROUP BY challenge.challenge_id order by createdate ASC LIMIT 12;
 				</when>
 				<!-- 참여인원 순 -->
 				<when test="sortType == 2"> 
-					<if test="count != 0">AND if(#{count} = '1', COUNT &gt; 2 and createdate &gt; #{createdate}, count &gt; #{count})</if>
+					<if test="count != 0"><![CDATA[ AND if(#{count} = '1', count < 2 and createdate < #{createdate}, count < #{count})]]></if>
 					GROUP BY challenge.challenge_id order by count desc, createdate DESC LIMIT 12;
 				</when>
 			</choose>
@@ -64,17 +64,17 @@
 			<choose>
 				<!-- 최신순 -->
 				<when test="sortType == 0">
-					<if test="createdate != 0"> AND createdate &gt; #{createdate} </if>
+					<if test="createdate != '0000-00-00 00:00:00'"><![CDATA[ AND createdate < #{createdate} ]]></if>
 					GROUP BY challenge.challenge_id order by createdate DESC LIMIT 12;
 				</when>
 				<!-- 오래된순 -->
 				<when test="sortType == 1">
-					<if test="createdate != 0"> AND createdate > #{createdate}</if>
+					<if test="createdate != '0000-00-00 00:00:00'"> AND createdate > #{createdate}</if>
 					GROUP BY challenge.challenge_id order by createdate ASC LIMIT 12;
 				</when>
 				<!-- 참여인원 순 -->
 				<when test="sortType == 2"> 
-					<if test="count != 0">AND if(#{count} = '1', COUNT &gt; 2 and createdate &gt; #{createdate}, count &gt; #{count})</if>
+					<if test="count != 0"><![CDATA[ AND if(#{count} = '1', COUNT < 2 and createdate < #{createdate}, count < #{count})]]></if>
 					GROUP BY challenge.challenge_id order by count desc, createdate DESC LIMIT 12;
 				</when>
 			</choose>
@@ -84,6 +84,13 @@
 	<select id="selectCategoryName" parameterType="int" resultType="map">
 		select sub_category.sub_category_name, main_category.main_category_name FROM sub_category, main_category 
 			WHERE sub_category_id = #{subcategory_id} AND sub_category.main_category_id = main_category.main_category_id;
+	</select>
+	
+	<!-- 챌린지 개수 조회 -->
+	<select id="selectCount" parameterType="int" resultType="int">
+		SELECT COUNT(*) AS count
+		FROM challenge
+		<if test="sub_category_id != 0">WHERE subcategory_id = #{sub_category_id};</if>
 	</select>
 	
 	<insert id="createChallenge" parameterType="ChallengeVO"
