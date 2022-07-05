@@ -15,7 +15,7 @@
 		<result column="thumbnail" property="thumbnail"></result>
 		<result column="startdate" property="startdate"></result>
 		<result column="enddate" property="enddate"></result>
-		<result column="createdatetime" property="createdate"></result>
+		<result column="createdate" property="createdate"></result>
 		<result column="member_id" property="member_id"></result>
 		<result column="subcategory_id" property="subcategory_id"></result>
 		<result column="challenge_type" property="challenge_type"></result>
@@ -25,38 +25,59 @@
 	
 	<!-- 전체 챌린지 리스트 조회 -->
 	<select id="selectChallengeList" parameterType="hashmap" resultMap="challengeMap">
-			SELECT challenge.challenge_id, challenge_name, thumbnail, startdate, enddate,  
-				date(createdate) AS createdatetime, challenge.member_id, subcategory_id, challenge_type, COUNT(*) as COUNT, sub_category_name  
-			from challenge, challenge_join, sub_category
-				WHERE challenge.challenge_id = challenge_join.challenge_id AND challenge.subcategory_id = sub_category.sub_category_id
-					GROUP BY challenge.challenge_id order by 
-				<choose>
-					<when test="sortCriteria == 'createdate'">createdate</when>
-					<when test="sortCriteria == 'count'">count</when>
-				</choose>
-				
-				<choose>
-					<when test="order == 'desc'">desc</when>
-					<when test="order == 'asc'">asc</when>
-				</choose>
+
+		SELECT challenge.challenge_id, challenge_name, thumbnail, startdate, enddate,  
+				createdate, challenge.member_id, subcategory_id, challenge_type, count, sub_category_name 
+		from challenge, sub_category, (SELECT challenge.challenge_id, COUNT(*) as count  
+										from challenge, challenge_join
+										WHERE challenge.challenge_id = challenge_join.challenge_id
+										GROUP BY challenge.challenge_id) count_table
+		WHERE challenge.subcategory_id = sub_category.sub_category_id AND challenge.challenge_id = count_table.challenge_id
+			<choose>
+				<!-- 최신순 -->
+				<when test="sortType == 0">	
+					<if test="createdate != 0">  <![CDATA[ AND createdate < to_char(#{createdate}, "%Y-%m-%d %h:%i:%s")  ]]> </if>
+					GROUP BY challenge.challenge_id order by createdate DESC LIMIT 12;
+				</when>
+				<!-- 오래된순 -->
+				<when test="sortType == 1">
+					<if test="createdate != 0"> AND createdate > #{createdate}</if>
+					GROUP BY challenge.challenge_id order by createdate ASC LIMIT 12;
+				</when>
+				<!-- 참여인원 순 -->
+				<when test="sortType == 2"> 
+					<if test="count != 0">AND if(#{count} = '1', COUNT &gt; 2 and createdate &gt; #{createdate}, count &gt; #{count})</if>
+					GROUP BY challenge.challenge_id order by count desc, createdate DESC LIMIT 12;
+				</when>
+			</choose>
 	</select>
 	
 	<!-- 카테고리 별 리스트 조회 -->
 	<select id="selectChallegeListCategory" parameterType="hashmap" resultMap="challengeMap">
-		SELECT challenge.challenge_id, challenge_name, thumbnail, startdate, enddate, 
-			date(createdate) AS createdatetime, challenge.member_id, subcategory_id, challenge_type, COUNT(*) as count  
-		from challenge, challenge_join 
-			WHERE challenge.challenge_id = challenge_join.challenge_id and subcategory_id = #{subcategory_id}
-				GROUP BY challenge.challenge_id order by 
-				<choose>
-					<when test="sortCriteria == 'createdate'">createdate</when>
-					<when test="sortCriteria == 'count'">count</when>
-				</choose>
-				
-				<choose>
-					<when test="order == 'desc'">desc</when>
-					<when test="order == 'asc'">asc</when>
-				</choose>
+		SELECT challenge.challenge_id, challenge_name, thumbnail, startdate, enddate,  
+				createdate, challenge.member_id, subcategory_id, challenge_type, count, sub_category_name 
+		from challenge, sub_category, (SELECT challenge.challenge_id, COUNT(*) as count  
+										from challenge, challenge_join
+										WHERE challenge.challenge_id = challenge_join.challenge_id
+										GROUP BY challenge.challenge_id) count_table
+		WHERE challenge.subcategory_id = sub_category.sub_category_id AND challenge.challenge_id = count_table.challenge_id AND subcategory_id = #{subcategory_id}
+			<choose>
+				<!-- 최신순 -->
+				<when test="sortType == 0">
+					<if test="createdate != 0"> AND createdate &gt; #{createdate} </if>
+					GROUP BY challenge.challenge_id order by createdate DESC LIMIT 12;
+				</when>
+				<!-- 오래된순 -->
+				<when test="sortType == 1">
+					<if test="createdate != 0"> AND createdate > #{createdate}</if>
+					GROUP BY challenge.challenge_id order by createdate ASC LIMIT 12;
+				</when>
+				<!-- 참여인원 순 -->
+				<when test="sortType == 2"> 
+					<if test="count != 0">AND if(#{count} = '1', COUNT &gt; 2 and createdate &gt; #{createdate}, count &gt; #{count})</if>
+					GROUP BY challenge.challenge_id order by count desc, createdate DESC LIMIT 12;
+				</when>
+			</choose>
 	</select>
 	 
 	<!-- 카테고리 이름 조회 -->

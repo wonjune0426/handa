@@ -82,7 +82,9 @@
 							<!-- 챌린지 리스트 -->
 							<div id="list-container" class="row gy-4">
 							</div> 
-
+							
+							<div id="end-list"></div>
+							
 						</div>
 					</div>
 				</div>
@@ -95,73 +97,19 @@
 	<th:block layout:fragment="javascript">   
 		<script src='../assets/js/infiniteScroll.js'></script>
 		<script th:inline='javascript'>
-			//$(function(){
+		
 			$(document).ready(function(){
-				console.log("asdasd");
 				var category = "[[${categoryID}]]";		// 카테고리 ID
 				var sortType = "[[${sortType}]]";		// 정렬 타입
+				var createdate = "0";
+				var count = "0";
 				
 				if(category == "null") category = "0"; 	// 전체 조회의 경우
 				if(sortType == "null") sortType = "0"; 	// 정렬 타입 주어지지 않은 경우
 				
-				//alert(category + sortType);
-				
-				$.ajax({
-					type : 'GET',
-					url : '/challenge-list',
-					dataType : 'json',
- 					data:{
-						category: category, 
-						sortType: sortType
-					},  
-					contentType : 'application/json',
-					success: function(res){
-						const challengeList = res['challengeList'];
-						const subCategoryName = res['subCategoryName'];
-
-						var data = "";
-						
-						for(var i = 0; i < challengeList.length; i++){
-								data += "<div class='card-container col-lg-4 col-md-6' data-aos='fade-up' data-aos-delay='100'>";
-								data += "<div class='card challenge-item'>";
-								data += "<div class='card-img'>";
-								data +=	"<img src='" + challengeList[i]['thumbnail'] + "' alt='' class='img-fluid challenge-thumbnail'>";
-								data += "</div>";
-
-								
-								data += "<h3>";
-								
-								if(subCategoryName != null){
-									data += "<a href='/detail' class='stretched-link'>[" + subCategoryName + "] " + challengeList[i]['challenge_name'] + "</a>";
-								}else {
-									data += "<a href='/detail' class='stretched-link'>[" + challengeList[i]['subcategory_name'] + "] " + challengeList[i]['challenge_name'] + "</a>";
-								}
-								
-								data += "</h3>";
-		
-								data += "<p id='card-p'>" + challengeList[i]['startdate'] + " ~ " + challengeList[i]['enddate'] + "</p>";
-								data += "<p id='card-p'> 참여인원 " + challengeList[0]['joinVO']['count'] + "명 </p>";
-								
-								data += "<div class='state'>";
-								data += "<div class='open-dt'>" + challengeList[i]['createdate'] + " 생성 </div>"; 
-								data +=	"<div class='state-label'>" + challengeList[i]['challenge_state'] + "</div>";
-								data += "</div>";
-								
-								data += "<div id ='endList'></div>";
-								data += "</div>";
-								
-								data += "</div>";
-								data += "</div>"; 
-
-						}
-						$("#list-container").html(data);
-						
-					},
-					error: function(){
-						alert('실패!');
-					}
-				});
+				getList(category, sortType, createdate, count);
 			}); 
+			
 		</script>
 	</th:block>
 </html>
