@@ -56,8 +56,15 @@
 									<div class="row">
 									
 										<div class="form-group mt-3">
-											<div class="profile-img-div">											
-												<img alt="프로필 이미지" class="profile-img" th:src="@{/assets/img/user.png}">
+											<div class="profile-img-div">	
+											
+												<img alt="프로필 이미지" class="profile-img" 
+												th:if="${not #strings.isEmpty(user.profile_name)}"
+												th:src="|${'/viewFile?fname=' + user.profile_path + '/' + user.profile_uuid + '_' + user.profile_name}|">
+												
+												<img alt="프로필 이미지" class="profile-img" 
+												th:unless="${not #strings.isEmpty(user.profile_name)}"
+												th:src="@{/assets/img/user.png}">
 											</div>
 											<h3 th:text="${user.member_name}">김한솔</h3> <p th:text="${'(' + user.member_id + ')'}">(hansol)</p>
 											<input type="hidden" th:value="${user.member_id}" name="member_id" id="member_id">
@@ -124,7 +131,7 @@
 												</tr>
 											</table>
 										</div>
-
+										<!-- <input type="text" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" /> --> 
 									</div>
 									<div class="text-center login-btn-div">
 										<button type="submit">정보수정</button>
@@ -138,8 +145,7 @@
 				</div>
 			</section>
 			<!-- End Services Section -->
-
-			<form th:action="@{/upload}" method="post" enctype="multipart/form-data" id="uploadForm">
+			<form action="" method="post" enctype="multipart/form-data" id="uploadForm">
 			</form>
 		</main>
 		<!-- End #main -->
@@ -150,6 +156,9 @@
 <script>
 	
 $(document).ready(function(){
+	
+/* 	var token = $("meta[name='_csrf']").attr("content");
+	var header = $("meta[name='_csrf_header']").attr("content"); */
 		
 	function loadSwal(type, text) {
 		Swal.fire({
@@ -209,6 +218,8 @@ $(document).ready(function(){
 	
 	$("#ex_filename").change(function(){
 		
+		console.log('버튼 동작확인');	// 로그 찍힘
+		
 		const uploadFile = $('input[name=uploadFile]')[0].files[0];
         
         const form = $('#uploadForm')[0];
@@ -220,8 +231,8 @@ $(document).ready(function(){
         
         formData.append("uploadFile", uploadFile);
         
-        console.log(uploadFile);
-        console.log(uploadFile.type);
+        console.log(uploadFile); // 로그 찍힘
+        console.log(uploadFile.type); // 로그 찍힘
         
         if (!(uploadFile.type == "image/png" || uploadFile.type == "image/jpeg" || uploadFile.type == "image/jpg" || uploadFile.type == "image/gif")) {
         	loadSwal('error', '이미지 파일만 업로드 하실 수 있습니다.');
@@ -229,11 +240,16 @@ $(document).ready(function(){
         }
         
         $.ajax({
-			type: "post",
-			url: "/upload",
+			type: "POST",
+			url: "/uploadFile",
 			data: formData,
+			dataType: "json",
 			contentType: false,
 			processData: false,
+/* 			beforeSend : function(xhr)
+            {   //데이터를 전송하기 전에 헤더에 csrf값을 설정한다
+				xhr.setRequestHeader(header, token);
+            }, */
 			success: function (data) {
 				console.log(data);
 				console.log(data.profile_uuid);
@@ -254,6 +270,9 @@ $(document).ready(function(){
 				profileUUID.val(data.profile_uuid);
 				profilePath.val(uploadPath);
 				
+			},
+			error: function (request,status,error) {
+				console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}
         });
 	});

@@ -76,6 +76,7 @@ public class UserController {
 			int result = userService.register(userVO);
 			
 			rttr.addFlashAttribute("msg", "register-success");
+			rttr.addFlashAttribute("memberId", userVO.getMember_id());
 
 			log.info("가입 성공-----------------------------");
 
