@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/layout}">
-	
+
 <!-- include CSS File -->
 <th:block layout:fragment="css">
 	<!-- Handa Challenge CSS File -->
@@ -30,9 +29,10 @@
 					<ol>
 						<li><a th:href="@{/list}">홈</a></li>
 						<li>챌린지 리스트</li>
+
 						<!-- 카테고리 조회일 경우에만 표시 -->
 						<li th:if="${not #strings.isEmpty(mainCategoryName)}" th:text=${mainCategoryName}></li>
-						<li th:if="${not #strings.isEmpty(subCategoryName)}"th:text=${subCategoryName}></li>
+						<li th:if="${not #strings.isEmpty(subCategoryName)}" th:text=${subCategoryName}></li>
 					</ol>
 				</div>
 			</nav>
@@ -54,37 +54,42 @@
 					</div>
 					<div class="row gy-4">
 						<div class="btn-group order-div col-2">
-							<select class="form-control handa-list-select" onchange="if(this.value) location.href=(this.value);">
+							<select class="form-control handa-list-select"
+								onchange="if(this.value) location.href=(this.value);">
 								<th:block th:if="${#strings.isEmpty(isCategory)} or ${!isCategory}">
-									<option th:value="@{/list?sortType=0}" th:text="최신순" th:selected="${sortType} == '0'"></option>
-									<option th:value="@{/list?sortType=1}" th:text="오래된순" th:selected="${sortType} == '1'"></option>
-									<option th:value="@{/list?sortType=2}" th:text="참여인원순" th:selected="${sortType} == '2'"></option>
+									<option th:value="@{/list?sortType=0}" th:text="최신순"
+										th:selected="${sortType} == '0'"></option>
+									<option th:value="@{/list?sortType=1}" th:text="오래된순"
+										th:selected="${sortType} == '1'"></option>
+									<option th:value="@{/list?sortType=2}" th:text="참여인원순"
+										th:selected="${sortType} == '2'"></option>
 								</th:block>
-								
+
 								<th:block th:if="${isCategory}">
-									<option th:value="@{${'/list?category=' + {categoryID} + '&sortType=0'}}" th:text="최신순" th:selected="${sortType} == '0'"></option>
-									<option th:value="@{${'/list?category=' + {categoryID} + '&sortType=1'}}" th:text="오래된순" th:selected="${sortType} == '1'"></option>
-									<option th:value="@{${'/list?category=' + {categoryID} + '&sortType=2'}}" th:text="참여인원순" th:selected="${sortType} == '2'"></option>
+									<option th:value="@{${'/list?category=' + {categoryID} + '&sortType=0'}}"
+										th:text="최신순" th:selected="${sortType} == '0'"></option>
+									<option th:value="@{${'/list?category=' + {categoryID} + '&sortType=1'}}"
+										th:text="오래된순" th:selected="${sortType} == '1'"></option>
+									<option th:value="@{${'/list?category=' + {categoryID} + '&sortType=2'}}"
+										th:text="참여인원순" th:selected="${sortType} == '2'"></option>
 								</th:block>
 							</select>
 						</div>
 						<div class="col-6"></div>
 						<div class="search-div col-4">
 							<form action="#" class="form-search handa-search-form">
-								<input type="text" class="form-control"
-									placeholder="검색어를 입력하세요.">
+								<input type="text" class="form-control" placeholder="검색어를 입력하세요.">
 								<button type="submit"
 									class="btn btn-primary handa-outline-btn list-search-btn">검색</button>
 							</form>
 						</div>
 						<div class="col-md-12"></div>
-						
+
 							<!-- 챌린지 리스트 -->
 							<div id="list-container" class="row gy-4">
 							</div> 
 							
 							<div id="end-list"></div>
-							
 						</div>
 					</div>
 				</div>
@@ -93,23 +98,29 @@
 	</main>
 	<!-- End #main -->
 </div>
-	<!-- include JS Script -->
-	<th:block layout:fragment="javascript">   
-		<script src='../assets/js/infiniteScroll.js'></script>
-		<script th:inline='javascript'>
+<!-- include JS Script -->
+<th:block layout:fragment="javascript">
+	<script src='../assets/js/infiniteScroll.js'></script>
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+		// 전체 리스트를 받고 리스트를 21개씩 화면에 보여주고 스크롤이 끝나면 추가로 그려줌
+
+		// 카드 담는 객체
+		const $cardContainer = document.querySelector('.list-container');
+		/*]]>*/
 		
-			$(document).ready(function(){
-				var category = "[[${categoryID}]]";		// 카테고리 ID
-				var sortType = "[[${sortType}]]";		// 정렬 타입
-				var createdate = "0";
-				var count = "0";
+		$(document).ready(function(){
+			var category = "[[${categoryID}]]";		// 카테고리 ID
+			var sortType = "[[${sortType}]]";		// 정렬 타입
+			var createdate = "0";
+			var count = "0";
 				
-				if(category == "null") category = "0"; 	// 전체 조회의 경우
-				if(sortType == "null") sortType = "0"; 	// 정렬 타입 주어지지 않은 경우
+			if(category == "null") category = "0"; 	// 전체 조회의 경우
+			if(sortType == "null") sortType = "0"; 	// 정렬 타입 주어지지 않은 경우
 				
-				getList(category, sortType, createdate, count);
-			}); 
-			
-		</script>
-	</th:block>
+			getList(category, sortType, createdate, count);
+		}); 
+		
+	</script>
+</th:block>
 </html>

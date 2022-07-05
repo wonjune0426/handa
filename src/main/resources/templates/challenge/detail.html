@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/layout}">
-	
+
 <!-- include CSS File -->
 <th:block layout:fragment="css">
 	<!-- Handa Challenge CSS File -->
@@ -12,206 +11,176 @@
 <div layout:fragment="content">
 	<main id="main">
 
-		<!-- ======= Breadcrumbs ======= -->
-<!-- 		<div class="breadcrumbs">
-			<div class="page-header d-flex align-items-center"
-				style="background-image: url('assets/img/page-header.jpg');">
-				<div class="container position-relative">
-					<div class="row d-flex justify-content-center">
-						<div class="col-lg-6 text-center">
-							<h2>Challenge List</h2>
-							<p>원하는 챌린지에 참여해보세요.</p>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<nav>
-				<div class="container">
-					<ol>
-						<li><a href="/">홈</a></li>
-						<li>챌린지 상세</li>
-					</ol>
-				</div>
-			</nav>
-		</div> -->
-		<!-- End Breadcrumbs -->
-		
-		<!-- 챌린지 상세보기 메뉴 탭 -->
-		<div id="scrollMenu" class="challenge-detail-tab">
-			<a class="menuTab detail_menu" th:href="@{#period}" style="margin-left:12em;">챌린지 기간</a>
-			<a class="menuTab detail_menu" th:href="@{#explanation}">챌린지 설명</a>
-			<a class="menuTab detail_menu" th:href="@{#caution}">주의사항</a>
-			<a class="menuTab detail_menu" th:href="@{#comment}">댓글</a>
-		</div>
-		
 		<!-- ======= Services Section ======= -->
-		<section id="service-details" class="service-details" style="position: relative">
+		<section id="service-details" class="service-details challenge-detail-section"
+			style="position: relative;padding-bottom: 0;">
 			<div class="container aos-init aos-animate" data-aos="fade-up">
-				<div class="col-lg-12"><hr/><br>
+				<div class="col-lg-12">
 					<div class="row gy-4">
 						<div class="col-lg-12">
-							<h3 class="ch-detail-title">정보처리기사 챌린지</h3>
 							<div class="row">
-								<img src="assets/img/study-thumb.jpg" alt=""
-									class="img-fluid services-img col-4 ch-detail-thumb">
-								<div class="col-8 challenge-join-member">
-										<p class="join-member-text">참여 인원 <span class="join-member-num">(8 명)</span></p>
-								<div class="ch-j-detail-div">
-								<p class="ch-j-detail">
-									<i alt="" class="ch-user-icon fa-solid fa-user"></i>
-								</p> 							
-								<p class="ch-j-detail">
-								<b>이고은</b>
-								</p> 
-								<P class="ch-j-detail ch-detail-position">선임</P> 
-								<p class="ch-j-detail ch-detail-aff">한솔 인티큐브</p> 
+								<div class="col-7 thumb-div">
+									<img th:src="${challengeDetail.thumbnail}" alt="" class="ch-detail-thumb">
+								</div>
+								<div class="col-5 challenge-summary">
+									<span class="ch-detail-category" th:if="${challengeDetail.subcategory_id}==1">취미 >
+										영화</span>
+									<span class="ch-detail-category" th:if="${challengeDetail.subcategory_id}==2">취미 >
+										모임</span>
+									<span class="ch-detail-category" th:if="${challengeDetail.subcategory_id}==3">취미 >
+										등산</span>
+									<span class="ch-detail-category" th:if="${challengeDetail.subcategory_id}==4">자기계발 >
+										독서</span>
+									<span class="ch-detail-category" th:if="${challengeDetail.subcategory_id}==5">자기계발 >
+										자격증</span>
+									<span class="ch-detail-category" th:if="${challengeDetail.subcategory_id}==6">자기계발 >
+										외국어</span>
+
+									<h3 class="ch-detail-title" th:text="${challengeDetail.challenge_name}"></h3>
+									<div class="create-user">
+										<img class="profile-img">
+										<span>[[${createMember.member_name}]]</span>
+										<small th:if="${createMember.position_id}==1">수석</small>
+										<small th:if="${createMember.position_id}==2">책임</small>
+										<small th:if="${createMember.position_id}==3">선임</small>
+
+										<small th:if="${createMember.affiliates_id}==1">한솔 인티큐브</small>
+										<small th:if="${createMember.affiliates_id}==2">한솔 제지</small>
+										<small th:if="${createMember.affiliates_id}==3">한솔 테크닉스</small>
+										<small th:if="${createMember.affiliates_id}==4">한솔 페이퍼택</small>
+										<small th:if="${createMember.affiliates_id}==5">한솔 홀딩스</small>
+										<small th:if="${createMember.affiliates_id}==6">한솔 문화재단</small>
+										<small th:if="${createMember.affiliates_id}==7">한솔 케미칼</small>
+										<small th:if="${createMember.affiliates_id}==8">한솔 홈데코</small>
+										<small th:if="${createMember.affiliates_id}==9">한솔 코에버</small>
+										<small th:if="${createMember.affiliates_id}==10">한솔 BS</small>
+										<small th:if="${createMember.affiliates_id}==11">한솔 PNS</small>
+										<small th:if="${createMember.affiliates_id}==12">한솔 로지스틱스</small>
+									</div>
+									<div class="date">
+										<small>기간</small>
+										[[${challengeDetail.startdate}]] ~ [[${challengeDetail.enddate}]]
+									</div>
+									<div class="num">
+										<small>인원</small>
+										[[${challengeDetail.count}]]명
+									</div>
+									<div class="ch-detail-etc">
+										<span class="status">모집중</span>
+										<span class="share">
+											<a href="" class="share-link">
+												<i class="fa-regular fa-share-from-square"></i>공유하기
+											</a>
+											<input type="hidden" class="copy-input">
+										</span>
+										<p class="challenge-toast">url이 클립보드에 복사되었습니다.</p>
+									</div>
+									<div class="price-div">
+										<p class="kind">챌린지 유형</p>
+										<p class="price" th:if="${challengeDetail.challenge_type}=='무료'">무료 챌린지</p>
+										<p class="price" th:if="${challengeDetail.challenge_type}=='유료'">유료 챌린지</p>
+									</div>
+									<button class="btn challenge-join-btn">참여하기</button>
+								</div>
 							</div>
-							<div class="ch-j-detail-div">
-								<p class="ch-j-detail">
-									<i alt="" class="ch-user-icon fa-solid fa-user"></i>
-								</p> 							
-								<p class="ch-j-detail">
-								<b>전현정</b>
-								</p> 
-								<P class="ch-j-detail ch-detail-position">수석</P> 
-								<p class="ch-j-detail ch-detail-aff">한솔 인티큐브</p> 
+
+							<!-- 챌린지 상세보기 메뉴 탭 -->
+							<div id="scrollMenu" class="challenge-detail-tab">
+								<a class="menuTab detail_menu" th:href="@{#member}">참여 인원</a>
+								<a class="menuTab detail_menu" th:href="@{#explanation}">챌린지 설명</a>
+								<a class="menuTab detail_menu" th:href="@{#caution}">주의사항</a>
+								<a class="menuTab detail_menu" th:href="@{#comment}">댓글</a>
 							</div>
-							<div class="ch-j-detail-div">
-								<p class="ch-j-detail">
-									<i alt="" class="ch-user-icon fa-solid fa-user"></i>
-								</p> 							
-								<p class="ch-j-detail">
-								<b>최원준</b>
-								</p> 
-								<P class="ch-j-detail ch-detail-position">책임</P> 
-								<p class="ch-j-detail ch-detail-aff">한솔 인티큐브</p> 
+
+							<div class="col-12 challenge-join-member" id="member">
+								<p class="join-member-text">
+									참여 인원 <span class="join-member-num">([[${challengeDetail.count}]]명)</span>
+								</p>
+								<div th:each="joinMembers:${joinMembers}" class="ch-j-detail-div">
+									<p class="ch-j-detail">
+										<i alt="" class="ch-user-icon fa-solid fa-user"></i>
+									</p>
+									<p class="ch-j-detail">
+										<b>[[${joinMembers.member_name}]]</b>
+									</p>
+									<P th:if="${joinMembers.position_id}==1" class="ch-j-detail ch-detail-position">수석
+									</P>
+									<P th:if="${joinMembers.position_id}==2" class="ch-j-detail ch-detail-position">책임
+									</P>
+									<P th:if="${joinMembers.position_id}==3" class="ch-j-detail ch-detail-position">선임
+									</P>
+
+									<p th:if="${joinMembers.affiliates_id}==1" class="ch-j-detail ch-detail-aff">한솔 인티큐브
+									</p>
+									<p th:if="${joinMembers.affiliates_id}==2" class="ch-j-detail ch-detail-aff">한솔 제지
+									</p>
+									<p th:if="${joinMembers.affiliates_id}==3" class="ch-j-detail ch-detail-aff">한솔 테크닉스
+									</p>
+									<p th:if="${joinMembers.affiliates_id}==4" class="ch-j-detail ch-detail-aff">한솔 페이퍼택
+									</p>
+									<p th:if="${joinMembers.affiliates_id}==5" class="ch-j-detail ch-detail-aff">한솔 홀딩스
+									</p>
+									<p th:if="${joinMembers.affiliates_id}==6" class="ch-j-detail ch-detail-aff">한솔 문화재단
+									</p>
+									<p th:if="${joinMembers.affiliates_id}==7" class="ch-j-detail ch-detail-aff">한솔 케미칼
+									</p>
+									<p th:if="${joinMembers.affiliates_id}==8" class="ch-j-detail ch-detail-aff">한솔 홈데코
+									</p>
+									<p th:if="${joinMembers.affiliates_id}==9" class="ch-j-detail ch-detail-aff">한솔 코에버
+									</p>
+									<p th:if="${joinMembers.affiliates_id}==10" class="ch-j-detail ch-detail-aff">한솔 BS
+									</p>
+									<p th:if="${joinMembers.affiliates_id}==11" class="ch-j-detail ch-detail-aff">한솔 PNS
+									</p>
+									<p th:if="${joinMembers.affiliates_id}==12" class="ch-j-detail ch-detail-aff">한솔
+										로지스틱스</p>
+
+								</div>
 							</div>
-							<div class="ch-j-detail-div">
-								<p class="ch-j-detail">
-									<i alt="" class="ch-user-icon fa-solid fa-user"></i>
-								</p> 							
-								<p class="ch-j-detail">
-								<b>이고은</b>
-								</p> 
-								<P class="ch-j-detail ch-detail-position">인턴</P> 
-								<p class="ch-j-detail ch-detail-aff">한솔 인티큐브</p> 
+
+
+							<div style="padding-bottom: 50px;">
+								<b id="explanation">챌린지 설명</b>
+								<br>
+								<p th:utext="${challengeDetail.description}"></p>
+
 							</div>
-							<div class="ch-j-detail-div">
-								<p class="ch-j-detail">
-									<i alt="" class="ch-user-icon fa-solid fa-user"></i>
-								</p> 							
-								<p class="ch-j-detail">
-								<b>이고은</b>
-								</p> 
-								<P class="ch-j-detail ch-detail-position">인턴</P> 
-								<p class="ch-j-detail ch-detail-aff">한솔 인티큐브</p> 
+
+							<div>
+								<b id="caution">챌린지 주의사항</b>
+								<ul>
+									<li><i class="bi bi-check-circle"></i>
+										<span>이 부분은
+											모든 챌린지에 고정적으로 들어가는 부분입니다.</span>
+									</li>
+									<li><i class="bi bi-check-circle"></i>
+										<span>챌린지
+											댓글은 참여자만 작성 가능합니다.</span>
+									</li>
+									<li><i class="bi bi-check-circle"></i>
+										<span>챌린지 주의사항 입니다.</span>
+									</li>
+								</ul>
 							</div>
-							<div class="ch-j-detail-div">
-								<p class="ch-j-detail">
-									<i alt="" class="ch-user-icon fa-solid fa-user"></i>
-								</p> 							
-								<p class="ch-j-detail">
-								<b>이고은</b>
-								</p> 
-								<P class="ch-j-detail ch-detail-position">인턴</P> 
-								<p class="ch-j-detail ch-detail-aff">한솔 인티큐브</p> 
-							</div>
-							<div class="ch-j-detail-div">
-								<p class="ch-j-detail">
-									<i alt="" class="ch-user-icon fa-solid fa-user"></i>
-								</p> 							
-								<p class="ch-j-detail">
-								<b>이고은</b>
-								</p> 
-								<P class="ch-j-detail ch-detail-position">인턴</P> 
-								<p class="ch-j-detail ch-detail-aff">한솔 인티큐브</p> 
-							</div>
-							<div class="ch-j-detail-div">
-								<p class="ch-j-detail">
-									<i alt="" class="ch-user-icon fa-solid fa-user"></i>
-								</p> 							
-								<p class="ch-j-detail">
-								<b>이고은</b>
-								</p> 
-								<P class="ch-j-detail ch-detail-position">인턴</P> 
-								<p class="ch-j-detail ch-detail-aff">한솔 인티큐브</p> 
-							</div>
-							<div class="ch-j-detail-div">
-								<p class="ch-j-detail">
-									<i alt="" class="ch-user-icon fa-solid fa-user"></i>
-								</p> 							
-								<p class="ch-j-detail">
-								<b>이고은</b>
-								</p> 
-								<P class="ch-j-detail ch-detail-position">인턴</P> 
-								<p class="ch-j-detail ch-detail-aff">한솔 인티큐브</p> 
-							</div>
-						</div>
 						</div>
 
-						<div>
-							<b id="period">챌린지 진행기간</b>
-							<p>2022.06.14 ~ 2022.07.28</p>
-						</div>
-						
-						<div>
-						<b id="explanation">챌린지 설명</b>
-						<p>
-						Est reprehenderit voluptatem necessitatibus asperiores
-							neque sed ea illo. Deleniti quam sequi optio iste veniam repellat
-							odit. Aut pariatur itaque nesciunt fuga.</p>
-						<p>Sunt rem odit accusantium omnis perspiciatis officia.
-							Laboriosam aut consequuntur recusandae mollitia doloremque est
-							architecto cupiditate ullam. Quia est ut occaecati fuga.
-							Distinctio ex repellendus eveniet velit sint quia sapiente
-							cumque. Et ipsa perferendis ut nihil. Laboriosam vel voluptates
-							tenetur nostrum. Eaque iusto cupiditate et totam et quia dolorum
-							in. Sunt molestiae ipsum at consequatur vero. Architecto ut
-							pariatur autem ad non cumque nesciunt qui maxime. Sunt eum quia
-							impedit dolore alias explicabo ea.</p>
-										<p>
-						Est reprehenderit voluptatem necessitatibus asperiores
-							neque sed ea illo. Deleniti quam sequi optio iste veniam repellat
-							odit. Aut pariatur itaque nesciunt fuga.</p>
-						<p>Sunt rem odit accusantium omnis perspiciatis officia.
-							Laboriosam aut consequuntur recusandae mollitia doloremque est
-							architecto cupiditate ullam. Quia est ut occaecati fuga.
-							Distinctio ex repellendus eveniet velit sint quia sapiente
-							cumque. Et ipsa perferendis ut nihil. Laboriosam vel voluptates
-							tenetur nostrum. Eaque iusto cupiditate et totam et quia dolorum
-							in. Sunt molestiae ipsum at consequatur vero. Architecto ut
-							pariatur autem ad non cumque nesciunt qui maxime. Sunt eum quia
-							impedit dolore alias explicabo ea.</p>
-							
-						</div>	
-							
-						<div>
-						<b id="caution">챌린지 주의사항</b>
-						<ul>
-							<li><i class="bi bi-check-circle"></i> <span>이 부분은 모든 챌린지에 고정적으로 들어가는 부분입니다.</span></li>
-							<li><i class="bi bi-check-circle"></i> <span>Assumenda
-									et porro nisi nihil nesciunt voluptatibus.</span></li>
-							<li><i class="bi bi-check-circle"></i> <span>Ullamco
-									laboris nisi ut aliquip ex ea</span></li>
-						</ul>
-						</div>
 					</div>
 
 				</div>
-
-			</div><hr>
+				<hr>
+			</div>
 		</section>
-		
-		<section class="service-details"><br><br><br>
+
+		<section class="service-details" style="padding: 0;">
+			<br> <br> <br>
 			<div class="container aos-init aos-animate" data-aos="fade-up">
 				<div class="row gy-4">
 					<div class="row ch-comment-input-content">
 						<div class="col-lg-12">
-							<p id="comment" >댓글 작성하기</p>
+							<p id="comment">댓글 작성하기</p>
 							<div class="form-group mt-3">
-								<textarea class="form-control" name="message" rows="3"
-									placeholder="댓글을 작성하세요." required=""></textarea>
+								<textarea class="form-control" name="message" rows="3" placeholder="댓글을 작성하세요."
+									required=""></textarea>
 							</div>
 						</div>
 						<div class="col-lg-12">
@@ -232,128 +201,101 @@
 
 				<div class="row  d-flex justify-content-center comment-content">
 					<div class="col-md-12">
-						<div
-							class="headings d-flex justify-content-between align-items-center mb-3">
+						<div class="headings d-flex justify-content-between align-items-center mb-3">
 							<h5>댓글(4)</h5>
 						</div>
 
 						<!-- --------------댓글 목록 부분------------ -->
 						<!-- 댓글 card 시작 -->
-						<div class="card p-3 mt-2">
-							<div class="d-flex justify-content-between align-items-center">
-
-								<div class="user d-flex flex-row align-items-center">
-
-									<img src="https://i.imgur.com/hczKIze.jpg" width="30"
-										class="user-img rounded-circle mr-2"> <span> <small
-										class="font-weight-bold text-primary">김한솔</small> <small
-										class="comment-list-position">선임</small> <small
-										class="font-weight-bold">추천합니다.</small>
-									</span>
-
-								</div>
-								<small>2022.06.14</small>
-							</div>
-							<div
-								class="action d-flex justify-content-between mt-2 align-items-center">
-
-								<div class="reply px-4">
-									<small>수정하기</small> <span class="dots"></span> <small>삭제하기</small>
-								</div>
-							</div>
-						</div>
-						<!-- 댓글 card 끝 -->
-
-						<!-- 댓글 card 시작 -->
-						<div class="card p-3 mt-2">
-							<div class="d-flex justify-content-between align-items-center">
-
-								<div class="user d-flex flex-row align-items-center">
-
-									<img src="https://i.imgur.com/C4egmYM.jpg" width="30"
-										class="user-img rounded-circle mr-2"> <span> <small
-										class="font-weight-bold text-primary">김한솔</small> <small
-										class="comment-list-position">선임</small> <small
-										class="font-weight-bold">추천합니다.</small>
-									</span>
-
-								</div>
-								<small>2022.06.14</small>
-							</div>
-							<div
-								class="action d-flex justify-content-between mt-2 align-items-center">
-
-								<div class="reply px-4">
-									<small>수정하기</small> <span class="dots"></span> <small>삭제하기</small>
-								</div>
-							</div>
-						</div>
-						<!-- 댓글 card 끝 -->
-
-						<!-- 댓글 card 시작 -->
-						<div class="card p-3 mt-2">
-							<div class="d-flex justify-content-between align-items-center">
-
-								<div class="user d-flex flex-row align-items-center">
-
-									<img src="https://i.imgur.com/hczKIze.jpg" width="30"
-										class="user-img rounded-circle mr-2"> <span> <small
-										class="font-weight-bold text-primary">김한솔</small> <small
-										class="comment-list-position">선임</small> <small
-										class="font-weight-bold">추천합니다.</small>
-									</span>
-
-								</div>
-								<small>2022.06.14</small>
-							</div>
-							<div
-								class="action d-flex justify-content-between mt-2 align-items-center">
-
-								<div class="reply px-4">
-									<small>수정하기</small> <span class="dots"></span> <small>삭제하기</small>
-								</div>
-							</div>
-						</div>
-						<!-- 댓글 card 끝 -->
+						<div id="card-list">
 						
-						<!-- 댓글 card 시작 -->
-						<div class="card p-3 mt-2">
-							<div class="d-flex justify-content-between align-items-center">
-
-								<div class="user d-flex flex-row align-items-center">
-
-									<img src="https://i.imgur.com/ZSkeqnd.jpg" width="30"
-										class="user-img rounded-circle mr-2"> <span> <small
-										class="font-weight-bold text-primary">김한솔</small> <small
-										class="comment-list-position">선임</small> <small
-										class="font-weight-bold">추천합니다.</small>
-									</span>
-
-								</div>
-								<small>2022.06.14</small>
-							</div>
-							<div
-								class="action d-flex justify-content-between mt-2 align-items-center">
-
-								<div class="reply px-4">
-									<small>수정하기</small> <span class="dots"></span> <small>삭제하기</small>
-								</div>
-							</div>
 						</div>
 						<!-- 댓글 card 끝 -->
 					</div>
 				</div>
-						<br><br>																	
-						<div class="ch-detail-to-list-btn">
-							<a th:href="@{/list?sortType=0}" class="comment-btn">목록</a>
-						</div>
+				<br> <br>
+				<div class="ch-detail-to-list-btn" style="display: none;">
+					<a th:href="@{/list?sortType=0}" class="comment-btn">목록</a>
+				</div>
 			</div>
 		</section>
 	</main>
 	<!-- End #main -->
 </div>
-	<!-- include JS Script -->
-	<th:block layout:fragment="javascript">   
-		<script src='../assets/js/scroll_menu.js'></script>
-	</th:block>
+<!-- include JS Script -->
+<th:block layout:fragment="javascript">
+	<script src='../assets/js/scroll_menu.js'></script>
+	<script th:inline="javascript">
+		$(document).ready(function () {
+			/*<![CDTATA[*/
+			var challenge_id =/*[[${challengeDetail.challenge_id}]]*/
+				/*]]>*/
+
+				$.ajax({
+					url: "/comment?challenge_id=" + challenge_id,
+					method: "GET",
+					//////////////////// recv
+					success: function (result) {
+						for (var i = 0; i < result.commentList.length; i++) {
+							var position=""
+							if(result.memberList[i].position_id==1){
+								position="수석"
+							}else if(result.memberList[i].position_id==1){
+								position="책임"
+							}else if(result.memberList[i].position_id==1){
+								position="선임"
+							}
+							$("#card-list").append(
+								`<div class="card p-3 mt-2">
+										<div class="d-flex justify-content-between align-items-center">
+											<div class="user d-flex flex-row align-items-center">
+												<img src="https://i.imgur.com/hczKIze.jpg" width="30"
+														class="user-img rounded-circle mr-2"> 
+													<span> 
+														<small class="font-weight-bold text-primary">`+result.memberList[i].member_name+`</small>
+														<small class="font-weight-bold">`+position+`</small>
+														<div>
+														<small class="font-weight-bold">`+result.commentList[i].comment_content+`</small>
+														</div>
+													</span>
+											</div>
+											<small>2022.06.14</small>
+										</div>
+										<div class="action d-flex justify-content-between mt-2 align-items-center">
+												<div class="reply px-4">
+													<small>수정하기</small> 
+														<span class="dots"></span> 
+													<small>삭제하기</small>
+												</div>
+										</div>
+									</div>`
+							)
+						}
+					},
+					error: function (xhr, status, error) { // (파라미터 생략가능)
+						alert("error");
+					}
+					////////////////////
+				})
+
+			//url 공유하기 버튼 클릭
+			$(".share-link").on("click", function (e) {
+
+				e.preventDefault();
+
+				$('.copy-input').attr('type', 'text');
+				$(".copy-input").val(window.location.href); // 현재 주소 불러옴
+				$(".copy-input").select();
+				var copy = document.execCommand('copy');
+				$('.copy-input').attr('type', 'hidden');
+
+				$('.challenge-toast').fadeIn();
+				$('.challenge-toast').delay(500).fadeOut('slow');
+			});
+
+
+		});
+	</script>
+</th:block>
+
 </html>

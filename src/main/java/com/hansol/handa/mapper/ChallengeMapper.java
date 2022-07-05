@@ -22,5 +22,8 @@ public interface ChallengeMapper {
 	void joinChallenge(@Param("member_id")String member_id,@Param("challenge_id") Integer challenge_id);
 	ChallengeVO getChallenge(int challenge_id);
 	void updateChallenge(ChallengeVO challengeVO);
+	void deleteChallenge(ChallengeVO challengeVO);
+	void secessionChallenge(ChallengeVO challengeVO);
+	ChallengeVO detailChallenge(int challenge_id);
 
 }

@@ -12,6 +12,11 @@
 	}
 }
 
+.login-section {
+	padding-top: 0px;
+	padding-bottom: 80px;
+}
+
 .login-label {
 	margin-bottom: 10px;
 }
@@ -26,6 +31,40 @@
 
 .login-btn-div button {
 	width: 100%;
+	border: 1px solid var(--color-primary) !important;
+}
+.remember-div {
+	text-align: left;
+	padding-left: 20px;
+}
+.find-div {
+	height: 44px;
+	line-height: 44px;
+	text-align: right;
+	padding: 0px;
+}
+
+.remember-div label {
+	height: 44px;
+	line-height: 44px;
+	vertical-align: top;
+}
+.remember-me {
+	webkit-appearance: checkbox;
+    -moz-appearance: checkbox;
+    appearance: checkbox;
+    width: 10%;
+    display: inline-block;
+}
+
+.login-btn-div .register-btn {
+	margin-top: 10px;
+	background-color: #fff !important;
+	border: 1px solid var(--color-primary) !important;
+	color: var(--color-primary) !important;
+    padding: 10px 35px;
+    transition: 0.4s;
+    border-radius: 5px;
 }
 
 /* 회원가입 하기 div */
@@ -47,6 +86,15 @@
 }
 
 /* ------------ 회원가입 (member/register.html) -------------- */
+.register-div {
+	width: 55%;
+	display: inline-block;
+}
+
+.register-btn-div {
+	margin-top: 50px;
+}
+
 /*  파일업로드 관련 css */
 .filebox input[type="file"] {
 	position: absolute;

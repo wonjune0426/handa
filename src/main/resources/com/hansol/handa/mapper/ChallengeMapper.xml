@@ -8,7 +8,7 @@
 	<resultMap id="joinVO" type="JoinVO">
 		<result column="count" property="count"></result>
 	</resultMap>
-	
+
 	<resultMap id="challengeMap" type="ChallengeVO">
 		<result column="challenge_id" property="challenge_id"></result>
 		<result column="challenge_name" property="challenge_name"></result>
@@ -20,7 +20,7 @@
 		<result column="subcategory_id" property="subcategory_id"></result>
 		<result column="challenge_type" property="challenge_type"></result>
 		<result column="sub_category_name" property="subcategory_name"></result>
-		<collection property="joinVO" resultMap="joinVO"/>
+		<collection property="joinVO" resultMap="joinVO" />
 	</resultMap>
 	
 	<!-- 전체 챌린지 리스트 조회 -->
@@ -86,30 +86,50 @@
 			WHERE sub_category_id = #{subcategory_id} AND sub_category.main_category_id = main_category.main_category_id;
 	</select>
 	
+	<insert id="createChallenge" parameterType="ChallengeVO"
+		useGeneratedKeys="true" keyProperty="challenge_id">
+		insert into
+		challenge(challenge_name,thumbnail,startdate,enddate,description,member_id,subcategory_id,challenge_type,createdate)
+		values
+		(#{challenge_name},IFNULL(#{thumbnail},NULL),IFNULL(#{startdate},NULL),IFNULL(#{enddate},NULL),IFNULL(#{description},NULL),#{member_id},#{subcategory_id},#{challenge_type},now())
+	</insert>
 
-	<insert id="createChallenge" parameterType="ChallengeVO" useGeneratedKeys="true" keyProperty="challenge_id">	 
-		insert into challenge(challenge_name,thumbnail,startdate,enddate,description,member_id,subcategory_id,challenge_type,createdate)
-		values (#{challenge_name},IFNULL(#{thumbnail},NULL),IFNULL(#{startdate},NULL),IFNULL(#{enddate},NULL),IFNULL(#{description},NULL),#{member_id},#{subcategory_id},#{challenge_type},now())
-	</insert>
-	
 	<select id="getChallenge" resultType="ChallengeVO">
-		select * from challenge where challenge_id=#{challenge_id}
+		select * from challenge
+		where challenge_id=#{challenge_id}
 	</select>
-	
+
 	<insert id="joinChallenge">
-		insert into challenge_join (challenge_id,member_id) values(#{challenge_id},#{member_id})
+		insert into challenge_join (challenge_id,member_id)
+		values(#{challenge_id},#{member_id})
 	</insert>
-	
+
 	<update id="updateChallenge" parameterType="ChallengeVO">
-		update challenge 
+		update challenge
 		set challenge_name=IFNULL(#{challenge_name},challenge_name),
-			thumbnail=IFNULL(#{thumbnail},thumbnail),
-			startdate=IFNULL(#{startdate},startdate),
-			enddate=IFNULL(#{enddate},enddate),
-			description=IFNULL(#{description},description),
-			challenge_type=IFNULL(#{challenge_type},challenge_type)
-		where challenge_id=#{challenge_id} and member_id=#{member_id}
+		thumbnail=IFNULL(#{thumbnail},thumbnail),
+		startdate=IFNULL(#{startdate},startdate),
+		enddate=IFNULL(#{enddate},enddate),
+		description=IFNULL(#{description},description),
+		challenge_type=IFNULL(#{challenge_type},challenge_type)
+		where
+		challenge_id=#{challenge_id} and member_id=#{member_id}
 	</update>
-	
-	
+
+	<delete id="deleteChallenge" parameterType="ChallengeVO">
+		delete from challenge
+		where challenge_id=#{challenge_id} and member_id=#{member_id}
+	</delete>
+
+	<delete id="secessionChallenge" parameterType="ChallengeVO">
+		delete from
+		challenge_join where challenge_id=#{challenge_id} and
+		member_id=#{member_id}
+	</delete>
+
+	<select id="detailChallenge" parameterType="ChallengeVO" resultType="ChallengeVO">
+		SELECT *,COUNT(*) AS COUNT FROM challenge a, challenge_join b
+		WHERE b.challenge_id=#{challenge_id} AND a.challenge_id=b.challenge_id
+		GROUP BY a.challenge_id
+	</select>
 </mapper>

@@ -1,5 +1,7 @@
 package com.hansol.handa.controller;
 
+import java.security.Principal;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hansol.handa.domain.UserVO;
+import com.hansol.handa.security.domain.CustomUser;
 import com.hansol.handa.service.UserService;
 
 import lombok.Setter;
@@ -153,7 +156,11 @@ public class UserController {
 	}
 
 	@GetMapping("sample")
-	public String securitySample() {
+	public String securitySample(Principal principal, Authentication auth) {
+		
+		CustomUser user = (CustomUser)auth.getPrincipal();
+		
+		log.info("principal: " + user);
 		
 		return "sample/security-sample";
 	}

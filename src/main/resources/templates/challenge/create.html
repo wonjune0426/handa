@@ -47,7 +47,7 @@
 				<section id="get-a-quote" class="get-a-quote">
 					<div class="container aos-init aos-animate" data-aos="fade-up" id="show_modal">
 						<div class="row g-0">
-							<form action="/challenge" method="post" class="php-email-form">
+							<form action="/challenge" method="post" class="php-email-form" id="challenge_create">
 								<div class="row gy-4">
 									<div class="col-md-6">
 										<label for="main-category">
@@ -79,7 +79,8 @@
 										<div class="col-md-6 width-100">
 											<label for="main-category">
 												<h3>카테고리 (소)</h3>
-											</label> <select class="form-control main-category" id="sub-category">
+											</label> <select class="form-control main-category" id="sub-category"
+												name="sub-category">
 												<option>카테고리(소)</option>
 											</select>
 										</div>
@@ -100,8 +101,8 @@
 												<h3>유형</h3>
 											</label> <select class="form-control main-category" name="challenge_type"
 												id="challenge_type">
-												<option>무료</option>
-												<option>유료</option>
+												<option value="무료">무료</option>
+												<option value="유료">유료</option>
 											</select>
 										</div>
 									</div>
@@ -136,7 +137,7 @@
 											<h3>설명</h3>
 										</label>
 										<div>
-											<textarea id="editor"></textarea>
+											<textarea id="editor" name></textarea>
 										</div>
 									</div>
 
@@ -231,16 +232,16 @@
 				$("#sub-category").empty();
 				$("#sub-category").append
 					(`<option>카테고리(소)</option>
-					<option>영화</option>
-					<option>모임</option>
-					<option>등산</option>`)
+					<option value=1>영화</option>
+					<option value=2>모임</option>
+					<option value=3>등산</option>`)
 			} else if (main == "자기계발") {
 				$("#sub-category").empty();
 				$("#sub-category").append
-					(`<option>카테고리(소)</option>
-					<option>독서</option>
-					<option>자격증</option>
-					<option>외국어</option>`)
+					(`<option value="카테코리(소)">카테고리(소)</option>
+					<option value=1>독서</option>
+					<option value=1>자격증</option>
+					<option value=1>외국어</option>`)
 			}
 		})
 
@@ -249,28 +250,6 @@
 			var startdate = $("input[name=startdate]").val()
 			var enddate = $("input[name=enddate]").val()
 			var dateRegexp = /[0-9]{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])/;
-			var subcategory_id;
-			switch (select_sub) {
-				case "영화":
-					subcategory_id = 1;
-					break
-				case "모임":
-					subcategory_id = 2;
-					break
-				case "등산":
-					subcategory_id = 3;
-					break
-				case "독서":
-					subcategory_id = 4;
-					break
-				case "자격증":
-					subcategory_id = 5;
-					break
-				case "외국어":
-					subcategory_id = 6;
-					break
-			}
-
 
 			if ($("input[name=challenge_name]").val() == null || $("input[name=challenge_name]").val() == "" || $("input[name=challenge_name]").val().length > 25) {
 				alert("제목없거나 너무 김");
@@ -280,7 +259,7 @@
 				alert("카테고리 선택필수");
 			} else if (!dateRegexp.test(startdate) || !dateRegexp.test(enddate)) {
 				alert("날짜형식 오류")
-			} else if (startdate>enddate) {
+			} else if (startdate > enddate) {
 				alert("종료날짜 설정 오류")
 			} else {
 				$.ajax({
@@ -291,14 +270,16 @@
 						thumbnail: $("#profile-img").attr("src"),
 						startdate: startdate,
 						enddate: enddate,
-						subcategory_id: subcategory_id,
+						subcategory_id: select_sub,
 						description: editor.getData(),
 						challenge_type: $("select[name=challenge_type]").val(),
 						member_id: $("input[name=member_id]").val()
 					},
 					dataType: "text",
 					//////////////////// recv
-					success:location.href = "/list?category=" + subcategory_id + "&sortType=0",
+					success: function () {
+						window.location.href = "/list?category=" + select_sub + "&sortType=0"
+					},
 					error: function (xhr, status, error) { // (파라미터 생략가능)
 						alert("error");
 					}

@@ -31,6 +31,21 @@
 	color: #616161!important;
 }
 
+.testimonial-item button {
+	padding: 15px 30px;
+	border-radius: 50px;
+	border: 1px solid #616161;
+	margin-top: 20px;
+	/* background-color: rgba(255, 255, 255, 0.4); */
+	background-color: rgba(255, 255, 255, 0);;
+	color: #616161;
+	font-weight: lighter;
+}
+
+.testimonial-item button:hover {
+	opacity: 0.7;
+	transition: .5s;
+}
 
 .main-banner .swiper-pagination .swiper-pagination-bullet {
     width: 12px;
@@ -49,12 +64,12 @@
 
 .main-banner {
 	padding: 0px;
-	height: 430px;
+	height: 400px;
 }
 
 .main-banner .testimonial-item {
 	padding: 10% 20%;
-	height: 430px;
+	height: 400px;
 	width: 100%;
 }
 
@@ -71,26 +86,39 @@
 .main-banner .swiper-container .slides-1 {
 	vertical-align: middle;
 	display: inline-block;
-	height: 430px;	
+	height: 400px;	
 }
 
 .event-banner {
-	background-color:  #eff3fc;
-	padding: 20px 0px;
+	/* background-color:  #eff3fc; */
+	padding: 0px 0px;
 	margin-bottom: 50px;
+	height: 200px;
 }
 
 .event-banner .swiper-pagination .swiper-pagination-bullet {
     width: 10px;
     height: 10px;
-    background-color: rgba(0, 0, 0, 0.4);
-    opacity: 0.5;
+    background-color: rgba(255, 255, 255, 1);
+    /* opacity: 0.5; */
     border-radius: 50px;
 }
+
 
 .event-banner .swiper-pagination .swiper-pagination-bullet-active {
     background-color: #616161;
     opacity: 1;
+}
+
+.testimonials .swiper-pagination {
+    margin-top: -40px;
+    position: relative;
+    bottom: 0;
+    height: 200px;
+}
+
+.event-banner .testimonial-item {
+	height: 200px !important;
 }
 
 /* 검색 */
@@ -169,6 +197,7 @@
 
 .services .card .card-img {
 	border-radius: 5px 5px 0 0;
+	height: 200px;
 }
 
 .ch-menu-title {
@@ -181,4 +210,8 @@
 
 :root {
     --swiper-theme-color: #808080;
+}
+
+.challenge-item {
+	width: auto;
 }

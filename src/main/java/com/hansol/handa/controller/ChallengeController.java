@@ -22,14 +22,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hansol.handa.domain.ChallengeVO;
 import com.hansol.handa.service.ChallengeService;
+import com.hansol.handa.service.UserService;
 
 import ch.qos.logback.classic.Logger;
+import lombok.RequiredArgsConstructor;
 
 @Controller
 public class ChallengeController {
-
+	
 	@Autowired
 	private ChallengeService challengeService;
+	@Autowired
+	private UserService userService;
 
 	private final Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
@@ -122,8 +126,8 @@ public class ChallengeController {
 
 	
 //challenge 수정화면 요청
-	@GetMapping("/challenge-amend/challenge_id={challenge_id}")
-	public String challengeGet(@PathVariable int challenge_id,Model model) {
+	@GetMapping("/challenge-amend")
+	public String challengeGet(@RequestParam(required = true) int challenge_id,Model model) {
 		ChallengeVO challengeVO=challengeService.getChallenge(challenge_id);
 		model.addAttribute("challenge",challengeVO);
 		return "challenge/update";
@@ -136,10 +140,31 @@ public class ChallengeController {
 		challengeService.updateChallenge(challengeVO);
 	}
 	
-
-	@GetMapping("/detail")
-	public String detail() {
-		System.out.println("detail---------------------------------------");
+	
+//challenge 삭제
+	@PostMapping("/challenge-remove")
+	public @ResponseBody void deleteChallenge(ChallengeVO challengeVO) {
+		challengeService.deleteChallenge(challengeVO);
+	}
+	
+// challenge 참여하기
+	@PostMapping("/challenge/member")
+	public @ResponseBody void joinChallege(ChallengeVO challengeVO) {
+		challengeService.joinChallenge(challengeVO.getMember_id(), challengeVO.getChallenge_id());
+	}
+	
+// challenge 탈퇴하기
+	@PostMapping("/challenge/challenge-secession")
+	public @ResponseBody void secessionChallenge(ChallengeVO challengeVO) {
+		challengeService.secessionChallenge(challengeVO);
+	}
+	
+	@GetMapping("/challenge/detail")
+	public String detail(@RequestParam(required = true) int challenge_id,Model model) {
+		ChallengeVO challengeVO=challengeService.detailChallenge(challenge_id);
+		model.addAttribute("challengeDetail",challengeVO);
+		model.addAttribute("createMember",userService.read(challengeVO.getMember_id()));
+		model.addAttribute("joinMembers",userService.joinMembers(challengeVO.getChallenge_id()));
 		return "challenge/detail";
 	}
 
