@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hansol.handa.domain.ChallengeVO;
+import com.hansol.handa.domain.UserVO;
 import com.hansol.handa.service.ChallengeService;
 import com.hansol.handa.service.UserService;
 
