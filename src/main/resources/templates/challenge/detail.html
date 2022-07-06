@@ -217,8 +217,10 @@
 					</div>
 				</div>
 				<br> <br>
-				<input type="hidden" class="form-control price" name="member_id"
-					th:value='${#authentication.principal.Username}' readonly>
+				<th:block sec:authorize="isAuthenticated()">
+					<input type="hidden" class="form-control price" name="member_id"
+						th:value='${#authentication.principal.Username}' readonly>
+				</th:block>
 				<div class="ch-detail-to-list-btn" style="display: none;">
 					<a th:href="@{/list?sortType=0}" class="comment-btn">목록</a>
 				</div>
@@ -234,19 +236,21 @@
 		$(document).ready(function () {
 			/*<![CDTATA[*/
 			let challenge_id =/*[[${challengeDetail.challenge_id}]]*/'default';
-				joinMembers =/*[[${joinMembers}]]*/'default';
-				/*]]>*/
-			var login_memberId=$("input[name='member_id']").val()
+			joinMembers =/*[[${joinMembers}]]*/'default';
+			/*]]>*/
+			var login_memberId = $("input[name='member_id']").val()
 
-
-			for(var i=0;i<joinMembers.length;i++){
-				if(joinMembers[i].member_id==login_memberId){
-					$("#challenge-join").css("display","none")
-					$("#comment-input").css("display","block")
+			if(login_memberId==null){
+			}
+			
+			for (var i = 0; i < joinMembers.length; i++) {
+				if (joinMembers[i].member_id == login_memberId) {
+					$("#challenge-join").css("display", "none")
+					$("#comment-input").css("display", "block")
 					break;
-				}else{
-					$("#challenge-join").css("display","block")
-					$("#comment-input").css("display","none")
+				} else {
+					$("#challenge-join").css("display", "block")
+					$("#comment-input").css("display", "none")
 				}
 			}
 

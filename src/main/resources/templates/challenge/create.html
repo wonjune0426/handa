@@ -258,6 +258,8 @@
 			} else if (select_sub == "카테고리(소)") {
 				alert("카테고리 선택필수");
 			} else if (!dateRegexp.test(startdate) || !dateRegexp.test(enddate)) {
+				console.log(startdate)
+				console.log(enddate)
 				alert("날짜형식 오류")
 			} else if (startdate > enddate) {
 				alert("종료날짜 설정 오류")
