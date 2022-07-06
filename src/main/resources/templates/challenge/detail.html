@@ -95,8 +95,9 @@
 							<div class="col-12 challenge-join-member" id="member">
 								<p class="join-member-text">
 									참여 인원 <span class="join-member-num">([[${challengeDetail.count}]]명)</span>
+									<button type="button" id="secession" class="btn btn-primary btn-sm"
+										style="float:right;">탈퇴하기</button>
 								</p>
-
 								<div th:each="joinMembers:${joinMembers}" class="ch-j-detail-div">
 									<input id="join_memberid" th:value="${joinMembers.member_id}"
 										style="display: none;">
@@ -137,7 +138,7 @@
 									</p>
 									<p th:if="${joinMembers.affiliates_id}==12" class="ch-j-detail ch-detail-aff">한솔
 										로지스틱스</p>
-
+									<p name="member-e_mail" class="ch-j-detail ch-detail-aff" style="float:right">[[${joinMembers.e_mail}]]</p>
 								</div>
 							</div>
 
@@ -237,20 +238,118 @@
 			/*<![CDTATA[*/
 			let challenge_id =/*[[${challengeDetail.challenge_id}]]*/'default';
 			joinMembers =/*[[${joinMembers}]]*/'default';
+			startdate =/*[[${challengeDetail.startdate}]]*/'default';
+			enddate =/*[[${challengeDetail.enddate}]]*/ 'default';
 			/*]]>*/
+
+			var today = new Date();
+			var year = today.getFullYear();
+			var month = ('0' + (today.getMonth() + 1)).slice(-2);
+			var day = ('0' + today.getDate()).slice(-2);
+			var todaydate = year + '-' + month + '-' + day;
+
 			var login_memberId = $("input[name='member_id']").val()
 
+			//버튼 관련 로직
 			for (var i = 0; i < joinMembers.length; i++) {
 				if (joinMembers[i].member_id == login_memberId) {
-					$("#challenge-join").css("display", "none")
+					$("#challenge-join").prop("disabled", true)
+					$("#challenge-join").html("참여 중")
 					$("#comment-input").css("display", "block")
+					$("#secession").css("display", "block")
+					$("p[name='member-e_mail']").css("display","block")
 					break;
 				} else {
-					$("#challenge-join").css("display", "block")
+					$("p[name='member-e_mail']").css("display","none")
+					$("#challenge-join").css("disabled", false)
 					$("#comment-input").css("display", "none")
+					$("#secession").css("display", "none")
 				}
 			}
 
+
+			//모집 진행 마감 버튼 처리
+			if (startdate > todaydate) {
+				$(".status").html("모집중");
+			} else if (startdate <= todaydate && todaydate <= enddate) {
+				$(".status").html("진행중");
+				$("#challenge-join").html("진행 중")
+				$("#challenge-join").prop("disabled", true)
+			} else if (todaydate > enddate) {
+				$(".status").html("마감");
+				$("#secession").css("display", "none")
+				$("#challenge-join").html("마감")
+				$("#challenge-join").prop("disabled", true)
+			}
+
+			//참여하기 버튼
+			$("#challenge-join").click(function () {
+				if (login_memberId == null) {
+					location.href = "/member/login";
+				} else {
+					$.ajax({
+						url: "/challenge/member",
+						method: "POST",
+						data: {
+							member_id: $("input[name='member_id']").val(),
+							challenge_id: challenge_id
+						},
+						//////////////////// recv
+						success: function () {
+							location.reload();
+						},
+						error: function (xhr, status, error) { // (파라미터 생략가능)
+							alert("error");
+						}
+						////////////////////
+					})
+				}
+
+			})
+
+
+			//url 공유하기 버튼 클릭
+			$(".share-link").on("click", function (e) {
+
+				e.preventDefault();
+
+				$('.copy-input').attr('type', 'text');
+				$(".copy-input").val(window.location.href); // 현재 주소 불러옴
+				$(".copy-input").select();
+				var copy = document.execCommand('copy');
+				$('.copy-input').attr('type', 'hidden');
+
+				$('.challenge-toast').fadeIn();
+				$('.challenge-toast').delay(500).fadeOut('slow');
+			});
+			
+			//탈퇴하기 버튼 클릭
+			$("#secession").click(function(){
+					$.ajax({
+						url: "/challenge/challenge-secession",
+						method: "POST",
+						async: false,
+						data: {
+							member_id: login_memberId,
+							challenge_id: challenge_id,
+						},
+						success: function () {
+							location.reload();
+						},
+						error: function (xhr, status, error) { // (파라미터 생략가능)
+							alert("error");
+						}
+
+					})
+			})
+
+
+
+
+
+			//----------------------------댓글 관련 스크립트 ---------------------------------------------
+
+			//댓글 불러오기
 			$.ajax({
 				url: "/comment?challenge_id=" + challenge_id,
 				method: "GET",
@@ -327,54 +426,6 @@
 				////////////////////
 			})
 
-
-
-			//참여하기 버튼
-			$("#challenge-join").click(function () {
-				if (login_memberId == null) {
-					location.href = "/member/login";
-				} else {
-					$.ajax({
-						url: "/challenge/member",
-						method: "POST",
-						data: {
-							member_id: $("input[name='member_id']").val(),
-							challenge_id: challenge_id
-						},
-						//////////////////// recv
-						success: function () {
-							location.reload();
-						},
-						error: function (xhr, status, error) { // (파라미터 생략가능)
-							alert("error");
-						}
-						////////////////////
-					})
-				}
-
-			})
-
-
-			//url 공유하기 버튼 클릭
-			$(".share-link").on("click", function (e) {
-
-				e.preventDefault();
-
-				$('.copy-input').attr('type', 'text');
-				$(".copy-input").val(window.location.href); // 현재 주소 불러옴
-				$(".copy-input").select();
-				var copy = document.execCommand('copy');
-				$('.copy-input').attr('type', 'hidden');
-
-				$('.challenge-toast').fadeIn();
-				$('.challenge-toast').delay(500).fadeOut('slow');
-			});
-
-
-
-//----------------------------댓글 관련 스크립트 ---------------------------------------------
-
-
 			//댓글 입력 방식 버튼 클릭/Enter키
 			$("#commentWrite").click(function () {
 				comment_ajax();
@@ -384,7 +435,7 @@
 					comment_ajax();
 				}
 			})
-			
+
 			//댓글 입력 ajax
 			var comment_ajax = function () {
 				$.ajax({
@@ -414,9 +465,9 @@
 				$(this).parent().parent().parent().find('.font-weight-bold.com').css("display", "none");
 				$(this).parent().parent().parent().find('.update-content').css("display", "block");
 			})
-			
+
 			//취소 누를시
-			$(".update-cancel").click(function(){
+			$(".update-cancel").click(function () {
 				$(this).parent().css("display", "none");
 				$(this).parent().siblings('div').css("display", "block");
 				$(this).parent().parent().parent().find('.font-weight-bold.com').css("display", "block");
@@ -428,6 +479,7 @@
 				$.ajax({
 					url: "/comment-amend",
 					method: "POST",
+					async: false,
 					data: {
 						member_id: login_memberId,
 						challenge_id: challenge_id,
@@ -444,6 +496,29 @@
 					////////////////////
 				})
 			})
+			$(".update-content").keydown(function (key) {
+				if (key.keyCode == 13) {
+					$.ajax({
+						url: "/comment-amend",
+						method: "POST",
+						async: false,
+						data: {
+							member_id: login_memberId,
+							challenge_id: challenge_id,
+							comment_id: $(this).parent().parent().parent().find('.comment-id').val(),
+							comment_content: $(this).parent().parent().parent().find('.update-content').val()
+						},
+						//////////////////// recv
+						success: function () {
+							location.reload();
+						},
+						error: function (xhr, status, error) { // (파라미터 생략가능)
+							alert("error");
+						}
+						////////////////////
+					})
+				}
+			})
 
 
 
@@ -458,7 +533,7 @@
 					data: {
 						member_id: login_memberId,
 						challenge_id: challenge_id,
-						comment_id:$(this).parent().parent().parent().find('.comment-id').val()
+						comment_id: $(this).parent().parent().parent().find('.comment-id').val()
 					},
 					//////////////////// recv
 					success: function () {
@@ -471,7 +546,7 @@
 				})
 			})
 
-	
+
 
 
 
