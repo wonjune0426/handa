@@ -240,9 +240,6 @@
 			/*]]>*/
 			var login_memberId = $("input[name='member_id']").val()
 
-			if(login_memberId==null){
-			}
-			
 			for (var i = 0; i < joinMembers.length; i++) {
 				if (joinMembers[i].member_id == login_memberId) {
 					$("#challenge-join").css("display", "none")
@@ -257,6 +254,7 @@
 			$.ajax({
 				url: "/comment?challenge_id=" + challenge_id,
 				method: "GET",
+				async: false,
 				//////////////////// recv
 				success: function (result) {
 					$("#comment-count").append(`(` + result.commentList.length + `)`)
@@ -278,20 +276,25 @@
 												<img src="https://i.imgur.com/hczKIze.jpg" width="30"
 														class="user-img rounded-circle mr-2"> 
 													<span> 
+														<input class="comment-id" value="`+ result.commentList[i].comment_id + `" style="display:none"></input>
 														<small class="font-weight-bold text-primary">`+ result.memberList[i].member_name + `</small>
 														<small class="font-weight-bold">`+ position + `</small>
 														<div>
-														<small class="font-weight-bold">`+ result.commentList[i].comment_content + `</small>
+														<small class="font-weight-bold com" style="display:block">`+ result.commentList[i].comment_content + `</small>
+														<textarea class="update-content" style="width:1000px; display:none">`+ result.commentList[i].comment_content + `</textarea>
 														</div>
 													</span>
 											</div>
 											<small>`+ result.commentList[i].createdate + `</small>
 										</div>
-									<div class="action d-flex justify-content-between mt-2 align-items-center">
+										<div class="action d-flex justify-content-between mt-2 align-items-center">
 												<div class="reply px-4">
-													<small>수정하기</small> 
-														<span class="dots"></span> 
-													<small>삭제하기</small>
+													<small class="com-update">수정하기</small> 
+													<small class="com-delete">삭제하기</small>
+												</div>
+												<div class="reply px-4 up" style="display:none">
+													<small class="update-ajax">수정</small> 
+													<small class="update-cancel">취소</small>
 												</div>
 										</div>
 									</div>`
@@ -328,53 +331,27 @@
 
 			//참여하기 버튼
 			$("#challenge-join").click(function () {
-				$.ajax({
-					url: "/challenge/member",
-					method: "POST",
-					data: {
-						member_id: $("input[name='member_id']").val(),
-						challenge_id: challenge_id
-					},
-					//////////////////// recv
-					success: function () {
-						location.reload();
-					},
-					error: function (xhr, status, error) { // (파라미터 생략가능)
-						alert("error");
-					}
-					////////////////////
-				})
-
-			})
-
-			var comment_ajax = function () {
-				$.ajax({
-					url: "/comment",
-					method: "POST",
-					data: {
-						member_id: login_memberId,
-						challenge_id: challenge_id,
-						comment_content: $("#comment_content").val()
-					},
-					//////////////////// recv
-					success: function () {
-						location.reload();
-					},
-					error: function (xhr, status, error) { // (파라미터 생략가능)
-						alert("error");
-					}
-					////////////////////
-				})
-			}
-
-			//댓글 입력
-			$("#commentWrite").click(function () {
-				comment_ajax();
-			})
-			$("#comment_content").keydown(function (key) {
-				if (key.keyCode == 13) {
-					comment_ajax();
+				if (login_memberId == null) {
+					location.href = "/member/login";
+				} else {
+					$.ajax({
+						url: "/challenge/member",
+						method: "POST",
+						data: {
+							member_id: $("input[name='member_id']").val(),
+							challenge_id: challenge_id
+						},
+						//////////////////// recv
+						success: function () {
+							location.reload();
+						},
+						error: function (xhr, status, error) { // (파라미터 생략가능)
+							alert("error");
+						}
+						////////////////////
+					})
 				}
+
 			})
 
 
@@ -392,6 +369,111 @@
 				$('.challenge-toast').fadeIn();
 				$('.challenge-toast').delay(500).fadeOut('slow');
 			});
+
+
+
+//----------------------------댓글 관련 스크립트 ---------------------------------------------
+
+
+			//댓글 입력 방식 버튼 클릭/Enter키
+			$("#commentWrite").click(function () {
+				comment_ajax();
+			})
+			$("#comment_content").keydown(function (key) {
+				if (key.keyCode == 13) {
+					comment_ajax();
+				}
+			})
+			
+			//댓글 입력 ajax
+			var comment_ajax = function () {
+				$.ajax({
+					url: "/comment",
+					method: "POST",
+					async: false,
+					data: {
+						member_id: login_memberId,
+						challenge_id: challenge_id,
+						comment_content: $("#comment_content").val()
+					},
+					//////////////////// recv
+					success: function () {
+						location.reload();
+					},
+					error: function (xhr, status, error) { // (파라미터 생략가능)
+						alert("error");
+					}
+					////////////////////
+				})
+			}
+
+			//수정하기 누를 시
+			$(".com-update").click(function () {
+				$(this).parent().css("display", "none");
+				$(this).parent().siblings('div').css("display", "block");
+				$(this).parent().parent().parent().find('.font-weight-bold.com').css("display", "none");
+				$(this).parent().parent().parent().find('.update-content').css("display", "block");
+			})
+			
+			//취소 누를시
+			$(".update-cancel").click(function(){
+				$(this).parent().css("display", "none");
+				$(this).parent().siblings('div').css("display", "block");
+				$(this).parent().parent().parent().find('.font-weight-bold.com').css("display", "block");
+				$(this).parent().parent().parent().find('.update-content').css("display", "none");
+			})
+
+			//수정 요청 ajax
+			$(".update-ajax").click(function () {
+				$.ajax({
+					url: "/comment-amend",
+					method: "POST",
+					data: {
+						member_id: login_memberId,
+						challenge_id: challenge_id,
+						comment_id: $(this).parent().parent().parent().find('.comment-id').val(),
+						comment_content: $(this).parent().parent().parent().find('.update-content').val()
+					},
+					//////////////////// recv
+					success: function () {
+						location.reload();
+					},
+					error: function (xhr, status, error) { // (파라미터 생략가능)
+						alert("error");
+					}
+					////////////////////
+				})
+			})
+
+
+
+
+
+			//댓글 삭제 ajax
+			$(".com-delete").click(function () {
+				$.ajax({
+					url: "/comment-remove",
+					method: "POST",
+					async: false,
+					data: {
+						member_id: login_memberId,
+						challenge_id: challenge_id,
+						comment_id:$(this).parent().parent().parent().find('.comment-id').val()
+					},
+					//////////////////// recv
+					success: function () {
+						location.reload();
+					},
+					error: function (xhr, status, error) { // (파라미터 생략가능)
+						alert("error");
+					}
+					////////////////////
+				})
+			})
+
+	
+
+
 
 
 		});
