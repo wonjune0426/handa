@@ -139,7 +139,7 @@ public class UserController {
 			rttr.addFlashAttribute("msg", "amend-fail");
 		}
 		
-		return "redirect:/mypage/memberdetail";
+		return "redirect:/mypage";
 	}
 
 	@GetMapping("/logout")

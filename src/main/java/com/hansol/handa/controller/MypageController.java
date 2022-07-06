@@ -39,5 +39,10 @@ public class MypageController {
 		logger.info("calendar-------------------");
 		return "mypage/calendar";
 	}
+	
+	@GetMapping("")
+	public String getIndex() {
+		return "mypage/index";
+	}
 	 
 }

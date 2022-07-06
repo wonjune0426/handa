@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}"
+	xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
+<head>
+	<title>내 정보</title>
+	
+	<!-- include CSS File -->
+	<th:block layout:fragment="css">
+		<link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css' rel='stylesheet' />
+		<link th:href="@{/assets/css/mypage.css}" rel="stylesheet">
+	</th:block>
+</head>
+
+<div layout:fragment="content">
+	<main id="main">
+		<!-- ======= Breadcrumbs ======= -->
+		<div class="breadcrumbs">
+			<div class="page-header d-flex align-items-center"
+				style="background-image: url('../assets/img/page-header.jpg');">
+				<div class="container position-relative">
+					<div class="row d-flex justify-content-center">
+						<div class="col-lg-6 text-center">
+							<h2></h2>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- <nav>
+				<div class="container">
+					<ol>
+						<li><a href="/">홈</a></li>
+            			<li>마이페이지</li>
+            			<li>내 정보</li>
+					</ol>
+				</div>
+			</nav> -->
+		</div>
+		<!-- End Breadcrumbs -->
+		<!-- ======= Services Section ======= -->
+		<section id="service-details" class="service-details">
+			<div class="container aos-init aos-animate" data-aos="fade-up">
+				<div class="row">
+					<div class="my-info col-3">
+						<b>내정보</b>
+						<div class="my-info-content">
+						<br>
+						<div class="img-wrapper">
+						  <img alt="프로필 이미지" class="image--cover" 
+												th:if="${not #strings.isEmpty(#authentication.principal.user.profile_name)}"
+												th:src="|${'http://172.27.0.174:8080/viewFile?fname=' 
+												+ #authentication.principal.user.profile_path + '/' 
+												+ #authentication.principal.user.profile_uuid + '_' 
+												+ #authentication.principal.user.profile_name}|">
+												
+						<img alt="프로필 이미지" class="image--cover" 
+												th:unless="${not #strings.isEmpty(#authentication.principal.user.profile_name)}"
+												th:src="@{/assets/img/user.png}">
+						</div>
+						<p class="my-info-name">
+							<th:block th:text="${#authentication.principal.user.member_name}"></th:block>
+							
+							<th:block th:if="${#authentication.principal.user.position_id==1}" th:text="수석"></th:block>
+            				<th:block th:if="${#authentication.principal.user.position_id==2}" th:text="책임"></th:block>
+            				<th:block th:if="${#authentication.principal.user.position_id==3}" th:text="선임"></th:block>
+						</p>
+						<hr>
+						<div class="my-info-etc">
+							<p>
+								<i class="fa-solid fa-city"></i>
+								<!-- 계열사 (조인으로 가져오는 걸로 처리해도 됩니다. 임시로 if 문 처리) -->			              							
+       							<th:block th:if="${#authentication.principal.user.affiliates_id==1}">한솔 인티큐브</th:block>
+       							<th:block th:if="${#authentication.principal.user.affiliates_id==2}">한솔 제지</th:block>
+       							<th:block th:if="${#authentication.principal.user.affiliates_id==3}">한솔 테크닉스</th:block>
+       							<th:block th:if="${#authentication.principal.user.affiliates_id==4}">한솔 페이퍼택</th:block>
+       							<th:block th:if="${#authentication.principal.user.affiliates_id==5}">한솔 홀딩스</th:block>
+       							<th:block th:if="${#authentication.principal.user.affiliates_id==6}">한솔 문화재단</th:block>
+       							<th:block th:if="${#authentication.principal.user.affiliates_id==7}">한솔 케미칼</th:block>
+       							<th:block th:if="${#authentication.principal.user.affiliates_id==8}">한솔 홈데코</th:block>
+       							<th:block th:if="${#authentication.principal.user.affiliates_id==9}">한솔 코에버</th:block>
+       							<th:block th:if="${#authentication.principal.user.affiliates_id==10}">한솔 BS</th:block>
+       							<th:block th:if="${#authentication.principal.user.affiliates_id==11}">한솔 PNS</th:block>
+       							<th:block th:if="${#authentication.principal.user.affiliates_id==12}">한솔 로지스틱스</th:block>
+							</p>
+							<p>
+								<i class="fa-solid fa-id-card-clip"></i>
+								<th:block th:text="${#authentication.principal.user.member_id}"></th:block>
+							</p>
+							<p>
+								<i class="fa-solid fa-envelope"></i>
+								<th:block th:text="${#authentication.principal.user.e_mail}"></th:block>
+							</p>
+							<p>
+								<i class="fa-solid fa-user-plus"></i>
+								생성 챌린지 
+								<span class="my-info-num">00</span>건
+							</p>
+							<p>
+								<i class="fa-solid fa-user-group"></i>
+								참여 챌린지 <span class="my-info-num">00</span>건
+							</p>
+						</div>
+						<!-- 정보 수정 버튼 -->
+						<div class="text-center member-amend-btn">
+							<th:block sec:authorize="isAuthenticated()"> 
+								<a th:href="@{/member/amend/} + ${#authentication.principal.Username}" class="mypage-btn align-items-center">정보 수정하기</a> 
+							<th:block>
+						</div>
+						</div>
+					</div>
+					<div class="challenge-info col-9">
+						<div class="create-challenge">
+							<div class="cc-title">
+								<b>내가 생성한 챌린지</b>
+								<a href="#">목록보기</a>
+							</div>
+							<div class="row challenge-card-div">
+								<div class="challenge-card col-4">
+									<a href="" class="ch-card-title">[자격증] 정보처리기사 챌린지</a>
+									<p>2022.07.01 ~ 2022.07.10</p>
+									<p>참여인원 3명</p>
+									<div class="state">
+										<div class="open-dt">2022-07-05 생성 </div>
+										<div class="state-label">진행중</div>
+									</div>
+									<div class="ch-card-btn-div">
+										<button>수정</button>
+										<button>삭제</button>
+									</div>
+								</div>
+								<div class="challenge-card col-4">
+									<a href="" class="ch-card-title">[자격증] 정보처리기사 챌린지</a>
+									<p>2022.07.01 ~ 2022.07.10</p>
+									<p>참여인원 3명</p>
+									<div class="state">
+										<div class="open-dt">2022-07-05 생성 </div>
+										<div class="state-label">진행중</div>
+									</div>
+									<div class="ch-card-btn-div">
+										<button>수정</button>
+										<button>삭제</button>
+									</div>
+								</div>
+								<div class="challenge-card col-4">
+									<a href="" class="ch-card-title">[자격증] 정보처리기사 챌린지</a>
+									<p>2022.07.01 ~ 2022.07.10</p>
+									<p>참여인원 3명</p>
+									<div class="state">
+										<div class="open-dt">2022-07-05 생성 </div>
+										<div class="state-label">진행중</div>
+									</div>
+									<div class="ch-card-btn-div">
+										<button>수정</button>
+										<button>삭제</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="join-challenge">
+							<div class="jc-title">
+								<b>내가 참여한 챌린지</b>
+								<a href="#">목록보기</a>
+							</div>
+							<div class="row challenge-card-div">
+								<div class="challenge-card col-4">
+									<a href="" class="ch-card-title">[자격증] 정보처리기사 챌린지</a>
+									<p>2022.07.01 ~ 2022.07.10</p>
+									<p>참여인원 3명</p>
+									<div class="state">
+										<div class="open-dt">2022-07-05 생성 </div>
+										<div class="state-label">진행중</div>
+									</div>
+									<div class="ch-card-btn-div">
+										<button>탈퇴</button>
+									</div>
+								</div>
+								<div class="challenge-card col-4">
+									<a href="" class="ch-card-title">[자격증] 정보처리기사 챌린지</a>
+									<p>2022.07.01 ~ 2022.07.10</p>
+									<p>참여인원 3명</p>
+									<div class="state">
+										<div class="open-dt">2022-07-05 생성 </div>
+										<div class="state-label">진행중</div>
+									</div>
+									<div class="ch-card-btn-div">
+										<button>탈퇴</button>
+									</div>
+								</div>
+								<div class="challenge-card col-4">
+									<a href="" class="ch-card-title">[자격증] 정보처리기사 챌린지</a>
+									<p>2022.07.01 ~ 2022.07.10</p>
+									<p>참여인원 3명</p>
+									<div class="state">
+										<div class="open-dt">2022-07-05 생성 </div>
+										<div class="state-label">진행중</div>
+									</div>
+									<div class="ch-card-btn-div">
+										<button>탈퇴</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="calender">
+							<b>일정관리</b>
+							<div class="calender-content">
+								<!-- 달력 -->
+								<div id='calendar'></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			
+			
+			<!-- 정보 수정 결과 -->
+			<input type="hidden" th:value="${msg}" class="amend-result"/>
+			
+		</section>
+	</main>
+	<!-- End #main -->
+<th:block layout:fragment="javascript">
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js'></script>
+    
+<!--     <script src='https://unpkg.com/popper.js/dist/umd/popper.min.js'></script> -->
+<!-- 	<script src='https://unpkg.com/tooltip.js/dist/umd/tooltip.min.js'></script> -->
+	
+<script src='../assets/js/calendar.js'></script>
+<script>
+$(document).ready(function(){
+	if ($(".amend-result").val() === "amend-success") {			
+		Swal.fire({
+		  icon: 'success',
+		  text: '수정이 완료되었습니다.'
+		})
+	}
+	
+	if ($(".amend-result").val() === "amend-fail") {			
+		Swal.fire({
+		  icon: 'error',
+		  text: '수정이 실패되었습니다. 다시 진행해주세요.'
+		})
+	}
+		
+});
+ 
+</script>
+</th:block>
+</div>
+</html>
