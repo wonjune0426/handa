@@ -61,6 +61,7 @@
 						<p class="my-info-name">
 							<th:block th:text="${#authentication.principal.user.member_name}"></th:block>
 							
+							<!-- 직급 (조인으로 가져오는 걸로 처리해도 됩니다. 임시로 if 문 처리) -->	
 							<th:block th:if="${#authentication.principal.user.position_id==1}" th:text="수석"></th:block>
             				<th:block th:if="${#authentication.principal.user.position_id==2}" th:text="책임"></th:block>
             				<th:block th:if="${#authentication.principal.user.position_id==3}" th:text="선임"></th:block>
@@ -87,7 +88,7 @@
 								<i class="fa-solid fa-id-card-clip"></i>
 								<th:block th:text="${#authentication.principal.user.member_id}"></th:block>
 							</p>
-							<p>
+							<p class="my-info-email">
 								<i class="fa-solid fa-envelope"></i>
 								<th:block th:text="${#authentication.principal.user.e_mail}"></th:block>
 							</p>

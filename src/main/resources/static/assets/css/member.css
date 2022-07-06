@@ -333,10 +333,16 @@
 	float:right;
 }
 
-.profile-img-div {
-}
 
-.profile-img {
-	width: 30%;
-	
+.img-wrapper {
+    width: 100%;
+    text-align: center;
+    margin-top: 18px;
+}
+.image--cover {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  /* object-position: center right; */
 }

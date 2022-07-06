@@ -230,11 +230,16 @@
 	margin-bottom: 35px;
 }
 .my-info-etc {
-	padding: 10px 15px;	
+	padding: 10px 5px;	
 }
 
 .my-info-num {
 	margin-left: 15px;
+}
+
+.my-info-email {
+	/* //word-wrap: normal; */
+	font-size: 13px !important;
 }
 
 .member-amend-btn {

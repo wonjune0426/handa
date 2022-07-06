@@ -54,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         		"/", "/list", "/detail", "/comment", "/member/login", 
         		"/member/register", "/assets/**", "/smarteditor/**",
         		"/member/index").permitAll()
-        .antMatchers("/mypage/**", "/create", "/member/amend/**","/challenge-amend/**").access("hasRole('ROLE_USER')");
+        .antMatchers("/mypage/**", "/create", "/member/amend/**","/challenge-amend/**","/challenge/member").access("hasRole('ROLE_USER')");
         // .access("hasRole('ROLE_USER')")
 //        .anyRequest().authenticated();
 

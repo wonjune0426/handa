@@ -27,6 +27,10 @@
 	
 }
 
+.challenge-thumbnail {
+	width: 100% !important;
+} 
+
 .testimonial-item, .testimonial-item h3, .testimonial-item h4 {
 	color: #616161!important;
 }

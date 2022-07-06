@@ -56,13 +56,13 @@
 									<div class="row">
 									
 										<div class="form-group mt-3">
-											<div class="profile-img-div">	
+											<div class="img-wrapper">	
 											
-												<img alt="프로필 이미지" class="profile-img" 
+												<img alt="프로필 이미지" class="image--cover" 
 												th:if="${not #strings.isEmpty(user.profile_name)}"
-												th:src="|${'/viewFile?fname=' + user.profile_path + '/' + user.profile_uuid + '_' + user.profile_name}|">
+												th:src="|${'http://172.27.0.174:8080/viewFile?fname=' + user.profile_path + '/' + user.profile_uuid + '_' + user.profile_name}|">
 												
-												<img alt="프로필 이미지" class="profile-img" 
+												<img alt="프로필 이미지" class="image--cover" 
 												th:unless="${not #strings.isEmpty(user.profile_name)}"
 												th:src="@{/assets/img/user.png}">
 											</div>

@@ -7,7 +7,8 @@
 	<select id="getComment" resultType="CommentVO">
 		select *
 		from comment
-		where challenge_id=#{challenge_id}
+		where challenge_id=#{challenge_id} 
+		order by createdate DESC
 	</select>
 	
 	<insert id="createComment" parameterType="CommentVO">
@@ -18,11 +19,11 @@
 	<update id="updateComment" parameterType="CommentVO">
 		update comment
 		set comment_content=#{comment_content}
-		where member_id=#{member_id} and challenge_id=#{challenge_id}
+		where member_id=#{member_id} and challenge_id=#{challenge_id} and comment_id=#{comment_id}
 	</update>
 	
 	<delete id="deleteComment" parameterType="CommentVO">
-		delete from comment where member_id=#{member_id} and challenge_id=#{challenge_id}
+		delete from comment where member_id=#{member_id} and challenge_id=#{challenge_id} and comment_id=#{comment_id}
 	</delete>
 	
 </mapper>
