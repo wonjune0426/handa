@@ -101,8 +101,8 @@
 		$(document).ready(function(){
 			var category = "[[${categoryID}]]";				// 카테고리 ID
 			var sortType = "[[${sortType}]]";				// 정렬 타입
-			var createdate = "0000-00-00 00:00:00";
-			var count = "0";
+			var createdate = "0000-00-00 00:00:00";			// 생성 날짜 기본 값
+			var count = "0";								// 참여 인원 기본 값
 			
 			if(category == "null") category = "0"; 			// 전체 조회의 경우
 			if(sortType == "null") sortType = "0"; 			// 정렬 타입 주어지지 않은 경우

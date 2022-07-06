@@ -100,7 +100,7 @@ public class ChallengeController {
 			
 			map.put("subCategoryName", categoryName.get("sub_category_name")); 
 		}
-		else challengeCount = challengeService.selectCount(0);
+		else challengeCount = challengeService.selectCount(0);	// 전체 리스트 조회일 경우
 		
 		List<ChallengeVO> challengeList = challengeService.selectChallegeList(category, sortType, createdate, count);
 		map.put("challengeList", challengeList);
