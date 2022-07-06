@@ -39,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 	
 	@Bean
-    public AuthenticationSuccessHandler loginSuccessHandler() {
+    AuthenticationSuccessHandler loginSuccessHandler() {
         return new CustomLoginSuccessHandler();
     }
     
@@ -67,19 +67,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.logout()
         .logoutUrl("/member/logout")
         .invalidateHttpSession(true)
-        .deleteCookies("JESSION_ID");
-//        .deleteCookies("remember-me", "JESSION_ID");
+        .deleteCookies("remember-me", "JESSION_ID");
         
-//        http.rememberMe()
-//	      .key("handa")
-//	      .tokenRepository(persistentTokenRepository())
-//	      .tokenValiditySeconds(604800);
+        http.rememberMe()
+	      .key("handa")
+	      .tokenRepository(persistentTokenRepository())
+	      .tokenValiditySeconds(604800); // 일주일
 
     }
     
 
     @Bean
-	public PersistentTokenRepository persistentTokenRepository() {
+	PersistentTokenRepository persistentTokenRepository() {
 		JdbcTokenRepositoryImpl repo = new JdbcTokenRepositoryImpl();
 		repo.setDataSource(dataSource);
 		return repo;
