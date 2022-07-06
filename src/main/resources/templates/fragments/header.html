@@ -32,11 +32,11 @@
 					<!-- 회원인 경우 -->
 					<th:block sec:authorize="isAuthenticated()">
 						
-						<li><a href="/mypage" class="nav-link" >
+						<li><a href="/mypage" class="nav-link" style="padding-left: 20px; padding-right: 15px;">
 						<i class="fa-solid fa-user" alt="마이페이지" title="마이페이지" ></i></a></li>
 						
 						<form action="/member/logout" method="post" id="logoutForm">
-							<li><a class="logout-btn" href="#">
+							<li><a class="logout-btn" href="#" style="padding-left: 15px; padding-right: 15px;">
 							<i class="fa-solid fa-right-from-bracket"  alt="로그아웃" title="로그아웃"></i></a></li>
 						</form>
 					</th:block>

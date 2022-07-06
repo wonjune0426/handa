@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		  const activeBannerColor = document.querySelector('.event-banner .swiper-slide-duplicate-active .testimonial-item');
 		  const changeBannerColor = document.querySelector('.event-banner');
 		  
-		  console.log("change , ", activeBannerColor);
+		  // console.log("change , ", activeBannerColor);
 		  
 		  changeBannerColor.style.background = activeBannerColor.dataset.bannerColor;
 		  changeBanner.style.background = 'url(' + bannerImg + ') no-repeat';
