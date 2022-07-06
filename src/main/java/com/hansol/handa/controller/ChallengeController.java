@@ -57,10 +57,10 @@ public class ChallengeController {
 	// 리스트 화면 호출
 	@GetMapping("/list")
 	public String list(@RequestParam(required = false) String category, @RequestParam(required = false) String sortType,
-			Model model) {
+			@RequestParam(required=false) String searchWord, Model model) {
 
 		Boolean isCategory = true;
-
+		
 		// 정렬 조건이 주어지지 않을 경우 (최신순)
 		if(sortType == null)
 			model.addAttribute("sortType", sortType);
@@ -78,6 +78,8 @@ public class ChallengeController {
 			model.addAttribute("mainCategoryName", categoryName.get("main_category_name"));
 		}
 
+		model.addAttribute("searchWord", searchWord);
+			
 		model.addAttribute("isCategory", isCategory);
 
 		return "challenge/list";
@@ -88,7 +90,8 @@ public class ChallengeController {
 	@GetMapping("/challenge-list")
 	// 전체 리스트 정렬 & 각 카테고리 별 챌린지 리스트 조회, 정렬
 	public HashMap<String, Object> listView(@RequestParam(required = false) String category, @RequestParam(required = false) String sortType,
-			@RequestParam(required = false) String createdate, @RequestParam(required = false) String count, Model model) {
+			@RequestParam(required = false) String createdate, @RequestParam(required = false) String count, 
+			@RequestParam(required = false) String searchWord, Model model) {
 	
 		HashMap<String, Object> map = new HashMap<>();
 		int challengeCount = 0;
@@ -102,14 +105,13 @@ public class ChallengeController {
 		}
 		else challengeCount = challengeService.selectCount(0);	// 전체 리스트 조회일 경우
 		
-		List<ChallengeVO> challengeList = challengeService.selectChallegeList(category, sortType, createdate, count);
+		List<ChallengeVO> challengeList = challengeService.selectChallegeList(category, sortType, createdate, count, searchWord);
 		map.put("challengeList", challengeList);
 
 		map.put("challengeCount", challengeCount);
 		
 		return map;
 	}
-	
 	
 //이미지 검색 api를 통한 이미지 검색
 	@GetMapping("/imagelist/{searchWord}")

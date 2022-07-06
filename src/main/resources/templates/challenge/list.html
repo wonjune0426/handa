@@ -75,7 +75,31 @@
 								</th:block>
 							</select>
 						</div>
-						<div class="col-6"></div>
+						
+						<div class="btn-group order-div col-1">
+							<select class="form-control handa-list-select"
+								onchange="if(this.value) location.href=(this.value);">
+								<th:block th:if="${#strings.isEmpty(isCategory)} or ${!isCategory}">
+									<option th:value="@{/list?sortType=0}" th:text="전체"
+										></option>
+									<option th:value="@{/list?sortType=1}" th:text="무료"
+										></option>
+									<option th:value="@{/list?sortType=2}" th:text="유료"
+										></option>
+								</th:block>
+
+								<th:block th:if="${isCategory}">
+									<option th:value="@{/list?sortType=0}" th:text="전체"
+										></option>
+									<option th:value="@{/list?sortType=1}" th:text="무료"
+										></option>
+									<option th:value="@{/list?sortType=2}" th:text="유료"
+										></option>
+								</th:block>
+							</select>
+						</div>
+						
+						<div class="col-5"></div>
 						<div class="search-div col-4">
 							<form action="#" class="form-search handa-search-form">
 								<input type="text" class="form-control" placeholder="검색어를 입력하세요.">
@@ -83,6 +107,8 @@
 									class="btn btn-primary handa-outline-btn list-search-btn">검색</button>
 							</form>
 						</div>
+						
+						<div></div><div></div>
 						<div id ="list-container" class="col-md-12"></div>
 						<div id="end"></div>
 						</div>
@@ -99,15 +125,17 @@
 	<script th:inline="javascript">
 		
 		$(document).ready(function(){
-			var category = "[[${categoryID}]]";				// 카테고리 ID
-			var sortType = "[[${sortType}]]";				// 정렬 타입
-			var createdate = "0000-00-00 00:00:00";			// 생성 날짜 기본 값
-			var count = "0";								// 참여 인원 기본 값
+			var category = "[[${categoryID}]]";					// 카테고리 ID
+			var sortType = "[[${sortType}]]";					// 정렬 타입
+			var createdate = "0000-00-00 00:00:00";				// 생성 날짜 기본 값
+			var count = "0";									// 참여 인원 기본 값
+			var searchWord = "[[${searchWord}]]";				// 검색 키워드
 			
-			if(category == "null") category = "0"; 			// 전체 조회의 경우
-			if(sortType == "null") sortType = "0"; 			// 정렬 타입 주어지지 않은 경우
-				
-			infiniteScroll(category, sortType, createdate, count);
+			if(category == "null") category = "0"; 				// 전체 조회의 경우
+			if(sortType == "null") sortType = "0"; 				// 정렬 타입 주어지지 않은 경우
+			if(searchWord == "null") searchWord = "search";		// 검색 키워드 주어지지 않은 경우
+			
+			infiniteScroll(category, sortType, createdate, count, searchWord);
 		}); 
 		
 	</script>

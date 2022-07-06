@@ -33,6 +33,7 @@
 										WHERE challenge.challenge_id = challenge_join.challenge_id
 										GROUP BY challenge.challenge_id) count_table
 		WHERE challenge.subcategory_id = sub_category.sub_category_id AND challenge.challenge_id = count_table.challenge_id
+			<if test = "searchword != 'search'"> AND challenge_name like '%#{searchword}%'</if>
 			<choose>
 				<!-- 최신순 -->
 				<when test="sortType == 0">	

@@ -11,7 +11,8 @@ function getList(element, category, sortType, createdate, count){
 			category: category, 
 			sortType: sortType,
 			createdate : createdate,
-			count : count
+			count : count,
+			searchWord : "search"
 		},  
 		contentType : 'application/json',
 		success: function(res){
@@ -65,21 +66,21 @@ function getList(element, category, sortType, createdate, count){
 	});
 }
 
-function infiniteScroll(category, sortType, createdate, count){
+function infiniteScroll(category, sortType, createdate, count, searchWord){
 	var page = 0;
 	var challenge = 12;
 	
 	const $listEnd = document.querySelector('#end');
 	const observer = new IntersectionObserver((entries) => {
 		if(page < 1){
-			getList("#list-container", category, sortType, createdate, count);
+			getList("#list-container", category, sortType, createdate, count, searchWord);
 		}else{
 			var pageTotal = (challengeCount % challenge == 0 ? challengeCount / challenge : challengeCount / challenge + 1);
 			
 			if(page != pageTotal){
 				var length = challengeList.length;
 				
-				getList("#end-list", category, sortType, challengeList[length-1]['createdate'], challengeList[length-1]['joinVO']['count']);
+				getList("#end-list", category, sortType, challengeList[length-1]['createdate'], challengeList[length-1]['joinVO']['count'], searchWord);
 			}else				
 				$('#end').hide();
 		}
