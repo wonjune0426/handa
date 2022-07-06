@@ -51,12 +51,11 @@ function getList(element, category, sortType, createdate, count){
 				data += "</div>";
 							
 				data += "</div>";
-				//data += "</div>";
 			}
+			
 			data += "</div>";
 			data += "<div id ='end-list' class='row gy-4'></div>";
 				 
-			//$("#list-container").html(data);
 			$(element).html(data);
 			$(element).attr('id', 'list-container');	
 		},
@@ -75,14 +74,13 @@ function infiniteScroll(category, sortType, createdate, count){
 		if(page < 1){
 			getList("#list-container", category, sortType, createdate, count);
 		}else{
-			var pageTotal = (challengeCount % challenge == 0 ? challengeCount / challenge : hallengeCount / challenge + 1);
+			var pageTotal = (challengeCount % challenge == 0 ? challengeCount / challenge : challengeCount / challenge + 1);
 			
 			if(page != pageTotal){
 				var length = challengeList.length;
 				
-				getList("#end-list", category, sortType, challengeList[length-1]['createdate'], challengeList[length-1]['count']);
-			}
-			else				
+				getList("#end-list", category, sortType, challengeList[length-1]['createdate'], challengeList[length-1]['joinVO']['count']);
+			}else				
 				$('#end').hide();
 		}
 		page++;

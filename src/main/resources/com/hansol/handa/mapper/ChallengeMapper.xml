@@ -46,7 +46,7 @@
 				</when>
 				<!-- 참여인원 순 -->
 				<when test="sortType == 2"> 
-					<if test="count != 0"><![CDATA[ AND if(#{count} = '1', count < 2 and createdate < #{createdate}, count < #{count})]]></if>
+					<if test="count != 0"><![CDATA[ AND if(#{count} = '1', count < 2 and createdate < #{createdate}, count < #{count} and createdate < #{createdate})]]></if>
 					GROUP BY challenge.challenge_id order by count desc, createdate DESC LIMIT 12;
 				</when>
 			</choose>
@@ -74,7 +74,7 @@
 				</when>
 				<!-- 참여인원 순 -->
 				<when test="sortType == 2"> 
-					<if test="count != 0"><![CDATA[ AND if(#{count} = '1', COUNT < 2 and createdate < #{createdate}, count < #{count})]]></if>
+					<if test="count != 0"><![CDATA[ AND if(#{count} = '1', count < 2 and createdate < #{createdate}, count < #{count} and createdate < #{createdate})]]></if>
 					GROUP BY challenge.challenge_id order by count desc, createdate DESC LIMIT 12;
 				</when>
 			</choose>
