@@ -1,5 +1,6 @@
 package com.hansol.handa.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +17,8 @@ public interface ChallengeMapper {
 	List<ChallengeVO> selectChallegeListCategory(Map<String, Object> map);		// 카테고리 별 리스트 조회
 	
 	Map<String, String> selectCategoryName(int sub_category_id);	// 카테고리 이름 조회
-	int selectCount(int sub_category_id);							// 챌린지 개수 조회
+	//int selectCount(int sub_category_id);							// 챌린지 개수 조회
+	int selectCount(HashMap<String, Object> countMap);
 	/* *************** */
 	
 	void createChallenge(ChallengeVO challengeVO);

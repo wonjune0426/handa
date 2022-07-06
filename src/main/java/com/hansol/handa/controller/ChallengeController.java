@@ -57,7 +57,7 @@ public class ChallengeController {
 	// 리스트 화면 호출
 	@GetMapping("/list")
 	public String list(@RequestParam(required = false) String category, @RequestParam(required = false) String sortType,
-			@RequestParam(required=false) String searchWord, Model model) {
+			@RequestParam(required=false) String searchWord, @RequestParam(required=false) String challengeType, Model model) {
 
 		Boolean isCategory = true;
 		
@@ -77,9 +77,14 @@ public class ChallengeController {
 			model.addAttribute("subCategoryName", categoryName.get("sub_category_name"));
 			model.addAttribute("mainCategoryName", categoryName.get("main_category_name"));
 		}
-
+		
+		if(challengeType == null)
+			model.addAttribute("challengeType", challengeType);
+		else
+			model.addAttribute("challengeType", Integer.parseInt(challengeType));
+		
 		model.addAttribute("searchWord", searchWord);
-			
+	
 		model.addAttribute("isCategory", isCategory);
 
 		return "challenge/list";
@@ -91,24 +96,33 @@ public class ChallengeController {
 	// 전체 리스트 정렬 & 각 카테고리 별 챌린지 리스트 조회, 정렬
 	public HashMap<String, Object> listView(@RequestParam(required = false) String category, @RequestParam(required = false) String sortType,
 			@RequestParam(required = false) String createdate, @RequestParam(required = false) String count, 
-			@RequestParam(required = false) String searchWord, Model model) {
+			@RequestParam(required = false) String searchWord, @RequestParam(required = false) String challengeType, Model model) {
 	
 		HashMap<String, Object> map = new HashMap<>();
+		HashMap<String, Object> countMap = new HashMap<>();
+		
 		int challengeCount = 0;
 		
 		if(!category.equals("0")){	// 카테고리 별 조회의 경우
 			int categoryID = Integer.parseInt(category);  
 			Map<String, String> categoryName = challengeService.selectCategoryName(categoryID);
-			challengeCount = challengeService.selectCount(categoryID);
-			
+
+			countMap.put("sub_category_id", categoryID);
 			map.put("subCategoryName", categoryName.get("sub_category_name")); 
 		}
-		else challengeCount = challengeService.selectCount(0);	// 전체 리스트 조회일 경우
-		
-		List<ChallengeVO> challengeList = challengeService.selectChallegeList(category, sortType, createdate, count, searchWord);
-		map.put("challengeList", challengeList);
 
+		countMap.put("searchWord", searchWord);
+		
+		countMap.put("challengeType", challengeType);
+		
+		challengeCount = challengeService.selectCount(countMap);
+		
+		List<ChallengeVO> challengeList = challengeService.selectChallegeList(category, sortType, createdate, count, searchWord, challengeType);
+		
+		map.put("challengeList", challengeList);
 		map.put("challengeCount", challengeCount);
+		map.put("searchWord", searchWord);
+		map.put("challengeType", challengeType);
 		
 		return map;
 	}

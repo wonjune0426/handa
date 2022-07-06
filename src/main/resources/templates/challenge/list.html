@@ -48,7 +48,7 @@
           			 <h2>챌린지 리스트</h2> -->
 				</div>
 
-				<div class="row gy-4">
+<!-- 				<div class="row gy-4">
 					<div class="create-challenge-div">
 						<a href="/create" class="create-challenge-btn">챌린지 생성</a>
 					</div>
@@ -97,6 +97,27 @@
 										></option>
 								</th:block>
 							</select>
+						</div> -->
+					<div class="row gy-4">
+					<div class="create-challenge-div">
+						<a href="/create" class="create-challenge-btn">챌린지 생성</a>
+					</div>
+					
+					<div class="row gy-4">
+						<div class="btn-group order-div col-2">
+							<select id="sortTypeSelect" name="sortTypeSelect" class="form-control handa-list-select" onchange="selectType()">
+								<option th:value="0" th:text="최신순" th:selected="${sortType} == '0'"></option>
+								<option th:value="1" th:text="오래된순" th:selected="${sortType} == '1'"></option>
+								<option th:value="2" th:text="참여인원순" th:selected="${sortType} == '2'"></option>
+							</select>
+						</div>
+						
+						<div class="btn-group order-div col-1">
+							<select id="challengeTypeSelect" name="challengeTypeSelect" class="form-control handa-list-select" onchange="selectType()">
+								<option th:value="0" th:text="전체" th:selected="${challengeType} == '0'"></option>
+								<option th:value="1" th:text="무료" th:selected="${challengeType} == '1'"></option>
+								<option th:value="2" th:text="유료" th:selected="${challengeType} == '2'"></option>
+							</select>
 						</div>
 						
 						<div class="col-5"></div>
@@ -109,7 +130,8 @@
 						</div>
 						
 						<div></div><div></div>
-						<div id ="list-container" class="col-md-12"></div>
+						
+						<div id ="list-container" class="row gy-4"></div> 
 						<div id="end"></div>
 						</div>
 					</div>
@@ -122,21 +144,39 @@
 <!-- include JS Script -->
 <th:block layout:fragment="javascript">
 	<script src='../assets/js/infiniteScroll.js'></script>
-	<script th:inline="javascript">
-		
+	<script th:inline="javascript">	
+	
 		$(document).ready(function(){
 			var category = "[[${categoryID}]]";					// 카테고리 ID
 			var sortType = "[[${sortType}]]";					// 정렬 타입
 			var createdate = "0000-00-00 00:00:00";				// 생성 날짜 기본 값
 			var count = "0";									// 참여 인원 기본 값
 			var searchWord = "[[${searchWord}]]";				// 검색 키워드
+			var challengeType = "[[${challengeType}]]";			// 챌린지 타입
 			
 			if(category == "null") category = "0"; 				// 전체 조회의 경우
 			if(sortType == "null") sortType = "0"; 				// 정렬 타입 주어지지 않은 경우
 			if(searchWord == "null") searchWord = "search";		// 검색 키워드 주어지지 않은 경우
+			if(challengeType == "null") challengeType = "0"		// 챌린지 타입 주어지지 않은 경우
 			
-			infiniteScroll(category, sortType, createdate, count, searchWord);
+			infiniteScroll(category, sortType, createdate, count, searchWord, challengeType);
 		}); 
+		
+		// select 태그 눌렀을 때 조건에 따라 조회 (정렬 조건, 챌린지 타입)
+		
+		function selectType(){
+			var category = "[[${categoryID}]]";	
+			var sortTypeSelect = document.getElementById('sortTypeSelect');
+			var challengeTypeSelect = document.getElementById("challengeTypeSelect");
+			
+			var sortType = sortTypeSelect.options[sortTypeSelect.selectedIndex].value;
+			var challengeType = challengeTypeSelect.options[challengeTypeSelect.selectedIndex].value;
+			
+			if(category == "null")
+				window.location.href = "/list?sortType=" + sortType + "&challengeType=" + challengeType;
+			else
+				window.location.href = "/list?category=" + category + "&sortType=" + sortType + "&challengeType=" + challengeType;
+		}
 		
 	</script>
 </th:block>

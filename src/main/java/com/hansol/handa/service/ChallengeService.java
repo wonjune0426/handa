@@ -1,5 +1,6 @@
 package com.hansol.handa.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,9 +9,10 @@ import com.hansol.handa.domain.ChallengeVO;
 public interface ChallengeService {
 	
 	/* 챌린지 리스트 조회 */
-	public List<ChallengeVO> selectChallegeList(String category, String sortType, String createdate, String count, String searchWord);
+	public List<ChallengeVO> selectChallegeList(String category, String sortType, String createdate, String count, String searchWord, String challengeType);
 	public Map<String, String> selectCategoryName(int categoryID);		// 카테고리 이름 조회
-	public int selectCount(int subCategory_id);							// 챌린지 개수 조회
+	//public int selectCount(int subCategory_id);							// 챌린지 개수 조회
+	public int selectCount(HashMap<String, Object> countMap);
 	/* *************** */
 	
 	public List<String> getimagelist(String searchWord);

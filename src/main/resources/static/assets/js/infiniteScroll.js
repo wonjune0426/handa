@@ -1,7 +1,7 @@
 var challengeList = null;
 var challengeCount = null;
 
-function getList(element, category, sortType, createdate, count){
+function getList(category, sortType, createdate, count, searchWord, challengeType){
 
 	$.ajax({
 		type : 'GET',
@@ -12,7 +12,8 @@ function getList(element, category, sortType, createdate, count){
 			sortType: sortType,
 			createdate : createdate,
 			count : count,
-			searchWord : "search"
+			searchWord : "search",
+			challengeType : challengeType
 		},  
 		contentType : 'application/json',
 		success: function(res){
@@ -22,7 +23,6 @@ function getList(element, category, sortType, createdate, count){
 			const subCategoryName = res['subCategoryName'];
 
 			var data = "";
-			data += "<div class='row gy-4'>";
 				
 			for(var i = 0; i < challengeList.length; i++){
 				data += "<div class='card-container col-lg-4 col-md-6' data-aos='fade-up' data-aos-delay='100'>";
@@ -55,10 +55,8 @@ function getList(element, category, sortType, createdate, count){
 			}
 			
 			data += "</div>";
-			data += "<div id ='end-list' class='row gy-4'></div>";
-				 
-			$(element).html(data);
-			$(element).attr('id', 'list-container');	
+			
+			$("#list-container").append(data);
 		},
 		error: function(){
 			alert('실패!');
@@ -66,21 +64,21 @@ function getList(element, category, sortType, createdate, count){
 	});
 }
 
-function infiniteScroll(category, sortType, createdate, count, searchWord){
+function infiniteScroll(category, sortType, createdate, count, searchWord, challengeType){
 	var page = 0;
 	var challenge = 12;
 	
 	const $listEnd = document.querySelector('#end');
 	const observer = new IntersectionObserver((entries) => {
 		if(page < 1){
-			getList("#list-container", category, sortType, createdate, count, searchWord);
+			getList(category, sortType, createdate, count, searchWord, challengeType);
 		}else{
-			var pageTotal = (challengeCount % challenge == 0 ? challengeCount / challenge : challengeCount / challenge + 1);
+			var pageTotal = ((challengeCount % challenge == 0) ? Math.round(challengeCount / challenge) : Math.round(challengeCount / challenge) + 1);
+			console.log(challengeCount);
 			
 			if(page != pageTotal){
 				var length = challengeList.length;
-				
-				getList("#end-list", category, sortType, challengeList[length-1]['createdate'], challengeList[length-1]['joinVO']['count'], searchWord);
+				getList(category, sortType, challengeList[length-1]['createdate'], challengeList[length-1]['joinVO']['count'], searchWord, challengeType);
 			}else				
 				$('#end').hide();
 		}
