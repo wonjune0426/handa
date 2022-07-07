@@ -2,7 +2,6 @@ package com.hansol.handa.controller;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -181,6 +180,7 @@ public class UserController {
 		
 		log.info("user: " + user); 
 		
+		// 토큰 값을 이쪽에서 생성해야함
 		userService.sendMail(user);
 		
 		model.addAttribute("msg", "after-send");
@@ -190,12 +190,9 @@ public class UserController {
 	
 	// 메일 인증 (메일 받고 인증링크로 인증하기)
 	@GetMapping("/check-email-token")
-	public String verifyEmail(String member_id, Model model, RedirectAttributes rttr) {
-		// String token, String email, String member_id ,
-		// 메일링크 클릭 시 파라미터로 token, email 값 전달 받기
-		
-		// 계정 정보를 불러와서 email 값과 일치하는지 확인
+	public String verifyEmail(String token, String member_id, RedirectAttributes rttr) {
 		// 토큰 값 일치하는지 확인
+		// 파라미터로 받은 토큰 값 == DB에서 불러온 토큰값
 		
 		// 인증 완료되면 auth 값 role_certify_user로 변경
 		UserVO vo = new UserVO();

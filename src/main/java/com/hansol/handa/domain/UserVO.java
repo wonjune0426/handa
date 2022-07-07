@@ -1,7 +1,5 @@
 package com.hansol.handa.domain;
 
-import java.util.List;
-
 import lombok.Data;
 
 @Data
@@ -20,6 +18,6 @@ public class UserVO {
 	private String profile_type;
 	private String createdate;
 	private int position_id;
-	private String certified;
 	private String auth;
+	private String certifyToken;
 }

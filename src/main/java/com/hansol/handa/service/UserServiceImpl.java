@@ -1,13 +1,12 @@
 package com.hansol.handa.service;
 
 import java.util.List;
-import java.util.Random;
+import java.util.UUID;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
@@ -38,6 +37,8 @@ public class UserServiceImpl implements UserService {
 		
 		userVO.setPassword(encoder.encode(userVO.getPassword()));
 		
+		userVO.setCertifyToken(createToken());
+		
 		return userMapper.register(userVO);	
 	}
 	
@@ -47,6 +48,8 @@ public class UserServiceImpl implements UserService {
 		
 		MimeMessage mimeMessage = javaMailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
+		
+		log.info("user SEND MAIL: " + user);
 		
 		helper.setFrom("HANDA");
 		helper.setTo(user.getE_mail());
@@ -60,15 +63,17 @@ public class UserServiceImpl implements UserService {
 		
 		StringBuffer emailContent = new StringBuffer();
 		
+		String token = user.getCertifyToken();
+		
 		emailContent.append(
 				"<div style='width: 400px; height: 1000px; border-top: 4px solid #86a0e6;'>"
-				+ "<small>Handa</small>"
+				+ "<p>Handa</p>"
 				+ "<h1>메일인증 안내입니다.</h1>"
 				+ "<p>" + user.getMember_name() + "(" + user.getMember_id() + ")" + " 님" + "</p>"
 				+ "<p>아래 '메일 인증' 버튼을 클릭하여 가입을 완료해주세요.</p>"
 				+ "<p>감사합니다.</p>"
-				+ ""
-				+ "<a href='http://localhost:8080/member/check-email-token?member_id=" + user.getMember_id() + "' target='_blank'"
+				+ "<br><br>"
+				+ "<a href='http://localhost:8080/member/check-email-token?token=" + token + "&member_id=" + user.getMember_id() + "' target='_blank'"
 				+ "		style='width:200px; height: 50px; padding: 10px 20px; color: #fff; background: #86a0e6;'>"
 				+ "메일 인증"
 				+ "</a>"
@@ -76,6 +81,16 @@ public class UserServiceImpl implements UserService {
 				+ "</div>");
 		
 		return emailContent.toString();
+	}
+	
+	public String createToken() {
+		String token = "";
+		
+		UUID uuid = UUID.randomUUID();
+		
+		token = uuid.toString();
+		
+		return token;
 	}
 	
 	public String getCertifiedKey() {

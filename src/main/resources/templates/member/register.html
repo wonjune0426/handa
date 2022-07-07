@@ -62,7 +62,7 @@
 								<table class="register-width100">
 									<tr>
 										<td class="register-width100"><input type="text"
-											name="member_id" class="form-control" id="memberid" value="mailtest"
+											name="member_id" class="form-control" id="memberid"
 											placeholder="아이디" required></td>
 										<td>
 											<button class="btn btn-primary register-button-width id-check">중복확인</button>
@@ -74,7 +74,7 @@
 									<label class="login-label"><b>비밀번호</b></label>
 								</div>
 								<input type="password" class="form-control" name="password"
-									id="password" placeholder="비밀번호" required="" maxlength="13" value="dlrhdms12">
+									id="password" placeholder="비밀번호" required="" maxlength="13">
 									<span style="font-size: 13px; color: #777;">8~13자 영문, 숫자 조합을 사용하세요.</span>
 							</div>
 							<div class="form-group mt-3">
@@ -82,14 +82,14 @@
 									<label class="login-label"><b>비밀번호 확인</b></label>
 								</div>
 								<input type="password" class="form-control"
-									id="password-check" placeholder="비밀번호 확인" required="" maxlength="13" value="dlrhdms12">
+									id="password-check" placeholder="비밀번호 확인" required="" maxlength="13">
 							</div>
 
 							<div class="form-group mt-3">
 								<div class="register-label-style">
 									<label class="login-label"><b>이름</b></label>
 								</div>
-								<input type="text" class="form-control" id="member-name" value="이름"
+								<input type="text" class="form-control" id="member-name"
 									name="member_name" placeholder="이름" maxlength="10" required="">
 							</div>
 
@@ -97,14 +97,14 @@
 								<div class="register-label-style">
 									<label class="login-label"><b>전화번호</b></label>
 								</div>
-								<input type="text" class="form-control" id="member-call" value="010-1234-1234"
+								<input type="text" class="form-control" id="member-call"
 									name="member_call" placeholder="전화번호" required="" maxlength="13">
 							</div>
 							<div class="form-group mt-3">
 								<div class="register-label-style">
 									<label class="login-label"><b>e-mail</b></label>
 								</div>
-								<input type="text" class="form-control" id="e-mail" value="lge_97@naver.com"
+								<input type="text" class="form-control" id="e-mail"
 									name="e_mail" placeholder="e-mail" required="">
 							</div>
 							<div class="form-group mt-3">
@@ -112,7 +112,7 @@
 									<label class="login-label"><b>성별</b></label>
 								</div>
 								<div class="register-float-right select">
-									 <input type="radio" id="select" name="gender" value="남" checked="checked"><label for="select">남</label>
+									 <input type="radio" id="select" name="gender" value="남"><label for="select">남</label>
      								<input type="radio" id="select2" name="gender" value="여"><label for="select2">여</label>
 								</div>
 							</div>
@@ -125,7 +125,7 @@
 										<td><select class="form-control handa-list-select"
 											name="affiliates_id">
 												<option value="0">-- 선택 --</option>
-												<option value="1" selected="selected">한솔 인티큐브</option>
+												<option value="1">한솔 인티큐브</option>
 												<option value="2">한솔 제지</option>
 												<option value="3">한솔 테크닉스</option>
 												<option value="4">한솔 페이퍼택</option>
@@ -150,7 +150,7 @@
 										<td><select class="form-control handa-list-select"
 											name="position_id">
 												<option value="0">-- 선택 --</option>
-												<option value="1"  selected="selected">수석</option>
+												<option value="1">수석</option>
 												<option value="2">책임</option>
 												<option value="3">선임</option>
 										</select></td>
@@ -243,9 +243,6 @@
 			  icon: 'error',
 			  text: text
 		})
-/* 		setTimeout(function(){
-			focus.focus();
-   		}); */
 	}
 	
 	$(".register-btn-div button").on("click", function (e) {

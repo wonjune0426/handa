@@ -57,14 +57,8 @@
 									
 										<div class="form-group mt-3">
 											<div class="img-wrapper">	
-											
 												<img alt="프로필 이미지" class="image--cover" 
-												th:if="${not #strings.isEmpty(user.profile_name)}"
 												th:src="|${'http://172.27.0.174:8080/viewFile?fname=' + user.profile_path + '/' + user.profile_uuid + '_' + user.profile_name}|">
-												
-												<img alt="프로필 이미지" class="image--cover" 
-												th:unless="${not #strings.isEmpty(user.profile_name)}"
-												th:src="@{/assets/img/user.png}">
 											</div>
 											<h3 th:text="${user.member_name}">김한솔</h3> <p th:text="${'(' + user.member_id + ')'}">(hansol)</p>
 											<input type="hidden" th:value="${user.member_id}" name="member_id" id="member_id">

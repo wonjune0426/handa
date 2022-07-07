@@ -48,15 +48,10 @@
 						<br>
 						<div class="img-wrapper">
 						  <img alt="프로필 이미지" class="image--cover" 
-												th:if="${not #strings.isEmpty(#authentication.principal.user.profile_name)}"
 												th:src="|${'http://172.27.0.174:8080/viewFile?fname=' 
 												+ #authentication.principal.user.profile_path + '/' 
 												+ #authentication.principal.user.profile_uuid + '_' 
 												+ #authentication.principal.user.profile_name}|">
-												
-						<img alt="프로필 이미지" class="image--cover" 
-												th:unless="${not #strings.isEmpty(#authentication.principal.user.profile_name)}"
-												th:src="@{/assets/img/user.png}">
 						</div>
 						<p class="my-info-name">
 							<th:block th:text="${#authentication.principal.user.member_name}"></th:block>
