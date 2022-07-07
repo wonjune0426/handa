@@ -11,10 +11,10 @@
 	<insert id="register">
 		INSERT INTO member 
 			(member_id, password, member_name, member_call, 
-			e_mail, gender, affiliates_id, position_id)
+			e_mail, gender, affiliates_id, position_id, certify_token)
 		VALUES
 			(#{member_id}, #{password},#{member_name}, #{member_call},
-			#{e_mail}, #{gender}, #{affiliates_id}, #{position_id})
+			#{e_mail}, #{gender}, #{affiliates_id}, #{position_id}, #{certifyToken})
 	</insert>
 	
 	<update id="update">

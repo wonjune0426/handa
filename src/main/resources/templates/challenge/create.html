@@ -99,11 +99,17 @@
 										<div class="col-md-6 width-100">
 											<label for="main-category">
 												<h3>유형</h3>
-											</label> <select class="form-control main-category" name="challenge_type"
-												id="challenge_type">
-												<option value="무료">무료</option>
-												<option value="유료">유료</option>
-											</select>
+											</label>
+											<div style="display: flex;">
+												<select class="form-control main-category" name="challenge_type"
+													id="challenge_type" style="width:50%">
+													<option value="무료">무료</option>
+													<option value="유료">유료</option>
+													<input type="text"
+														onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" style="width:50%" name="challenge_cost" class="form-control"
+														placeholder="금액을 입력해주세요" disabled>
+												</select>
+											</div>
 										</div>
 									</div>
 									<div class="modal">
@@ -173,6 +179,15 @@
 			.catch(error => {
 				console.error(error);
 			});
+
+		$("#challenge_type").change(function () {
+			if ($(this).val() == "유료") {
+				$("input[name=challenge_cost]").prop("disabled", false)
+			} else {
+				$("input[name=challenge_cost]").prop("disabled", true)
+				$("input[name=challenge_cost]").val("")
+			}
+		})
 
 		$('#modal-btn').click(function () {
 			$('.modal').toggleClass('show')
@@ -283,6 +298,7 @@
 					text: '종료날짜 설정이 잘못되었어요'
 				})
 			} else {
+				cost = $("input[name=challenge_cost]").val().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
 				$.ajax({
 					url: "/challenge",
 					method: "POST",
@@ -294,7 +310,8 @@
 						subcategory_id: select_sub,
 						description: editor.getData(),
 						challenge_type: $("select[name=challenge_type]").val(),
-						member_id: $("input[name=member_id]").val()
+						member_id: $("input[name=member_id]").val(),
+						challenge_cost: cost
 					},
 					dataType: "text",
 					//////////////////// recv

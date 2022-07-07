@@ -19,7 +19,8 @@
 						<div class="col-lg-12">
 							<div class="row">
 								<div class="col-7 thumb-div">
-									<img th:src="${challengeDetail.thumbnail}" alt="" class="ch-detail-thumb" id="profile-img">
+									<img th:src="${challengeDetail.thumbnail}" alt="" class="ch-detail-thumb"
+										id="profile-img">
 								</div>
 								<div class="col-5 challenge-summary">
 									<span class="ch-detail-category" th:if="${challengeDetail.subcategory_id}==1">취미 >
@@ -41,22 +42,37 @@
 											<img class="image--cover"
 												th:src="|${'http://172.27.0.174:8080/viewFile?fname=' +createMember.profile_path + '/' + createMember.profile_uuid + '_' + createMember.profile_name}|">
 											<span class="vertical-align-bottom">[[${createMember.member_name}]]</span>
-											<small class="vertical-align-bottom" th:if="${createMember.position_id}==1">수석</small>
-											<small class="vertical-align-bottom" th:if="${createMember.position_id}==2">책임</small>
-											<small class="vertical-align-bottom" th:if="${createMember.position_id}==3">선임</small>
+											<small class="vertical-align-bottom"
+												th:if="${createMember.position_id}==1">수석</small>
+											<small class="vertical-align-bottom"
+												th:if="${createMember.position_id}==2">책임</small>
+											<small class="vertical-align-bottom"
+												th:if="${createMember.position_id}==3">선임</small>
 
-											<small class="vertical-align-bottom" th:if="${createMember.affiliates_id}==1">한솔 인티큐브</small>
-											<small class="vertical-align-bottom" th:if="${createMember.affiliates_id}==2">한솔 제지</small>
-											<small class="vertical-align-bottom" th:if="${createMember.affiliates_id}==3">한솔 테크닉스</small>
-											<small class="vertical-align-bottom" th:if="${createMember.affiliates_id}==4">한솔 페이퍼택</small>
-											<small class="vertical-align-bottom" th:if="${createMember.affiliates_id}==5">한솔 홀딩스</small>
-											<small class="vertical-align-bottom" th:if="${createMember.affiliates_id}==6">한솔 문화재단</small>
-											<small class="vertical-align-bottom" th:if="${createMember.affiliates_id}==7">한솔 케미칼</small>
-											<small class="vertical-align-bottom" th:if="${createMember.affiliates_id}==8">한솔 홈데코</small>
-											<small class="vertical-align-bottom" th:if="${createMember.affiliates_id}==9">한솔 코에버</small>
-											<small class="vertical-align-bottom" th:if="${createMember.affiliates_id}==10">한솔 BS</small>
-											<small class="vertical-align-bottom" th:if="${createMember.affiliates_id}==11">한솔 PNS</small>
-											<small class="vertical-align-bottom" th:if="${createMember.affiliates_id}==12">한솔 로지스틱스</small>
+											<small class="vertical-align-bottom"
+												th:if="${createMember.affiliates_id}==1">한솔 인티큐브</small>
+											<small class="vertical-align-bottom"
+												th:if="${createMember.affiliates_id}==2">한솔 제지</small>
+											<small class="vertical-align-bottom"
+												th:if="${createMember.affiliates_id}==3">한솔 테크닉스</small>
+											<small class="vertical-align-bottom"
+												th:if="${createMember.affiliates_id}==4">한솔 페이퍼택</small>
+											<small class="vertical-align-bottom"
+												th:if="${createMember.affiliates_id}==5">한솔 홀딩스</small>
+											<small class="vertical-align-bottom"
+												th:if="${createMember.affiliates_id}==6">한솔 문화재단</small>
+											<small class="vertical-align-bottom"
+												th:if="${createMember.affiliates_id}==7">한솔 케미칼</small>
+											<small class="vertical-align-bottom"
+												th:if="${createMember.affiliates_id}==8">한솔 홈데코</small>
+											<small class="vertical-align-bottom"
+												th:if="${createMember.affiliates_id}==9">한솔 코에버</small>
+											<small class="vertical-align-bottom"
+												th:if="${createMember.affiliates_id}==10">한솔 BS</small>
+											<small class="vertical-align-bottom"
+												th:if="${createMember.affiliates_id}==11">한솔 PNS</small>
+											<small class="vertical-align-bottom"
+												th:if="${createMember.affiliates_id}==12">한솔 로지스틱스</small>
 										</div>
 										<div class="date">
 											<small>기간</small>
@@ -78,10 +94,13 @@
 										</div>
 										<div class="price-div">
 											<p class="kind">챌린지 유형</p>
-											<p class="price" th:if="${challengeDetail.challenge_type}=='무료'">무료 챌린지
-											</p>
-											<p class="price" th:if="${challengeDetail.challenge_type}=='유료'">유료 챌린지
-											</p>
+											<div>
+												<p class="price" th:if="${challengeDetail.challenge_type}=='무료'">무료
+												</p>
+												<p class="price" th:if="${challengeDetail.challenge_type}=='유료'">유료/[[${challengeDetail.challenge_cost}]]
+												</p>
+
+											</div>
 										</div>
 										<button id="challenge-join" class="btn challenge-join-btn">참여하기</button>
 									</div>
