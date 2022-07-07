@@ -51,22 +51,21 @@ public class ChallengeController {
 
 	/**
 	 * @param category : 카테고리 ID (1 ~ 6)
-	 * @param sortType : 정렬 타입 (0: 최신 순, 1: 오래된 순, 2: 참여 인원 순)
+	 * @param sort_type : 정렬 타입 (0: 최신 순, 1: 오래된 순, 2: 참여 인원 순)
 	 */
 
 	// 리스트 화면 호출
 	@GetMapping("/list")
-	public String list(@RequestParam(required = false) String category, @RequestParam(required = false) String sortType,
-			 @RequestParam(required = false) String challengeType,
-			Model model) {
+	public String list(@RequestParam(required = false) String category, @RequestParam(required = false) String sort_type,
+			 @RequestParam(required = false) String challenge_type, Model model) {
 
 		Boolean isCategory = true;
 
 		// 정렬 조건이 주어지지 않을 경우 (최신순)
-		if (sortType == null)
-			model.addAttribute("sortType", sortType);
+		if (sort_type == null)
+			model.addAttribute("sortType", sort_type);
 		else
-			model.addAttribute("sortType", Integer.parseInt(sortType));
+			model.addAttribute("sortType", Integer.parseInt(sort_type));
 
 		// 카테고리 ID가 주어지지 않을 경우 (전체 조회)
 		if (category == null)
@@ -81,11 +80,11 @@ public class ChallengeController {
 		}
 
 		// 챌린지 타입이 주어지지 않을 경우 (전체 조회)
-		if (challengeType == null)
-			model.addAttribute("challengeType", challengeType);
+		if (challenge_type == null)
+			model.addAttribute("challengeType", challenge_type);
 	
 		else
-			model.addAttribute("challengeType", Integer.parseInt(challengeType));
+			model.addAttribute("challengeType", Integer.parseInt(challenge_type));
 
 		model.addAttribute("isCategory", isCategory);
 
@@ -131,16 +130,16 @@ public class ChallengeController {
 
 	// 챌린지 검색
 	@GetMapping("/search") 
-	public String search(@RequestParam(required = false) String category, @RequestParam(required = false) String sortType, 
-			@RequestParam(required = false) String challengeType, @RequestParam String searchWord, Model model) {
+	public String search(@RequestParam(required = false) String category, @RequestParam(required = false) String sort_type, 
+			@RequestParam(required = false) String challenge_type, @RequestParam String searchword, Model model) {
 	  
 		Boolean isCategory = true;
 
 		// 정렬 조건이 주어지지 않을 경우
-		if (sortType.equals(""))
+		if (sort_type.equals(""))
 			model.addAttribute("sortType", 0);
 		else
-			model.addAttribute("sortType", Integer.parseInt(sortType));
+			model.addAttribute("sortType", Integer.parseInt(sort_type));
 
 		// 카테고리 ID가 주어지지 않을 경우
 		if (category.equals("") || category == null)
@@ -155,12 +154,12 @@ public class ChallengeController {
 		}
 
 		// 챌린지 타입이 주어지지 않을 경우
-		if (challengeType.equals(""))
+		if (challenge_type.equals(""))
 			model.addAttribute("challengeType", 0);
 		else
-			model.addAttribute("challengeType", Integer.parseInt(challengeType));
+			model.addAttribute("challengeType", Integer.parseInt(challenge_type));
 
-		model.addAttribute("searchWord", searchWord);
+		model.addAttribute("searchWord", searchword);
 		model.addAttribute("isCategory", isCategory);
 	  
 		return "challenge/list"; 

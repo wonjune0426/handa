@@ -140,20 +140,38 @@
 }
 /* 챌린지 상세 탭 (기본정보, 댓글) */
 
+/* 스크롤 탭 관련 css */
+#member, #explanation, #caution{
+	scroll-margin-top: 9em;
+}
+#comment{
+	scroll-margin-top: 5em;
+}
+
+#scroll-interval{
+	height: 38px;
+} 
+
 /* 챌린지 상세보기 메뉴 탭 */
 #scrollMenu{
-	margin-top: 5em;
+	margin-top: 1em;
 }
 
 /* 챌린지 상세보기 메뉴 탭 스크롤 시 */
 #scrollMenu.fixed{
-	/* position:fixed; */
+	position:fixed;
 	z-index: 1000;
 	top: -1em;
 	width: 100%;
 	height: 5em;
-	position:sticky;
+	margin-top: 5em;
+/* 	position:sticky; */
 }
+
+#first-menu{
+	margin-left: 12em;
+}
+
 .challenge-detail-tab{
 	position: relative;
 	border-bottom: 0;
@@ -564,11 +582,6 @@
 	margin: 0px auto;
 }
 
-
-/* 스크롤 탭 관련 css */
-#period, #explanation, #caution, #comment{
-	/* scroll-margin-top: 10em; */
-}
 
 .img-btn{
 	width:200px;

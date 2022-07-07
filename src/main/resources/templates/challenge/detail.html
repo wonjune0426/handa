@@ -10,7 +10,6 @@
 
 <div layout:fragment="content">
 	<main id="main">
-
 		<!-- ======= Services Section ======= -->
 		<section id="service-details" class="service-details challenge-detail-section"
 			style="position: relative;padding-bottom: 0;">
@@ -87,16 +86,30 @@
 										<button id="challenge-join" class="btn challenge-join-btn">참여하기</button>
 									</div>
 								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		<!-- 챌린지 상세보기 메뉴 탭 -->
+		<div id="scrollMenu" class="challenge-detail-tab">
+			<a class="menuTab detail_menu" id="first-menu" th:href="@{#member}">참여 인원</a>
+			<a class="menuTab detail_menu" th:href="@{#explanation}">챌린지 설명</a>
+			<a class="menuTab detail_menu" th:href="@{#caution}">주의사항</a>
+			<a class="menuTab detail_menu" th:href="@{#comment}">댓글</a>
 
-								<!-- 챌린지 상세보기 메뉴 탭 -->
-								<div id="scrollMenu" class="challenge-detail-tab">
-									<a class="menuTab detail_menu" th:href="@{#member}">참여 인원</a>
-									<a class="menuTab detail_menu" th:href="@{#explanation}">챌린지 설명</a>
-									<a class="menuTab detail_menu" th:href="@{#caution}">주의사항</a>
-									<a class="menuTab detail_menu" th:href="@{#comment}">댓글</a>
-								</div>
-
-								<div class="col-12 challenge-join-member" id="member">
+		</div>
+		
+		<section id="service-details" class="service-details challenge-detail-section"
+			style="position: relative;padding-bottom: 0;">
+			<div id="member"></div><div id="scroll-interval"></div>
+			<div class="container aos-init aos-animate" data-aos="fade-up">
+				<div class="col-lg-12">
+					<div class="row gy-4">
+						<div class="col-lg-12">
+								<div class="col-12 challenge-join-member">
 									<p class="join-member-text">
 										참여 인원 <span class="join-member-num">([[${challengeDetail.count}]]명)</span>
 										<button type="button" id="secession" class="btn btn-primary btn-sm"
@@ -161,7 +174,6 @@
 									</div>
 								</div>
 
-
 								<div style="padding-bottom: 50px;">
 									<b id="explanation">챌린지 설명</b>
 									<br>
@@ -193,7 +205,7 @@
 					<hr>
 				</div>
 		</section>
-
+		<div id="comment"></div>
 		<section class="service-details" style="padding: 0;">
 			<br> <br> <br>
 			<div class="container aos-init aos-animate" data-aos="fade-up">
@@ -242,7 +254,7 @@
 						th:value='${#authentication.principal.Username}' readonly>
 				</th:block>
 				<div class="ch-detail-to-list-btn" style="display: none;">
-					<a th:href="@{/list?sortType=0}" class="comment-btn">목록</a>
+					<a th:href="@{/list?sort_type=0}" class="comment-btn">목록</a>
 				</div>
 			</div>
 		</section>
