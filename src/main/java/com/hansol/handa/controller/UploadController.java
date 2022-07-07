@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,11 +22,12 @@ import com.hansol.handa.domain.UserVO;
 
 import lombok.extern.slf4j.Slf4j;
 
+@CrossOrigin("*")
 @Slf4j
 @Controller
 public class UploadController {
 
-	@Value("${handa.upload.path}") // application.properties의 변수
+	@Value("${handa.upload.path}") 
 	private String uploadServerPath;
 
 	@PostMapping("/uploadFile")

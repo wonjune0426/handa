@@ -241,7 +241,7 @@ $(document).ready(function(){
         
         $.ajax({
 			type: "POST",
-			url: "/uploadFile",
+			url: "http://172.27.0.174:8080/uploadFile",
 			data: formData,
 			dataType: "json",
 			contentType: false,
@@ -260,11 +260,11 @@ $(document).ready(function(){
 				
 				console.log('uploadPath: ', uploadPath);
 				
-				const profileURL = "/viewFile?fname=" + uploadPath + "/" + data.profile_uuid + "_" + data.profile_name;
+				const profileURL = "http://172.27.0.174:8080/viewFile?fname=" + uploadPath + "/" + data.profile_uuid + "_" + data.profile_name;
 				
 				console.log('profileURL: ', profileURL);
 				
-				$('.profile-img').attr("src", profileURL);
+				$('.image--cover').attr("src", profileURL);
 				
 				profileName.val(data.profile_name);
 				profileUUID.val(data.profile_uuid);

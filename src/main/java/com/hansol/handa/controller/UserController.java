@@ -1,12 +1,10 @@
 package com.hansol.handa.controller;
 
-import java.security.Principal;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hansol.handa.domain.UserVO;
-import com.hansol.handa.security.domain.CustomUser;
 import com.hansol.handa.service.UserService;
 
 import lombok.Setter;
@@ -31,6 +28,9 @@ public class UserController {
 
 	@Setter(onMethod_ = { @Autowired })
 	private UserService userService;
+	
+	@Autowired
+	AuthenticationManager authenticationManager;
 
 	@GetMapping("/login")
 	public String login(String error, String logout, Model model, RedirectAttributes rttr, HttpServletRequest request) {
@@ -73,7 +73,7 @@ public class UserController {
 
 
 		try {
-			int result = userService.register(userVO);
+			userService.register(userVO);
 			
 			rttr.addFlashAttribute("msg", "register-success");
 			rttr.addFlashAttribute("memberId", userVO.getMember_id());
@@ -154,21 +154,5 @@ public class UserController {
 
 		model.addAttribute("msg", "AccessDenied");
 
-	}
-
-	@GetMapping("sample")
-	public String securitySample(Principal principal, Authentication auth) {
-		
-		CustomUser user = (CustomUser)auth.getPrincipal();
-		
-		log.info("principal: " + user);
-		
-		return "sample/security-sample";
-	}
-	
-	@GetMapping("detail")
-	public String detail() {
-		
-		return "sample/detail";
 	}
 }
