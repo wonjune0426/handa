@@ -108,9 +108,12 @@
 					<div class="col-md-7">
 
 						<div class="form">
-							<form>
-								<input type="text" class="form-control form-input"
+							<form id="search-form" th:action="@{/search}">
+								<input id="search" th:name="searchWord" type="text" class="form-control form-input"
 									placeholder="찾으시는 챌린지가 있나요?">
+								<input type="hidden" name="category" th:value="null">
+								<input type="hidden" name="sortType" th:value="null">
+								<input type="hidden" name="challengeType" th:value="null">
 							</form>
 							<i class="fa fa-search"></i>
 							<!-- <span class="left-pan"></span>
@@ -494,5 +497,6 @@
 </div>
 <th:block>
 <th:block layout:fragment="javascript">
+	<script src='../assets/js/search_handling.js'></script>
 </th:block>
 </html>

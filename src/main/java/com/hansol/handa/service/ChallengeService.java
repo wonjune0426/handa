@@ -11,8 +11,7 @@ public interface ChallengeService {
 	/* 챌린지 리스트 조회 */
 	public List<ChallengeVO> selectChallegeList(String category, String sortType, String createdate, String count, String searchWord, String challengeType);
 	public Map<String, String> selectCategoryName(int categoryID);		// 카테고리 이름 조회
-	//public int selectCount(int subCategory_id);							// 챌린지 개수 조회
-	public int selectCount(HashMap<String, Object> countMap);
+	public int selectCount(HashMap<String, Object> countMap);			// 챌린지 개수 조회
 	/* *************** */
 	
 	public List<String> getimagelist(String searchWord);
