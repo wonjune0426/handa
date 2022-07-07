@@ -18,6 +18,7 @@ public class ChallengeVO {
 	 private int subcategory_id;
 	 private String challenge_type;
 	 private String challenge_state;
+	 private String challenge_cost;
 	 
 	 private String subcategory_name;
 	 private int count;
