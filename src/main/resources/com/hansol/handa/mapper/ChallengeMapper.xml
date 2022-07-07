@@ -33,13 +33,13 @@
 										WHERE challenge.challenge_id = challenge_join.challenge_id
 										GROUP BY challenge.challenge_id) count_table
 		WHERE challenge.subcategory_id = sub_category.sub_category_id AND challenge.challenge_id = count_table.challenge_id
-			<if test = "search_word != 'search'"> AND challenge_name like '%#{search_word}%'</if>
+			<!-- <if test = "searchWord != 'search'"> AND challenge_name like CONCAT('%', #{searchWord}, '%')</if> -->
+			<if test = "searchWord != null"> AND challenge_name like CONCAT('%', #{searchWord}, '%')</if>
 			<choose>
 				<when test="challenge_type == 1">AND challenge_type = "무료"</when>
 				<when test="challenge_type == 2">AND challenge_type = "유료"</when>
 			</choose>
 	
-			
 			<choose>
 				<!-- 최신순 -->
 				<when test="sortType == 0">	
@@ -68,7 +68,7 @@
 										WHERE challenge.challenge_id = challenge_join.challenge_id
 										GROUP BY challenge.challenge_id) count_table
 		WHERE challenge.subcategory_id = sub_category.sub_category_id AND challenge.challenge_id = count_table.challenge_id AND subcategory_id = #{subcategory_id}
-			<if test = "search_word != 'search'"> AND challenge_name like '%#{search_word}%'</if>
+			<if test = "searchWord != 'search'"> AND challenge_name like CONCAT('%', #{searchWord}, '%')</if>
 			<choose>
 				<when test="challenge_type == 1">AND challenge_type = "무료"</when>
 				<when test="challenge_type == 2">AND challenge_type = "유료"</when>
@@ -103,9 +103,9 @@
 	<select id="selectCount" parameterType="hashmap" resultType="int">
 		SELECT COUNT(*) AS count
 		FROM challenge
-		<if test="sub_category_id != null or searchWord != null or challengeType != 0">WHERE 1=1</if> 
+		<if test="sub_category_id != null or searchWord != 'search' or challengeType != 0">WHERE 1=1</if> 
 		<if test="sub_category_id != null">and subcategory_id = #{sub_category_id}</if>
-		<if test="searchWord != 'search'">and challenge_name like '%#{searchWord}%'</if>
+		<if test="searchWord != 'search'">and challenge_name like CONCAT('%', #{searchWord}, '%')</if>
 		<choose>
 			<when test="challengeType == 1">AND challenge_type = "무료"</when>
 			<when test="challengeType == 2">AND challenge_type = "유료"</when>
