@@ -20,7 +20,7 @@
 						<div class="col-lg-12">
 							<div class="row">
 								<div class="col-7 thumb-div">
-									<img th:src="${challengeDetail.thumbnail}" alt="" class="ch-detail-thumb">
+									<img th:src="${challengeDetail.thumbnail}" alt="" class="ch-detail-thumb" id="profile-img">
 								</div>
 								<div class="col-5 challenge-summary">
 									<span class="ch-detail-category" th:if="${challengeDetail.subcategory_id}==1">취미 >
@@ -38,141 +38,160 @@
 
 									<h3 class="ch-detail-title" th:text="${challengeDetail.challenge_name}"></h3>
 									<div class="create-user">
-										<img class="profile-img">
-										<span>[[${createMember.member_name}]]</span>
-										<small th:if="${createMember.position_id}==1">수석</small>
-										<small th:if="${createMember.position_id}==2">책임</small>
-										<small th:if="${createMember.position_id}==3">선임</small>
+										<div class="img-wrapper">
+											<img class="image--cover"
+												th:src="|${'http://172.27.0.174:8080/viewFile?fname=' +createMember.profile_path + '/' + createMember.profile_uuid + '_' + createMember.profile_name}|">
+											<span class="vertical-align-bottom">[[${createMember.member_name}]]</span>
+											<small class="vertical-align-bottom" th:if="${createMember.position_id}==1">수석</small>
+											<small class="vertical-align-bottom" th:if="${createMember.position_id}==2">책임</small>
+											<small class="vertical-align-bottom" th:if="${createMember.position_id}==3">선임</small>
 
-										<small th:if="${createMember.affiliates_id}==1">한솔 인티큐브</small>
-										<small th:if="${createMember.affiliates_id}==2">한솔 제지</small>
-										<small th:if="${createMember.affiliates_id}==3">한솔 테크닉스</small>
-										<small th:if="${createMember.affiliates_id}==4">한솔 페이퍼택</small>
-										<small th:if="${createMember.affiliates_id}==5">한솔 홀딩스</small>
-										<small th:if="${createMember.affiliates_id}==6">한솔 문화재단</small>
-										<small th:if="${createMember.affiliates_id}==7">한솔 케미칼</small>
-										<small th:if="${createMember.affiliates_id}==8">한솔 홈데코</small>
-										<small th:if="${createMember.affiliates_id}==9">한솔 코에버</small>
-										<small th:if="${createMember.affiliates_id}==10">한솔 BS</small>
-										<small th:if="${createMember.affiliates_id}==11">한솔 PNS</small>
-										<small th:if="${createMember.affiliates_id}==12">한솔 로지스틱스</small>
+											<small class="vertical-align-bottom" th:if="${createMember.affiliates_id}==1">한솔 인티큐브</small>
+											<small class="vertical-align-bottom" th:if="${createMember.affiliates_id}==2">한솔 제지</small>
+											<small class="vertical-align-bottom" th:if="${createMember.affiliates_id}==3">한솔 테크닉스</small>
+											<small class="vertical-align-bottom" th:if="${createMember.affiliates_id}==4">한솔 페이퍼택</small>
+											<small class="vertical-align-bottom" th:if="${createMember.affiliates_id}==5">한솔 홀딩스</small>
+											<small class="vertical-align-bottom" th:if="${createMember.affiliates_id}==6">한솔 문화재단</small>
+											<small class="vertical-align-bottom" th:if="${createMember.affiliates_id}==7">한솔 케미칼</small>
+											<small class="vertical-align-bottom" th:if="${createMember.affiliates_id}==8">한솔 홈데코</small>
+											<small class="vertical-align-bottom" th:if="${createMember.affiliates_id}==9">한솔 코에버</small>
+											<small class="vertical-align-bottom" th:if="${createMember.affiliates_id}==10">한솔 BS</small>
+											<small class="vertical-align-bottom" th:if="${createMember.affiliates_id}==11">한솔 PNS</small>
+											<small class="vertical-align-bottom" th:if="${createMember.affiliates_id}==12">한솔 로지스틱스</small>
+										</div>
+										<div class="date">
+											<small>기간</small>
+											[[${challengeDetail.startdate}]] ~ [[${challengeDetail.enddate}]]
+										</div>
+										<div class="num">
+											<small>인원</small>
+											[[${challengeDetail.count}]]명
+										</div>
+										<div class="ch-detail-etc">
+											<span class="status">모집중</span>
+											<span class="share">
+												<a href="" class="share-link">
+													<i class="fa-regular fa-share-from-square"></i>공유하기
+												</a>
+												<input type="hidden" class="copy-input">
+											</span>
+											<p class="challenge-toast">url이 클립보드에 복사되었습니다.</p>
+										</div>
+										<div class="price-div">
+											<p class="kind">챌린지 유형</p>
+											<p class="price" th:if="${challengeDetail.challenge_type}=='무료'">무료 챌린지
+											</p>
+											<p class="price" th:if="${challengeDetail.challenge_type}=='유료'">유료 챌린지
+											</p>
+										</div>
+										<button id="challenge-join" class="btn challenge-join-btn">참여하기</button>
 									</div>
-									<div class="date">
-										<small>기간</small>
-										[[${challengeDetail.startdate}]] ~ [[${challengeDetail.enddate}]]
+								</div>
+
+								<!-- 챌린지 상세보기 메뉴 탭 -->
+								<div id="scrollMenu" class="challenge-detail-tab">
+									<a class="menuTab detail_menu" th:href="@{#member}">참여 인원</a>
+									<a class="menuTab detail_menu" th:href="@{#explanation}">챌린지 설명</a>
+									<a class="menuTab detail_menu" th:href="@{#caution}">주의사항</a>
+									<a class="menuTab detail_menu" th:href="@{#comment}">댓글</a>
+								</div>
+
+								<div class="col-12 challenge-join-member" id="member">
+									<p class="join-member-text">
+										참여 인원 <span class="join-member-num">([[${challengeDetail.count}]]명)</span>
+										<button type="button" id="secession" class="btn btn-primary btn-sm"
+											style="float:right;">탈퇴하기</button>
+									</p>
+									<div th:each="joinMembers:${joinMembers}" class="ch-j-detail-div">
+										<input id="join_memberid" th:value="${joinMembers.member_id}"
+											style="display: none;">
+										<p class="ch-j-detail">
+											<i alt="" class="ch-user-icon fa-solid fa-user"></i>
+										</p>
+										<p class="ch-j-detail">
+											<b>[[${joinMembers.member_name}]]</b>
+										</p>
+										<P th:if="${joinMembers.position_id}==1" class="ch-j-detail ch-detail-position">
+											수석
+										</P>
+										<P th:if="${joinMembers.position_id}==2" class="ch-j-detail ch-detail-position">
+											책임
+										</P>
+										<P th:if="${joinMembers.position_id}==3" class="ch-j-detail ch-detail-position">
+											선임
+										</P>
+
+										<p th:if="${joinMembers.affiliates_id}==1" class="ch-j-detail ch-detail-aff">한솔
+											인티큐브
+										</p>
+										<p th:if="${joinMembers.affiliates_id}==2" class="ch-j-detail ch-detail-aff">한솔
+											제지
+										</p>
+										<p th:if="${joinMembers.affiliates_id}==3" class="ch-j-detail ch-detail-aff">한솔
+											테크닉스
+										</p>
+										<p th:if="${joinMembers.affiliates_id}==4" class="ch-j-detail ch-detail-aff">한솔
+											페이퍼택
+										</p>
+										<p th:if="${joinMembers.affiliates_id}==5" class="ch-j-detail ch-detail-aff">한솔
+											홀딩스
+										</p>
+										<p th:if="${joinMembers.affiliates_id}==6" class="ch-j-detail ch-detail-aff">한솔
+											문화재단
+										</p>
+										<p th:if="${joinMembers.affiliates_id}==7" class="ch-j-detail ch-detail-aff">한솔
+											케미칼
+										</p>
+										<p th:if="${joinMembers.affiliates_id}==8" class="ch-j-detail ch-detail-aff">한솔
+											홈데코
+										</p>
+										<p th:if="${joinMembers.affiliates_id}==9" class="ch-j-detail ch-detail-aff">한솔
+											코에버
+										</p>
+										<p th:if="${joinMembers.affiliates_id}==10" class="ch-j-detail ch-detail-aff">한솔
+											BS
+										</p>
+										<p th:if="${joinMembers.affiliates_id}==11" class="ch-j-detail ch-detail-aff">한솔
+											PNS
+										</p>
+										<p th:if="${joinMembers.affiliates_id}==12" class="ch-j-detail ch-detail-aff">한솔
+											로지스틱스</p>
+										<p name="member-e_mail" class="ch-j-detail ch-detail-aff" style="float:right">
+											[[${joinMembers.e_mail}]]</p>
 									</div>
-									<div class="num">
-										<small>인원</small>
-										[[${challengeDetail.count}]]명
-									</div>
-									<div class="ch-detail-etc">
-										<span class="status">모집중</span>
-										<span class="share">
-											<a href="" class="share-link">
-												<i class="fa-regular fa-share-from-square"></i>공유하기
-											</a>
-											<input type="hidden" class="copy-input">
-										</span>
-										<p class="challenge-toast">url이 클립보드에 복사되었습니다.</p>
-									</div>
-									<div class="price-div">
-										<p class="kind">챌린지 유형</p>
-										<p class="price" th:if="${challengeDetail.challenge_type}=='무료'">무료 챌린지</p>
-										<p class="price" th:if="${challengeDetail.challenge_type}=='유료'">유료 챌린지</p>
-									</div>
-									<button id="challenge-join" class="btn challenge-join-btn">참여하기</button>
+								</div>
+
+
+								<div style="padding-bottom: 50px;">
+									<b id="explanation">챌린지 설명</b>
+									<br>
+									<p th:utext="${challengeDetail.description}"></p>
+
+								</div>
+
+								<div>
+									<b id="caution">챌린지 주의사항</b>
+									<ul>
+										<li><i class="bi bi-check-circle"></i>
+											<span>이 부분은
+												모든 챌린지에 고정적으로 들어가는 부분입니다.</span>
+										</li>
+										<li><i class="bi bi-check-circle"></i>
+											<span>챌린지
+												댓글은 참여자만 작성 가능합니다.</span>
+										</li>
+										<li><i class="bi bi-check-circle"></i>
+											<span>챌린지 주의사항 입니다.</span>
+										</li>
+									</ul>
 								</div>
 							</div>
 
-							<!-- 챌린지 상세보기 메뉴 탭 -->
-							<div id="scrollMenu" class="challenge-detail-tab">
-								<a class="menuTab detail_menu" th:href="@{#member}">참여 인원</a>
-								<a class="menuTab detail_menu" th:href="@{#explanation}">챌린지 설명</a>
-								<a class="menuTab detail_menu" th:href="@{#caution}">주의사항</a>
-								<a class="menuTab detail_menu" th:href="@{#comment}">댓글</a>
-							</div>
-
-							<div class="col-12 challenge-join-member" id="member">
-								<p class="join-member-text">
-									참여 인원 <span class="join-member-num">([[${challengeDetail.count}]]명)</span>
-									<button type="button" id="secession" class="btn btn-primary btn-sm"
-										style="float:right;">탈퇴하기</button>
-								</p>
-								<div th:each="joinMembers:${joinMembers}" class="ch-j-detail-div">
-									<input id="join_memberid" th:value="${joinMembers.member_id}"
-										style="display: none;">
-									<p class="ch-j-detail">
-										<i alt="" class="ch-user-icon fa-solid fa-user"></i>
-									</p>
-									<p class="ch-j-detail">
-										<b>[[${joinMembers.member_name}]]</b>
-									</p>
-									<P th:if="${joinMembers.position_id}==1" class="ch-j-detail ch-detail-position">수석
-									</P>
-									<P th:if="${joinMembers.position_id}==2" class="ch-j-detail ch-detail-position">책임
-									</P>
-									<P th:if="${joinMembers.position_id}==3" class="ch-j-detail ch-detail-position">선임
-									</P>
-
-									<p th:if="${joinMembers.affiliates_id}==1" class="ch-j-detail ch-detail-aff">한솔 인티큐브
-									</p>
-									<p th:if="${joinMembers.affiliates_id}==2" class="ch-j-detail ch-detail-aff">한솔 제지
-									</p>
-									<p th:if="${joinMembers.affiliates_id}==3" class="ch-j-detail ch-detail-aff">한솔 테크닉스
-									</p>
-									<p th:if="${joinMembers.affiliates_id}==4" class="ch-j-detail ch-detail-aff">한솔 페이퍼택
-									</p>
-									<p th:if="${joinMembers.affiliates_id}==5" class="ch-j-detail ch-detail-aff">한솔 홀딩스
-									</p>
-									<p th:if="${joinMembers.affiliates_id}==6" class="ch-j-detail ch-detail-aff">한솔 문화재단
-									</p>
-									<p th:if="${joinMembers.affiliates_id}==7" class="ch-j-detail ch-detail-aff">한솔 케미칼
-									</p>
-									<p th:if="${joinMembers.affiliates_id}==8" class="ch-j-detail ch-detail-aff">한솔 홈데코
-									</p>
-									<p th:if="${joinMembers.affiliates_id}==9" class="ch-j-detail ch-detail-aff">한솔 코에버
-									</p>
-									<p th:if="${joinMembers.affiliates_id}==10" class="ch-j-detail ch-detail-aff">한솔 BS
-									</p>
-									<p th:if="${joinMembers.affiliates_id}==11" class="ch-j-detail ch-detail-aff">한솔 PNS
-									</p>
-									<p th:if="${joinMembers.affiliates_id}==12" class="ch-j-detail ch-detail-aff">한솔
-										로지스틱스</p>
-									<p name="member-e_mail" class="ch-j-detail ch-detail-aff" style="float:right">[[${joinMembers.e_mail}]]</p>
-								</div>
-							</div>
-
-
-							<div style="padding-bottom: 50px;">
-								<b id="explanation">챌린지 설명</b>
-								<br>
-								<p th:utext="${challengeDetail.description}"></p>
-
-							</div>
-
-							<div>
-								<b id="caution">챌린지 주의사항</b>
-								<ul>
-									<li><i class="bi bi-check-circle"></i>
-										<span>이 부분은
-											모든 챌린지에 고정적으로 들어가는 부분입니다.</span>
-									</li>
-									<li><i class="bi bi-check-circle"></i>
-										<span>챌린지
-											댓글은 참여자만 작성 가능합니다.</span>
-									</li>
-									<li><i class="bi bi-check-circle"></i>
-										<span>챌린지 주의사항 입니다.</span>
-									</li>
-								</ul>
-							</div>
 						</div>
 
 					</div>
-
+					<hr>
 				</div>
-				<hr>
-			</div>
 		</section>
 
 		<section class="service-details" style="padding: 0;">
@@ -184,7 +203,7 @@
 							<p id="comment">댓글 작성하기</p>
 							<div class="form-group mt-3">
 								<textarea id="comment_content" class="form-control" name="message" rows="3"
-									placeholder="댓글을 작성하세요." required=""></textarea>
+									placeholder="댓글을 작성하세요."></textarea>
 							</div>
 						</div>
 						<div class="col-lg-12">
@@ -205,7 +224,7 @@
 
 				<div class="row  d-flex justify-content-center comment-content">
 					<div class="col-md-12">
-						<div class="headings d-flex justify-content-between align-items-center mb-3">
+						<div id="comment-info" class="headings d-flex justify-content-between align-items-center mb-3">
 							<h5 id="comment-count">댓글</h5>
 						</div>
 
@@ -232,6 +251,7 @@
 </div>
 <!-- include JS Script -->
 <th:block layout:fragment="javascript">
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src='../assets/js/scroll_menu.js'></script>
 	<script th:inline="javascript">
 		$(document).ready(function () {
@@ -240,7 +260,16 @@
 			joinMembers =/*[[${joinMembers}]]*/'default';
 			startdate =/*[[${challengeDetail.startdate}]]*/'default';
 			enddate =/*[[${challengeDetail.enddate}]]*/ 'default';
+			createMember =/*[[${createMember.member_id}]]*/'default';
 			/*]]>*/
+
+			function sweetAlert(msg) {
+				Swal.fire({
+					icon: 'success',
+					text: msg,
+					allowEnterKey: false
+				})
+			}
 
 			var today = new Date();
 			var year = today.getFullYear();
@@ -256,11 +285,15 @@
 					$("#challenge-join").prop("disabled", true)
 					$("#challenge-join").html("참여 중")
 					$("#comment-input").css("display", "block")
-					$("#secession").css("display", "block")
-					$("p[name='member-e_mail']").css("display","block")
+					if (login_memberId == createMember) {
+						$("#secession").css("display", "none")
+					} else {
+						$("#secession").css("display", "block")
+					}
+					$("p[name='member-e_mail']").css("display", "block")
 					break;
 				} else {
-					$("p[name='member-e_mail']").css("display","none")
+					$("p[name='member-e_mail']").css("display", "none")
 					$("#challenge-join").css("disabled", false)
 					$("#comment-input").css("display", "none")
 					$("#secession").css("display", "none")
@@ -287,24 +320,38 @@
 				if (login_memberId == null) {
 					location.href = "/member/login";
 				} else {
-					$.ajax({
-						url: "/challenge/member",
-						method: "POST",
-						data: {
-							member_id: $("input[name='member_id']").val(),
-							challenge_id: challenge_id
-						},
-						//////////////////// recv
-						success: function () {
-							location.reload();
-						},
-						error: function (xhr, status, error) { // (파라미터 생략가능)
-							alert("error");
+					Swal.fire({
+						title: '참여하시겠습니까?',
+						icon: 'question',
+
+						showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
+						confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
+						cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
+						confirmButtonText: '참여', // confirm 버튼 텍스트 지정
+						cancelButtonText: '취소', // cancel 버튼 텍스트 지정
+
+					}).then(result => {
+						if (result.isConfirmed) {
+							$.ajax({
+								url: "/challenge/member",
+								method: "POST",
+								data: {
+									member_id: $("input[name='member_id']").val(),
+									challenge_id: challenge_id
+								},
+								//////////////////// recv
+								success: function () {
+									location.reload();
+								},
+								error: function (xhr, status, error) { // (파라미터 생략가능)
+									alert("error");
+								}
+								////////////////////
+							})
 						}
-						////////////////////
+
 					})
 				}
-
 			})
 
 
@@ -322,54 +369,89 @@
 				$('.challenge-toast').fadeIn();
 				$('.challenge-toast').delay(500).fadeOut('slow');
 			});
-			
-			//탈퇴하기 버튼 클릭
-			$("#secession").click(function(){
-					$.ajax({
-						url: "/challenge/challenge-secession",
-						method: "POST",
-						async: false,
-						data: {
-							member_id: login_memberId,
-							challenge_id: challenge_id,
-						},
-						success: function () {
-							location.reload();
-						},
-						error: function (xhr, status, error) { // (파라미터 생략가능)
-							alert("error");
-						}
 
-					})
+			//탈퇴하기 버튼 클릭
+			$("#secession").click(function () {
+				Swal.fire({
+					title: '탈퇴하시겠습니까?',
+					icon: 'warning',
+
+					showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
+					confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
+					cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
+					confirmButtonText: '탈퇴', // confirm 버튼 텍스트 지정
+					cancelButtonText: '취소', // cancel 버튼 텍스트 지정
+
+				}).then(result => {
+					if (result.isConfirmed) {
+						$.ajax({
+							url: "/challenge/challenge-secession",
+							method: "POST",
+							async: false,
+							data: {
+								member_id: login_memberId,
+								challenge_id: challenge_id,
+							},
+							success: function () {
+								location.reload();
+							},
+							error: function (xhr, status, error) { // (파라미터 생략가능)
+								alert("error");
+							}
+						})
+					}
+				})
+
 			})
 
 
+			//날짜형식 변환 함수
+			function formatDate(date) {
+
+				var d = new Date(date),
+
+					month = '' + (d.getMonth() + 1),
+					day = '' + d.getDate(),
+					year = d.getFullYear();
+
+				if (month.length < 2) month = '0' + month;
+				if (day.length < 2) day = '0' + day;
+
+				return [year, month, day].join('-');
+
+			}
 
 
 
 			//----------------------------댓글 관련 스크립트 ---------------------------------------------
 
 			//댓글 불러오기
-			$.ajax({
-				url: "/comment?challenge_id=" + challenge_id,
-				method: "GET",
-				async: false,
-				//////////////////// recv
-				success: function (result) {
-					$("#comment-count").append(`(` + result.commentList.length + `)`)
-					for (var i = 0; i < result.commentList.length; i++) {
-						var position;
-						if (result.memberList[i].position_id == 1) {
-							position = "수석"
-						} else if (result.memberList[i].position_id == 2) {
-							position = "책임"
-						} else if (result.memberList[i].position_id == 3) {
-							position = "선임"
-						}
+			var commnet_read = function () {
+				$.ajax({
+					url: "/comment?challenge_id=" + challenge_id,
+					method: "GET",
+					async: false,
+					cache: false,
+					//////////////////// recv
+					success: function (result) {
+						$("#comment-info").empty()
+						$("#card-list").empty()
+						$("#comment-info").append(`<h5 id="comment-count">댓글(` + result.commentList.length + `)</h5>`)
+						for (var i = 0; i < result.commentList.length; i++) {
+							var position;
+							if (result.memberList[i].position_id == 1) {
+								position = "수석"
+							} else if (result.memberList[i].position_id == 2) {
+								position = "책임"
+							} else if (result.memberList[i].position_id == 3) {
+								position = "선임"
+							}
 
-						if (result.memberList[i].member_id == login_memberId) {
-							$("#card-list").append(
-								`<div class="card p-3 mt-2">
+
+
+							if (result.memberList[i].member_id == login_memberId) {
+								$("#card-list").append(
+									`<div class="card p-3 mt-2">
 										<div class="d-flex justify-content-between align-items-center">
 											<div class="user d-flex flex-row align-items-center">
 												<img src="https://i.imgur.com/hczKIze.jpg" width="30"
@@ -384,7 +466,7 @@
 														</div>
 													</span>
 											</div>
-											<small>`+ result.commentList[i].createdate + `</small>
+											<small>`+ formatDate(result.commentList[i].createdate) + `</small>
 										</div>
 										<div class="action d-flex justify-content-between mt-2 align-items-center">
 												<div class="reply px-4">
@@ -397,10 +479,10 @@
 												</div>
 										</div>
 									</div>`
-							)
-						} else {
-							$("#card-list").append(
-								`<div class="card p-3 mt-2">
+								)
+							} else {
+								$("#card-list").append(
+									`<div class="card p-3 mt-2">
 										<div class="d-flex justify-content-between align-items-center">
 											<div class="user d-flex flex-row align-items-center">
 												<img src="https://i.imgur.com/hczKIze.jpg" width="30"
@@ -413,25 +495,31 @@
 														</div>
 													</span>
 											</div>
-											<small>`+ result.commentList[i].createdate + `</small>
+											<small>`+ formatDate(result.commentList[i].createdate) + `</small>
 										</div>
 									</div>`
-							)
+								)
+							}
 						}
+					},
+					error: function (xhr, status, error) { // (파라미터 생략가능)
+						alert("error");
 					}
-				},
-				error: function (xhr, status, error) { // (파라미터 생략가능)
-					alert("error");
-				}
-				////////////////////
-			})
+					////////////////////
+				})
+			}
+
+			commnet_read();
 
 			//댓글 입력 방식 버튼 클릭/Enter키
 			$("#commentWrite").click(function () {
+				sweetAlert("댓글이 입력됬습니다.")
 				comment_ajax();
 			})
+
 			$("#comment_content").keydown(function (key) {
 				if (key.keyCode == 13) {
+					sweetAlert("댓글이 입력됬습니다.")
 					comment_ajax();
 				}
 			})
@@ -449,25 +537,26 @@
 					},
 					//////////////////// recv
 					success: function () {
-						location.reload();
+						commnet_read();
+						$("#comment_content").val("")
 					},
 					error: function (xhr, status, error) { // (파라미터 생략가능)
 						alert("error");
 					}
-					////////////////////
 				})
+				////////////////////
 			}
 
 			//수정하기 누를 시
-			$(".com-update").click(function () {
+			$(document).on("click", ".com-update", function () {
 				$(this).parent().css("display", "none");
 				$(this).parent().siblings('div').css("display", "block");
 				$(this).parent().parent().parent().find('.font-weight-bold.com').css("display", "none");
 				$(this).parent().parent().parent().find('.update-content').css("display", "block");
 			})
 
-			//취소 누를시
-			$(".update-cancel").click(function () {
+			//취소 누를시 
+			$(document).on("click", ".update-cancel", function () {
 				$(this).parent().css("display", "none");
 				$(this).parent().siblings('div').css("display", "block");
 				$(this).parent().parent().parent().find('.font-weight-bold.com').css("display", "block");
@@ -475,7 +564,7 @@
 			})
 
 			//수정 요청 ajax
-			$(".update-ajax").click(function () {
+			$(document).on("click", ".update-ajax", function () {
 				$.ajax({
 					url: "/comment-amend",
 					method: "POST",
@@ -488,15 +577,17 @@
 					},
 					//////////////////// recv
 					success: function () {
-						location.reload();
+						commnet_read();
 					},
 					error: function (xhr, status, error) { // (파라미터 생략가능)
 						alert("error");
 					}
 					////////////////////
 				})
+				sweetAlert("댓글이 수정되었습니다")
 			})
-			$(".update-content").keydown(function (key) {
+
+			$(document).on("keydown", ".update-content", function (key) {
 				if (key.keyCode == 13) {
 					$.ajax({
 						url: "/comment-amend",
@@ -510,46 +601,56 @@
 						},
 						//////////////////// recv
 						success: function () {
-							location.reload();
+							commnet_read();
 						},
 						error: function (xhr, status, error) { // (파라미터 생략가능)
 							alert("error");
 						}
 						////////////////////
 					})
+					sweetAlert("댓글이 수정되었습니다")
 				}
 			})
 
 
+			//댓글 삭제
+			$(document).on("click", ".com-delete", function () {
+				Swal.fire({
+					title: '삭제하시겠습니까?',
+					icon: 'warning',
 
+					showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
+					confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
+					cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
+					confirmButtonText: '삭제', // confirm 버튼 텍스트 지정
+					cancelButtonText: '취소', // cancel 버튼 텍스트 지정
 
+				}).then(result => {
+					if (result.isConfirmed) {
+						sweetAlert("댓글이 삭제되었습니다")
+						$.ajax({
+							url: "/comment-remove",
+							method: "POST",
+							async: false,
+							cache: false,
+							data: {
+								member_id: login_memberId,
+								challenge_id: challenge_id,
+								comment_id: $(this).parent().parent().parent().find('.comment-id').val()
+							},
+							//////////////////// recv
+							success: function () {
+								commnet_read()
+							},
+							error: function (xhr, status, error) { // (파라미터 생략가능)
+								alert("error");
+							}
 
-			//댓글 삭제 ajax
-			$(".com-delete").click(function () {
-				$.ajax({
-					url: "/comment-remove",
-					method: "POST",
-					async: false,
-					data: {
-						member_id: login_memberId,
-						challenge_id: challenge_id,
-						comment_id: $(this).parent().parent().parent().find('.comment-id').val()
-					},
-					//////////////////// recv
-					success: function () {
-						location.reload();
-					},
-					error: function (xhr, status, error) { // (파라미터 생략가능)
-						alert("error");
+						})
 					}
-					////////////////////
 				})
+
 			})
-
-
-
-
-
 
 		});
 	</script>

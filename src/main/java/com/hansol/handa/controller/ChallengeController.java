@@ -207,7 +207,6 @@ public class ChallengeController {
 	}
 
 // challenge 참여하기
-	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/challenge/member")
 	public @ResponseBody void joinChallege(ChallengeVO challengeVO) {
 		challengeService.joinChallenge(challengeVO.getMember_id(), challengeVO.getChallenge_id());
