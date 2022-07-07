@@ -86,7 +86,7 @@
 						</div>
 
 						<!-- End Contact Form -->
-
+						<input type="hidden" th:value="${msg}" name="msg" />
 					</div>
 				</section>
 			</div>
@@ -146,7 +146,14 @@
 				  text: '가입이 완료되었습니다.'
 				})
 			}
-			
+		
+		if ($('input[name=msg]').val() === "certify-success") {
+			Swal.fire({
+				  icon: 'success',
+				  text: '인증이 완료되었습니다.'
+				})
+			}
+		
 	});
 	</script>
 </th:block>

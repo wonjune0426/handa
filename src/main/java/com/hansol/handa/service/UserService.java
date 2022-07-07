@@ -2,6 +2,8 @@ package com.hansol.handa.service;
 
 import java.util.List;
 
+import javax.mail.MessagingException;
+
 import com.hansol.handa.domain.UserVO;
 
 public interface UserService {
@@ -15,4 +17,8 @@ public interface UserService {
 	int amend(UserVO userVO);
 	
 	List<UserVO> joinMembers(int challenge_id);
+	
+	void sendMail(UserVO user) throws MessagingException;
+	
+	void updateAuth(UserVO vo);
 }

@@ -1,6 +1,8 @@
 package com.hansol.handa.controller;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -67,7 +69,7 @@ public class UserController {
 	}
 
 	@PostMapping("/register")
-	public String registerPOST(UserVO userVO, RedirectAttributes rttr) {
+	public String registerPOST(UserVO userVO, RedirectAttributes rttr, Model model) {
 
 		log.info("register post--------------------");
 
@@ -76,12 +78,16 @@ public class UserController {
 			userService.register(userVO);
 			
 			rttr.addFlashAttribute("msg", "register-success");
-			rttr.addFlashAttribute("memberId", userVO.getMember_id());
+			// rttr.addFlashAttribute("memberId", userVO.getMember_id());
+			
+			model.addAttribute("msg", "before-send");
+			
+			// 메일 보내기
+			model.addAttribute("user", userVO);
 
 			log.info("가입 성공-----------------------------");
 
-			return "redirect:/member/login";
-			
+			return "member/certifyEmail";
 			
 		} catch (Exception e) {
 			
@@ -135,6 +141,7 @@ public class UserController {
 		
 		if (result == 1) {
 			rttr.addFlashAttribute("msg", "amend-success");
+			
 		} else {
 			rttr.addFlashAttribute("msg", "amend-fail");
 		}
@@ -154,5 +161,52 @@ public class UserController {
 
 		model.addAttribute("msg", "AccessDenied");
 
+	}
+	
+	@GetMapping("/nonCertify")
+	public String nonCertify() {
+		
+		return "member/nonCertify";
+	}
+	
+	
+	@GetMapping("/certifyEmail")
+	public String certifyEmail(HttpServletRequest request) {
+		
+		return "member/certifyEmail";
+	}
+	
+	@PostMapping("/sendMail")
+	public String sendMail(UserVO user, Model model) throws MessagingException {
+		
+		log.info("user: " + user); 
+		
+		userService.sendMail(user);
+		
+		model.addAttribute("msg", "after-send");
+		
+		return "member/certifyEmail";
+	}
+	
+	// 메일 인증 (메일 받고 인증링크로 인증하기)
+	@GetMapping("/check-email-token")
+	public String verifyEmail(String member_id, Model model, RedirectAttributes rttr) {
+		// String token, String email, String member_id ,
+		// 메일링크 클릭 시 파라미터로 token, email 값 전달 받기
+		
+		// 계정 정보를 불러와서 email 값과 일치하는지 확인
+		// 토큰 값 일치하는지 확인
+		
+		// 인증 완료되면 auth 값 role_certify_user로 변경
+		UserVO vo = new UserVO();
+		vo.setMember_id(member_id);
+		vo.setAuth("ROLE_CERTIFY_USER");
+		
+		userService.updateAuth(vo);
+		
+		rttr.addFlashAttribute("msg", "certify-success");
+		rttr.addFlashAttribute("memberId", vo.getMember_id());
+		
+		return "redirect:/member/login";
 	}
 }

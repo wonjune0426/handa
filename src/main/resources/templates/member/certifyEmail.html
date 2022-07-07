@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
+
+<!-- include CSS File -->
+<th:block layout:fragment="css">
+	<!-- Handa Member CSS File -->
+	<link th:href="@{/assets/css/member.css}" rel="stylesheet">
+</th:block>
+
+<div layout:fragment="content">
+<main id="main">
+
+<!-- ======= Breadcrumbs ======= -->
+<div class="breadcrumbs">
+	<div class="page-header d-flex align-items-center">
+		<div class="container position-relative">
+			<div class="row d-flex justify-content-center">
+				<div class="col-lg-6 text-center">
+					<h2>Register</h2>
+					<p>정보를 입력해 주세요</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<nav>
+		<div class="container">
+			<ol>
+				<li><a href="/">홈</a></li>
+				<li>회원가입</li>
+			</ol>
+		</div>
+	</nav>
+</div>
+<!-- End Breadcrumbs -->
+
+<section class="sample-page register-padding-top-0">
+	<div class="container" data-aos="fade-up"></div>
+</section>
+
+<!-- ======= Services Section ======= -->
+<section id="service" class="services pt-0">
+	<div class="container" data-aos="fade-up">
+
+		<div class="section-header">
+			<h2>회원가입</h2>
+		</div>
+		<section id="contact" class="contact register-padding-top-30px">
+			<div class="text-center">
+				<div class="register-step">
+					<h5><span>1단계(정보입력)</span> > <span style="color: #86a0e6;">2단계(메일 인증)</span></h5>
+				</div>
+				<div class="register-div">
+				
+				<p th:text="${msg}"></p>
+				<th:block th:if="${msg == 'before-send'}">
+					<div class="before-send">
+						<input type="hidden" name="e_mail" th:value="${user.e_mail}">
+						<input type="hidden" name="member_id" th:value="${user.member_id}">
+						<input type="hidden" name="member_name" th:value="${user.member_name}">
+						<button type="hidden" class="send">인증 메일 전송</button>
+					</div>
+				</th:block>
+				<th:block th:if="${msg == 'non-certified-user'}">
+					<div class="before-send">
+						메일 인증을 완료하셔야합니다.
+					</div>
+				</th:block>
+				
+					<div class="after-send" style="display: none;">
+						<p>인증 메일을 전송하였습니다. 가입한 이메일로 전송된 메일 링크를 통해 인증을 완료해주세요.</p>
+						<a href="">메일 다시 전송 받기</a>
+					</div>
+				</div>
+				<!-- End Contact Form -->
+					<input type="hidden" th:value="${msg}" class="register-result"/>
+			</div>
+		</section>
+	</div>
+</section>
+<!-- End Services Section -->
+
+</main>
+<!-- End #main -->
+</div>
+
+<th:block layout:fragment="javascript">
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+	
+$(document).ready(function(){
+	
+	const member_id = $("input[name=member_id]").val();
+	const member_name = $("input[name=member_name]").val();
+	const e_mail = $("input[name=e_mail]").val();
+	
+	$(".send").on("click", function (e) {
+		e.preventDefault();
+		
+		$.ajax({
+			type: 'post',
+			url: "/member/sendMail",
+			data: {"member_id": member_id, "member_name": member_name, "e_mail": e_mail},
+			success: function (data) {
+				
+				console.log('aaa');
+				if (data === 0) {
+					
+				}
+			}
+		});
+		
+		$(".before-send").css('display', 'none');
+		$(".after-send").css('display', 'block');
+		
+	});	
+});
+</script>
+</th:block>
+
+</html>

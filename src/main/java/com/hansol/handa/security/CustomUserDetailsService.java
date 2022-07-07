@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import com.hansol.handa.domain.AuthVO;
 import com.hansol.handa.domain.UserVO;
 import com.hansol.handa.mapper.UserMapper;
 import com.hansol.handa.security.domain.CustomUser;
@@ -29,21 +30,14 @@ public class CustomUserDetailsService implements UserDetailsService {
         UserVO vo = userMapper.read(userName);
         log.warn("queried by user mapper: " + vo);
         
-        AuthVO authVO = new AuthVO();
-        authVO.setAuth("ROLE_USER");
-        authVO.setMember_id("goeunlee");
         
-        List<AuthVO> authList = new ArrayList<AuthVO>();
-        
-        log.warn("authvo: " + authVO.toString());
-        
-        authList.add(authVO);
-        
-        vo.setAuthList(authList);
+        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+        authorities.add(new SimpleGrantedAuthority(vo.getAuth()));
+
 
         log.warn("add authlist queried by user mapper: " + vo);
         
-		return new CustomUser(vo);
+		return new CustomUser(vo, authorities);
 	}
 	
 	

@@ -16,4 +16,6 @@ public interface UserMapper {
 	int update(UserVO userVO);
 
 	List<UserVO> joinMembers(int challenge_id);
+	
+	void updateAuth(UserVO vo);
 }

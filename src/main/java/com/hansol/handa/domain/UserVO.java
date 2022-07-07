@@ -20,6 +20,6 @@ public class UserVO {
 	private String profile_type;
 	private String createdate;
 	private int position_id;
-
-	private List<AuthVO> authList;
+	private String certified;
+	private String auth;
 }

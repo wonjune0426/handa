@@ -1,8 +1,8 @@
 package com.hansol.handa.security.domain;
 
-import java.util.stream.Collectors;
+import java.util.Collection;
 
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
 import com.hansol.handa.domain.UserVO;
@@ -26,16 +26,12 @@ public class CustomUser extends User {
 	 * authorities); this.user = vo; }
 	 */
 
-	public CustomUser(UserVO vo) {
+	public CustomUser(UserVO vo, Collection<? extends GrantedAuthority> authorities) {
 
-		super(vo.getMember_id(), vo.getPassword(), vo.getAuthList().stream()
-				.map(auth -> new SimpleGrantedAuthority(auth.getAuth())).collect(Collectors.toList()));
+		super(vo.getMember_id(), vo.getPassword(), authorities);
 
 		this.user = vo;
 
-		this.testParam = "test";
-
 		log.info("CustomUSer - " + vo.toString());
 	}
-
 }

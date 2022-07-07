@@ -32,6 +32,15 @@
 			member_id = #{member_id}
 	</update>
 	
+	<update id="updateAuth">
+		UPDATE 
+			member 
+		SET
+			auth = #{auth}
+		WHERE 
+			member_id = #{member_id}
+	</update>
+	
 	<select id="joinMembers" resultType="UserVO">
 		SELECT * FROM member 
 		WHERE member_id IN

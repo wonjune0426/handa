@@ -54,8 +54,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers(
         		"/", "/list", "/detail", "/comment", "/member/login", 
         		"/member/register", "/assets/**", "/smarteditor/**",
-        		"/member/index").permitAll()
-        .antMatchers("/mypage/**", "/create", "/member/amend/**","/challenge-amend/**","/challenge/member").access("hasRole('ROLE_USER')");
+        		"/member/index", "/member/sendMail", "/member/certifyEmail", "member/nonCertify"
+        		).permitAll()
+        .antMatchers("/mypage/**", "/create", "/member/amend/**","/challenge-amend/**","/challenge/member").access("hasRole('ROLE_CERTIFY_USER')");
         // .access("hasRole('ROLE_USER')")
 //        .anyRequest().authenticated();
 
@@ -68,7 +69,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.logout()
         .logoutUrl("/member/logout")
         .invalidateHttpSession(true)
-        .deleteCookies("remember-me", "JESSION_ID");
+        .deleteCookies("remember-me", "JSESSIONID");
         
         http.rememberMe()
 	      .key("handa")
