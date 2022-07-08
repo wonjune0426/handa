@@ -14,6 +14,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -172,6 +173,7 @@ public class ChallengeController {
 	 
 
 //이미지 검색 api를 통한 이미지 검색
+	@CrossOrigin(origins="*")
 	@GetMapping("/imagelist/{searchWord}")
 	@ResponseBody
 	public List<String> imageList(@PathVariable String searchWord) {

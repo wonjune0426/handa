@@ -222,7 +222,7 @@
 			if ($('#search-word').val() != '') {
 				$.ajax({ // ajax 기본형태
 					//////////////////// send(가는것)
-					url: "/imagelist/" + $('#search-word').val(),
+					url: "http://localhost:8080/imagelist/" + $('#search-word').val(),
 					method: "GET",
 					//////////////////// recv
 					success: function (data) { // status, xhr 생략가능
