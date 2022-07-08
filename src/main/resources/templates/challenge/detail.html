@@ -97,7 +97,8 @@
 											<div>
 												<p class="price" th:if="${challengeDetail.challenge_type}=='무료'">무료
 												</p>
-												<p class="price" th:if="${challengeDetail.challenge_type}=='유료'">유료/[[${challengeDetail.challenge_cost}]]
+												<p class="price" th:if="${challengeDetail.challenge_type}=='유료'">
+													유료/[[${challengeDetail.challenge_cost}]]
 												</p>
 
 											</div>
@@ -111,7 +112,7 @@
 				</div>
 			</div>
 		</section>
-		
+
 		<!-- 챌린지 상세보기 메뉴 탭 -->
 		<div id="scrollMenu" class="challenge-detail-tab">
 			<a class="menuTab detail_menu" id="first-menu" th:href="@{#member}">참여 인원</a>
@@ -120,109 +121,111 @@
 			<a class="menuTab detail_menu" th:href="@{#comment}">댓글</a>
 
 		</div>
-		
+
 		<section id="service-details" class="service-details challenge-detail-section"
 			style="position: relative;padding-bottom: 0;">
-			<div id="member"></div><div id="scroll-interval"></div>
+			<div id="member"></div>
+			<div id="scroll-interval"></div>
 			<div class="container aos-init aos-animate" data-aos="fade-up">
 				<div class="col-lg-12">
 					<div class="row gy-4">
 						<div class="col-lg-12">
-								<div class="col-12 challenge-join-member">
-									<p class="join-member-text">
-										참여 인원 <span class="join-member-num">([[${challengeDetail.count}]]명)</span>
-										<button type="button" id="secession" class="btn btn-primary btn-sm"
-											style="float:right;">탈퇴하기</button>
+							<div class="col-12 challenge-join-member">
+								<p class="join-member-text">
+									참여 인원 <span class="join-member-num">([[${challengeDetail.count}]]명)</span>
+									<button type="button" id="secession" class="btn btn-primary btn-sm"
+										style="float:right;">탈퇴하기</button>
+								</p>
+								<div th:each="joinMembers:${joinMembers}" class="ch-j-detail-div">
+									<input id="join_memberid" th:value="${joinMembers.member_id}"
+										style="display: none;">
+									<p class="ch-j-detail">
+										<i th:if="${joinMembers.member_id}==${createMember.member_id}" alt="" class="ch-user-icon fa-solid fa-user" style="color: #4ed7e3;"></i>
+										<i th:if="${joinMembers.member_id}!=${createMember.member_id}" alt="" class="ch-user-icon fa-solid fa-user"></i>
 									</p>
-									<div th:each="joinMembers:${joinMembers}" class="ch-j-detail-div">
-										<input id="join_memberid" th:value="${joinMembers.member_id}"
-											style="display: none;">
-										<p class="ch-j-detail">
-											<i alt="" class="ch-user-icon fa-solid fa-user"></i>
-										</p>
-										<p class="ch-j-detail">
-											<b>[[${joinMembers.member_name}]]</b>
-										</p>
-										<P th:if="${joinMembers.position_id}==1" class="ch-j-detail ch-detail-position">
-											수석
-										</P>
-										<P th:if="${joinMembers.position_id}==2" class="ch-j-detail ch-detail-position">
-											책임
-										</P>
-										<P th:if="${joinMembers.position_id}==3" class="ch-j-detail ch-detail-position">
-											선임
-										</P>
+									<p class="ch-j-detail">
+										<b>[[${joinMembers.member_name}]]</b>
+									</p>
+									<P th:if="${joinMembers.position_id}==1" class="ch-j-detail ch-detail-position">
+										수석
+									</P>
+									<P th:if="${joinMembers.position_id}==2" class="ch-j-detail ch-detail-position">
+										책임
+									</P>
+									<P th:if="${joinMembers.position_id}==3" class="ch-j-detail ch-detail-position">
+										선임
+									</P>
 
-										<p th:if="${joinMembers.affiliates_id}==1" class="ch-j-detail ch-detail-aff">한솔
-											인티큐브
-										</p>
-										<p th:if="${joinMembers.affiliates_id}==2" class="ch-j-detail ch-detail-aff">한솔
-											제지
-										</p>
-										<p th:if="${joinMembers.affiliates_id}==3" class="ch-j-detail ch-detail-aff">한솔
-											테크닉스
-										</p>
-										<p th:if="${joinMembers.affiliates_id}==4" class="ch-j-detail ch-detail-aff">한솔
-											페이퍼택
-										</p>
-										<p th:if="${joinMembers.affiliates_id}==5" class="ch-j-detail ch-detail-aff">한솔
-											홀딩스
-										</p>
-										<p th:if="${joinMembers.affiliates_id}==6" class="ch-j-detail ch-detail-aff">한솔
-											문화재단
-										</p>
-										<p th:if="${joinMembers.affiliates_id}==7" class="ch-j-detail ch-detail-aff">한솔
-											케미칼
-										</p>
-										<p th:if="${joinMembers.affiliates_id}==8" class="ch-j-detail ch-detail-aff">한솔
-											홈데코
-										</p>
-										<p th:if="${joinMembers.affiliates_id}==9" class="ch-j-detail ch-detail-aff">한솔
-											코에버
-										</p>
-										<p th:if="${joinMembers.affiliates_id}==10" class="ch-j-detail ch-detail-aff">한솔
-											BS
-										</p>
-										<p th:if="${joinMembers.affiliates_id}==11" class="ch-j-detail ch-detail-aff">한솔
-											PNS
-										</p>
-										<p th:if="${joinMembers.affiliates_id}==12" class="ch-j-detail ch-detail-aff">한솔
-											로지스틱스</p>
-										<p name="member-e_mail" class="ch-j-detail ch-detail-aff" style="float:right">
-											[[${joinMembers.e_mail}]]</p>
-									</div>
-								</div>
-
-								<div style="padding-bottom: 50px;">
-									<b id="explanation">챌린지 설명</b>
-									<br>
-									<p th:utext="${challengeDetail.description}"></p>
-
-								</div>
-
-								<div>
-									<b id="caution">챌린지 주의사항</b>
-									<ul>
-										<li><i class="bi bi-check-circle"></i>
-											<span>이 부분은
-												모든 챌린지에 고정적으로 들어가는 부분입니다.</span>
-										</li>
-										<li><i class="bi bi-check-circle"></i>
-											<span>챌린지
-												댓글은 참여자만 작성 가능합니다.</span>
-										</li>
-										<li><i class="bi bi-check-circle"></i>
-											<span>챌린지 주의사항 입니다.</span>
-										</li>
-									</ul>
+									<p th:if="${joinMembers.affiliates_id}==1" class="ch-j-detail ch-detail-aff">한솔
+										인티큐브
+									</p>
+									<p th:if="${joinMembers.affiliates_id}==2" class="ch-j-detail ch-detail-aff">한솔
+										제지
+									</p>
+									<p th:if="${joinMembers.affiliates_id}==3" class="ch-j-detail ch-detail-aff">한솔
+										테크닉스
+									</p>
+									<p th:if="${joinMembers.affiliates_id}==4" class="ch-j-detail ch-detail-aff">한솔
+										페이퍼택
+									</p>
+									<p th:if="${joinMembers.affiliates_id}==5" class="ch-j-detail ch-detail-aff">한솔
+										홀딩스
+									</p>
+									<p th:if="${joinMembers.affiliates_id}==6" class="ch-j-detail ch-detail-aff">한솔
+										문화재단
+									</p>
+									<p th:if="${joinMembers.affiliates_id}==7" class="ch-j-detail ch-detail-aff">한솔
+										케미칼
+									</p>
+									<p th:if="${joinMembers.affiliates_id}==8" class="ch-j-detail ch-detail-aff">한솔
+										홈데코
+									</p>
+									<p th:if="${joinMembers.affiliates_id}==9" class="ch-j-detail ch-detail-aff">한솔
+										코에버
+									</p>
+									<p th:if="${joinMembers.affiliates_id}==10" class="ch-j-detail ch-detail-aff">한솔
+										BS
+									</p>
+									<p th:if="${joinMembers.affiliates_id}==11" class="ch-j-detail ch-detail-aff">한솔
+										PNS
+									</p>
+									<p th:if="${joinMembers.affiliates_id}==12" class="ch-j-detail ch-detail-aff">한솔
+										로지스틱스</p>
+									<p name="member-e_mail" class="ch-j-detail ch-detail-aff" style="float:right">
+										[[${joinMembers.e_mail}]]</p>
 								</div>
 							</div>
 
+							<div style="padding-bottom: 50px;">
+								<b id="explanation">챌린지 설명</b>
+								<br>
+								<p th:utext="${challengeDetail.description}"></p>
+
+							</div>
+
+							<div>
+								<b id="caution">챌린지 주의사항</b>
+								<ul>
+									<li><i class="bi bi-check-circle"></i>
+										<span>이 부분은
+											모든 챌린지에 고정적으로 들어가는 부분입니다.</span>
+									</li>
+									<li><i class="bi bi-check-circle"></i>
+										<span>챌린지
+											댓글은 참여자만 작성 가능합니다.</span>
+									</li>
+									<li><i class="bi bi-check-circle"></i>
+										<span>챌린지 주의사항 입니다.</span>
+									</li>
+								</ul>
+							</div>
 						</div>
 
 					</div>
-					<hr>
+
 				</div>
+				<hr>
+			</div>
 		</section>
 		<div id="comment"></div>
 		<section class="service-details" style="padding: 0;">
@@ -477,17 +480,14 @@
 							} else if (result.memberList[i].position_id == 3) {
 								position = "선임"
 							}
-
-
-
+							var img_src = result.memberList[i].profile_path + `/` + result.memberList[i].profile_uuid + `_` + result.memberList[i].profile_name;
 							if (result.memberList[i].member_id == login_memberId) {
 								$("#card-list").append(
 									`<div class="card p-3 mt-2">
 										<div class="d-flex justify-content-between align-items-center">
 											<div class="user d-flex flex-row align-items-center">
-												<img src="https://i.imgur.com/hczKIze.jpg" width="30"
-														class="user-img rounded-circle mr-2"> 
-													<span> 
+												<img class='comment-image' src="http://172.27.0.174:8080/viewFile?fname=`+ img_src + `"> 
+													<span style="padding-left:10px"> 
 														<input class="comment-id" value="`+ result.commentList[i].comment_id + `" style="display:none"></input>
 														<small class="font-weight-bold text-primary">`+ result.memberList[i].member_name + `</small>
 														<small class="font-weight-bold">`+ position + `</small>
@@ -516,9 +516,8 @@
 									`<div class="card p-3 mt-2">
 										<div class="d-flex justify-content-between align-items-center">
 											<div class="user d-flex flex-row align-items-center">
-												<img src="https://i.imgur.com/hczKIze.jpg" width="30"
-														class="user-img rounded-circle mr-2"> 
-													<span> 
+												<img class='comment-image' src="http://172.27.0.174:8080/viewFile?fname=`+ img_src + `">
+													<span style="padding-left:10px"> 
 														<small class="font-weight-bold text-primary">`+ result.memberList[i].member_name + `</small>
 														<small class="font-weight-bold">`+ position + `</small>
 														<div>
