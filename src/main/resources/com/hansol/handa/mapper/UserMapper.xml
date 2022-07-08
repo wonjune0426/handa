@@ -47,4 +47,13 @@
 		(SELECT member_id FROM challenge_join WHERE challenge_id=#{challenge_id})
 	</select>
 	
+	<update id="updateToken">
+		UPDATE 
+			member 
+		SET
+			certify_token = #{certify_token}
+		WHERE 
+			member_id = #{member_id}
+	</update>
+	
 </mapper>

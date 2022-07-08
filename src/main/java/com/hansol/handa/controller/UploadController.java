@@ -34,9 +34,6 @@ public class UploadController {
 	@ResponseBody
 	public ResponseEntity<UserVO> uploadFile(MultipartFile uploadFile) {
 
-		// String uploadFolder = "C:\\upload"; // window
-		// String uploadFolder = "/home/tomcat/apache-tomcat-9.0.64/webapps/upload/"; // linux
-
 		String uploadFolderPath = getFolder();
 
 		log.info("uploadFolderPath: " + uploadFolderPath);
@@ -112,7 +109,6 @@ public class UploadController {
 	public ResponseEntity<byte[]> viewFile(String fname) {
 		log.info("fname : " + fname);
 
-		// File file = new File("c:\\upload\\" + fname);
 		File file = new File(uploadServerPath + fname);
 
 		log.info("file : " + file);

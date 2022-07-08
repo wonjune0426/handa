@@ -19,5 +19,5 @@ public class UserVO {
 	private String createdate;
 	private int position_id;
 	private String auth;
-	private String certifyToken;
+	private String certify_token;
 }

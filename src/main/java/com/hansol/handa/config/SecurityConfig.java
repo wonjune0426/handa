@@ -56,9 +56,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         		"/member/register", "/assets/**", "/smarteditor/**",
         		"/member/index", "/member/sendMail", "/member/certifyEmail", "member/nonCertify"
         		).permitAll()
-        .antMatchers("/mypage/**", "/create", "/member/amend/**","/challenge-amend/**","/challenge/member").access("hasRole('ROLE_CERTIFY_USER')");
-        // .access("hasRole('ROLE_USER')")
-//        .anyRequest().authenticated();
+        .antMatchers(
+        		"/mypage/**",
+        		"/create", 
+        		"/member/amend/**",
+        		"/challenge-amend/**",
+        		"/challenge/member"
+        		).access("hasRole('ROLE_CERTIFY_USER')");
 
         // 로그인 페이지 설정
         http.formLogin()
