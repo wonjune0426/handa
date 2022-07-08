@@ -48,6 +48,15 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 			roleNames.add(authority.getAuthority());
 		});
 		
+		// 이전 링크가 detail인 경우
+		Integer detail = (Integer)request.getSession().getAttribute("detail");
+
+		if (detail != null) {
+			response.sendRedirect("/challenge/detail?challenge_id=" + detail);
+			
+			return;
+		}
+		
 		if (roleNames.contains("ROLE_USER")) {
 			response.sendRedirect("/member/nonCertify");
 		}
@@ -60,12 +69,15 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 			// prePage가 존재하는 경우 사용자가 직접 /member/login 경로로 로그인 요청
 			// 기존 Session의 prePage attribute 제거
 			String prePage = (String) request.getSession().getAttribute("prePage");
+			
 
 			log.info("이전 페이지: " + prePage);
 
 			if (prePage != null) {
 				request.getSession().removeAttribute("prePage");
 			}
+			
+			
 
 			// 기본 uri
 			String uri = "/";
@@ -78,6 +90,8 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 				// 회원가입 -> 로그인으로 넘어온 경우 "/"로 redirect
 				if (prePage.contains("/member/register")) {
 					uri = "/";
+				} else if (prePage.contains("/challenge/detail")) {
+					uri = "/challenge/detail";
 				} else {
 					uri = prePage;
 				}

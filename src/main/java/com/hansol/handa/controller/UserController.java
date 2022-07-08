@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -34,7 +35,7 @@ public class UserController {
 	AuthenticationManager authenticationManager;
 
 	@GetMapping("/login")
-	public String login(String error, String logout, Model model, RedirectAttributes rttr, HttpServletRequest request) {
+	public String login(String error, String logout, Integer challenge_id, Model model, RedirectAttributes rttr, HttpServletRequest request) {
 		log.info("login---------------------------------------");
 
 		log.info("error:" + error);
@@ -51,11 +52,23 @@ public class UserController {
 		if (logout != null) {
 			model.addAttribute("logout", "Logout");
 		}
+		
+		if (challenge_id != null) {
+			log.info("" + challenge_id);
+			request.getSession().setAttribute("detail", challenge_id);
+		}
 
 		// 로그인 후 이전 페이지로 이동 - 이전 페이지로 되돌아가기 위한 Refer 헤더 값을 세션의 prePage attribute 로 저장
 		String uri = request.getHeader("Refer");
+		log.info("refer: " + uri);
 		if (uri != null && !uri.contains("/login")) {
 			request.getSession().setAttribute("prePage", uri);
+		}
+		
+		if (uri != null && !uri.contains("/challenge/detail")) {
+			request.getSession().setAttribute("prePage", uri);
+			
+			log.info("refer challenge detail");
 		}
 
 		return "member/login";
