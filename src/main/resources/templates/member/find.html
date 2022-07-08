@@ -17,8 +17,7 @@
 	<main id="main">
 		<!-- ======= Breadcrumbs ======= -->
 		<div class="breadcrumbs">
-			<div class="page-header d-flex align-items-center"
-				style="background-image: url('../assets/img/page-header.jpg');">
+			<div class="page-header d-flex align-items-center">
 				<div class="container position-relative">
 					<div class="row d-flex justify-content-center">
 						<div class="col-lg-6 text-center">
@@ -49,14 +48,21 @@
 						</div>
 						<div class="find-id">
 							<p>아이디를 잊으셨나요? 아래의 정보를 입력해주세요.</p>
-							<input class="form-control" type="text" placeholder="이메일을 입력하세요">
-							<button>아이디 찾기</button>
+							<form action="/member/find" method="post">
+								<input class="form-control" type="hidden" name="type" value="id">
+								<input class="form-control" type="text" name="member_name" placeholder="이름을 입력하세요.">
+								<input class="form-control" type="text" name="e_mail" placeholder="이메일을 입력하세요.">
+								<button type="submit">아이디 찾기</button>
+							</form>
 						</div>
 						<div class="find-pw" style="display: none;">
 							<p>비밀번호를 잊으셨나요? 아래의 정보를 입력해주세요.</p>
-							<input class="form-control" type="text" placeholder="이메일을 입력하세요">
-							<input class="form-control" type="text" placeholder="아이디를 입력하세요">
-							<button>비밀번호 찾기</button>
+							<form action="/member/find" method="post">
+								<input class="form-control" type="hidden" name="type" value="pw">
+								<input class="form-control" type="text" name="e_mail" placeholder="이메일을 입력하세요.">
+								<input class="form-control" type="text" name="member_id" placeholder="아이디를 입력하세요.">
+								<button type="button">비밀번호 찾기</button>
+							</form>
 						</div>
 					</div>
 				</div>

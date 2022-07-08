@@ -189,7 +189,7 @@ public class UserController {
 	
 	// 메일 인증 링크
 	@GetMapping("/check-email-token")
-	public String verifyEmail(String token, String member_id, RedirectAttributes rttr) {
+	public String verifyEmail(String token, String member_id, RedirectAttributes rttr, Model model) {
 		
 		log.info("check-email-token Contorller: " + token + ", " + member_id);
 		
@@ -206,6 +206,9 @@ public class UserController {
 			
 			rttr.addFlashAttribute("msg", "certify-success");
 			rttr.addFlashAttribute("memberId", vo.getMember_id());
+			
+			return "redirect:/member/emailCheck";
+			
 		} else {								// 인증 실패
 			rttr.addFlashAttribute("msg", "certify-fail");
 			rttr.addFlashAttribute("error", "메일 인증에 실패하였습니다. 인증을 다시 진행해주세요.");
@@ -213,6 +216,26 @@ public class UserController {
 		
 		return "redirect:/member/login";
 	}
+	
+	@GetMapping("/emailCheck")
+	public String emailCheck() {
+		return "member/emailCheck";
+	}
+	
+	 @PostMapping("/find")
+	 public String findPOST(String type) {
+		 
+		 if (type == "id") {
+			 log.info("find id-----------------------------");
+		 }
+		 
+		 if (type == "pw") {
+			 log.info("find pw-----------------------------");
+			 
+		 }
+		 
+		 return "member/find";
+	 }
 	
 	 @GetMapping("/find")
 	 public String find() {

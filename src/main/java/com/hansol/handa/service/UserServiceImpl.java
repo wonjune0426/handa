@@ -75,7 +75,7 @@ public class UserServiceImpl implements UserService {
 				+ "<p>아래 <span style='color: #86a0e6;'>'메일 인증'</span> 버튼을 클릭하여 가입을 완료해주세요.</p>"
 				+ "<p>감사합니다.</p>"
 				+ "<br><br>"
-				+ "<a href='http://localhost:8080/member/check-email-token?token=" + token + "&member_id=" + user.getMember_id() + "' target='_blank'"
+				+ "<a href='http://172.27.0.174:8080/member/check-email-token?token=" + token + "&member_id=" + user.getMember_id() + "' target='_blank'"
 				+ "		style='width:200px; height: 50px; padding: 10px 20px; color: #fff; background: #86a0e6;'>"
 				+ "메일 인증"
 				+ "</a>"
