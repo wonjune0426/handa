@@ -77,7 +77,6 @@ public class UserController {
 			userService.register(userVO);
 			
 			rttr.addFlashAttribute("msg", "register-success");
-			// rttr.addFlashAttribute("memberId", userVO.getMember_id());
 			
 			model.addAttribute("msg", "before-send");
 			
@@ -180,7 +179,7 @@ public class UserController {
 		
 		log.info("user: " + user); 
 		
-		// 토큰 값을 이쪽에서 생성해야함
+		// 토큰 값을 서비스 쪽에서 생성해야함
 		userService.sendMail(user);
 		
 		model.addAttribute("msg", "after-send");
@@ -188,21 +187,29 @@ public class UserController {
 		return "member/certifyEmail";
 	}
 	
-	// 메일 인증 (메일 받고 인증링크로 인증하기)
+	// 메일 인증 링크
 	@GetMapping("/check-email-token")
 	public String verifyEmail(String token, String member_id, RedirectAttributes rttr) {
-		// 토큰 값 일치하는지 확인
-		// 파라미터로 받은 토큰 값 == DB에서 불러온 토큰값
 		
-		// 인증 완료되면 auth 값 role_certify_user로 변경
-		UserVO vo = new UserVO();
-		vo.setMember_id(member_id);
-		vo.setAuth("ROLE_CERTIFY_USER");
+		log.info("check-email-token Contorller: " + token + ", " + member_id);
 		
-		userService.updateAuth(vo);
+		// 토큰 값 일치하는지 확인 (파라미터로 받은 토큰 값 == DB에서 불러온 토큰값) : 이 작업도 서비스에서 진행
+		boolean checkResult = userService.checkEmailToken(token, member_id);
 		
-		rttr.addFlashAttribute("msg", "certify-success");
-		rttr.addFlashAttribute("memberId", vo.getMember_id());
+		if (checkResult) { 						// 인증 성공
+			// auth 값 ROLE_CERTIFY_USER로 변경
+			UserVO vo = new UserVO();
+			vo.setMember_id(member_id);
+			vo.setAuth("ROLE_CERTIFY_USER");
+			
+			userService.updateAuth(vo);
+			
+			rttr.addFlashAttribute("msg", "certify-success");
+			rttr.addFlashAttribute("memberId", vo.getMember_id());
+		} else {								// 인증 실패
+			rttr.addFlashAttribute("msg", "certify-fail");
+			rttr.addFlashAttribute("error", "메일 인증에 실패하였습니다. 인증을 다시 진행해주세요.");
+		}
 		
 		return "redirect:/member/login";
 	}

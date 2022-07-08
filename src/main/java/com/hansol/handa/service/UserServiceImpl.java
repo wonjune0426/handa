@@ -37,11 +37,12 @@ public class UserServiceImpl implements UserService {
 		
 		userVO.setPassword(encoder.encode(userVO.getPassword()));
 		
-		userVO.setCertifyToken(createToken());
+		userVO.setCertify_token(createToken());
 		
 		return userMapper.register(userVO);	
 	}
 	
+	// 메일 전송
 	@Override
 	@Async
 	public void sendMail(UserVO user) throws MessagingException {
@@ -53,24 +54,25 @@ public class UserServiceImpl implements UserService {
 		
 		helper.setFrom("HANDA");
 		helper.setTo(user.getE_mail());
-		helper.setSubject("한다 이메일 인증");
+		helper.setSubject("[한다] 이메일 인증");
 		helper.setText(setMailContent(user), true);
 		
 		javaMailSender.send(mimeMessage);
 	}
 	
+	// 인증 메일 내용 작성
 	public String setMailContent(UserVO user) {
 		
 		StringBuffer emailContent = new StringBuffer();
 		
-		String token = user.getCertifyToken();
+		String token = user.getCertify_token();
 		
 		emailContent.append(
 				"<div style='width: 400px; height: 1000px; border-top: 4px solid #86a0e6;'>"
 				+ "<p>Handa</p>"
-				+ "<h1>메일인증 안내입니다.</h1>"
+				+ "<h1>메일 인증 안내입니다.</h1>"
 				+ "<p>" + user.getMember_name() + "(" + user.getMember_id() + ")" + " 님" + "</p>"
-				+ "<p>아래 '메일 인증' 버튼을 클릭하여 가입을 완료해주세요.</p>"
+				+ "<p>아래 <span style='color: #86a0e6;'>'메일 인증'</span> 버튼을 클릭하여 가입을 완료해주세요.</p>"
 				+ "<p>감사합니다.</p>"
 				+ "<br><br>"
 				+ "<a href='http://localhost:8080/member/check-email-token?token=" + token + "&member_id=" + user.getMember_id() + "' target='_blank'"
@@ -83,6 +85,7 @@ public class UserServiceImpl implements UserService {
 		return emailContent.toString();
 	}
 	
+	// 인증 메일 토큰 생성
 	public String createToken() {
 		String token = "";
 		
@@ -93,8 +96,18 @@ public class UserServiceImpl implements UserService {
 		return token;
 	}
 	
-	public String getCertifiedKey() {
-		return "";
+	// 메일 인증 토큰 값 체크
+	@Override
+	public boolean checkEmailToken(String token, String member_id) {
+		
+		log.info("check-email-token Service: " + token + ", " + member_id);
+		
+		// DB에서 사용자 불러와서 파라미터로 전달받은 토큰 값과 일치하는지 확인
+		UserVO user = userMapper.read(member_id);
+		
+		log.info("check-email-token Service UserVO: " + user);
+		
+		return token.equals(user.getCertify_token());
 	}
 
 	@Override
@@ -124,6 +137,12 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void updateAuth(UserVO vo) {
 		userMapper.updateAuth(vo);
+		
+	}
+
+	@Override
+	public void updateToken(UserVO userVO) {
+		userMapper.updateToken(userVO);
 		
 	}
 }

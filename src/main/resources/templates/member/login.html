@@ -154,6 +154,13 @@
 				})
 			}
 		
+		if ($('input[name=msg]').val() === "certify-fail") {
+			Swal.fire({
+				  icon: 'error',
+				  text: '메일 인증에 실패했습니다. 다시 진행해주세요.'
+				})
+			}
+		
 	});
 	</script>
 </th:block>

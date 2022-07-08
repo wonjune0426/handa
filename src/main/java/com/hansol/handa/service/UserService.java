@@ -21,4 +21,8 @@ public interface UserService {
 	void sendMail(UserVO user) throws MessagingException;
 	
 	void updateAuth(UserVO vo);
+	
+	boolean checkEmailToken(String token, String member_id);
+	
+	void updateToken(UserVO userVO);
 }

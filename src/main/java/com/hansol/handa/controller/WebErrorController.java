@@ -37,7 +37,7 @@ public class WebErrorController implements ErrorController {
 		}
 		
 		model.addAttribute("code", "ERROR");
-		model.addAttribute("msg", "오류");
+		model.addAttribute("msg", "오류 페이지입니다.");
 
 		return "error/error";
 	}
