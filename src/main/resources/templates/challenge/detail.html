@@ -35,8 +35,13 @@
 										자격증</span>
 									<span class="ch-detail-category" th:if="${challengeDetail.subcategory_id}==6">자기계발 >
 										외국어</span>
-
-									<h3 class="ch-detail-title" th:text="${challengeDetail.challenge_name}"></h3>
+									<div style="display: flex;">
+										<h3 class="ch-detail-title" th:text="${challengeDetail.challenge_name}">
+										</h3>
+										<div>
+											<button class="btn challenge-join-btn" style="margin-left:150%;width:130px;height:50px;display:none;" id="challenge-amend">수정하기</button>
+										</div>
+									</div>
 									<div class="create-user">
 										<div class="img-wrapper">
 											<img class="image--cover"
@@ -140,8 +145,10 @@
 									<input id="join_memberid" th:value="${joinMembers.member_id}"
 										style="display: none;">
 									<p class="ch-j-detail">
-										<i th:if="${joinMembers.member_id}==${createMember.member_id}" alt="" class="ch-user-icon fa-solid fa-user" style="color: #4ed7e3;"></i>
-										<i th:if="${joinMembers.member_id}!=${createMember.member_id}" alt="" class="ch-user-icon fa-solid fa-user"></i>
+										<i th:if="${joinMembers.member_id}==${createMember.member_id}" alt=""
+											class="ch-user-icon fa-solid fa-user" style="color: #4ed7e3;"></i>
+										<i th:if="${joinMembers.member_id}!=${createMember.member_id}" alt=""
+											class="ch-user-icon fa-solid fa-user"></i>
 									</p>
 									<p class="ch-j-detail">
 										<b>[[${joinMembers.member_name}]]</b>
@@ -321,6 +328,7 @@
 					$("#comment-input").css("display", "block")
 					if (login_memberId == createMember) {
 						$("#secession").css("display", "none")
+						$("#challenge-amend").css("display","block")
 					} else {
 						$("#secession").css("display", "block")
 					}
@@ -352,7 +360,7 @@
 			//참여하기 버튼
 			$("#challenge-join").click(function () {
 				if (login_memberId == null) {
-					location.href = "/member/login";
+					location.href = "/member/login?challenge_id="+challege_id;
 				} else {
 					Swal.fire({
 						title: '참여하시겠습니까?',
@@ -454,6 +462,11 @@
 				return [year, month, day].join('-');
 
 			}
+			
+			//수정하기 버튼 클릭
+			$('#challenge-amend').click(function(){
+				location.href="/challenge-amend?challenge_id="+challenge_id;
+			})
 
 
 
