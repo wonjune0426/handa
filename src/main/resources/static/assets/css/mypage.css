@@ -285,6 +285,19 @@
 	border-radius: 4px;
 }
 
+.challenge-card-zero {
+	background-color: #fff;	
+	margin: 0px 1%;
+	display: inline-block;
+	padding: 18px;
+	box-shadow: 3px 3px 3px #b4b4b4;
+	border-radius: 4px;
+	width: 97%;
+	height: 190px;
+	text-align: center;
+	vertical-align: middle;
+}
+
 .challenge-card-div {
 	margin-top: 10px;
 	margin-bottom: 35px;
@@ -311,7 +324,7 @@
 	font-size: 14px;
 }
 
-.ch-card-btn-div {
+.ch-card-btn-div, {
 	text-align: right;
 }
 
