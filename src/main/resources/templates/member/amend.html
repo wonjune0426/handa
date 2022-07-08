@@ -94,7 +94,7 @@
 													<td><label class="login-label register-label-style"><b>회사</b></label></td>
 												</tr>
 												<tr>
-													<td><select class="form-control handa-list-select" name="affiliates_id" th:value="${user.affiliates_id}">
+													<td><select class="form-select" name="affiliates_id" th:value="${user.affiliates_id}">
 															<option value="1" th:selected="${user.affiliates_id}==1">한솔 인티큐브</option>
 															<option value="2" th:selected="${user.affiliates_id}==2">한솔 제지</option>
 															<option value="3" th:selected="${user.affiliates_id}==3">한솔 테크닉스</option>
@@ -117,7 +117,7 @@
 													<td><label class="login-label register-label-style"><b>직급</b></label></td>
 												</tr>
 												<tr>
-													<td><select class="form-control handa-list-select" name="position_id" th:value="${user.position_id}">
+													<td><select class="form-select" name="position_id" th:value="${user.position_id}">
 															<option value="1"  th:selected="${user.position_id}==1">수석</option>
 															<option value="2"  th:selected="${user.position_id}==2">책임</option>
 															<option value="3"  th:selected="${user.position_id}==3">선임</option>
