@@ -32,7 +32,7 @@
 					<!-- 회원인 경우 -->
 					<th:block sec:authorize="isAuthenticated()">
 						
-						<li><a href="/mypage" class="nav-link" style="padding-left: 20px; padding-right: 15px;">
+						<li><a th:href="@{/mypage?member_id=} + ${#authentication.principal.Username}" class="nav-link" style="padding-left: 20px; padding-right: 15px;">
 						<i class="fa-solid fa-user" alt="마이페이지" title="마이페이지" ></i></a></li>
 						
 						<form action="/member/logout" method="post" id="logoutForm">

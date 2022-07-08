@@ -20,4 +20,7 @@ public class UserVO {
 	private int position_id;
 	private String auth;
 	private String certify_token;
+	
+	private String affiliates_name;
+	private String position_name;
 }

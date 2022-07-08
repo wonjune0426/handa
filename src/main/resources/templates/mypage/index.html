@@ -48,53 +48,43 @@
 						<br>
 						<div class="img-wrapper">
 						  <img alt="프로필 이미지" class="image--cover" 
-												th:src="|${'http://172.27.0.174:8080/viewFile?fname=' 
-												+ #authentication.principal.user.profile_path + '/' 
-												+ #authentication.principal.user.profile_uuid + '_' 
-												+ #authentication.principal.user.profile_name}|">
+							th:src="'http://172.27.0.174:8080/viewFile?fname=' + ${memberInfo.profile_path} + '/' + ${memberInfo.profile_uuid}+ '_' + ${memberInfo.profile_name}">
+												
 						</div>
 						<p class="my-info-name">
-							<th:block th:text="${#authentication.principal.user.member_name}"></th:block>
-							
-							<!-- 직급 (조인으로 가져오는 걸로 처리해도 됩니다. 임시로 if 문 처리) -->	
-							<th:block th:if="${#authentication.principal.user.position_id==1}" th:text="수석"></th:block>
-            				<th:block th:if="${#authentication.principal.user.position_id==2}" th:text="책임"></th:block>
-            				<th:block th:if="${#authentication.principal.user.position_id==3}" th:text="선임"></th:block>
+							<th:block th:text="${memberInfo.member_name}"></th:block>
+							<!-- 직급 -->	
+            				<th:block th:text="${memberInfo.position_name}"></th:block>
 						</p>
 						<hr>
 						<div class="my-info-etc">
 							<p>
 								<i class="fa-solid fa-city"></i>
-								<!-- 계열사 (조인으로 가져오는 걸로 처리해도 됩니다. 임시로 if 문 처리) -->			              							
-       							<th:block th:if="${#authentication.principal.user.affiliates_id==1}">한솔 인티큐브</th:block>
-       							<th:block th:if="${#authentication.principal.user.affiliates_id==2}">한솔 제지</th:block>
-       							<th:block th:if="${#authentication.principal.user.affiliates_id==3}">한솔 테크닉스</th:block>
-       							<th:block th:if="${#authentication.principal.user.affiliates_id==4}">한솔 페이퍼택</th:block>
-       							<th:block th:if="${#authentication.principal.user.affiliates_id==5}">한솔 홀딩스</th:block>
-       							<th:block th:if="${#authentication.principal.user.affiliates_id==6}">한솔 문화재단</th:block>
-       							<th:block th:if="${#authentication.principal.user.affiliates_id==7}">한솔 케미칼</th:block>
-       							<th:block th:if="${#authentication.principal.user.affiliates_id==8}">한솔 홈데코</th:block>
-       							<th:block th:if="${#authentication.principal.user.affiliates_id==9}">한솔 코에버</th:block>
-       							<th:block th:if="${#authentication.principal.user.affiliates_id==10}">한솔 BS</th:block>
-       							<th:block th:if="${#authentication.principal.user.affiliates_id==11}">한솔 PNS</th:block>
-       							<th:block th:if="${#authentication.principal.user.affiliates_id==12}">한솔 로지스틱스</th:block>
+								<!-- 계열사 -->			              							
+       							<th:block th:text="${memberInfo.affiliates_name}"></th:block>
 							</p>
 							<p>
 								<i class="fa-solid fa-id-card-clip"></i>
-								<th:block th:text="${#authentication.principal.user.member_id}"></th:block>
+								<th:block th:text="${memberInfo.member_id}"></th:block>
 							</p>
 							<p class="my-info-email">
 								<i class="fa-solid fa-envelope"></i>
-								<th:block th:text="${#authentication.principal.user.e_mail}"></th:block>
+								<th:block th:text="${memberInfo.e_mail}"></th:block>
 							</p>
 							<p>
 								<i class="fa-solid fa-user-plus"></i>
 								생성 챌린지 
-								<span class="my-info-num">00</span>건
+								<span class="my-info-num">
+									<a th:href="@{/mypage/challenge-produce?member_id=} + ${memberInfo.member_id}" th:text="${produceCount} "></a>
+								</span>건
+								
 							</p>
 							<p>
 								<i class="fa-solid fa-user-group"></i>
-								참여 챌린지 <span class="my-info-num">00</span>건
+								참여 챌린지
+								<span class="my-info-num">
+									<a th:href="@{/mypage/challenge-part?member_id=} + ${memberInfo.member_id}" th:text="${partCount} "></a>
+								</span>건
 							</p>
 						</div>
 						<!-- 정보 수정 버튼 -->

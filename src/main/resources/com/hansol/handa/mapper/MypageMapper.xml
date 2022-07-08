@@ -3,4 +3,25 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hansol.handa.mapper.MypageMapper">
+
+	<!-- 마이페이지 내 정보 조회 -->
+	<select id="selectMemberInfo" parameterType="String" resultType="UserVO">
+		SELECT member_id, member_name, e_mail, profile_path, profile_uuid, profile_name, affiliates_name, position_name
+		FROM member, position, affiliates
+		WHERE member.affiliates_id = affiliates.affiliates_id AND member.position_id = position.position_id AND member.member_id = #{member_id};
+	</select>
+
+	<!-- 생성 챌린지 개수 조회 -->
+	<select id="selectProduceCount" parameterType="String" resultType="Integer">
+		SELECT COUNT(*) AS COUNT
+		FROM challenge
+		WHERE member_id = #{member_id};
+	</select>
+	
+	<!-- 참여 챌린지 개수 조회 -->
+	<select id="selectPartCount" parameterType="String" resultType="Integer">
+		SELECT COUNT(*) AS COUNT
+		FROM challenge_join
+		WHERE member_id = #{member_id};
+	</select>
 </mapper>

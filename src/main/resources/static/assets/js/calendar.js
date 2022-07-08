@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		 	}, 
 		 	{            
 		 		title: 'Click test',            
-		 		url: '/detail', // 클릭시 해당 url로 이동 
+		 		url: '/challenge/detail?challenge_id=117', // 클릭시 해당 url로 이동 
 		 		description: 'description for Repeating Event',
 		 		start: '2022-06-28',    
 		 		color: 'purple'  

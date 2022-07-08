@@ -145,6 +145,7 @@
 									<img th:src="${popular.thumbnail}" alt=""
 										class="img-fluid challenge-thumbnail">
 								</div>
+
 								<h3>
 									<a th:href="@{/challenge/detail(challenge_id=${popular.challenge_id})}"
 										th:text="'[' + ${popular.subcategory_name} + '] ' + ${popular.challenge_name}" class="stretched-link"></a>

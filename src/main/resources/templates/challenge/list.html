@@ -135,9 +135,9 @@
 
 			if(searchWord != null)
 				if(category != "null")
-					window.location.href = "/search?search_word=" + searchWord + "&category=" + category +"&sort_type=" + sortType + "&challenge_type=" + challengeType;
+					window.location.href = "/search?searchword=" + searchWord + "&category=" + category +"&sort_type=" + sortType + "&challenge_type=" + challengeType;
 				else
-					window.location.href = "/search?search_word=" + searchWord + "&category=&sort_type=" + sortType + "&challenge_type=" + challengeType;
+					window.location.href = "/search?searchword=" + searchWord + "&category=&sort_type=" + sortType + "&challenge_type=" + challengeType;
 			else{
 				if(category == "null")
 					window.location.href = "/list?sort_type=" + sortType + "&challenge_type=" + challengeType;
