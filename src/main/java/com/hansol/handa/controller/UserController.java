@@ -213,4 +213,10 @@ public class UserController {
 		
 		return "redirect:/member/login";
 	}
+	
+	 @GetMapping("/find")
+	 public String find() {
+		 
+		 return "member/find";
+	 }
 }

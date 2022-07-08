@@ -366,3 +366,44 @@
   object-fit: cover;
   /* object-position: center right; */
 }
+
+/* ------------아이디 / 비밀번호 찾기 (member/find.html)-------------- */
+/* 마이페이지 탭 활성화될 경우 */
+.find-tab a.active {
+    font-weight: 700;
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
+/* 마이페이지 탭  */
+.find-tab a {
+	display: inline-block;
+	text-align: center;
+	width: 49%;
+    line-height: 1;
+    padding: 8px 15px 20px 15px;
+    border-bottom: 3px solid #C2CBDF;
+    margin: 20px 0;
+    color: var(--color-secondary);
+    transition: 0.3s;
+    font-size: 20px;
+}
+
+.find-tab {
+	margin-bottom: 30px;
+}
+
+.find-wrapper button {
+	margin-top: 10px;
+	color: #fff !important;
+	border: 1px solid var(--color-primary) !important;
+	background-color: var(--color-primary) !important;
+    padding: 10px 35px;
+    transition: 0.4s;
+    border-radius: 5px;
+}
+
+.find-content {
+	margin: 0 auto;
+}
+

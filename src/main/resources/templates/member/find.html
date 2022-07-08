@@ -9,7 +9,7 @@
 	<!-- include CSS File -->
 	<th:block layout:fragment="css">
 		<!-- Handa Challenge CSS File -->
-		<link th:href="@{/assets/css/mypage.css}" rel="stylesheet">
+		<link th:href="@{/assets/css/member.css}" rel="stylesheet">
 	</th:block>
 </head>
 
@@ -22,7 +22,7 @@
 				<div class="container position-relative">
 					<div class="row d-flex justify-content-center">
 						<div class="col-lg-6 text-center">
-							<h2>My Page</h2>
+							
 						</div>
 					</div>
 				</div>
@@ -31,8 +31,7 @@
 				<div class="container">
 					<ol>
 						<li><a href="/">홈</a></li>
-            			<li>마이페이지</li>
-            			<li>내 정보</li>
+            			<li>아이디/비밀번호 찾기</li>
 					</ol>
 				</div>
 			</nav>
@@ -41,59 +40,24 @@
 		<!-- ======= Services Section ======= -->
 		<section id="service-details" class="service-details">
 			<div class="container aos-init aos-animate" data-aos="fade-up">
-				<div class="row gy-4">
-					<div class="col-lg-12">
+				<div class="row gy-4 find-wrapper">
+					<div class="col-lg-6 find-content">
 						<!-- 마이페이지 메뉴 탭 -->
-						<div class="mypage-detail-tab">
-							<a href="/mypage/memberdetail" class="active">내 정보</a> 
-							<a href="/mypage/challenge-produce">생성 챌린지</a>
-							<a href="/mypage/challenge-part">참여 챌린지</a>
-							<a href="/mypage/calendar">일정 관리</a>
+						<div class="find-tab">
+							<a href="" data-type="find-id" class="find-tab-menu find-id-menu active">아이디 찾기</a> 
+							<a href="" data-type="find-pw" class="find-tab-menu find-pw-menu">비밀번호 찾기</a>
 						</div>
-					</div>
-					
-					<div class="row gy-4"/>
-					<div class="col-lg-12">
-						<div class="row gy-4 align-items-center features-item aos-init aos-animate" data-aos="fade-up">
-							<!-- 프로필 사진 -->
-          					<div class="profile col-md-5 text-center">
-            					<img id="profile" src="../assets/img/features-1.jpg" class="profile-img img-fluid" alt="">
-          					</div>
-          					<!-- 회원 정보 -->
-          					<div class="col-md-7">
-            					<h3>
-            					<th:block th:text="${#authentication.principal.Username}"></th:block> 
-            					/
-            					 <th:block th:text="${#authentication.principal.user.member_name}"></th:block>
-            					 <th:block th:if="${#authentication.principal.user.position_id==1}" th:text="수석"></th:block>
-            					 <th:block th:if="${#authentication.principal.user.position_id==2}" th:text="책임"></th:block>
-            					 <th:block th:if="${#authentication.principal.user.position_id==3}" th:text="선임"></th:block>
-            					 </h3>
-            					<p class="fst-italic"><th:block th:text="${#authentication.principal.user.e_mail}"></th:block></p>
-            					<ul>
-              						<li>
-              							<i class="bi bi-check"></i>
-										<!-- 계열사 (조인으로 가져오는 걸로 처리해도 됩니다. 임시로 if 문 처리) -->			              							
-              							<th:block th:if="${#authentication.principal.user.affiliates_id==1}">한솔 인티큐브</th:block>
-              							<th:block th:if="${#authentication.principal.user.affiliates_id==2}">한솔 제지</th:block>
-              							<th:block th:if="${#authentication.principal.user.affiliates_id==3}">한솔 테크닉스</th:block>
-              							<th:block th:if="${#authentication.principal.user.affiliates_id==4}">한솔 페이퍼택</th:block>
-              							<th:block th:if="${#authentication.principal.user.affiliates_id==5}">한솔 홀딩스</th:block>
-              							<th:block th:if="${#authentication.principal.user.affiliates_id==6}">한솔 문화재단</th:block>
-              							<th:block th:if="${#authentication.principal.user.affiliates_id==7}">한솔 케미칼</th:block>
-              							<th:block th:if="${#authentication.principal.user.affiliates_id==8}">한솔 홈데코</th:block>
-              							<th:block th:if="${#authentication.principal.user.affiliates_id==9}">한솔 코에버</th:block>
-              							<th:block th:if="${#authentication.principal.user.affiliates_id==10}">한솔 BS</th:block>
-              							<th:block th:if="${#authentication.principal.user.affiliates_id==11}">한솔 PNS</th:block>
-              							<th:block th:if="${#authentication.principal.user.affiliates_id==12}">한솔 로지스틱스</th:block>
-              						</li>
-              						<li></li>
-              						<!-- 숫자 클릭 시 해당 페이지로 이동 -->
-              						<li><i class="bi bi-check"></i> 내가 생성한 챌린지 : <a href="/mypage/challenge-produce">&nbsp 3</a>개<li>
-              						<li><i class="bi bi-check"></i> 내가 참여한 챌린지 : <a href="/mypage/challenge-produce">&nbsp 10</a>개</li>
-            					</ul>
-          					</div>
-        				</div>
+						<div class="find-id">
+							<p>아이디를 잊으셨나요? 아래의 정보를 입력해주세요.</p>
+							<input class="form-control" type="text" placeholder="이메일을 입력하세요">
+							<button>아이디 찾기</button>
+						</div>
+						<div class="find-pw" style="display: none;">
+							<p>비밀번호를 잊으셨나요? 아래의 정보를 입력해주세요.</p>
+							<input class="form-control" type="text" placeholder="이메일을 입력하세요">
+							<input class="form-control" type="text" placeholder="아이디를 입력하세요">
+							<button>비밀번호 찾기</button>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -115,20 +79,23 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 $(document).ready(function(){
-	if ($(".amend-result").val() === "amend-success") {			
-		Swal.fire({
-		  icon: 'success',
-		  text: '수정이 완료되었습니다.'
-		})
-	}
-	
-	if ($(".amend-result").val() === "amend-fail") {			
-		Swal.fire({
-		  icon: 'error',
-		  text: '수정이 실패되었습니다. 다시 진행해주세요.'
-		})
-	}
-		
+	$(".find-tab-menu").on("click", function (e) {
+		 e.preventDefault();
+		 
+		 if ($(this).data('type') === "find-id") {
+			$('.find-id').css('display', 'block'); 
+			$('.find-pw').css('display', 'none');
+			$('.find-id-menu').addClass('active');
+			$('.find-pw-menu').removeClass('active');
+		 }
+		 
+		 if ($(this).data('type') === "find-pw") {
+				$('.find-id').css('display', 'none'); 
+				$('.find-pw').css('display', 'block');
+				$('.find-pw-menu').addClass('active');
+				$('.find-id-menu').removeClass('active');
+			 }
+	});		
 });
 </script>
 </th:block>
