@@ -45,7 +45,12 @@ public class ChallengeController {
 
 	@GetMapping("/")
 	// 메인 페이지
-	public String index() {
+	public String index(Model model) {
+		// 인기 챌린지
+		model.addAttribute("popularChallenge", challengeService.selectPopular());
+		// 유료 챌린지
+		model.addAttribute("costChallenge", challengeService.selectCost());
+		
 		return "challenge/index";
 	}
 

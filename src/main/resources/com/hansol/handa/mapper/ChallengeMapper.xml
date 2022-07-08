@@ -111,6 +111,30 @@
 			<when test="challengeType == 2">AND challenge_type = "유료"</when>
 		</choose>
  	</select>
+ 	
+ 	<!-- 메인 페이지 인기 챌린지 조회 -->
+ 	<select id="selectPopular" resultMap="challengeMap">
+ 		SELECT challenge.challenge_id, challenge_name, thumbnail, startdate, enddate,  
+			createdate, challenge.member_id, subcategory_id, challenge_type, count, sub_category_name   
+		from challenge, sub_category, (SELECT challenge.challenge_id, COUNT(*) as count  
+										from challenge, challenge_join
+										WHERE challenge.challenge_id = challenge_join.challenge_id
+										GROUP BY challenge.challenge_id) count_table
+		WHERE challenge.subcategory_id = sub_category.sub_category_id AND challenge.challenge_id = count_table.challenge_id AND enddate >= NOW()
+			GROUP BY challenge.challenge_id order by COUNT desc, challenge.createdate desc LIMIT 8;
+ 	</select>
+	
+	<!-- 메인 페이지 유료 챌린지 조회 -->
+	<select id="selectCost" resultMap="challengeMap">
+		SELECT challenge.challenge_id, challenge_name, thumbnail, startdate, enddate,  
+			createdate, challenge.member_id, subcategory_id, challenge_type, count, sub_category_name   
+		from challenge, sub_category, (SELECT challenge.challenge_id, COUNT(*) as count  
+										from challenge, challenge_join
+										WHERE challenge.challenge_id = challenge_join.challenge_id
+										GROUP BY challenge.challenge_id) count_table
+		WHERE challenge.subcategory_id = sub_category.sub_category_id AND challenge.challenge_id = count_table.challenge_id and challenge_type = "유료" AND enddate >= NOW()
+			GROUP BY challenge.challenge_id order by challenge.createdate desc LIMIT 6;
+	</select>
 	
 	<insert id="createChallenge" parameterType="ChallengeVO"
 		useGeneratedKeys="true" keyProperty="challenge_id">

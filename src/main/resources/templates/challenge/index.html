@@ -139,158 +139,24 @@
 						</div>
 
 						<!-- 챌린지 리스트 -->
-						<div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
+						<div class="col-md-3" data-aos="fade-up" data-aos-delay="100" th:each="popular: ${popularChallenge}">
 							<div class="card challenge-item">
 								<div class="card-img">
-									<img th:src="@{../assets/img/study-thumb.jpg}" alt=""
+									<img th:src="${popular.thumbnail}" alt=""
 										class="img-fluid challenge-thumbnail">
 								</div>
 								<h3>
-									<a href="/challenge/detail?challenge_id=111"
-										class="stretched-link">[영화] 일주일에 한편 보기</a>
+									<a th:href="@{/challenge/detail(challenge_id=${popular.challenge_id})}"
+										th:text="'[' + ${popular.subcategory_name} + '] ' + ${popular.challenge_name}" class="stretched-link"></a>
 								</h3>
-								<p id="card-p">2022-07-06 ~ 2022-07-21</p>
-								<p id="card-p">참여인원 1명</p>
+								<p id="card-p" th:text="${popular.startdate} + ' ~ ' + ${popular.enddate}"></p>
+								<p id="card-p" th:text="'참여인원 ' + ${popular.joinVO.count} + '명'"></p>
 								<div class="state">
-									<div class="open-dt">2022-07-05 생성</div>
-									<div class="state-label">진행중</div>
+									<div class="open-dt" th:text="${popular.createdate} + ' 생성'"></div>
+									<div class="state-label" th:text="${popular.challenge_state}"></div>
 								</div>
 							</div>
 						</div>
-
-						<div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
-							<div class="card challenge-item">
-								<div class="card-img">
-									<img th:src="@{../assets/img/study-thumb.jpg}" alt=""
-										class="img-fluid challenge-thumbnail">
-								</div>
-								<h3>
-									<a href="/challenge/detail?challenge_id=111"
-										class="stretched-link">[영화] 일주일에 한편 보기</a>
-								</h3>
-								<p id="card-p">2022-07-06 ~ 2022-07-21</p>
-								<p id="card-p">참여인원 1명</p>
-								<div class="state">
-									<div class="open-dt">2022-07-05 생성</div>
-									<div class="state-label">진행중</div>
-								</div>
-							</div>
-						</div>
-						
-						<div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
-							<div class="card challenge-item">
-								<div class="card-img">
-									<img th:src="@{../assets/img/study-thumb.jpg}" alt=""
-										class="img-fluid challenge-thumbnail">
-								</div>
-								<h3>
-									<a href="/challenge/detail?challenge_id=111"
-										class="stretched-link">[영화] 일주일에 한편 보기</a>
-								</h3>
-								<p id="card-p">2022-07-06 ~ 2022-07-21</p>
-								<p id="card-p">참여인원 1명</p>
-								<div class="state">
-									<div class="open-dt">2022-07-05 생성</div>
-									<div class="state-label">진행중</div>
-								</div>
-							</div>
-						</div>
-						
-						<div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
-							<div class="card challenge-item">
-								<div class="card-img">
-									<img th:src="@{../assets/img/study-thumb.jpg}" alt=""
-										class="img-fluid challenge-thumbnail">
-								</div>
-								<h3>
-									<a href="/challenge/detail?challenge_id=111"
-										class="stretched-link">[영화] 일주일에 한편 보기</a>
-								</h3>
-								<p id="card-p">2022-07-06 ~ 2022-07-21</p>
-								<p id="card-p">참여인원 1명</p>
-								<div class="state">
-									<div class="open-dt">2022-07-05 생성</div>
-									<div class="state-label">진행중</div>
-								</div>
-							</div>
-						</div>
-						
-						<div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
-							<div class="card challenge-item">
-								<div class="card-img">
-									<img th:src="@{../assets/img/study-thumb.jpg}" alt=""
-										class="img-fluid challenge-thumbnail">
-								</div>
-								<h3>
-									<a href="/challenge/detail?challenge_id=111"
-										class="stretched-link">[영화] 일주일에 한편 보기</a>
-								</h3>
-								<p id="card-p">2022-07-06 ~ 2022-07-21</p>
-								<p id="card-p">참여인원 1명</p>
-								<div class="state">
-									<div class="open-dt">2022-07-05 생성</div>
-									<div class="state-label">진행중</div>
-								</div>
-							</div>
-						</div>
-						
-						<div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
-							<div class="card challenge-item">
-								<div class="card-img">
-									<img th:src="@{../assets/img/study-thumb.jpg}" alt=""
-										class="img-fluid challenge-thumbnail">
-								</div>
-								<h3>
-									<a href="/challenge/detail?challenge_id=111"
-										class="stretched-link">[영화] 일주일에 한편 보기</a>
-								</h3>
-								<p id="card-p">2022-07-06 ~ 2022-07-21</p>
-								<p id="card-p">참여인원 1명</p>
-								<div class="state">
-									<div class="open-dt">2022-07-05 생성</div>
-									<div class="state-label">진행중</div>
-								</div>
-							</div>
-						</div>
-						
-						<div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
-							<div class="card challenge-item">
-								<div class="card-img">
-									<img th:src="@{../assets/img/study-thumb.jpg}" alt=""
-										class="img-fluid challenge-thumbnail">
-								</div>
-								<h3>
-									<a href="/challenge/detail?challenge_id=111"
-										class="stretched-link">[영화] 일주일에 한편 보기</a>
-								</h3>
-								<p id="card-p">2022-07-06 ~ 2022-07-21</p>
-								<p id="card-p">참여인원 1명</p>
-								<div class="state">
-									<div class="open-dt">2022-07-05 생성</div>
-									<div class="state-label">진행중</div>
-								</div>
-							</div>
-						</div>
-						
-						<div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
-							<div class="card challenge-item">
-								<div class="card-img">
-									<img th:src="@{../assets/img/study-thumb.jpg}" alt=""
-										class="img-fluid challenge-thumbnail">
-								</div>
-								<h3>
-									<a href="/challenge/detail?challenge_id=111"
-										class="stretched-link">[영화] 일주일에 한편 보기</a>
-								</h3>
-								<p id="card-p">2022-07-06 ~ 2022-07-21</p>
-								<p id="card-p">참여인원 1명</p>
-								<div class="state">
-									<div class="open-dt">2022-07-05 생성</div>
-									<div class="state-label">진행중</div>
-								</div>
-							</div>
-						</div>
-
 					</div>
 				</div>
 			</div>
@@ -366,127 +232,24 @@
 
 						<!-- 챌린지 리스트 -->
 						<div class="col-lg-4 col-md-6" data-aos="fade-up"
-							data-aos-delay="100">
+							data-aos-delay="100" th:each="cost:${costChallenge}">
 							<div class="card challenge-item">
 								<div class="card-img">
-									<img th:src="@{../assets/img/study-thumb.jpg}" alt=""
+									<img th:src="${cost.thumbnail}" alt=""
 										class="img-fluid challenge-thumbnail">
 								</div>
 								<h3>
-									<a href="/challenge/detail?challenge_id=111"
-										class="stretched-link">[영화] 일주일에 한편 보기</a>
+									<a th:href="@{/challenge/detail(challenge_id=${cost.challenge_id})}"
+										th:text="'[' + ${cost.subcategory_name} + '] ' + ${cost.challenge_name}" class="stretched-link"></a>
 								</h3>
-								<p id="card-p">2022-07-06 ~ 2022-07-21</p>
-								<p id="card-p">참여인원 1명</p>
+								<p id="card-p" th:text="${cost.startdate} + ' ~ ' + ${cost.enddate}"></p>
+								<p id="card-p" th:text="'참여인원 ' + ${cost.joinVO.count} + '명'"></p>
 								<div class="state">
-									<div class="open-dt">2022-07-05 생성</div>
-									<div class="state-label">진행중</div>
+									<div class="open-dt" th:text="${cost.createdate} + ' 생성'"></div>
+									<div class="state-label" th:text="${cost.challenge_state}"></div>
 								</div>
 							</div>
 						</div>
-
-						<div class="col-lg-4 col-md-6" data-aos="fade-up"
-							data-aos-delay="100">
-							<div class="card challenge-item">
-								<div class="card-img">
-									<img th:src="@{../assets/img/study-thumb.jpg}" alt=""
-										class="img-fluid challenge-thumbnail">
-								</div>
-								<h3>
-									<a href="/challenge/detail?challenge_id=111"
-										class="stretched-link">[영화] 일주일에 한편 보기</a>
-								</h3>
-								<p id="card-p">2022-07-06 ~ 2022-07-21</p>
-								<p id="card-p">참여인원 1명</p>
-								<div class="state">
-									<div class="open-dt">2022-07-05 생성</div>
-									<div class="state-label">진행중</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-4 col-md-6" data-aos="fade-up"
-							data-aos-delay="100">
-							<div class="card challenge-item">
-								<div class="card-img">
-									<img th:src="@{../assets/img/study-thumb.jpg}" alt=""
-										class="img-fluid challenge-thumbnail">
-								</div>
-								<h3>
-									<a href="/challenge/detail?challenge_id=111"
-										class="stretched-link">[영화] 일주일에 한편 보기</a>
-								</h3>
-								<p id="card-p">2022-07-06 ~ 2022-07-21</p>
-								<p id="card-p">참여인원 1명</p>
-								<div class="state">
-									<div class="open-dt">2022-07-05 생성</div>
-									<div class="state-label">진행중</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-4 col-md-6" data-aos="fade-up"
-							data-aos-delay="100">
-							<div class="card challenge-item">
-								<div class="card-img">
-									<img th:src="@{../assets/img/study-thumb.jpg}" alt=""
-										class="img-fluid challenge-thumbnail">
-								</div>
-								<h3>
-									<a href="/challenge/detail?challenge_id=111"
-										class="stretched-link">[영화] 일주일에 한편 보기</a>
-								</h3>
-								<p id="card-p">2022-07-06 ~ 2022-07-21</p>
-								<p id="card-p">참여인원 1명</p>
-								<div class="state">
-									<div class="open-dt">2022-07-05 생성</div>
-									<div class="state-label">진행중</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-4 col-md-6" data-aos="fade-up"
-							data-aos-delay="100">
-							<div class="card challenge-item">
-								<div class="card-img">
-									<img th:src="@{../assets/img/study-thumb.jpg}" alt=""
-										class="img-fluid challenge-thumbnail">
-								</div>
-								<h3>
-									<a href="/challenge/detail?challenge_id=111"
-										class="stretched-link">[영화] 일주일에 한편 보기</a>
-								</h3>
-								<p id="card-p">2022-07-06 ~ 2022-07-21</p>
-								<p id="card-p">참여인원 1명</p>
-								<div class="state">
-									<div class="open-dt">2022-07-05 생성</div>
-									<div class="state-label">진행중</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-4 col-md-6" data-aos="fade-up"
-							data-aos-delay="100">
-							<div class="card challenge-item">
-								<div class="card-img">
-									<img th:src="@{../assets/img/study-thumb.jpg}" alt=""
-										class="img-fluid challenge-thumbnail">
-								</div>
-								<h3>
-									<a href="/challenge/detail?challenge_id=111"
-										class="stretched-link">[영화] 일주일에 한편 보기</a>
-								</h3>
-								<p id="card-p">2022-07-06 ~ 2022-07-21</p>
-								<p id="card-p">참여인원 1명</p>
-								<div class="state">
-									<div class="open-dt">2022-07-05 생성</div>
-									<div class="state-label">진행중</div>
-								</div>
-							</div>
-						</div>
-						
-						
-						
 					</div>
 				</div>
 			</div>

@@ -18,6 +18,9 @@ public interface ChallengeMapper {
 	
 	Map<String, String> selectCategoryName(int sub_category_id);				// 카테고리 이름 조회
 	int selectCount(HashMap<String, Object> countMap);							// 챌린지 개수 조회
+	
+	List<ChallengeVO> selectPopular();											// 메인 페이지 인기 챌린지 조회
+	List<ChallengeVO> selectCost();												// 메인 페이지 유료 챌린지 조회
 	/* *************** */
 	
 	void createChallenge(ChallengeVO challengeVO);
