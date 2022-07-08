@@ -14,7 +14,7 @@
 			e_mail, gender, affiliates_id, position_id, certify_token)
 		VALUES
 			(#{member_id}, #{password},#{member_name}, #{member_call},
-			#{e_mail}, #{gender}, #{affiliates_id}, #{position_id}, #{certifyToken})
+			#{e_mail}, #{gender}, #{affiliates_id}, #{position_id}, #{certify_token})
 	</insert>
 	
 	<update id="update">

@@ -95,6 +95,26 @@
 	margin-top: 50px;
 }
 
+.register-btn-div button {
+	margin-top: 10px;
+	color: #fff !important;
+	border: 1px solid var(--color-primary) !important;
+	background-color: var(--color-primary) !important;
+    padding: 10px 35px;
+    transition: 0.4s;
+    border-radius: 5px;
+}
+
+.register-btn-div button:hover {
+	margin-top: 10px;
+	background-color: #fff !important;
+	border: 1px solid var(--color-primary) !important;
+	color: var(--color-primary) !important;
+    padding: 10px 35px;
+    transition: 0.4s;
+    border-radius: 5px;
+}
+
 /*  파일업로드 관련 css */
 .filebox input[type="file"] {
 	position: absolute;
