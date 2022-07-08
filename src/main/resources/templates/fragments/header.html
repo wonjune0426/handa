@@ -31,13 +31,22 @@
 
 					<!-- 회원인 경우 -->
 					<th:block sec:authorize="isAuthenticated()">
-						
-						<li><a th:href="@{/mypage?member_id=} + ${#authentication.principal.Username}" class="nav-link" style="padding-left: 20px; padding-right: 15px;">
-						<i class="fa-solid fa-user" alt="마이페이지" title="마이페이지" ></i></a></li>
+					
+						<li class="nav-link"><a href="" class="nav-link">
+						<th:block th:text="${#authentication.principal.user.member_name + ' 님'}"></th:block>
+						</a></li>
+
+						<li><a th:href="@{/mypage?member_id=} + ${#authentication.principal.Username}" class="nav-link">
+						마이페이지
+						<!-- <i class="fa-solid fa-user" alt="마이페이지" title="마이페이지" ></i> -->
+						</a></li>
+
 						
 						<form action="/member/logout" method="post" id="logoutForm">
-							<li><a class="logout-btn" href="#" style="padding-left: 15px; padding-right: 15px;">
-							<i class="fa-solid fa-right-from-bracket"  alt="로그아웃" title="로그아웃"></i></a></li>
+							<li><a class="logout-btn" href="#">
+							<!-- <i class="fa-solid fa-right-from-bracket"  alt="로그아웃" title="로그아웃"></i> -->
+							로그아웃
+							</a></li>
 						</form>
 					</th:block>
 

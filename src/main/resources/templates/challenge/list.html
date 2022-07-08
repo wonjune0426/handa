@@ -56,7 +56,7 @@
 					
 					<div class="row gy-4">
 						<div class="btn-group order-div col-2">
-							<select id="sortTypeSelect" name="sortTypeSelect" class="form-control handa-list-select" onchange="selectType()">
+							<select id="sortTypeSelect" name="sortTypeSelect" class="form-select" onchange="selectType()">
 								<option th:value="0" th:text="최신순" th:selected="${sortType} == '0'"></option>
 								<option th:value="1" th:text="오래된순" th:selected="${sortType} == '1'"></option>
 								<option th:value="2" th:text="참여인원순" th:selected="${sortType} == '2'"></option>
@@ -64,7 +64,7 @@
 						</div>
 						
 						<div class="btn-group order-div col-1">
-							<select id="challengeTypeSelect" name="challengeTypeSelect" class="form-control handa-list-select" onchange="selectType()">
+							<select id="challengeTypeSelect" name="challengeTypeSelect" class="form-select" onchange="selectType()">
 								<option th:value="0" th:text="전체" th:selected="${challengeType} == '0'"></option>
 								<option th:value="1" th:text="무료" th:selected="${challengeType} == '1'"></option>
 								<option th:value="2" th:text="유료" th:selected="${challengeType} == '2'"></option>
@@ -100,7 +100,7 @@
 <!-- include JS Script -->
 <th:block layout:fragment="javascript">
 	<script src='../assets/js/infiniteScroll.js'></script>
-	<script src='../assets/js/search_handling.js'></script>
+	<!-- <script src='../assets/js/search_handling.js'></script> -->
 	<script th:inline="javascript">	
 	
 		$(document).ready(function(){
