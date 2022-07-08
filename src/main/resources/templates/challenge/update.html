@@ -170,7 +170,7 @@
 			/*<![CDTATA[*/
 			var sub_category =/*[[${challenge.subcategory_id}]]*/'default';
 			challenge_type=/*[[${challenge.challenge_type}]]*/'default';
-			chaellenge_id=/*[[${challenge.challenge_id}]]*/'default';
+			challenge_id=/*[[${challenge.challenge_id}]]*/'default';
 			/*]]>*/	
 
 			
@@ -283,7 +283,7 @@
 					url: "/challenge-amend",
 					method: "POST",
 					data: {
-						challenge_id:chaellenge_id,
+						challenge_id:challenge_id,
 						challenge_name: $("input[name=challenge_name]").val(),
 						thumbnail: $("#profile-img").attr("src"),
 						startdate: startdate,
@@ -295,7 +295,7 @@
 					dataType: "text",
 					//////////////////// recv
 					success: function(){
-					window.location.href="/memberdetail?member_id="+member_id;						
+					window.location.href="/challenge/detail?challenge_id="+challenge_id;						
 					}, 
 					error: function (xhr, status, error) { // (파라미터 생략가능)
 						alert("error");
