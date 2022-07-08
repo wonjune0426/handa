@@ -58,7 +58,7 @@
 							<input type="hidden" name="e_mail" th:value="${user.e_mail}">
 							<input type="hidden" name="member_id" th:value="${user.member_id}">
 							<input type="hidden" name="member_name" th:value="${user.member_name}">
-							<input type="hidden" name="certifyToken" th:value="${user.certify_token}">
+							<input type="hidden" name="certify_token" th:value="${user.certify_token}">
 							<button type="hidden" class="send">인증 메일 전송</button>
 						</div>
 					</th:block>
@@ -89,7 +89,7 @@ $(document).ready(function(){
 	const member_id = $("input[name=member_id]").val();
 	const member_name = $("input[name=member_name]").val();
 	const e_mail = $("input[name=e_mail]").val();
-	const certify_token = $("input[name=certifyToken]").val();
+	const certify_token = $("input[name=certify_token]").val();
 	
 	$(".send").on("click", function (e) {
 		e.preventDefault();
@@ -101,7 +101,7 @@ $(document).ready(function(){
 				"member_id": member_id, 
 				"member_name": member_name, 
 				"e_mail": e_mail, 
-				"certifyToken": certify_token
+				"certify_token": certify_token
 			},
 			success: function (data) {
 				
