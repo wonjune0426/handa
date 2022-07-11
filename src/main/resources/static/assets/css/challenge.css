@@ -112,7 +112,7 @@
  
 /* ------------ 챌린지 생성 (challenge/create.html)-------------- */
 /* 카테고리 대분류 */
-.main-category {
+/* .main-category {
 	display: block;
 	width: 100%;
 	padding: 0.7rem 0.9rem;
@@ -127,11 +127,29 @@
 	border-radius: 0 !important;
 	transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 	font-size: 14px;
-}
+} */
 
 /* 챌린지 생성버튼 감싸는 div */
 .create-challenge {
 	margin-top: 50px;
+}
+
+#challenge_type {
+	border-radius: 4px 0px 0px 4px;
+}
+
+#challenge_cost {
+	border-radius: 0px 4px 4px 0px;
+}
+
+.create-label {
+	vertical-align: middle;
+	height: 50px;
+	line-height: 50px;
+}
+
+.challenge_create .form-control {
+	font-size: 15px !important;
 }
 
 /* ------------ 챌린지 상세 (기본정보 페이지 challenge/detail.html) -------------- */

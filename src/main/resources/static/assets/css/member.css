@@ -37,8 +37,8 @@
 	color: #414141;
 }
 .find-div {
-	height: 44px;
-	line-height: 44px;
+	height: 50px;
+	line-height: 50px;
 	text-align: right;
 	padding: 0px;
 }
@@ -53,8 +53,8 @@
 }
 
 .remember-div label {
-	height: 44px;
-	line-height: 44px;
+	height: 50px;
+	line-height: 50px;
 	vertical-align: top;
 	margin-left: 3px;
 }
@@ -103,7 +103,7 @@
 }
 
 .register-btn-div {
-	margin-top: 50px;
+	margin-.remember-div labeltop: 50px;
 }
 
 /* .register-btn-div button {
@@ -517,6 +517,9 @@
 
 
 /* ------------아이디 / 비밀번호 찾기 (member/find.html)-------------- */
+.find-content {
+	width: 30%;
+}
 /* 마이페이지 탭 활성화될 경우 */
 .find-tab a.active {
     font-weight: 700;
@@ -546,12 +549,17 @@
 	display: block;
 	margin: 0 auto;
 	margin-top: 20px;
-	color: #fff !important;
-	border: 1px solid var(--color-primary) !important;
-	background-color: var(--color-primary) !important;
-    padding: 10px 35px;
-    transition: 0.4s;
-    border-radius: 5px;
+}
+
+.find-wrapper button:hover {
+	display: block;
+	margin: 0 auto;
+	margin-top: 20px;
+}
+
+#find-pw, #find-id {
+	width: inherit;
+	padding: 10px 15px;
 }
 
 .find-wrapper input {
@@ -560,6 +568,10 @@
 
 .find-content {
 	margin: 100px auto;
+}
+
+.find-content input {
+	height: 50px;
 }
 
 .find-content .user-list {

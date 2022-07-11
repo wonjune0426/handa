@@ -1540,6 +1540,11 @@ section {
 .get-a-quote .php-email-form textarea:focus {
   border-color: var(--color-primary);
 }
+input:focus,
+textarea:focus {
+	outline: none;
+  	border-color: var(--color-primary);
+}
 
 .get-a-quote .php-email-form input {
   padding: 12px 15px;
@@ -1880,16 +1885,18 @@ section {
 --------------------------------------------------------------*/
 .footer {
   font-size: 14px;
-  /* background-color: #505050; */
+  background-color: #0E1D34;
   padding: 50px 0;
-  color: #000;
-  border-top: 1px solid #e1e1e1;
+  color: #fff;
+  
   /* margin-top: 60px; */
 }
 
 .footer .footer-info .logo {
   line-height: 0;
   margin-bottom: 25px;
+  font-family: Mont-HeavyDEMO, sans-serif !important;
+ color: #fff;
 }
 
 .footer .footer-info .logo img {
@@ -1901,8 +1908,8 @@ section {
   font-size: 30px;
   font-weight: 700;
   letter-spacing: 1px;
-  color: #000;
-  font-family: var(--font-primary);
+  color: #fff;
+  /* font-family: var(--font-primary); */
 }
 
 .footer .footer-info p {
@@ -1965,7 +1972,7 @@ section {
 
 .footer .footer-links ul a {
   /* color: rgba(255, 255, 255, 0.6); */
-  color: #000;
+  color: #fff;
   transition: 0.3s;
   display: inline-block;
   line-height: 1;
@@ -2033,4 +2040,15 @@ section {
     padding: 10px 35px;
     transition: 0.4s;
     border-radius: 5px;
+}
+
+input:focus,
+textarea:focus {
+	outline: none;
+  	border-color: var(--color-primary);
+}
+
+.form-select {
+	height: 50px !important;
+	font-size: 15px;
 }
