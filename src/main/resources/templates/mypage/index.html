@@ -27,15 +27,6 @@
 					</div>
 				</div>
 			</div>
-			<!-- <nav>
-				<div class="container">
-					<ol>
-						<li><a href="/">홈</a></li>
-            			<li>마이페이지</li>
-            			<li>내 정보</li>
-					</ol>
-				</div>
-			</nav> -->
 		</div>
 		<!-- End Breadcrumbs -->
 		<!-- ======= Services Section ======= -->
@@ -75,7 +66,8 @@
 								<i class="fa-solid fa-user-plus"></i>
 								생성 챌린지 
 								<span class="my-info-num">
-									<a th:href="@{/mypage/challenge-produce?member_id=} + ${memberInfo.member_id}" th:text="${produceCount} "></a>
+									<a th:if="${produceCount} == 0" th:text="${produceCount}"></a>
+									<a th:unless="${produceCount} == 0" th:href="@{/mypage/challenge-produce?member_id=} + ${memberInfo.member_id}" th:text="${produceCount} "></a>
 								</span>건
 								
 							</p>
@@ -83,7 +75,8 @@
 								<i class="fa-solid fa-user-group"></i>
 								참여 챌린지
 								<span class="my-info-num">
-									<a th:href="@{/mypage/challenge-part?member_id=} + ${memberInfo.member_id}" th:text="${partCount} "></a>
+									<a th:if="${partCount} == 0" th:text="${partCount} "></a>
+									<a th:unless="${partCount} == 0" th:href="@{/mypage/challenge-part?member_id=} + ${memberInfo.member_id}" th:text="${partCount} "></a>
 								</span>건
 							</p>
 						</div>
@@ -99,63 +92,76 @@
 						<div class="create-challenge">
 							<div class="cc-title">
 								<b>내가 생성한 챌린지</b>
-								<a href="#">목록보기</a>
+								<a th:if="${produceCount} > 3" th:href="@{/mypage/challenge-produce?member_id=} + ${memberInfo.member_id}">목록보기</a>
 							</div>
+							
+							<!-- 생성 챌린지 0개 일경우 -->
+							<th:block th:if="${produceCount} == 0">
+								<div class="row challenge-card-div">
+									<div class="challenge-card-zero col-12">
+										<p>생성한 챌린지가 없습니다.</p>
+										<a th:href="@{/create}">생성하기</a>
+									</div>
+								</div>
+							</th:block>
+							
+							<!-- 생성 챌린지 0개 이상 -->
+							<th:block th:unless="${produceCount} == 0">
 							<div class="row challenge-card-div">
-								<div class="challenge-card col-4">
-									<a href="" class="ch-card-title">[자격증] 정보처리기사 챌린지</a>
-									<p>2022.07.01 ~ 2022.07.10</p>
-									<p>참여인원 3명</p>
+								<div class="challenge-card col-4" th:each="produce: ${listProduce}">
+									<a th:href="@{/challenge/detail(challenge_id=${produce.challenge_id})}" 
+										th:text="'[' + ${produce.subcategory_name} + '] ' + ${produce.challenge_name}" class="ch-card-title"></a>
+									<p th:text="${produce.startdate} + ' ~ ' + ${produce.enddate}"></p>
+									<p th:text="'참여인원 ' + ${produce.joinVO.count} + '명'"></p>
 									<div class="state">
-										<div class="open-dt">2022-07-05 생성 </div>
-										<div class="state-label">진행중</div>
+										<div class="open-dt" th:text="${produce.createdate} + ' 생성'"></div>
+										<div class="state-label" th:text="${produce.challenge_state}"></div>
 									</div>
 									<div class="ch-card-btn-div">
-										<button>수정</button>
-										<button>삭제</button>
-									</div>
-								</div>
-								<div class="challenge-card col-4">
-									<a href="" class="ch-card-title">[자격증] 정보처리기사 챌린지</a>
-									<p>2022.07.01 ~ 2022.07.10</p>
-									<p>참여인원 3명</p>
-									<div class="state">
-										<div class="open-dt">2022-07-05 생성 </div>
-										<div class="state-label">진행중</div>
-									</div>
-									<div class="ch-card-btn-div">
-										<button>수정</button>
-										<button>삭제</button>
-									</div>
-								</div>
-								<div class="challenge-card col-4">
-									<a href="" class="ch-card-title">[자격증] 정보처리기사 챌린지</a>
-									<p>2022.07.01 ~ 2022.07.10</p>
-									<p>참여인원 3명</p>
-									<div class="state">
-										<div class="open-dt">2022-07-05 생성 </div>
-										<div class="state-label">진행중</div>
-									</div>
-									<div class="ch-card-btn-div">
-										<button>수정</button>
-										<button>삭제</button>
+										<button id="challenge-amend" th:challenge_id="${produce.challenge_id}"
+											onclick="amend(this.getAttribute('challenge_id'))">수정</button>
+										<button id="challenge-remove" th:challenge_id="${produce.challenge_id}"
+											onclick="remove(this.getAttribute('challenge_id'))">삭제</button>
 									</div>
 								</div>
 							</div>
+							</th:block>
+							
 						</div>
 						<div class="join-challenge">
 							<div class="jc-title">
 								<b>내가 참여한 챌린지</b>
-								<a href="#">목록보기</a>
+								<a th:if="${partCount} > 3" th:href="@{/mypage/challenge-part?member_id=} + ${memberInfo.member_id}">목록보기</a>
 							</div>
 							
 							<!-- 챌린지 개수 0개 start -->
-							<div class="row challenge-card-div">
-								<div class="challenge-card-zero col-12">
-									<p>참여중인 챌린지가 없습니다.</p>
-									<a href="">참여하기</a>
+							<th:block th:if="${partCount} == 0">
+								<div class="row challenge-card-div">
+									<div class="challenge-card-zero col-12">
+										<p>참여중인 챌린지가 없습니다.</p>
+										<a th:href="@{/list}">참여하기</a>
+									</div>
+								</div>
+							</th:block>
+							
+							<th:block th:unless="${partCount} == 0">
+								<div class="row challenge-card-div">
+								<div class="challenge-card col-4" th:each="part: ${listPart}">
+									<a th:href="@{/challenge/detail(challenge_id=${part.challenge_id})}" 
+										th:text="'[' + ${part.subcategory_name} + '] ' + ${part.challenge_name}" class="ch-card-title"></a>
+									<p th:text="${part.startdate} + ' ~ ' + ${part.enddate}"></p>
+									<p th:text="'참여인원 ' + ${part.joinVO.count} + '명'"></p>
+									<div class="state">
+										<div class="open-dt" th:text="${part.createdate} + ' 생성'"></div>
+										<div class="state-label" th:text="${part.challenge_state}"></div>
+									</div>
+									<div class="ch-card-btn-div">
+										<button id="secession" th:challenge_id="${part.challenge_id}" 
+											onclick="secession(this.getAttribute('challenge_id'))">탈퇴</button>
+									</div>
 								</div>
 							</div>
+							</th:block>
 							<!-- 챌린지 개수 0개 end -->
 							
 						</div>
@@ -187,8 +193,9 @@
 <!-- 	<script src='https://unpkg.com/tooltip.js/dist/umd/tooltip.min.js'></script> -->
 	
 <script src='../assets/js/calendar.js'></script>
-<script>
-$(document).ready(function(){
+<script th:inline="javascript">
+	$(document).ready(function(){
+	
 	if ($(".amend-result").val() === "amend-success") {			
 		Swal.fire({
 		  icon: 'success',
@@ -203,8 +210,90 @@ $(document).ready(function(){
 		})
 	}
 		
-});
- 
+	});
+
+//탈퇴 버튼 클릭
+function secession(challenge_id) {
+	
+	/*<![CDTATA[*/
+	var member_id =/*[[${memberInfo.member_id}]]*/'default';
+	/*]]>*/
+	
+	Swal.fire({
+		title: '탈퇴하시겠습니까?',
+		icon: 'warning',
+
+		showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
+		confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
+		cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
+		confirmButtonText: '탈퇴', // confirm 버튼 텍스트 지정
+		cancelButtonText: '취소', // cancel 버튼 텍스트 지정
+
+	}).then(result => {
+		if (result.isConfirmed) {
+			$.ajax({
+				url: "/challenge/challenge-secession",
+				method: "POST",
+				async: false,
+				data: {
+					member_id: member_id,
+					challenge_id: challenge_id,
+				},
+				success: function () {
+					location.reload();
+				},
+				error: function (xhr, status, error) { // (파라미터 생략가능)
+					alert("error");
+				}
+			})
+		}
+	})
+}
+
+// 수정 버튼 클릭
+function amend(challenge_id){
+	location.href="/challenge-amend?challenge_id="+challenge_id;
+}
+
+// 삭제 버튼 클릭
+function remove(challenge_id){
+	/*<![CDTATA[*/
+	var member_id =/*[[${memberInfo.member_id}]]*/'default';
+	/*]]>*/
+	
+	Swal.fire({
+		title: '삭제하시겠습니까?',
+		icon: 'warning',
+
+		showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
+		confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
+		cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
+		confirmButtonText: '삭제', // confirm 버튼 텍스트 지정
+		cancelButtonText: '취소', // cancel 버튼 텍스트 지정
+
+	}).then(result => {
+		if (result.isConfirmed) {
+			$.ajax({
+				url: "/challenge-remove",
+				method: "POST",
+				async: false,
+				data: {
+					member_id: member_id,
+					challenge_id: challenge_id,
+				},
+				//////////////////// recv
+				success: function () {
+					location.reload();
+				},
+				error: function (xhr, status, error) { // (파라미터 생략가능)
+					alert("error");
+				}
+
+			})
+		}
+	})
+}
+
 </script>
 </th:block>
 </div>

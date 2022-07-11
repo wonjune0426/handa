@@ -37,16 +37,26 @@ document.addEventListener('DOMContentLoaded', function() {
 		 events: [          
 		 	{            
 		 		title: 'test event',            
-		 		start: '2022-06-24',
+		 		start: '2022-07-24',
+		 		end: '2022-07-28',
 		 		description: '테스트 이벤트',
 		 	}, 
 		 	{            
 		 		title: 'Click test',            
 		 		url: '/challenge/detail?challenge_id=117', // 클릭시 해당 url로 이동 
 		 		description: 'description for Repeating Event',
-		 		start: '2022-06-28',    
+		 		start: '2022-06-28',
+		 		end: '2022-06-28',    
 		 		color: 'purple'  
-		 	}        
+		 	}, 
+		 	{            
+		 		title: '[영화] 영화 TEST',            
+		 		url: '/challenge/detail?challenge_id=117', // 클릭시 해당 url로 이동 
+		 		description: 'description for Repeating Event',
+		 		start: '2022-07-01',
+		 		end: '2022-07-04',    
+		 		color: 'green'  
+		 	}, 
 		 	]
 			});          
 			calendar.render();    // 캘린더 랜더링  

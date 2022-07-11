@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.hansol.handa.domain.ChallengeVO;
 import com.hansol.handa.domain.UserVO;
 import com.hansol.handa.service.MypageService;
 
@@ -31,10 +32,14 @@ public class MypageController {
 		UserVO memberInfo = mypageService.selectMemberInfo(member_id);
 		int produceCount = mypageService.selectProduceCount(member_id);
 		int partCount = mypageService.selectPartCount(member_id);
+		List<ChallengeVO> listProduce = mypageService.selectProdeceLimit(member_id);
+		List<ChallengeVO> listPart = mypageService.selectPartLimit(member_id);
 		
 		model.addAttribute("memberInfo", memberInfo);
 		model.addAttribute("produceCount", produceCount);
 		model.addAttribute("partCount", partCount);
+		model.addAttribute("listProduce", listProduce);
+		model.addAttribute("listPart", listPart);
 		
 		return "mypage/index";
 	}

@@ -142,6 +142,9 @@
 	margin: 10px;
 }	
 
+#service-details-list{
+	background-color: #ffff;	
+}
 
 /* ------------마이페이지 - 일정관리 (mypage/calender.html)-------------- */
 /* 마이페이지 탭 활성화될 경우*/
@@ -324,7 +327,7 @@
 	font-size: 14px;
 }
 
-.ch-card-btn-div, {
+.ch-card-btn-div {
 	text-align: right;
 }
 
