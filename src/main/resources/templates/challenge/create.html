@@ -47,7 +47,8 @@
 				<section id="get-a-quote" class="get-a-quote">
 					<div class="container aos-init aos-animate" data-aos="fade-up" id="show_modal">
 						<div class="row g-0">
-							<form action="/challenge" method="post" class="php-email-form" id="challenge_create">
+							<form action="/challenge" method="post" class="php-email-form" id="challenge_create"
+								style="background:white;">
 								<div class="row gy-4">
 									<div class="col-md-6">
 										<label for="main-category">
@@ -62,21 +63,23 @@
 										</div>
 									</div>
 									<div class="col-md-6">
-										<label>
-											<h3>챌린지 이름</h3>
-										</label>
-										<input type="text" name="challenge_name" class="form-control "
-											placeholder="챌린지 이름" required="">
-										<div class="col-md-6 width-100">
+										<div class="col-md-6">
+											<label>
+												<h3>챌린지 이름</h3>
+											</label>
+											<input type="text" name="challenge_name" class="form-control "
+												placeholder="챌린지 이름" required="" style="width:30%">
+										</div>
+										<div class="col-md-6">
 											<label for="main-category">
 												<h3>카테고리 (대)</h3>
-											</label> <select class="form-control main-category" id="main-category">
+											</label> <select class="main-category" id="main-category" style="width:30%">
 												<option>카테고리(대)</option>
 												<option name="main_1">취미</option>
 												<option name="main_2">자기계발</option>
 											</select>
 										</div>
-										<div class="col-md-6 width-100">
+										<div class="col-md-6">
 											<label for="main-category">
 												<h3>카테고리 (소)</h3>
 											</label> <select class="form-control main-category" id="sub-category"
@@ -84,19 +87,19 @@
 												<option>카테고리(소)</option>
 											</select>
 										</div>
-										<div class="col-md-6 width-100">
+										<div class="col-md-6">
 											<label for="main-category">
 												<h3>시작날짜</h3>
 											</label> <input type="text" name="startdate" class="form-control"
 												placeholder="시작날짜" required="">
 										</div>
-										<div class="col-md-6 width-100">
+										<div class="col-md-6">
 											<label for="main-category">
 												<h3>종료날짜</h3>
 											</label> <input type="text" class="form-control" name="enddate"
 												placeholder="종료날짜" required="">
 										</div>
-										<div class="col-md-6 width-100">
+										<div class="col-md-6">
 											<label for="main-category">
 												<h3>유형</h3>
 											</label>
@@ -201,7 +204,7 @@
 		$("input[name=startdate]").datepicker({
 			dateFormat: 'yy-mm-dd'
 		});
-		
+
 		$("input[name=enddate]").datepicker({
 			dateFormat: 'yy-mm-dd'
 		});
@@ -336,7 +339,7 @@
 				cost = $("input[name=challenge_cost]").val().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
 				$.ajax({
 					url: "/challenge",
-					type:"POST",
+					type: "POST",
 					method: "POST",
 					data: {
 						challenge_name: $("input[name=challenge_name]").val(),

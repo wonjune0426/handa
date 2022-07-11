@@ -564,17 +564,13 @@
 /* modal 관련 css */
 
 /* 챌린지 생성화면 css */
-.width-100{
-	width:100%;
-	padding-bottom: 3px;
-}
 
 .profile-btn{
 	width:581px;
 	height:438px;
 	border: 0;
 	margin:0px auto;
-	background-color: #f3f6fc;
+	background-color: rgb(255, 255, 255);
 }
 #profile-img{
 	width:100%;
