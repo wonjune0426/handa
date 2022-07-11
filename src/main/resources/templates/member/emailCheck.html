@@ -41,30 +41,46 @@
 </section>
 
 <!-- ======= Services Section ======= -->
-<section id="service" class="services pt-0">
-	<div class="container" data-aos="fade-up">
+		<section id="service" class="services pt-0">
+			<div class="container" data-aos="fade-up">
 
-		<div class="section-header">
-			<h2>메일 인증 완료</h2>
-		</div>
-		<section id="contact" class="contact register-padding-top-30px">
-			<div class="text-center">
-				<div class="register-step">
+				<div class="section-header">
+					<h2>회원가입</h2>
 				</div>
-				<div class="register-div">
-				
-					<div class="before-send">
-						<p>메일 인증이 완료되었습니다. 로그인 하여 한다 서비스를 이용하세요.</p>
-						<a href="/member/login">로그인 하기</a> 
+				<section id="contact" class="contact register-padding-top-30px">
+					<div class="text-center">
+						<div class="stepper-wrapper">
+							<div class="stepper-item ">
+								<div class="step-counter">
+									<i class="fa-solid fa-pen"></i>
+								</div>
+								<div class="step-name">정보입력</div>
+							</div>
+							<div class="stepper-item">
+								<div class="">></div>
+							</div>
+							<div class="stepper-item completed">
+								<div class="step-counter">
+									<i class="fa-solid fa-envelope"></i>
+								</div>
+								<div class="step-name">메일인증</div>
+							</div>
+						</div>
+						<div class="register-div">
+							<div class="line-div">
+							</div>
+							<div class="before-send register-btn-div">
+								<p>메일 인증이 완료되었습니다. 로그인 하여 한다 서비스를 이용하세요.</p>
+								<a href="/member/login">로그인 하기</a> 
+							</div>
+						</div>
+						<!-- End Contact Form -->
+						<input type="hidden" th:value="${msg}" class="register-result" />
 					</div>
-
-				<!-- End Contact Form -->
-					<input type="hidden" th:value="${msg}" class="register-result"/>
+				</section>
 			</div>
 		</section>
-	</div>
-</section>
-<!-- End Services Section -->
+		<!-- End Services Section -->
 
 </main>
 <!-- End #main -->

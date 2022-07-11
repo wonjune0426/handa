@@ -10,267 +10,282 @@
 </th:block>
 
 <body>
-	<div layout:fragment="content">
-		<main id="main">
+<div layout:fragment="content">
+<main id="main">
 
-			<!-- ======= Breadcrumbs ======= -->
-			<div class="breadcrumbs">
-				<div class="page-header d-flex align-items-center">
-					<div class="container position-relative">
-						<div class="row d-flex justify-content-center">
-							<div class="col-lg-6 text-center">
-								<!-- <h2>Amend</h2>
-								<p>수정할 정보를 입력해 주세요</p> -->
+<!-- ======= Breadcrumbs ======= -->
+<div class="breadcrumbs">
+	<div class="page-header d-flex align-items-center"></div>
+</div>
+<!-- End Breadcrumbs -->
+
+<section class="sample-page register-padding-top-0">
+	<div class="container" data-aos="fade-up"></div>
+</section>
+
+<!-- ======= Services Section ======= -->
+<section id="service" class="services pt-0">
+	<div class="container" data-aos="fade-up">
+
+		<div class="section-header">
+			<!-- <span>회원 정보 수정</span> -->
+			<h2>회원 정보 수정</h2>
+		</div>
+		<section id="contact" class="contact register-padding-top-10px">
+			<div class="text-center">
+				<div class="amend-div">
+					<form action="" method="post" role="form" class="php-email-form">
+						<div class="row">
+							<div class="form-group mt-3">
+								<div class="img-wrapper">
+									<img alt="프로필 이미지" class="image--cover"
+										th:src="|${'http://172.27.0.174:8080/viewFile?fname=' + user.profile_path + '/' + user.profile_uuid + '_' + user.profile_name}|">
+								</div>
+								<h3 th:text="${user.member_name}" style="margin-top: 20px;">김한솔</h3>
+								<p th:text="${'(' + user.member_id + ')'}">(hansol)</p>
+								<input type="hidden" th:value="${user.member_id}"
+									name="member_id" id="member_id"> <input
+									type="hidden" name="profile_name"
+									th:value="${user.profile_name}" /> <input type="hidden"
+									name="profile_uuid" th:value="${user.profile_uuid}" /> <input
+									type="hidden" name="profile_path"
+									th:value="${user.profile_path}" />
+								<!-- <small>여</small> -->
 							</div>
-						</div>
-					</div>
-				</div>
+							<div class="form-group">
+								<div class="filebox">
+									<label for="ex_filename">프로필 편집</label> <input type="file"
+										id="ex_filename" name="uploadFile" class="upload-hidden"
+										accept=".gif, .jpg, .png" />
+								</div>
+							</div>
+							<hr>
 
-				<nav>
-					<div class="container">
-						<ol>
-							<li><a href="/">홈</a></li>
-							<li>회원 정보 수정</li>
-						</ol>
-					</div>
-				</nav>
+							<div class="form-group mt-3 row">
+								<div class="col-3 register-label-style">
+									<label class="login-label"> 비밀번호<small
+										style="color: #5c7fdd;">*</small>
+									</label>
+								</div>
+								<div class="col-9" style="text-align: left;">
+									<button class="id-check">변경하기</button>
+								</div>
+							</div>
+
+							<div class="form-group mt-3 row">
+								<div class="col-3 register-label-style">
+									<label class="login-label"> 전화번호<small
+										style="color: #5c7fdd;">*</small>
+									</label>
+								</div>
+								<div class="col-9">
+									<input type="text" class="form-control" id="member-call"
+										name="member_call" placeholder="숫자만 입력해주세요."
+										th:value="${user.member_call}" required maxlength="13">
+								</div>
+							</div>
+
+							<div class="form-group mt-3 row">
+								<div class="register-label-style col-3">
+									<label class="login-label">e-mail<small
+										style="color: #5c7fdd;">*</small></label>
+								</div>
+								<div class="col-9">
+									<input type="text" class="form-control" id="e-mail"
+										name="e_mail" placeholder="예 : handa@hansol.com"
+										th:value="${user.e_mail}" required>
+									<p class="vaild-check" id="e-mail-check"></p>
+								</div>
+
+							</div>
+
+							<div class="form-group mt-3 row">
+								<div class="register-label-style col-3">
+									<label class="login-label">회사<small
+										style="color: #5c7fdd;">*</small></label>
+								</div>
+								<div class="col-9">
+									<select class="form-select" name="affiliates_id"
+										th:value="${user.affiliates_id}">
+										<option value="1" th:selected="${user.affiliates_id}==1">한솔
+											인티큐브</option>
+										<option value="2" th:selected="${user.affiliates_id}==2">한솔
+											제지</option>
+										<option value="3" th:selected="${user.affiliates_id}==3">한솔
+											테크닉스</option>
+										<option value="4" th:selected="${user.affiliates_id}==4">한솔
+											페이퍼택</option>
+										<option value="5" th:selected="${user.affiliates_id}==5">한솔
+											홀딩스</option>
+										<option value="6" th:selected="${user.affiliates_id}==6">한솔
+											문화재단</option>
+										<option value="7" th:selected="${user.affiliates_id}==7">한솔
+											케미칼</option>
+										<option value="8" th:selected="${user.affiliates_id}==8">한솔
+											홈데코</option>
+										<option value="9" th:selected="${user.affiliates_id}==9">한솔
+											코에버</option>
+										<option value="10" th:selected="${user.affiliates_id}==10">한솔
+											BS</option>
+										<option value="11" th:selected="${user.affiliates_id}==11">한솔
+											PNS</option>
+										<option value="12" th:selected="${user.affiliates_id}==12">한솔
+											로지스틱스</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group mt-3 row">
+								<div class="register-label-style col-3">
+									<label class="login-label">직급<small
+										style="color: #5c7fdd;">*</small></label>
+								</div>
+								<div class="col-9">
+									<select class="form-select" name="position_id"
+										th:value="${user.position_id}">
+										<option value="1" th:selected="${user.position_id}==1">수석</option>
+										<option value="2" th:selected="${user.position_id}==2">책임</option>
+										<option value="3" th:selected="${user.position_id}==3">선임</option>
+									</select>
+								</div>
+							</div>
+
+						</div>
+						<div class="text-center login-btn-div">
+							<button type="submit">정보수정</button>
+						</div>
+					</form>
+				</div>
+				<!-- End Contact Form -->
+
 			</div>
-			<!-- End Breadcrumbs -->
-
-			<section class="sample-page register-padding-top-0">
-				<div class="container" data-aos="fade-up"></div>
-			</section>
-
-			<!-- ======= Services Section ======= -->
-			<section id="service" class="services pt-0">
-				<div class="container" data-aos="fade-up">
-
-					<div class="section-header">
-						<!-- <span>회원 정보 수정</span> -->
-						<h2>회원 정보 수정</h2>
-					</div>
-					<section id="contact" class="contact register-padding-top-10px">
-						<div class="text-center">
-							<div class="login-div">
-								<form action="" method="post" role="form" class="php-email-form">
-									<div class="row">
-									
-										<div class="form-group mt-3">
-											<div class="img-wrapper">	
-												<img alt="프로필 이미지" class="image--cover" 
-												th:src="|${'http://172.27.0.174:8080/viewFile?fname=' + user.profile_path + '/' + user.profile_uuid + '_' + user.profile_name}|">
-											</div>
-											<h3 th:text="${user.member_name}">김한솔</h3> <p th:text="${'(' + user.member_id + ')'}">(hansol)</p>
-											<input type="hidden" th:value="${user.member_id}" name="member_id" id="member_id">
-											<input type="hidden" name="profile_name"/>
-											<input type="hidden" name="profile_uuid"/>
-											<input type="hidden" name="profile_path"/>
-											<!-- <small>여</small> -->
-										</div>
-										<div class="form-group">
-											<div class="filebox">
-												<label for="ex_filename">프로필 편집</label> 
-												<input type="file" id="ex_filename" name="uploadFile" class="upload-hidden"  accept=".gif, .jpg, .png" />
-											</div>
-										</div>
-										<hr>
-										<div class="form-group mt-3">
-											<div class="register-label-style">
-												<label class="login-label"><b>전화번호</b></label>
-											</div>
-											<input type="text" class="form-control" id="member-call" name="member_call"
-												placeholder="전화번호" th:value="${user.member_call}" required="">
-										</div>
-										<div class="form-group mt-3">
-											<div class="register-label-style">
-												<label class="login-label"><b>e-mail</b></label>
-											</div>
-											<input type="text" class="form-control" id="e-mail" name="e_mail"
-												placeholder="e-mail" th:value="${user.e_mail}" required="">
-										</div>
-										<div class="form-group mt-3">
-											<table class="register-width100">
-												<tr>
-													<td><label class="login-label register-label-style"><b>회사</b></label></td>
-												</tr>
-												<tr>
-													<td><select class="form-select" name="affiliates_id" th:value="${user.affiliates_id}">
-															<option value="1" th:selected="${user.affiliates_id}==1">한솔 인티큐브</option>
-															<option value="2" th:selected="${user.affiliates_id}==2">한솔 제지</option>
-															<option value="3" th:selected="${user.affiliates_id}==3">한솔 테크닉스</option>
-															<option value="4" th:selected="${user.affiliates_id}==4">한솔 페이퍼택</option>
-															<option value="5" th:selected="${user.affiliates_id}==5">한솔 홀딩스</option>
-															<option value="6" th:selected="${user.affiliates_id}==6">한솔 문화재단</option>
-															<option value="7" th:selected="${user.affiliates_id}==7">한솔 케미칼</option>
-															<option value="8" th:selected="${user.affiliates_id}==8">한솔 홈데코</option>
-															<option value="9" th:selected="${user.affiliates_id}==9">한솔 코에버</option>
-															<option value="10" th:selected="${user.affiliates_id}==10">한솔 BS</option>
-															<option value="11" th:selected="${user.affiliates_id}==11">한솔 PNS</option>
-															<option value="12" th:selected="${user.affiliates_id}==12">한솔 로지스틱스</option>
-													</select></td>
-												</tr>
-											</table>
-										</div>
-										<div class="form-group mt-3">
-											<table class="register-width100">
-												<tr>
-													<td><label class="login-label register-label-style"><b>직급</b></label></td>
-												</tr>
-												<tr>
-													<td><select class="form-select" name="position_id" th:value="${user.position_id}">
-															<option value="1"  th:selected="${user.position_id}==1">수석</option>
-															<option value="2"  th:selected="${user.position_id}==2">책임</option>
-															<option value="3"  th:selected="${user.position_id}==3">선임</option>
-													</select></td>
-												</tr>
-											</table>
-										</div>
-										<!-- <input type="text" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" /> --> 
-									</div>
-									<div class="text-center login-btn-div">
-										<button type="submit">정보수정</button>
-									</div>
-								</form>
-							</div>
-							<!-- End Contact Form -->
-
-						</div>
-					</section>
-				</div>
-			</section>
-			<!-- End Services Section -->
-			<form action="" method="post" enctype="multipart/form-data" id="uploadForm">
-			</form>
-		</main>
-		<!-- End #main -->
+		</section>
 	</div>
+</section>
+<!-- End Services Section -->
+<form action="" method="post" enctype="multipart/form-data"
+	id="uploadForm"></form>
+</main>
+<!-- End #main -->
+</div>
 </body>
 <th:block layout:fragment="javascript">
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-	
-$(document).ready(function(){
-	
-/* 	var token = $("meta[name='_csrf']").attr("content");
-	var header = $("meta[name='_csrf_header']").attr("content"); */
-		
-	function loadSwal(type, text) {
-		Swal.fire({
-			  icon: type,
-			  text: text
-		})
-	}
-	
-	$(".login-btn-div button").on("click", function (e) {
-        
-        e.preventDefault();
-        
-        // console.log("버튼 쿨릭 테스트")
-        const memberId = $("#member_id").val();
-        const password = $("#password").val();
-        const passwordCheck = $("#password-check").val();
-        const memberName = $("#member-name").val();
-        const memberCall = $("#member-call").val();
-        const memberEmail = $("#e-mail").val();
-        const gender = $('input[name=gender]');
-        const affiliates = $('select[name=affiliates_id]');
-        const position = $('select[name=position_id]');
-        
-     // 전화번호 작성여부 확인 & 중간에 '-' 표시 넣기
-		if (memberCall == "") {
-			
-			loadSwal('error', '전화번호를 작성 해주세요.');
-			
-  			return;
-			
-		}
-        
-     	// email 작성여부 확인 & 형식에 맞게 작성했는지 확인
-		if (memberEmail == "") {
-			
-			loadSwal('error', '이메일을 작성 해주세요.');
-			
-  			return;
-			
-		}
-     	
-		// 회사, 직급 선택여부 확인
-		if (affiliates.val() == 0 || position.val() == 0) {
-					
-			loadSwal('error', '회사/직급 정보를 선택 해주세요.');
-			
-  			return;
-			
-		}
-		
-		
+	$(document).ready(function() {
 
-		// 폼 전송
-        $(".php-email-form").attr("action", "/member/amend/" + memberId);
-        $(".php-email-form").submit();
-    });
+		/* 	var token = $("meta[name='_csrf']").attr("content");
+		 var header = $("meta[name='_csrf_header']").attr("content"); */
+
+		function loadSwal(type, text) {
+			Swal.fire({
+				icon : type,
+				text : text
+			})
+		}
+
+		$(".login-btn-div button").on("click", function(e) {
+
+			e.preventDefault();
 	
-	$("#ex_filename").change(function(){
-		
-		console.log('버튼 동작확인');	// 로그 찍힘
-		
-		const uploadFile = $('input[name=uploadFile]')[0].files[0];
-        
-        const form = $('#uploadForm')[0];
-        const formData = new FormData(form);
-        
-        const profileName = $('input[name=profile_name]');
-        const profileUUID = $('input[name=profile_uuid]');
-        const profilePath = $('input[name=profile_path]');
-        
-        formData.append("uploadFile", uploadFile);
-        
-        console.log(uploadFile); // 로그 찍힘
-        console.log(uploadFile.type); // 로그 찍힘
-        
-        if (!(uploadFile.type == "image/png" || uploadFile.type == "image/jpeg" || uploadFile.type == "image/jpg" || uploadFile.type == "image/gif")) {
-        	loadSwal('error', '이미지 파일만 업로드 하실 수 있습니다.');
-        	return;
-        }
-        
-        $.ajax({
-			type: "POST",
-			url: "http://172.27.0.174:8080/uploadFile",
-			data: formData,
-			dataType: "json",
-			contentType: false,
-			processData: false,
-/* 			beforeSend : function(xhr)
-            {   //데이터를 전송하기 전에 헤더에 csrf값을 설정한다
-				xhr.setRequestHeader(header, token);
-            }, */
-			success: function (data) {
-				console.log(data);
-				console.log(data.profile_uuid);
-				console.log(data.profile_name);
-				console.log(data.profile_path);
-				
-				const uploadPath = data.profile_path.replace(/\\/gi,"/");
-				
-				console.log('uploadPath: ', uploadPath);
-				
-				const profileURL = "http://172.27.0.174:8080/viewFile?fname=" + uploadPath + "/" + data.profile_uuid + "_" + data.profile_name;
-				
-				console.log('profileURL: ', profileURL);
-				
-				$('.image--cover').attr("src", profileURL);
-				
-				profileName.val(data.profile_name);
-				profileUUID.val(data.profile_uuid);
-				profilePath.val(uploadPath);
-				
-			},
-			error: function (request,status,error) {
-				console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			// console.log("버튼 쿨릭 테스트")
+			const memberId = $("#member_id").val();
+			const password = $("#password").val();
+			const passwordCheck = $("#password-check").val();
+			const memberName = $("#member-name").val();
+			const memberCall = $("#member-call").val();
+			const memberEmail = $("#e-mail").val();
+			const gender = $('input[name=gender]');
+			const affiliates = $('select[name=affiliates_id]');
+			const position = $('select[name=position_id]');
+	
+			// 전화번호 작성여부 확인 & 중간에 '-' 표시 넣기
+			if (memberCall == "") {
+	
+				loadSwal('error', '전화번호를 작성 해주세요.');
+	
+				return;
+	
 			}
-        });
+	
+			// email 작성여부 확인 & 형식에 맞게 작성했는지 확인
+			if (memberEmail == "") {
+	
+				loadSwal('error', '이메일을 작성 해주세요.');
+	
+				return;
+	
+			}
+	
+			// 회사, 직급 선택여부 확인
+			if (affiliates.val() == 0 || position.val() == 0) {
+	
+				loadSwal('error', '회사/직급 정보를 선택 해주세요.');
+	
+				return;
+	
+			}
+	
+			// 폼 전송
+			$(".php-email-form").attr("action", "/member/amend/" + memberId);
+			$(".php-email-form").submit();
+		});
+
+		$("#ex_filename").change(function() {
+
+			console.log('버튼 동작확인'); // 로그 찍힘
+
+			const uploadFile = $('input[name=uploadFile]')[0].files[0];
+
+			const form = $('#uploadForm')[0];
+			const formData = new FormData(form);
+
+			const profileName = $('input[name=profile_name]');
+			const profileUUID = $('input[name=profile_uuid]');
+			const profilePath = $('input[name=profile_path]');
+
+			formData.append("uploadFile", uploadFile);
+
+			console.log(uploadFile); // 로그 찍힘
+			console.log(uploadFile.type); // 로그 찍힘
+
+			if (!(uploadFile.type == "image/png" || uploadFile.type == "image/jpeg" 
+					|| uploadFile.type == "image/jpg" || uploadFile.type == "image/gif")) {
+				loadSwal('error', '이미지 파일만 업로드 하실 수 있습니다.');
+				return;
+			}
+
+			$.ajax({
+				type : "POST",
+				url : "http://172.27.0.174:8080/uploadFile",
+				data : formData,
+				dataType : "json",
+				contentType : false,
+				processData : false,
+				success : function(data) {
+					const uploadPath = data.profile_path.replace(/\\/gi, "/");
+
+					const profileURL = "http://172.27.0.174:8080/viewFile?fname="
+							+ uploadPath
+							+ "/"
+							+ data.profile_uuid
+							+ "_"
+							+ data.profile_name;
+
+					$('.image--cover').attr("src", profileURL);
+
+					profileName.val(data.profile_name);
+					profileUUID.val(data.profile_uuid);
+					profilePath.val(uploadPath);
+				},
+				error : function(request, status, error) {
+					console.log("code:" + request.status + "\n" 
+							+ "message:" + request.responseText + "\n" 
+							+ "error:" + error);
+				}
+			});
+		});
 	});
-});
 </script>
 </th:block>
 </html>

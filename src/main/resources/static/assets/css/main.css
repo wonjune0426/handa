@@ -9,11 +9,13 @@
 # Set main reusable colors and fonts using CSS variables
 # Learn more about CSS variables at https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties
 --------------------------------------------------------------*/
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
 /* Fonts */
 :root {
-  --font-default: 'Noto Sans KR', sans-serif;
-  --font-primary: 'Noto Sans KR', sans-serif;
-  --font-secondary: Poppins, sans-serif;
+  --font-default: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+  --font-primary: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+  --font-secondary: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
 }
 
 /* Colors */
@@ -30,7 +32,7 @@
 }
 
 .handa-logo {
-	font-family: Inter, sans-serif !important;
+	/* font-family: Inter, sans-serif !important; */
 }
 
 ::selection {
@@ -79,20 +81,20 @@ section {
 }
 
 .section-header h2 {
-  font-size: 32px;
-  font-weight: 700;
+  font-size: 28px;
+  font-weight: 400;
   text-transform: uppercase;
   margin-bottom: 20px;
   padding-bottom: 0;
-  color: #001973;
+  color: #505050;
   position: relative;
   z-index: 2;
   margin-bottom: 20px;
-  padding-bottom: 20px;
+  /* padding-bottom: 20px; */
   position: relative;
 }
 
-.section-header h2:after {
+/* .section-header h2:after {
   content: "";
   position: absolute;
   display: block;
@@ -104,7 +106,7 @@ section {
   bottom: 0;
   margin: auto;
 }
-
+ */
 .section-header span {
   position: absolute;
   top: 46px;
@@ -840,7 +842,7 @@ section {
 }
 
 .services .card a {
-  color: #001973;
+  color: #000000;
   transition: 0.3;
 }
 
@@ -1875,9 +1877,11 @@ section {
 --------------------------------------------------------------*/
 .footer {
   font-size: 14px;
-  background-color: var(--color-secondary);
+  /* background-color: #505050; */
   padding: 50px 0;
-  color: white;
+  color: #000;
+  border-top: 1px solid #e1e1e1;
+  /* margin-top: 60px; */
 }
 
 .footer .footer-info .logo {
@@ -1894,7 +1898,7 @@ section {
   font-size: 30px;
   font-weight: 700;
   letter-spacing: 1px;
-  color: #fff;
+  color: #000;
   font-family: var(--font-primary);
 }
 
@@ -1957,7 +1961,8 @@ section {
 }
 
 .footer .footer-links ul a {
-  color: rgba(255, 255, 255, 0.6);
+  /* color: rgba(255, 255, 255, 0.6); */
+  color: #000;
   transition: 0.3s;
   display: inline-block;
   line-height: 1;

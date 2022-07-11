@@ -56,4 +56,26 @@
 			member_id = #{member_id}
 	</update>
 	
+	<select id="findID" resultType="UserVO">
+		select 
+			replace(member_id,substring(member_id,2,2),'**') member_id, 
+			member_name,
+			e_mail, 
+			createdate
+		from member where member_name = #{member_name} and e_mail = #{e_mail} 
+	</select>
+	
+	<select id="findPW" resultType="UserVO">
+		select * from member where member_id = #{member_id} and e_mail = #{e_mail} 
+	</select>
+	
+	<update id="updatePW">
+		UPDATE 
+			member 
+		SET
+			password = #{password}
+		WHERE 
+			member_id = #{member_id}
+	</update>
+	
 </mapper>
