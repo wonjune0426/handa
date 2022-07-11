@@ -47,6 +47,30 @@ document.addEventListener('DOMContentLoaded', function() {
 		 		description: 'description for Repeating Event',
 		 		start: '2022-06-28',
 		 		end: '2022-06-28',    
+		 		color: '#86a0e6'  
+		 	}, 
+		 	{            
+		 		title: 'Click test',            
+		 		url: '/challenge/detail?challenge_id=117', // 클릭시 해당 url로 이동 
+		 		description: 'description for Repeating Event',
+		 		start: '2022-06-28',
+		 		end: '2022-06-28',    
+		 		color: 'purple'  
+		 	}, 
+		 	{            
+		 		title: 'Click test',            
+		 		url: '/challenge/detail?challenge_id=117', // 클릭시 해당 url로 이동 
+		 		description: 'description for Repeating Event',
+		 		start: '2022-06-28',
+		 		end: '2022-06-28',    
+		 		color: 'purple'  
+		 	}, 
+		 	{            
+		 		title: 'Click test',            
+		 		url: '/challenge/detail?challenge_id=117', // 클릭시 해당 url로 이동 
+		 		description: 'description for Repeating Event',
+		 		start: '2022-06-28',
+		 		end: '2022-06-28',    
 		 		color: 'purple'  
 		 	}, 
 		 	{            
@@ -55,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		 		description: 'description for Repeating Event',
 		 		start: '2022-07-01',
 		 		end: '2022-07-04',    
-		 		color: 'green'  
+		 		color: '#8cc084'  
 		 	}, 
 		 	]
 			});          

@@ -89,10 +89,11 @@
   color: #fff;
 }
 
+
 /* 버튼 오른쪽으로 배치 */
-.mypage-btn-div a{
-	float: right;
-	margin: 10px;
+.mypage-btn-div button{
+	width: 50%;
+	float: left;
 }	
 
 
@@ -136,16 +137,67 @@
   color: #fff;
 }
 
+.mypage-btn-div{
+	display: inline-flex;
+	font-size: 18px;
+}
+
 /* 버튼 오른쪽으로 배치 */
 .mypage-btn-div a{
 	float: right;
 	margin: 10px;
 }	
 
+.mypage-btn-div button.left{
+	margin-right:5px;
+}
+
+.mypage-btn-div button:right{
+	margin-left: 5px;
+}
+
+#challenge-secession{
+	width:100%;
+}
+
 #service-details-list{
 	background-color: #ffff;	
 }
 
+.challenge-thumbnail{
+	height: 280px;
+	width: 400px;
+}
+
+.challenge-item{
+	width: 400px;
+}
+
+.state-list{
+    padding: 0 15px 0 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    margin-top: 15px;
+}
+
+.state-list > div{
+	border-radius: 4px;
+    background: #ebebeb;
+    padding: 3px 8px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #747474;
+}
+ 
+#card-p{
+ 	padding: 0 30px;
+    margin-bottom: 10px;
+    color: var(--color-secondary);
+    font-size: 15px;
+ }
+ 
 /* ------------마이페이지 - 일정관리 (mypage/calender.html)-------------- */
 /* 마이페이지 탭 활성화될 경우*/
 .mypage-detail-tab a.active {

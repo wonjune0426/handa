@@ -1,5 +1,6 @@
 package com.hansol.handa.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.slf4j.LoggerFactory;
@@ -39,26 +40,52 @@ public class MypageServiceImpl implements MypageService {
 
 	@Override
 	public List<ChallengeVO> selectProdeceLimit(String member_id) {
-		List<ChallengeVO> list = mapper.selectProdeceLimit(member_id);
-		list = challengeService.getChallengeState(list);
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("member_id", member_id);
+		map.put("mypage", true);
 		
-		for(ChallengeVO challenge : list) {
-			String[] date = challenge.getCreatedate().split(" ");
-			challenge.setCreatedate(date[0]);
-		}
+		List<ChallengeVO> list = mapper.selectProdece(map);
+		list = challengeService.getChallengeState(list);
+		list = challengeService.amendList(list);
 		
 		return list;
 	}
 
 	@Override
 	public List<ChallengeVO> selectPartLimit(String member_id) {
-		List<ChallengeVO> list = mapper.selectPartLimit(member_id);
-		list = challengeService.getChallengeState(list);
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("member_id", member_id);
+		map.put("mypage", true);
 		
-		for(ChallengeVO challenge : list){
-			String[] date = challenge.getCreatedate().split(" ");
-			challenge.setCreatedate(date[0]);
-		}
+		List<ChallengeVO> list = mapper.selectPart(map);
+		list = challengeService.getChallengeState(list);
+		list = challengeService.amendList(list);
+		
+		return list;
+	}
+
+	@Override
+	public List<ChallengeVO> selectProduce(String member_id) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("member_id", member_id);
+		map.put("mypage", false);
+		
+		List<ChallengeVO> list = mapper.selectProdece(map);
+		list = challengeService.getChallengeState(list);
+		list = challengeService.amendList(list);
+		
+		return list;
+	}
+
+	@Override
+	public List<ChallengeVO> selectPart(String member_id) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("member_id", member_id);
+		map.put("mypage", false);
+		
+		List<ChallengeVO> list = mapper.selectPart(map);
+		list = challengeService.getChallengeState(list);
+		list = challengeService.amendList(list);
 		
 		return list;
 	}

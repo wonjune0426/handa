@@ -46,15 +46,21 @@ public class MypageController {
 	 
 	// 마이 페이지 생성 챌린지 목록 보기
 	@GetMapping("/challenge-produce")
-	public String challengeProduce() {
-		logger.info("challenge-produce-------------------------");
+	public String challengeProduce(@RequestParam String member_id, Model model) {
+		List<ChallengeVO> list = mypageService.selectProduce(member_id);
+		
+		model.addAttribute("produceList", list);
+	
 		return "mypage/challengeProduce";
 	}
 	
 	// 마이 페이지 참여 챌린지 목록 보기
  	@GetMapping("/challenge-part")
-	public String challengePart() {
-		logger.info("challenge-part-----------------");
+	public String challengePart(@RequestParam String member_id, Model model) {
+		List<ChallengeVO> list = mypageService.selectPart(member_id);
+		
+		model.addAttribute("partList", list);
+		
 		return "mypage/challengePart";
 	}
 }
