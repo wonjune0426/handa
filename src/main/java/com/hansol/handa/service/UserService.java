@@ -30,6 +30,8 @@ public interface UserService {
 	
 	boolean findPW(UserVO vo);									// 비밀번호 찾기
 	
-	void sendPWMail(UserVO user) throws MessagingException;		// 비밀번호 재발급 메일 
+	void sendPWMail(UserVO user) throws MessagingException;		// 비밀번호 재발급 메일
+	
+	void updatePW(UserVO vo);									// 비밀번호 변경
 	
 }

@@ -251,4 +251,13 @@ public class UserServiceImpl implements UserService {
 		
 		return password.toString(); 
 	}
+
+	@Override
+	public void updatePW(UserVO vo) {
+		
+		vo.setPassword(encoder.encode(vo.getPassword()));
+		
+		userMapper.updatePW(vo);
+		
+	}
 }

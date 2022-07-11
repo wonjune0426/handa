@@ -291,4 +291,14 @@ public class UserController {
 
 		return "member/find";
 	}
+	
+	@PostMapping("/change-pw")
+	public @ResponseBody String passwordChange(UserVO user) {
+		
+		log.info("change password:" + user.getPassword());
+		
+		userService.updatePW(user);
+		
+		return "change";
+	}
 }
