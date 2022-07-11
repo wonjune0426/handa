@@ -39,7 +39,9 @@
 										<h3 class="ch-detail-title" th:text="${challengeDetail.challenge_name}">
 										</h3>
 										<div>
-											<button class="btn challenge-join-btn" style="margin-left:150%;width:130px;height:50px;display:none;" id="challenge-amend">수정하기</button>
+											<button class="btn challenge-join-btn"
+												style="margin-left:150%;width:130px;height:50px;display:none;"
+												id="challenge-amend">수정하기</button>
 										</div>
 									</div>
 									<div class="create-user">
@@ -53,6 +55,8 @@
 												th:if="${createMember.position_id}==2">책임</small>
 											<small class="vertical-align-bottom"
 												th:if="${createMember.position_id}==3">선임</small>
+											<small class="vertical-align-bottom"
+												th:if="${createMember.position_id}==4">팀장</small>
 
 											<small class="vertical-align-bottom"
 												th:if="${createMember.affiliates_id}==1">한솔 인티큐브</small>
@@ -328,7 +332,7 @@
 					$("#comment-input").css("display", "block")
 					if (login_memberId == createMember) {
 						$("#secession").css("display", "none")
-						$("#challenge-amend").css("display","block")
+						$("#challenge-amend").css("display", "block")
 					} else {
 						$("#secession").css("display", "block")
 					}
@@ -360,9 +364,7 @@
 			//참여하기 버튼
 			$("#challenge-join").click(function () {
 				if (login_memberId == null) {
-					console.log(challenge_id);
-					
-					location.href = "/member/login?challenge_id="+challenge_id;
+					location.href = "/member/login?challenge_id=" + challenge_id;
 				} else {
 					Swal.fire({
 						title: '참여하시겠습니까?',
@@ -464,10 +466,10 @@
 				return [year, month, day].join('-');
 
 			}
-			
+
 			//수정하기 버튼 클릭
-			$('#challenge-amend').click(function(){
-				location.href="/challenge-amend?challenge_id="+challenge_id;
+			$('#challenge-amend').click(function () {
+				location.href = "/challenge-amend?challenge_id=" + challenge_id;
 			})
 
 
@@ -494,6 +496,8 @@
 								position = "책임"
 							} else if (result.memberList[i].position_id == 3) {
 								position = "선임"
+							} else if (result.memberList[i].position_id == 3) {
+								position = "팀장"
 							}
 							var img_src = result.memberList[i].profile_path + `/` + result.memberList[i].profile_uuid + `_` + result.memberList[i].profile_name;
 							if (result.memberList[i].member_id == login_memberId) {
@@ -571,24 +575,33 @@
 
 			//댓글 입력 ajax
 			var comment_ajax = function () {
-				$.ajax({
-					url: "/comment",
-					method: "POST",
-					async: false,
-					data: {
-						member_id: login_memberId,
-						challenge_id: challenge_id,
-						comment_content: $("#comment_content").val()
-					},
-					//////////////////// recv
-					success: function () {
-						commnet_read();
-						$("#comment_content").val("")
-					},
-					error: function (xhr, status, error) { // (파라미터 생략가능)
-						alert("error");
-					}
-				})
+				if ($("#comment_content").val() == "" || $("#comment_content").val() == null) {
+					Swal.fire({
+						icon: 'warning',
+						text: "내용을 입력해주세요",
+						allowEnterKey: false
+					})
+				} else {
+					$.ajax({
+						url: "/comment",
+						method: "POST",
+						async: false,
+						data: {
+							member_id: login_memberId,
+							challenge_id: challenge_id,
+							comment_content: $("#comment_content").val()
+						},
+						//////////////////// recv
+						success: function () {
+							commnet_read();
+							$("#comment_content").val("")
+						},
+						error: function (xhr, status, error) { // (파라미터 생략가능)
+							alert("error");
+						}
+					})
+				}
+
 				////////////////////
 			}
 

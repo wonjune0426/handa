@@ -87,13 +87,13 @@
 										<div class="col-md-6 width-100">
 											<label for="main-category">
 												<h3>시작날짜</h3>
-											</label> <input type="date" name="startdate" class="form-control"
+											</label> <input type="text" name="startdate" class="form-control"
 												placeholder="시작날짜" required="">
 										</div>
 										<div class="col-md-6 width-100">
 											<label for="main-category">
 												<h3>종료날짜</h3>
-											</label> <input type="date" class="form-control" name="enddate"
+											</label> <input type="text" class="form-control" name="enddate"
 												placeholder="종료날짜" required="">
 										</div>
 										<div class="col-md-6 width-100">
@@ -108,8 +108,8 @@
 													<input type="text"
 														onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
 														style="width:60%;" name="challenge_cost" class="form-control"
-														placeholder="금액을 입력해주세요"disabled >
-														</input>
+														placeholder="금액을 입력해주세요" disabled>
+													</input>
 												</select>
 											</div>
 										</div>
@@ -171,6 +171,9 @@
 <th:block layout:fragment="javascript">
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="build/ckeditor.js"></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 	<script>
 		let editor;
 		ClassicEditor
@@ -181,6 +184,27 @@
 			.catch(error => {
 				console.error(error);
 			});
+
+		$.datepicker.setDefaults({
+			dateFormat: 'yymmdd',
+			prevText: '이전 달',
+			nextText: '다음 달',
+			monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+			monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+			dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+			dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+			dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+			showMonthAfterYear: true,
+			yearSuffix: '년'
+		});
+
+		$("input[name=startdate]").datepicker({
+			dateFormat: 'yy-mm-dd'
+		});
+		
+		$("input[name=enddate]").datepicker({
+			dateFormat: 'yy-mm-dd'
+		});
 
 		$("#challenge_type").change(function () {
 			if ($(this).val() == "유료") {
@@ -198,7 +222,7 @@
 			$('.modal').toggleClass('show')
 		});
 
-		var searchEvent = function (){
+		var searchEvent = function () {
 			$('#img-list').empty();
 			if ($('#search-word').val() != '') {
 				$.ajax({ // ajax 기본형태
@@ -303,10 +327,16 @@
 					icon: 'warning',
 					text: '종료날짜 설정이 잘못되었어요'
 				})
+			} else if ($("#challenge_type").val() == "유료" && $("input[name=challenge_cost]").val() == "") {
+				Swal.fire({
+					icon: 'warning',
+					text: '챌린지 금액을 입력해 주세요'
+				})
 			} else {
 				cost = $("input[name=challenge_cost]").val().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
 				$.ajax({
 					url: "/challenge",
+					type:"POST",
 					method: "POST",
 					data: {
 						challenge_name: $("input[name=challenge_name]").val(),

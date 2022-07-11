@@ -83,21 +83,29 @@
 										<div class="col-md-6 width-100">
 											<label for="main-category">
 												<h3>시작날짜</h3>
-											</label> <input type="date" name="startdate" class="form-control"
+											</label> <input type="text" name="startdate" class="form-control"
 												placeholder="시작날짜" required="" th:value="${challenge.startdate}">
 										</div>
 										<div class="col-md-6 width-100">
 											<label for="main-category">
 												<h3>종료날짜</h3>
-											</label> <input type="date" class="form-control" name="enddate"
+											</label> <input type="text" class="form-control" name="enddate"
 												placeholder="종료날짜" required="" th:value=${challenge.enddate}>
 										</div>
 										<div class="col-md-6 width-100">
 											<label for="main-category">
 												<h3>유형</h3>
-											</label> <select class="form-control main-category" name="challenge_type"
-												id="challenge_type">
-											</select>
+											</label>
+											<div style="display: flex;">
+												<select class="form-control main-category" name="challenge_type"
+													id="challenge_type" style="width:50%">
+													<input type="text"
+														onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
+														style="width:60%;" name="challenge_cost" class="form-control"
+														placeholder="금액을 입력해주세요" disabled>
+													</input>
+												</select>
+											</div>
 										</div>
 									</div>
 									<div class="modal">
@@ -136,7 +144,8 @@
 									</div>
 
 									<div class="col-md-12 text-center create-challenge">
-										<button type="button" id="update-challenge" class="btn btn-primary">챌린지 수정</button>
+										<button type="button" id="update-challenge" class="btn btn-primary">챌린지
+											수정</button>
 									</div>
 									<input type="hidden" class="form-control price" name="member_id"
 										th:value='${#authentication.principal.Username}' readonly>
@@ -155,7 +164,11 @@
 </div>
 <th:block layout:fragment="javascript">
 	<script src="/build/ckeditor.js"></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 	<script th:inline="javascript">
+
 
 		let editor;
 		ClassicEditor
@@ -169,11 +182,32 @@
 		$(document).ready(function () {
 			/*<![CDTATA[*/
 			var sub_category =/*[[${challenge.subcategory_id}]]*/'default';
-			challenge_type=/*[[${challenge.challenge_type}]]*/'default';
-			challenge_id=/*[[${challenge.challenge_id}]]*/'default';
-			/*]]>*/	
+			challenge_type =/*[[${challenge.challenge_type}]]*/'default';
+			challenge_id =/*[[${challenge.challenge_id}]]*/'default';
+			challenge_cost =/*[[${challenge.challenge_cost}]]*/'dafault'
+			/*]]>*/
 
-			
+			$.datepicker.setDefaults({
+				dateFormat: 'yymmdd',
+				prevText: '이전 달',
+				nextText: '다음 달',
+				monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+				monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+				dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+				dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+				dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+				showMonthAfterYear: true,
+				yearSuffix: '년'
+			});
+
+			$("input[name=startdate]").datepicker({
+				dateFormat: 'yy-mm-dd'
+			});
+
+			$("input[name=enddate]").datepicker({
+				dateFormat: 'yy-mm-dd'
+			});
+
 			switch (sub_category) {
 				case 1:
 					$("input[name=sub_category]").attr("value", "영화")
@@ -203,9 +237,13 @@
 			switch (challenge_type) {
 				case "유료":
 					$("select[name=challenge_type]").append("<option>유료</option><option>무료</option>")
+					$("input[name=challenge_cost]").prop("disabled",false)
+					var change_cost=challenge_cost.replace("원","")
+					change_cost=change_cost.replace(",","")
+					$("input[name=challenge_cost]").val(change_cost)
 					break;
 				case "무료":
-					$("select[name=challenge_type]").append("<option>무료</option><option>무료</option>")
+					$("select[name=challenge_type]").append("<option>무료</option><option>유료</option>")
 					break;
 			}
 
@@ -216,6 +254,15 @@
 		$('#modal-close').click(function () {
 			$('.modal').toggleClass('show')
 		});
+
+		$("#challenge_type").change(function () {
+			if ($(this).val() == "유료") {
+				$("input[name=challenge_cost]").prop("disabled", false)
+			} else {
+				$("input[name=challenge_cost]").prop("disabled", true)
+				$("input[name=challenge_cost]").val("")
+			}
+		})
 
 		var searchEvent = function () {
 			$('#img-list').empty();
@@ -264,7 +311,7 @@
 		});
 
 		$('#update-challenge').click(function () {
-			var member_id=$("input[name=member_id]").val();
+			var member_id = $("input[name=member_id]").val();
 			var startdate = $("input[name=startdate]").val()
 			var enddate = $("input[name=enddate]").val()
 			var dateRegexp = /[0-9]{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])/;
@@ -279,24 +326,27 @@
 			} else if (startdate > enddate) {
 				alert("종료날짜 설정 오류")
 			} else {
+				cost = $("input[name=challenge_cost]").val().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
 				$.ajax({
 					url: "/challenge-amend",
+					type:"post",
 					method: "POST",
 					data: {
-						challenge_id:challenge_id,
+						challenge_id: challenge_id,
 						challenge_name: $("input[name=challenge_name]").val(),
 						thumbnail: $("#profile-img").attr("src"),
 						startdate: startdate,
 						enddate: enddate,
 						description: editor.getData(),
 						challenge_type: $("select[name=challenge_type]").val(),
-						member_id:member_id
+						member_id: member_id,
+						challenge_cost: cost
 					},
 					dataType: "text",
 					//////////////////// recv
-					success: function(){
-					window.location.href="/challenge/detail?challenge_id="+challenge_id;						
-					}, 
+					success: function () {
+						window.location.href = "/challenge/detail?challenge_id=" + challenge_id;
+					},
 					error: function (xhr, status, error) { // (파라미터 생략가능)
 						alert("error");
 					}
