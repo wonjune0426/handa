@@ -18,66 +18,97 @@
 		<!-- ======= Breadcrumbs ======= -->
 		<div class="breadcrumbs">
 			<div class="page-header d-flex align-items-center">
-				<div class="container position-relative">
-					<div class="row d-flex justify-content-center">
-						<div class="col-lg-6 text-center">
-							
-						</div>
-					</div>
-				</div>
 			</div>
-			<nav>
-				<div class="container">
-					<ol>
-						<li><a href="/">홈</a></li>
-            			<li>아이디/비밀번호 찾기</li>
-					</ol>
-				</div>
-			</nav>
 		</div>
 		<!-- End Breadcrumbs -->
+		
 		<!-- ======= Services Section ======= -->
 		<section id="service-details" class="service-details">
 			<div class="container aos-init aos-animate" data-aos="fade-up">
+				
 				<div class="row gy-4 find-wrapper">
-					<div class="col-lg-6 find-content">
-						<!-- 마이페이지 메뉴 탭 -->
+					<th:block th:if="${msg != 'find-result'}">
+					<div class="col-lg-6 find-content find-form">
+						<!-- 메뉴 탭 -->
 						<div class="find-tab">
 							<a href="" data-type="find-id" class="find-tab-menu find-id-menu active">아이디 찾기</a> 
 							<a href="" data-type="find-pw" class="find-tab-menu find-pw-menu">비밀번호 찾기</a>
 						</div>
+						
+						<!-- 아이디/비밀번호 찾기 폼 -->
 						<div class="find-id">
 							<p>아이디를 잊으셨나요? 아래의 정보를 입력해주세요.</p>
-							<form action="/member/find" method="post">
+							<form action="/member/find/id" method="post">
 								<input class="form-control" type="hidden" name="type" value="id">
 								<input class="form-control" type="text" name="member_name" placeholder="이름을 입력하세요.">
 								<input class="form-control" type="text" name="e_mail" placeholder="이메일을 입력하세요.">
 								<button type="submit">아이디 찾기</button>
 							</form>
 						</div>
+						
 						<div class="find-pw" style="display: none;">
 							<p>비밀번호를 잊으셨나요? 아래의 정보를 입력해주세요.</p>
-							<form action="/member/find" method="post">
+							<form action="/member/find/pw" method="post">
 								<input class="form-control" type="hidden" name="type" value="pw">
-								<input class="form-control" type="text" name="e_mail" placeholder="이메일을 입력하세요.">
 								<input class="form-control" type="text" name="member_id" placeholder="아이디를 입력하세요.">
-								<button type="button">비밀번호 찾기</button>
+								<input class="form-control" type="text" name="e_mail" id="pw_email" placeholder="이메일을 입력하세요.">
+								<button type="button" id="find-pw">비밀번호 찾기</button>
 							</form>
 						</div>
+						
 					</div>
+					</th:block>
+					
+					<!-- 아이디/비밀번호 찾기 결과 -->
+					<th:block th:if="${msg == 'find-result'}">
+						<div class="col-lg-6 find-content find-result">
+							<!-- 메뉴 탭 -->
+							<div class="find-tab">
+								<a href="/member/find" data-type="find-id" class=" find-id-menu active">아이디 찾기</a> 
+								<a href="/member/find" data-type="find-pw" class=" find-pw-menu">비밀번호 찾기</a>
+							</div>
+							<h4>아이디 찾기 결과입니다.</h4>
+							<div th:each="user : ${userList}" class="user-list">
+								<div>
+								<span>아이디</span>
+								<p th:text="${user.member_id}"></p>
+								</div>
+								<span>이름</span>
+								<span th:text="${user.member_name}"></span>
+								<span>이메일</span>
+								<span th:text="${user.e_mail}"></span>
+								<span th:text="${#strings.substring(user.createdate, 0, 10)}"></span>
+								<span>가입</span>
+							</div>
+							<div class="text-center">
+								<a href="/member/login" th:if="${!#lists.isEmpty(userList)}">로그인하러 가기</a>
+							</div>
+							
+							<p th:if="${#lists.isEmpty(userList)}">입력한 정보와 일치하는 아이디가 존재하지 않습니다.</p>
+							<br>
+						</div>
+					</th:block>
+					
+					<div class="col-lg-6 find-content find-result" style="display: none;">
+						<!-- 메뉴 탭 -->
+						<div class="find-tab">
+							<a href="/member/find" data-type="find-id" class=" find-id-menu active">아이디 찾기</a> 
+							<a href="/member/find" data-type="find-pw" class=" find-pw-menu">비밀번호 찾기</a>
+						</div>
+						<h4>비밀번호 찾기 결과입니다.</h4>
+						<div th:each="user : ${userList}">
+							<p th:text=${user.member_id}></p>
+							<p th:text=${user.member_name}></p>
+							<p th:text=${user.e_mail}></p>
+							<p th:text=${user.createdate}></p>
+						</div>
+						<p class="result-text"></p>
+						<br>
+						
+					</div>
+					
 				</div>
 			</div>
-			
-			<!-- 정보 수정 버튼 -->
-			<div class="pricing-item text-center">
-				<th:block sec:authorize="isAuthenticated()"> 
-					<a th:href="@{/member/amend/} + ${#authentication.principal.Username}" class="mypage-btn align-items-center">정보 수정하기</a> 
-				<th:block>
-			</div>
-			
-			<!-- 정보 수정 결과 -->
-			<input type="hidden" th:value="${msg}" class="amend-result"/>
-			
 		</section>
 	</main>
 	<!-- End #main -->
@@ -101,7 +132,64 @@ $(document).ready(function(){
 				$('.find-pw-menu').addClass('active');
 				$('.find-id-menu').removeClass('active');
 			 }
-	});		
+	});	
+	
+	function sendPWMail(member_id, e_mail) {
+		$.ajax({
+			type : "POST",
+			url : "/member/find/send-pw",
+			data : {
+				'type' : 'pw',
+				'member_id' : member_id,
+				'e_mail' : e_mail
+			},
+			success : function(data) {
+				console.log(data);
+			},
+			error : function(request, status, error) {
+				console.log("code:" + request.status + "\n" 
+						+ "message:" + request.responseText + "\n" 
+						+ "error:" + error);
+			}
+		});
+	}
+	
+	$("#find-pw").on("click", function (e) {
+		e.preventDefault();
+		
+		const member_id = $('input[name=member_id]').val();
+		const e_mail = $('#pw_email').val();
+		
+		const findForm = $('.find-form');
+		const findResult = $('.find-result');
+		const resultText = $('.result-text');
+		
+		console.log(member_id, e_mail);
+		
+		$.ajax({
+			type : "POST",
+			url : "/member/find/pw",
+			data : {
+				'type' : 'pw',
+				'member_id' : member_id,
+				'e_mail' : e_mail
+			},
+			success : function(data) {
+				console.log(data);
+				
+				resultText.text(data);
+				findForm.css('display', 'none');
+				findResult.css('display', 'block');
+				
+				sendPWMail(member_id, e_mail);
+			},
+			error : function(request, status, error) {
+				console.log("code:" + request.status + "\n" 
+						+ "message:" + request.responseText + "\n" 
+						+ "error:" + error);
+			}
+		});
+	});
 });
 </script>
 </th:block>

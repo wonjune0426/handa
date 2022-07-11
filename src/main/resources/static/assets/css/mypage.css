@@ -142,6 +142,9 @@
 	margin: 10px;
 }	
 
+#service-details-list{
+	background-color: #ffff;	
+}
 
 /* ------------마이페이지 - 일정관리 (mypage/calender.html)-------------- */
 /* 마이페이지 탭 활성화될 경우*/
@@ -288,14 +291,18 @@
 .challenge-card-zero {
 	background-color: #fff;	
 	margin: 0px 1%;
-	display: inline-block;
+	display: flex;
+	align-items: center;
 	padding: 18px;
 	box-shadow: 3px 3px 3px #b4b4b4;
 	border-radius: 4px;
 	width: 97%;
 	height: 190px;
 	text-align: center;
-	vertical-align: middle;
+}
+
+.challenge-card-zero div {
+	margin: 0 auto;
 }
 
 .challenge-card-div {
@@ -324,7 +331,7 @@
 	font-size: 14px;
 }
 
-.ch-card-btn-div, {
+.ch-card-btn-div {
 	text-align: right;
 }
 

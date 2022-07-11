@@ -4,6 +4,24 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hansol.handa.mapper.MypageMapper">
 
+	<!-- 챌린지 조회 resultMap -->
+	<resultMap id="joinVO" type="JoinVO">
+		<result column="count" property="count"></result>
+	</resultMap>
+
+	<resultMap id="challengeMap" type="ChallengeVO">
+		<result column="challenge_id" property="challenge_id"></result>
+		<result column="challenge_name" property="challenge_name"></result>
+		<result column="startdate" property="startdate"></result>
+		<result column="enddate" property="enddate"></result>
+		<result column="createdate" property="createdate"></result>
+		<result column="member_id" property="member_id"></result>
+		<result column="subcategory_id" property="subcategory_id"></result>
+		<result column="challenge_type" property="challenge_type"></result>
+		<result column="sub_category_name" property="subcategory_name"></result>
+		<collection property="joinVO" resultMap="joinVO" />
+	</resultMap>
+	
 	<!-- 마이페이지 내 정보 조회 -->
 	<select id="selectMemberInfo" parameterType="String" resultType="UserVO">
 		SELECT member_id, member_name, e_mail, profile_path, profile_uuid, profile_name, affiliates_name, position_name
@@ -21,7 +39,35 @@
 	<!-- 참여 챌린지 개수 조회 -->
 	<select id="selectPartCount" parameterType="String" resultType="Integer">
 		SELECT COUNT(*) AS COUNT
-		FROM challenge_join
-		WHERE member_id = #{member_id};
+		FROM challenge, challenge_join
+		WHERE challenge.challenge_id = challenge_join.challenge_id and challenge_join.member_id = #{member_id} 
+			AND challenge.member_id != #{member_id};
+	</select>
+	
+	<!-- 마이페이지 생성 챌린지 조회 -->
+	<select id="selectProdeceLimit" parameterType="String" resultMap="challengeMap">
+		SELECT challenge.challenge_id, challenge_name, startdate, enddate,  
+			createdate, challenge.member_id, subcategory_id, challenge_type, count, sub_category_name    
+		from challenge, sub_category, (SELECT challenge.challenge_id, COUNT(*) as count  
+													from challenge, challenge_join
+													WHERE challenge.challenge_id = challenge_join.challenge_id
+													GROUP BY challenge.challenge_id) count_table
+		WHERE challenge.challenge_id = count_table.challenge_id AND challenge.subcategory_id = sub_category.sub_category_id AND member_id = #{member_id}
+		GROUP BY challenge.challenge_id order by createdate DESC LIMIT 3;
+	</select>
+	
+	<!-- 마이페이지 참여 챌린지 조회 -->
+	<select id="selectPartLimit" parameterType="String" resultMap="challengeMap">
+		SELECT challenge.challenge_id, challenge_name, startdate, enddate,  
+			createdate, challenge.member_id, subcategory_id, challenge_type, count, sub_category_name
+		from challenge, sub_category, (SELECT challenge.challenge_id, COUNT(*) as COUNT
+													from challenge, challenge_join
+													WHERE challenge.challenge_id = challenge_join.challenge_id
+													GROUP BY challenge.challenge_id) count_table,
+												(SELECT challenge.challenge_id
+													FROM challenge, challenge_join
+													where challenge.challenge_id = challenge_join.challenge_id AND challenge_join.member_id = #{member_id}) AS join_table
+		WHERE challenge.challenge_id = count_table.challenge_id AND challenge.subcategory_id = sub_category.sub_category_id AND challenge.challenge_id = join_table.challenge_id AND member_id != #{member_id}																		
+		GROUP BY challenge.challenge_id order by createdate DESC LIMIT 3;
 	</select>
 </mapper>
