@@ -10,7 +10,10 @@
 # Learn more about CSS variables at https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties
 --------------------------------------------------------------*/
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
-
+@font-face {
+    font-family: 'Mont-HeavyDEMO';
+    src:url('../fonts/Mont-HeavyDEMO.otf');
+} 
 /* Fonts */
 :root {
   --font-default: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
@@ -32,7 +35,7 @@
 }
 
 .handa-logo {
-	/* font-family: Inter, sans-serif !important; */
+	font-family: Mont-HeavyDEMO, sans-serif !important;
 }
 
 ::selection {
@@ -1674,7 +1677,7 @@ section {
 }
 
 .contact .php-email-form input {
-  height: 44px;
+  height: 50px;
 }
 
 .contact .php-email-form textarea {
@@ -1988,4 +1991,46 @@ section {
 
 .footer .credits a {
   color: #fff;
+}
+
+.handa-btn {
+    margin-top: 10px;
+    color: #fff !important;
+    border: 1px solid var(--color-primary) !important;
+    background-color: var(--color-primary) !important;
+    padding: 10px 35px;
+    transition: 0.4s;
+    border-radius: 5px;
+    width: 30%;
+}
+
+.handa-btn:hover {
+	margin-top: 10px;
+	background-color: #fff !important;
+	border: 1px solid var(--color-primary) !important;
+	color: var(--color-primary) !important;
+    padding: 10px 35px;
+    transition: 0.4s;
+    border-radius: 5px;
+}
+
+.handa-outline-btn {
+    margin-top: 10px;
+    background-color: #fff !important;
+	border: 1px solid var(--color-primary) !important;
+	color: var(--color-primary) !important;
+    padding: 10px 35px;
+    transition: 0.4s;
+    border-radius: 5px;
+    width: 30%;
+}
+
+.handa-outline-btn:hover {
+	margin-top: 10px;
+	color: #fff !important;
+    border: 1px solid var(--color-primary) !important;
+    background-color: var(--color-primary) !important;
+    padding: 10px 35px;
+    transition: 0.4s;
+    border-radius: 5px;
 }

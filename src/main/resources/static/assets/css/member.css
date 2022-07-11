@@ -1,6 +1,6 @@
 /* ------------ 로그인 (member/login.html) -------------- */
 .login-div {
-	width: 33%;
+	width: 28%;
 	display: inline-block;
 }
 
@@ -106,7 +106,7 @@
 	margin-top: 50px;
 }
 
-.register-btn-div button {
+/* .register-btn-div button {
 	margin-top: 10px;
 	color: #fff !important;
 	border: 1px solid var(--color-primary) !important;
@@ -125,7 +125,7 @@
     padding: 10px 35px;
     transition: 0.4s;
     border-radius: 5px;
-}
+} */
 
 /*  파일업로드 관련 css */
 .filebox input[type="file"] {
@@ -345,11 +345,13 @@
 .register-form input.form-control {
 	padding: 10px !important;
 	font-size: 15px;
+	height: 50px;
 }
 
 .register-form select {
 	padding: 10px !important;
 	font-size: 15px;
+	height: 50px;
 }
 
 .register-form option {
@@ -512,6 +514,7 @@
   object-fit: cover;
   /* object-position: center right; */
 }
+
 
 /* ------------아이디 / 비밀번호 찾기 (member/find.html)-------------- */
 /* 마이페이지 탭 활성화될 경우 */
