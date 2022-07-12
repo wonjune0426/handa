@@ -158,7 +158,10 @@
 									<a th:href="@{/challenge/detail(challenge_id=${popular.challenge_id})}"
 										th:text="'[' + ${popular.subcategory_name} + '] ' + ${popular.challenge_name}" class="stretched-link"></a>
 								</h3>
-								<p id="card-p" th:text="${popular.startdate} + ' ~ ' + ${popular.enddate}"></p>
+								<div>
+									<p id="card-p" class="date-p" th:text="${popular.startdate} + ' ~ ' + ${popular.enddate}"></p>
+									<span th:if="${popular.challenge_state} == '모집중'" class="dday" th:text="'D-' + ${popular.dday}"></span>
+								</div>
 								<p id="card-p" th:text="'참여인원 ' + ${popular.joinVO.count} + '명'"></p>
 								<div class="state">
 									<div class="open-dt" th:text="${popular.createdate} + ' 생성'"></div>
@@ -251,15 +254,16 @@
 									<a th:href="@{/challenge/detail(challenge_id=${cost.challenge_id})}"
 										th:text="'[' + ${cost.subcategory_name} + '] ' + ${cost.challenge_name}" class="stretched-link"></a>
 								</h3>
-								<p id="card-p" th:text="${cost.startdate} + ' ~ ' + ${cost.enddate}"></p>
+								<div>
+									<p id="card-p" class="date-p" th:text="${cost.startdate} + ' ~ ' + ${cost.enddate}"></p>
+									<span th:if="${cost.challenge_state} == '모집중'" class="dday" th:text="'D-' + ${cost.dday}"></span>
+								</div>
 								<p id="card-p" th:text="'참여인원 ' + ${cost.joinVO.count} + '명'"></p>
 								<div class="state">
 									<div class="open-dt" th:text="${cost.createdate} + ' 생성'"></div>
 									<div class="state-label" th:text="${cost.challenge_state}"></div>
 									<img th:src="@{../assets/img/won.png}" alt=""
 										class="challenge_cost">
-
-									<!-- <div class="state-label" th:text="${cost.challenge_state}"></div> -->
 								</div>
 							</div>
 						</div>

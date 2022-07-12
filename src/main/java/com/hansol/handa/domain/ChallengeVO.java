@@ -19,6 +19,7 @@ public class ChallengeVO {
 	 private String challenge_type;
 	 private String challenge_state;
 	 private String challenge_cost;
+	 private int dday;
 	 
 	 private String subcategory_name;
 	 private int count;

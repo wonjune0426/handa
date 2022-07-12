@@ -114,13 +114,17 @@
 										<div class="challenge-card col-4" th:each="produce: ${listProduce}">
 											<a th:href="@{/challenge/detail(challenge_id=${produce.challenge_id})}" 
 												th:text="'[' + ${produce.subcategory_name} + '] ' + ${produce.challenge_name}" class="ch-card-title"></a>
-											<p th:text="${produce.startdate} + ' ~ ' + ${produce.enddate}"></p>
+											<img th:if="${produce.challenge_type} == '유료'" th:src="@{../assets/img/won.png}" alt=""
+													class="challenge_cost">
+											<!-- <p th:text="${produce.startdate} + ' ~ ' + ${produce.enddate}"></p> -->
+											<div>
+												<p class="date" th:text="${produce.startdate} + ' ~ ' + ${produce.enddate}"></p>
+												<span th:if="${produce.challenge_state} == '모집중'" class="dday" th:text="'D-' + ${produce.dday}"></span>
+											</div><br>
 											<p th:text="'참여인원 ' + ${produce.joinVO.count} + '명'"></p>
 											<div class="state">
 												<div class="open-dt" th:text="${produce.createdate} + ' 생성'"></div>
 												<div class="state-label" th:text="${produce.challenge_state}"></div>
-<!-- 												<img th:if="${produce.challenge_type} == '유료'" th:src="@{../assets/img/won.png}" alt=""
-													class="challenge_cost"> -->
 											</div>
 											<div class="ch-card-btn-div">
 												<button id="challenge-amend" th:challenge_id="${produce.challenge_id}"
@@ -158,7 +162,12 @@
 										<div class="challenge-card col-4" th:each="part: ${listPart}">
 											<a th:href="@{/challenge/detail(challenge_id=${part.challenge_id})}" 
 												th:text="'[' + ${part.subcategory_name} + '] ' + ${part.challenge_name}" class="ch-card-title"></a>
-											<p th:text="${part.startdate} + ' ~ ' + ${part.enddate}"></p>
+											<img th:if="${part.challenge_type} == '유료'" th:src="@{../assets/img/won.png}" alt=""
+													class="challenge_cost">
+											<div>
+												<p class="date" th:text="${part.startdate} + ' ~ ' + ${part.enddate}"></p>
+												<span th:if="${part.challenge_state} == '모집중'" class="dday" th:text="'D-' + ${part.dday}"></span>
+											</div><br>
 											<p th:text="'참여인원 ' + ${part.joinVO.count} + '명'"></p>
 											<div class="state">
 												<div class="open-dt" th:text="${part.createdate} + ' 생성'"></div>

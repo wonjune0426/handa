@@ -176,24 +176,42 @@
 .challenge-item{
 	width: 400px;
 }
-/* 
-.state{
+
+.state-list{
     padding: 0 15px 0 25px;
-    display: flex;
+    /* display: flex; */
     flex-direction: row;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     margin-bottom: 25px;
     margin-top: 15px;
-} */
+}
 
-/* .state > div{
+.state-list > div{
 	border-radius: 4px;
     background: #ebebeb;
     padding: 3px 8px;
     font-size: 12px;
     font-weight: bold;
     color: #747474;
-} */
+    
+    margin-top:2px;
+}
+
+.state-list .open-dt{
+ 	float : left;
+ }
+ 
+.state-list .state-label{
+ 	float: right;
+ }
+ 
+.state-list .challenge_cost{
+ 	height : 30px;
+ 	width : 30px;
+ 	float : right;
+ 	vertical-align: middle;
+ 	margin-right : 10px;
+ }
  
 #card-p{
  	padding: 0 30px;
@@ -202,6 +220,26 @@
     font-size: 15px;
  }
  
+ 
+.date{
+	float:left;
+}
+
+.dday{
+	font-size: 15px;
+    float: right;
+    color: rgb(253, 48, 73);
+    font-weight: 600;
+    margin-right: 5px;
+}
+
+.dday-list{
+	font-size: 15px;
+    float: right;
+    margin-right: 20px;
+    color: rgb(253, 48, 73);
+    font-weight: 600;
+}
 
 /* ------------마이페이지 - 일정관리 (mypage/calender.html)-------------- */
 /* 마이페이지 탭 활성화될 경우*/
@@ -396,18 +434,10 @@
 .challenge_cost{
  	height : 30px;
  	width : 30px;
- 	margin-right : 10px;
  	float : right;
  	vertical-align: middle;
  }
  
-.open-dt{
- 	float : left;
- }
- 
-.state-label{
- 	float: right;
- } 
 .ch-card-btn-div {
 	text-align: right;
 }
@@ -433,6 +463,8 @@
     padding: 3px 8px;
     font-size: 12px;
     color: #747474;
+    
+    margin-top:2px;
 }
 
 .calender-content {

@@ -43,12 +43,25 @@ function getList(category, sortType, createdate, count, searchWord, challengeTyp
 	
 					data += "</h3>";
 			
-					data += "<p id='card-p'>" + challengeList[i]['startdate'] + " ~ " + challengeList[i]['enddate'] + "</p>";
+					//data += "<p id='card-p'>" + challengeList[i]['startdate'] + " ~ " + challengeList[i]['enddate'] + "</p>";
+
+					data += "<div>";
+					data += "<p id='card-p' class='date-p'>" + challengeList[i]['startdate'] + " ~ " + challengeList[i]['enddate'] + "</p>";
+					
+					if(challengeList[i]['challenge_state'] == "모집중")
+						data += "<span class='dday'>" + "D-" + challengeList[i]['dday'] + "</span>";
+					
+					data += "</div>";
+					
 					data += "<p id='card-p'> 참여인원 " + challengeList[i]['joinVO']['count'] + "명 </p>";
 							
 					data += "<div class='state'>";
 					data += "<div class='open-dt'>" + challengeList[i]['createdate'].split(" ", 1) + " 생성 </div>"; 
 					data +=	"<div class='state-label'>" + challengeList[i]['challenge_state'] + "</div>";
+
+					if(challengeList[i]['challenge_type'] == "유료")
+						data += "<img src='../assets/img/won.png' alt='' class='challenge_cost'>";
+						
 					data += "</div>";
 								
 					data += "</div>";

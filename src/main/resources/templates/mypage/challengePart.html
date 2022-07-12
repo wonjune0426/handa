@@ -50,18 +50,22 @@
 									<img th:src="${part.thumbnail}" alt=""
 										class="img-fluid challenge-thumbnail">
 								</div>
-								<div>
 									<h3>
 										<a th:href="@{/challenge/detail(challenge_id=${part.challenge_id})}"
 											th:text="'[' + ${part.subcategory_name} + '] ' + ${part.challenge_name}"></a>
 									</h3>
-									<p id="card-p" th:text="${part.startdate} + ' ~ ' + ${part.enddate}"></p>
+									<!-- <p id="card-p" th:text="${part.startdate} + ' ~ ' + ${part.enddate}"></p> -->
+									<div>
+										<p id="card-p" class="date" th:text="${part.startdate} + ' ~ ' + ${part.enddate}"></p>
+										<span th:if="${part.challenge_state} == '모집중'" class="dday-list" th:text="'D-' + ${part.dday}"></span>
+									</div>
 									<p id="card-p" th:text="'참여인원 ' + ${part.joinVO.count} + '명'"></p>
 									<div class="state-list">
 										<div class="open-dt" th:text="${part.createdate} + ' 생성'"></div>
 										<div class="state-label" th:text="${part.challenge_state}"></div>
+										<img th:if="${part.challenge_type} == '유료'" th:src="@{../assets/img/won.png}" alt=""
+													class="challenge_cost">
 									</div>
-								</div>
 								
               					<!-- 챌린지 탈퇴 버튼 -->
               					<div class="mypage-btn-div">
