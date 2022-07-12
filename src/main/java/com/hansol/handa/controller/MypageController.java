@@ -1,5 +1,6 @@
 package com.hansol.handa.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.slf4j.LoggerFactory;
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hansol.handa.domain.ChallengeVO;
 import com.hansol.handa.domain.UserVO;
@@ -29,11 +31,13 @@ public class MypageController {
 	// 마이 페이지 화면
 	@GetMapping("")
 	public String getIndex(@RequestParam String member_id, Model model) {
-		UserVO memberInfo = mypageService.selectMemberInfo(member_id);
-		int produceCount = mypageService.selectProduceCount(member_id);
-		int partCount = mypageService.selectPartCount(member_id);
-		List<ChallengeVO> listProduce = mypageService.selectProdeceLimit(member_id);
-		List<ChallengeVO> listPart = mypageService.selectPartLimit(member_id);
+		UserVO memberInfo = mypageService.selectMemberInfo(member_id);					// 내 정보 조회
+		
+		int produceCount = mypageService.selectProduceCount(member_id);					// 생성 챌린지 개수
+		int partCount = mypageService.selectPartCount(member_id);						// 참여 챌린지 개수
+		
+		List<ChallengeVO> listProduce = mypageService.selectProdeceLimit(member_id);	// 생성 챌린지 (3개)
+		List<ChallengeVO> listPart = mypageService.selectPartLimit(member_id);			// 참여 챌린지 (3개)
 		
 		model.addAttribute("memberInfo", memberInfo);
 		model.addAttribute("produceCount", produceCount);
@@ -63,4 +67,18 @@ public class MypageController {
 		
 		return "mypage/challengePart";
 	}
+ 	
+ 	// 마이페이지 일정 관리 (생성/참여 챌린지 목록 조회)
+ 	@GetMapping("/challenge-all")
+ 	@ResponseBody
+ 	public HashMap<String, Object> challengeAll(@RequestParam String member_id){
+ 		HashMap<String, Object> map = new HashMap<String, Object>();
+ 		List<ChallengeVO> listProduce = mypageService.selectProduce(member_id);
+ 		List<ChallengeVO> listPart = mypageService.selectPart(member_id);
+ 		
+ 		map.put("listProduce", listProduce);
+ 		map.put("listPart", listPart);
+ 		
+ 		return map;
+ 	}
 }

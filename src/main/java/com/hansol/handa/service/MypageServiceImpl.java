@@ -23,21 +23,25 @@ public class MypageServiceImpl implements MypageService {
 	
 	private final Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 	
+	// 내 정보 조회
 	@Override
 	public UserVO selectMemberInfo(String member_id) {
 		return mapper.selectMemberInfo(member_id);
 	}
 
+	// 생성 챌린지 개수
 	@Override
 	public int selectProduceCount(String member_id) {
 		return mapper.selectProduceCount(member_id);
 	}
 
+	// 참여 챌린지 개수
 	@Override
 	public int selectPartCount(String member_id) {
 		return mapper.selectPartCount(member_id);
 	}
 
+	// 생성 챌린지 조회 (3개)
 	@Override
 	public List<ChallengeVO> selectProdeceLimit(String member_id) {
 		HashMap<String, Object> map = new HashMap<>();
@@ -51,6 +55,7 @@ public class MypageServiceImpl implements MypageService {
 		return list;
 	}
 
+	// 참여 챌린지 조회 (3개)
 	@Override
 	public List<ChallengeVO> selectPartLimit(String member_id) {
 		HashMap<String, Object> map = new HashMap<>();
@@ -64,6 +69,7 @@ public class MypageServiceImpl implements MypageService {
 		return list;
 	}
 
+	// 생성 챌린지 리스트
 	@Override
 	public List<ChallengeVO> selectProduce(String member_id) {
 		HashMap<String, Object> map = new HashMap<>();
@@ -77,6 +83,7 @@ public class MypageServiceImpl implements MypageService {
 		return list;
 	}
 
+	// 참여 챌린지 리스트
 	@Override
 	public List<ChallengeVO> selectPart(String member_id) {
 		HashMap<String, Object> map = new HashMap<>();

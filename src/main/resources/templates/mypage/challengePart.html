@@ -80,6 +80,7 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js'></script>
 <script th:inline="javascript">
+
 //탈퇴 버튼 클릭
 function secession(challenge_id) {
 	
@@ -91,11 +92,11 @@ function secession(challenge_id) {
 		title: '탈퇴하시겠습니까?',
 		icon: 'warning',
 
-		showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
-		confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
-		cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
-		confirmButtonText: '탈퇴', // confirm 버튼 텍스트 지정
-		cancelButtonText: '취소', // cancel 버튼 텍스트 지정
+		showCancelButton: true, 		// cancel버튼 보이기. 기본은 원래 없음
+		confirmButtonColor: '#3085d6', 	// confrim 버튼 색깔 지정
+		cancelButtonColor: '#d33', 		// cancel 버튼 색깔 지정
+		confirmButtonText: '탈퇴', 		// confirm 버튼 텍스트 지정
+		cancelButtonText: '취소', 		// cancel 버튼 텍스트 지정
 
 	}).then(result => {
 		if (result.isConfirmed) {

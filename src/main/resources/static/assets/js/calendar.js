@@ -1,10 +1,9 @@
 /**
 *	마이페이지의 일정 관리(달력)
 */
-
-document.addEventListener('DOMContentLoaded', function() {
-	var calendarEl = document.getElementById('calendar');
 	
+function addCalendar(member_id){
+	var calendarEl = document.getElementById('calendar');
 		// full-calendar 생성하기      
 		var calendar = new FullCalendar.Calendar(calendarEl, {
 		        		  
@@ -15,74 +14,54 @@ document.addEventListener('DOMContentLoaded', function() {
 		 	right: 'dayGridMonth,listMonth'      
 		 },    
 		 
-		 expandRows: true, // 화면에 맞게 높이 재설정   
-		 initialView: 'dayGridMonth', // 초기 로드 될때 보이는 캘린더 화면(기본 설정: 달)
-		 navLinks: true, // 날짜를 선택하면 Day 캘린더나 Week 캘린더로 링크      
-		 nowIndicator: true, // 현재 시간 마크        
-		 dayMaxEvents: true, // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)        
-		 locale: 'ko', // 한국어 설정  
-		 //eventColor: 'blue',	// 이벤트 색상
+		 expandRows: true, 					// 화면에 맞게 높이 재설정   
+		 initialView: 'dayGridMonth', 		// 초기 로드 될때 보이는 캘린더 화면(기본 설정: 달)
+		 navLinks: true, 					// 날짜를 선택하면 Day 캘린더나 Week 캘린더로 링크      
+		 nowIndicator: true, 				// 현재 시간 마크        
+		 dayMaxEvents: true, 				// 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)        
+		 locale: 'ko', 						// 한국어 설정  
+
+		 events: function(info, successCallback, failureCallback){
+			$.ajax({
+				type: 'GET',
+				url: "/mypage/challenge-all",
+				dataType : 'json',
+				contentType : 'application/json; charset=UTF-8',
+				data : {
+					member_id : member_id
+				},
+				success: function(data){
+					var listProduce = data['listProduce'];	// 생성 챌린지 
+					var listPart = data['listPart'];		// 참여 챌린지
+					
+					var events = [];
+					
+					// 생성 챌린지 추가
+					for(var i = 0; i < listProduce.length; i++){
+						events.push({
+							title : '[' + listProduce[i]['subcategory_name'] + '] ' + listProduce[i]['challenge_name'],
+							start: listProduce[i]['startdate'],
+							end: listProduce[i]['enddate'],
+							color: '#86a0e6',
+							url: '/challenge/detail?challenge_id=' + listProduce[i]['challenge_id'] 
+						});
+					}
+					
+					// 참여 챌린지 추가
+					for(var i = 0; i < listPart.length; i++){
+						events.push({
+							title : '[' + listPart[i]['subcategory_name'] + '] ' + listPart[i]['challenge_name'],
+							start: listPart[i]['startdate'],
+							end: listPart[i]['enddate'],
+							color: '#8cc084',
+							url: '/challenge/detail?challenge_id=' + listPart[i]['challenge_id'] 
+						})
+					}
+					successCallback(events);
+				}
+			})
+		}
+	});         
 		 
-		 // 마우스 올렸을 때 설명 띄우기
-//		 eventDidMount: function(info) {
-//		        var tooltip = new Tooltip(info.el, {
-//		          title: info.event.extendedProps.description,
-//		          placement: 'top',
-//		          trigger: 'hover',
-//		          container: 'body'
-//		        });
-//		      }, 
-   
-		 // 이벤트 
-		 events: [          
-		 	{            
-		 		title: 'test event',            
-		 		start: '2022-07-24',
-		 		end: '2022-07-28',
-		 		description: '테스트 이벤트',
-		 	}, 
-		 	{            
-		 		title: 'Click test',            
-		 		url: '/challenge/detail?challenge_id=117', // 클릭시 해당 url로 이동 
-		 		description: 'description for Repeating Event',
-		 		start: '2022-06-28',
-		 		end: '2022-06-28',    
-		 		color: '#86a0e6'  
-		 	}, 
-		 	{            
-		 		title: 'Click test',            
-		 		url: '/challenge/detail?challenge_id=117', // 클릭시 해당 url로 이동 
-		 		description: 'description for Repeating Event',
-		 		start: '2022-06-28',
-		 		end: '2022-06-28',    
-		 		color: 'purple'  
-		 	}, 
-		 	{            
-		 		title: 'Click test',            
-		 		url: '/challenge/detail?challenge_id=117', // 클릭시 해당 url로 이동 
-		 		description: 'description for Repeating Event',
-		 		start: '2022-06-28',
-		 		end: '2022-06-28',    
-		 		color: 'purple'  
-		 	}, 
-		 	{            
-		 		title: 'Click test',            
-		 		url: '/challenge/detail?challenge_id=117', // 클릭시 해당 url로 이동 
-		 		description: 'description for Repeating Event',
-		 		start: '2022-06-28',
-		 		end: '2022-06-28',    
-		 		color: 'purple'  
-		 	}, 
-		 	{            
-		 		title: '[영화] 영화 TEST',            
-		 		url: '/challenge/detail?challenge_id=117', // 클릭시 해당 url로 이동 
-		 		description: 'description for Repeating Event',
-		 		start: '2022-07-01',
-		 		end: '2022-07-04',    
-		 		color: '#8cc084'  
-		 	}, 
-		 	]
-			});          
-			calendar.render();    // 캘린더 랜더링  
-		}); 
-			
+	calendar.render();    // 캘린더 랜더링  
+}

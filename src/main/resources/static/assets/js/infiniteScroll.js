@@ -17,10 +17,10 @@ function getList(category, sortType, createdate, count, searchWord, challengeTyp
 		},  
 		contentType : 'application/json',
 		success: function(res){
-			challengeList = res['challengeList'];
-			challengeCount = res['challengeCount'];
+			challengeList = res['challengeList'];		// 페이지 당 챌린지 리스트
+			challengeCount = res['challengeCount'];		// 챌린지 총 개수
 			
-			const subCategoryName = res['subCategoryName'];
+			const subCategoryName = res['subCategoryName'];	
 
 			var data = "";
 			if(challengeCount == 0)
@@ -68,25 +68,30 @@ function getList(category, sortType, createdate, count, searchWord, challengeTyp
 }
 
 function infiniteScroll(category, sortType, createdate, count, searchWord, challengeType){
-	var page = 0;
-	var challenge = 12;
+	
+	var page = 0;			// 현재 페이지
+	var challenge = 12;		// 한 페이지에 보여줄 챌린지 개수
 	
 	const $listEnd = document.querySelector('#end');
 	const observer = new IntersectionObserver((entries) => {
 		if(page < 1){
+			// 맨 처음 페이지
 			getList(category, sortType, createdate, count, searchWord, challengeType);
 		}else{
+			// 총 페이지 개수
 			var pageTotal = ((challengeCount % challenge == 0) ? Math.round(challengeCount / challenge) : Math.round(challengeCount / challenge) + 1);
-			console.log(challengeCount);
+			//console.log(challengeCount);
 
+			// 마지막 페이지 까지
 			if(page != pageTotal){
 				var length = challengeList.length;
 				if(length == 0)
 					$('#end').hide();
 				else
+					// 다음 페이지
 					getList(category, sortType, challengeList[length-1]['createdate'], challengeList[length-1]['joinVO']['count'], searchWord, challengeType);
 			}else				
-				$('#end').hide();
+				$('#end').hide();	// 요소 관찰 종료 (요소 숨김)
 		}
 		page++;
 	})

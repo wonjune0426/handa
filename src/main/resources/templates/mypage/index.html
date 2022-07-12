@@ -36,160 +36,160 @@
 					<div class="my-info col-3">
 						<b>내정보</b>
 						<div class="my-info-content">
-						<br>
-						<div class="img-wrapper">
-						  <img alt="프로필 이미지" class="image--cover" 
-							th:src="'http://172.27.0.174:8080/viewFile?fname=' + ${memberInfo.profile_path} + '/' + ${memberInfo.profile_uuid}+ '_' + ${memberInfo.profile_name}">
+							<br>
+								<div class="img-wrapper">
+						  			<img alt="프로필 이미지" class="image--cover" 
+										th:src="'http://172.27.0.174:8080/viewFile?fname=' + ${memberInfo.profile_path} + '/' + ${memberInfo.profile_uuid}+ '_' + ${memberInfo.profile_name}">
 												
-						</div>
-						<p class="my-info-name">
-							<th:block th:text="${memberInfo.member_name}"></th:block>
-							<!-- 직급 -->	
-            				<th:block th:text="${memberInfo.position_name}"></th:block>
-						</p>
-						<hr>
-						<div class="my-info-etc">
-							<p>
-								<i class="fa-solid fa-city"></i>
-								<!-- 계열사 -->			              							
-       							<th:block th:text="${memberInfo.affiliates_name}"></th:block>
-							</p>
-							<p>
-								<i class="fa-solid fa-id-card-clip"></i>
-								<th:block th:text="${memberInfo.member_id}"></th:block>
-							</p>
-							<p class="my-info-email">
-								<i class="fa-solid fa-envelope"></i>
-								<th:block th:text="${memberInfo.e_mail}"></th:block>
-							</p>
-							<p>
-								<i class="fa-solid fa-user-plus"></i>
-								생성 챌린지 
-								<span class="my-info-num">
-									<a th:if="${produceCount} == 0" th:text="${produceCount}"></a>
-									<a th:unless="${produceCount} == 0" th:href="@{/mypage/challenge-produce?member_id=} + ${memberInfo.member_id}" th:text="${produceCount} "></a>
-								</span>건
+								</div>
+								<p class="my-info-name">
+									<!-- 이름 -->
+									<th:block th:text="${memberInfo.member_name}"></th:block>
+									<!-- 직급 -->	
+            						<th:block th:text="${memberInfo.position_name}"></th:block>
+								</p>
+								<hr>
+								<div class="my-info-etc">
+									<p>
+										<i class="fa-solid fa-city"></i>
+										<!-- 계열사 -->			              							
+       									<th:block th:text="${memberInfo.affiliates_name}"></th:block>
+									</p>
+									<p>
+										<i class="fa-solid fa-id-card-clip"></i>
+										<th:block th:text="${memberInfo.member_id}"></th:block>
+									</p>
+									<p class="my-info-email">
+										<i class="fa-solid fa-envelope"></i>
+										<th:block th:text="${memberInfo.e_mail}"></th:block>
+									</p>
+									<p>
+										<i class="fa-solid fa-user-plus"></i>
+										생성 챌린지 
+										<span class="my-info-num">
+												<a th:if="${produceCount} == 0" th:text="${produceCount}"></a>
+												<a th:unless="${produceCount} == 0" th:href="@{/mypage/challenge-produce?member_id=} + ${memberInfo.member_id}" th:text="${produceCount} "></a>
+										</span>건
 								
-							</p>
-							<p>
-								<i class="fa-solid fa-user-group"></i>
-								참여 챌린지
-								<span class="my-info-num">
-									<a th:if="${partCount} == 0" th:text="${partCount} "></a>
-									<a th:unless="${partCount} == 0" th:href="@{/mypage/challenge-part?member_id=} + ${memberInfo.member_id}" th:text="${partCount} "></a>
-								</span>건
-							</p>
-						</div>
-						<!-- 정보 수정 버튼 -->
-						<div class="text-center member-amend-btn">
-							<th:block sec:authorize="isAuthenticated()"> 
-								<a th:href="@{/member/amend/} + ${#authentication.principal.Username}" class="mypage-btn align-items-center">정보 수정하기</a> 
-							<th:block>
-						</div>
-						</div>
-					</div>
-					<div class="challenge-info col-9">
-						<div class="create-challenge">
-							<div class="cc-title">
-								<b>내가 생성한 챌린지</b>
-								<a th:if="${produceCount} > 3" th:href="@{/mypage/challenge-produce?member_id=} + ${memberInfo.member_id}">목록보기</a>
+									</p>
+									<p>
+										<i class="fa-solid fa-user-group"></i>
+										참여 챌린지
+										<span class="my-info-num">
+											<a th:if="${partCount} == 0" th:text="${partCount} "></a>
+											<a th:unless="${partCount} == 0" th:href="@{/mypage/challenge-part?member_id=} + ${memberInfo.member_id}" th:text="${partCount} "></a>
+										</span>건
+									</p>
+								</div>
+								<!-- 정보 수정 버튼 -->
+								<div class="text-center member-amend-btn">
+									<th:block sec:authorize="isAuthenticated()"> 
+										<a th:href="@{/member/amend/} + ${#authentication.principal.Username}" class="mypage-btn align-items-center">정보 수정하기</a> 
+									<th:block>
+								</div>
 							</div>
+						</div>
+						<div class="challenge-info col-9">
+							<div class="create-challenge">
+								<div class="cc-title">
+									<b>내가 생성한 챌린지</b>
+									<a th:if="${produceCount} > 3" th:href="@{/mypage/challenge-produce?member_id=} + ${memberInfo.member_id}">목록보기</a>
+								</div>
 							
-							<!-- 생성 챌린지 0개 일경우 -->
-							<th:block th:if="${produceCount} == 0">
-								<div class="row challenge-card-div">
-									<div class="challenge-card-zero">
-										<div>
-											<p>생성한 챌린지가 없습니다.</p>
-											<a th:href="@{/create}">생성하기</a>
+								<!-- 생성 챌린지 0개 -->
+								<th:block th:if="${produceCount} == 0">
+									<div class="row challenge-card-div">
+										<div class="challenge-card-zero">
+											<div>
+												<p>생성한 챌린지가 없습니다.</p>
+												<a th:href="@{/create}">생성하기</a>
+											</div>
 										</div>
 									</div>
-								</div>
-							</th:block>
+								</th:block>
 							
-							<!-- 생성 챌린지 0개 이상 -->
-							<th:block th:unless="${produceCount} == 0">
-							<div class="row challenge-card-div">
-								<div class="challenge-card col-4" th:each="produce: ${listProduce}">
-									<a th:href="@{/challenge/detail(challenge_id=${produce.challenge_id})}" 
-										th:text="'[' + ${produce.subcategory_name} + '] ' + ${produce.challenge_name}" class="ch-card-title"></a>
-									<p th:text="${produce.startdate} + ' ~ ' + ${produce.enddate}"></p>
-									<p th:text="'참여인원 ' + ${produce.joinVO.count} + '명'"></p>
-									<div class="state">
-										<div class="open-dt" th:text="${produce.createdate} + ' 생성'"></div>
-										<div class="state-label" th:text="${produce.challenge_state}"></div>
-									</div>
-									<div class="ch-card-btn-div">
-										<button id="challenge-amend" th:challenge_id="${produce.challenge_id}"
-											onclick="amend(this.getAttribute('challenge_id'))">수정</button>
-										<button id="challenge-remove" th:challenge_id="${produce.challenge_id}"
-											onclick="remove(this.getAttribute('challenge_id'))">삭제</button>
-									</div>
-								</div>
-							</div>
-							</th:block>
-							
-						</div>
-						<div class="join-challenge">
-							<div class="jc-title">
-								<b>내가 참여한 챌린지</b>
-								<a th:if="${partCount} > 3" th:href="@{/mypage/challenge-part?member_id=} + ${memberInfo.member_id}">목록보기</a>
-							</div>
-							
-							<!-- 챌린지 개수 0개 start -->
-							<th:block th:if="${partCount} == 0">
-								<div class="row challenge-card-div">
-									<div class="challenge-card-zero">
-										<div>
-											<p>참여중인 챌린지가 없습니다.</p>
-											<a th:href="@{/list}">참여하기</a>
+								<!-- 생성 챌린지 0개 이상 -->
+								<th:block th:unless="${produceCount} == 0">
+									<div class="row challenge-card-div">
+										<div class="challenge-card col-4" th:each="produce: ${listProduce}">
+											<a th:href="@{/challenge/detail(challenge_id=${produce.challenge_id})}" 
+												th:text="'[' + ${produce.subcategory_name} + '] ' + ${produce.challenge_name}" class="ch-card-title"></a>
+											<p th:text="${produce.startdate} + ' ~ ' + ${produce.enddate}"></p>
+											<p th:text="'참여인원 ' + ${produce.joinVO.count} + '명'"></p>
+											<div class="state">
+												<div class="open-dt" th:text="${produce.createdate} + ' 생성'"></div>
+												<div class="state-label" th:text="${produce.challenge_state}"></div>
+											</div>
+											<div class="ch-card-btn-div">
+												<button id="challenge-amend" th:challenge_id="${produce.challenge_id}"
+													onclick="amend(this.getAttribute('challenge_id'))">수정</button>
+												<button id="challenge-remove" th:challenge_id="${produce.challenge_id}"
+													onclick="remove(this.getAttribute('challenge_id'))">삭제</button>
+											</div>
 										</div>
 									</div>
-								</div>
-							</th:block>
+								</th:block>
+								<!-- 생성 챌린지 end -->
 							
-							<!-- 챌린지 개수 0개 이상 -->
-							<th:block th:unless="${partCount} == 0">
-								<div class="row challenge-card-div">
-								<div class="challenge-card col-4" th:each="part: ${listPart}">
-									<a th:href="@{/challenge/detail(challenge_id=${part.challenge_id})}" 
-										th:text="'[' + ${part.subcategory_name} + '] ' + ${part.challenge_name}" class="ch-card-title"></a>
-									<p th:text="${part.startdate} + ' ~ ' + ${part.enddate}"></p>
-									<p th:text="'참여인원 ' + ${part.joinVO.count} + '명'"></p>
-									<div class="state">
-										<div class="open-dt" th:text="${part.createdate} + ' 생성'"></div>
-										<div class="state-label" th:text="${part.challenge_state}"></div>
-									</div>
-									<div class="ch-card-btn-div">
-										<button id="secession" th:challenge_id="${part.challenge_id}" 
-											onclick="secession(this.getAttribute('challenge_id'))">탈퇴</button>
-									</div>
-								</div>
 							</div>
-							</th:block>
-							<!-- 챌린지 개수 0개 end -->
+							<div class="join-challenge">
+								<div class="jc-title">
+									<b>내가 참여한 챌린지</b>
+									<a th:if="${partCount} > 3" th:href="@{/mypage/challenge-part?member_id=} + ${memberInfo.member_id}">목록보기</a>
+								</div>
 							
-						</div>
+								<!-- 참여 챌린지 개수 0개 -->
+								<th:block th:if="${partCount} == 0">
+									<div class="row challenge-card-div">
+										<div class="challenge-card-zero">
+											<div>
+												<p>참여중인 챌린지가 없습니다.</p>
+												<a th:href="@{/list}">참여하기</a>
+											</div>
+										</div>
+									</div>
+								</th:block>
+							
+								<!-- 참여 챌린지 개수 0개 이상 -->
+								<th:block th:unless="${partCount} == 0">
+									<div class="row challenge-card-div">
+										<div class="challenge-card col-4" th:each="part: ${listPart}">
+											<a th:href="@{/challenge/detail(challenge_id=${part.challenge_id})}" 
+												th:text="'[' + ${part.subcategory_name} + '] ' + ${part.challenge_name}" class="ch-card-title"></a>
+											<p th:text="${part.startdate} + ' ~ ' + ${part.enddate}"></p>
+											<p th:text="'참여인원 ' + ${part.joinVO.count} + '명'"></p>
+											<div class="state">
+												<div class="open-dt" th:text="${part.createdate} + ' 생성'"></div>
+												<div class="state-label" th:text="${part.challenge_state}"></div>
+											</div>
+											<div class="ch-card-btn-div">
+												<button id="secession" th:challenge_id="${part.challenge_id}" 
+													onclick="secession(this.getAttribute('challenge_id'))">탈퇴</button>
+											</div>
+										</div>
+									</div>
+								</th:block>
+								<!-- 참여 챌린지 end -->
+					
+							</div>
 						
-						<div class="calender">
-							<b>일정관리</b>
-							<div class="calender-content">
-								<!-- 달력 -->
-								<div id='calendar'></div>
+							<div class="calender">
+								<b>일정관리</b>
+								<div class="calender-content">
+									<!-- 달력 -->
+									<div id='calendar'></div>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
 			
-			
-			
-			<!-- 정보 수정 결과 -->
-			<input type="hidden" th:value="${msg}" class="amend-result"/>
-			
-		</section>
-	</main>
-	<!-- End #main -->
+				<!-- 정보 수정 결과 -->
+				<input type="hidden" th:value="${msg}" class="amend-result"/>
+			</section>
+		</main>
+		<!-- End #main -->
+		
 <th:block layout:fragment="javascript">
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js'></script>
@@ -200,7 +200,9 @@
 <script src='../assets/js/calendar.js'></script>
 <script th:inline="javascript">
 	$(document).ready(function(){
-	
+		/*<![CDTATA[*/
+		var member_id =/*[[${memberInfo.member_id}]]*/'default';
+		/*]]>*/
 	if ($(".amend-result").val() === "amend-success") {			
 		Swal.fire({
 		  icon: 'success',
@@ -214,7 +216,7 @@
 		  text: '수정이 실패되었습니다. 다시 진행해주세요.'
 		})
 	}
-		
+		addCalendar(member_id);
 	});
 
 //탈퇴 버튼 클릭
