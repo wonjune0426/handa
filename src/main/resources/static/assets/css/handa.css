@@ -34,6 +34,7 @@
 
 .testimonial-item, .testimonial-item h3, .testimonial-item h4 {
 	color: #000 !important;
+	opacity: 0 !important;
 }
 
 .testimonial-item button {
@@ -92,6 +93,22 @@
 	vertical-align: middle;
 	display: inline-block;
 	height: 400px;
+}
+
+.swiper-button-next:after, .swiper-rtl .swiper-button-prev:after {
+	content: 'next';
+	height: 100px;
+	line-height: 100px;
+	width: 50px;
+	text-align: center;
+}
+
+.swiper-button-prev:after, .swiper-rtl .swiper-button-next:after {
+	content: 'prev';
+	height: 100px;
+	line-height: 100px;
+	width: 50px;
+	text-align: center;
 }
 
 .event-banner {
@@ -238,6 +255,30 @@
 		.main-banner {
 			max-width: 100%;
 		}
+	}
+}
+
+@media ( min-width : 1200px) {
+	.event-banner .container {
+		max-width: 100%;
+	}
+}
+
+@media ( min-width : 992px) {
+	.event-banner .container {
+		max-width: 100%;
+	}
+}
+
+@media ( min-width : 768px) {
+	.event-banner .container {
+		max-width: 100%;
+	}
+}
+
+@media ( min-width : 576px) {
+	.event-banner .container {
+		max-width: 100%;
 	}
 }
 
