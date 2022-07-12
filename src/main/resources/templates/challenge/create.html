@@ -323,28 +323,38 @@
 			var dateRegexp = /[0-9]{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])/;
 
 			if ($("input[name=challenge_name]").val() == null || $("input[name=challenge_name]").val() == "" || $("input[name=challenge_name]").val().length > 25) {
+				$("input[name=challenge_name]").focus()
 				Swal.fire({
 					icon: 'warning',
-					text: '제목이 없거나 25자 이상입니다.'
+					text: '제목이 없거나 25자 이상입니다.',
 				})
+
+			} else if ($("#profile-img").attr("src") == "../assets/img/defaultImg.png") {
+				$("#modal-btn").focus()
+				Swal.fire({
+					icon: "warning",
+					text: "썸네일 이미지를 선택해주세요."
+				})
+
 			} else if (editor.getData().length > 3000) {
 				Swal.fire({
 					icon: 'warning',
 					text: '내용이 너무 길어요'
 				})
 			} else if (select_sub == "카테고리(소)") {
+				$("#sub-category").focus()
 				Swal.fire({
 					icon: 'warning',
 					text: '카테고리는 필수항목 입니다.'
 				});
 			} else if (!dateRegexp.test(startdate) || !dateRegexp.test(enddate)) {
-				console.log(startdate)
-				console.log(enddate)
+				$("input[name=startdate]").focus()
 				Swal.fire({
 					icon: 'warning',
 					text: '날짜의 형식이 맞지 않아요'
 				})
 			} else if (startdate > enddate) {
+				$("input[name=enddate]").focus()
 				Swal.fire({
 					icon: 'warning',
 					text: '종료날짜 설정이 잘못되었어요'
