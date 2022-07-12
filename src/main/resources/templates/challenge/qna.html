@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/layout}">
 
 <!-- include CSS File -->
@@ -56,8 +55,8 @@
 						<!-- 자주묻는 질문 section -->
 						<section id="faq" class="faq" style="padding: 0px;">
 							<div class="container aos-init aos-animate" data-aos="fade-up">
-								<div class="row justify-content-center aos-init aos-animate"
-									data-aos="fade-up" data-aos-delay="200">
+								<div class="row justify-content-center aos-init aos-animate" data-aos="fade-up"
+									data-aos-delay="200">
 									<div class="col-lg-10">
 
 										<div class="accordion accordion-flush" id="faqlist">
@@ -66,16 +65,14 @@
 												<h3 class="accordion-header">
 													<button class="accordion-button collapsed" type="button"
 														data-bs-toggle="collapse" data-bs-target="#faq-content-1">
-														<i class="bi bi-question-circle question-icon"></i> 
+														<i class="bi bi-question-circle question-icon"></i>
 														챌린지 참여는 어떻게 하나요?
 													</button>
 												</h3>
 												<div id="faq-content-1" class="accordion-collapse collapse"
 													data-bs-parent="#faqlist">
-													<div class="accordion-body">Feugiat pretium nibh
-														ipsum consequat. Tempus iaculis urna id volutpat lacus
-														laoreet non curabitur gravida. Venenatis lectus magna
-														fringilla urna porttitor rhoncus dolor purus non.</div>
+													<div class="accordion-body">챌린지는 로그인된 회원이 모집 중인 챌린지를 찾아 참여할 수 있습니다.
+														단, 이미 진행 중이거나 모집 중인 챌린지는 참여할 수 없습니다.</div>
 												</div>
 											</div>
 											<!-- # Faq item-->
@@ -90,12 +87,8 @@
 												</h3>
 												<div id="faq-content-2" class="accordion-collapse collapse"
 													data-bs-parent="#faqlist">
-													<div class="accordion-body">Dolor sit amet
-														consectetur adipiscing elit pellentesque habitant morbi.
-														Id interdum velit laoreet id donec ultrices. Fringilla
-														phasellus faucibus scelerisque eleifend donec pretium. Est
-														pellentesque elit ullamcorper dignissim. Mauris ultrices
-														eros in cursus turpis massa tincidunt dui.</div>
+													<div class="accordion-body">'마이페이지 - 내가 참여한 챌린지'를 통해 참여한 챌린지를 확인할 수
+														있으며 자유롭게 탈퇴할 수 있습니다.</div>
 												</div>
 											</div>
 											<!-- # Faq item-->
@@ -104,19 +97,14 @@
 												<h3 class="accordion-header">
 													<button class="accordion-button collapsed" type="button"
 														data-bs-toggle="collapse" data-bs-target="#faq-content-3">
-														<i class="bi bi-question-circle question-icon"></i> 
+														<i class="bi bi-question-circle question-icon"></i>
 														유료 챌린지를 개설하려고 하는데 주의사항이 있나요?
 													</button>
 												</h3>
 												<div id="faq-content-3" class="accordion-collapse collapse"
 													data-bs-parent="#faqlist">
-													<div class="accordion-body">Eleifend mi in nulla
-														posuere sollicitudin aliquam ultrices sagittis orci.
-														Faucibus pulvinar elementum integer enim. Sem nulla
-														pharetra diam sit amet nisl suscipit. Rutrum tellus
-														pellentesque eu tincidunt. Lectus urna duis convallis
-														convallis tellus. Urna molestie at elementum eu facilisis
-														sed odio morbi quis</div>
+													<div class="accordion-body">유료 챌린지는 금전적 거래가 있는 챌린지입니다.
+														해당 챌린지를 통해 금전적 이득만을 취하는 사기 행위는 처벌 대상이므로 주의해주세요.</div>
 												</div>
 											</div>
 											<!-- # Faq item-->
@@ -125,19 +113,15 @@
 												<h3 class="accordion-header">
 													<button class="accordion-button collapsed" type="button"
 														data-bs-toggle="collapse" data-bs-target="#faq-content-4">
-														<i class="bi bi-question-circle question-icon"></i> 
+														<i class="bi bi-question-circle question-icon"></i>
 														참여한 챌린지가 삭제 됐어요. 어떻게 하나요?
 													</button>
 												</h3>
 												<div id="faq-content-4" class="accordion-collapse collapse"
 													data-bs-parent="#faqlist">
 													<div class="accordion-body">
-														<i class="bi bi-question-circle question-icon"></i> Dolor
-														sit amet consectetur adipiscing elit pellentesque habitant
-														morbi. Id interdum velit laoreet id donec ultrices.
-														Fringilla phasellus faucibus scelerisque eleifend donec
-														pretium. Est pellentesque elit ullamcorper dignissim.
-														Mauris ultrices eros in cursus turpis massa tincidunt dui.
+														개설자에 의해 삭제됐거나 혹은 관리자의 판단에 의해 삭제된 것입니다.
+														다른 챌린지에 참여해보세요
 													</div>
 												</div>
 											</div>
@@ -148,16 +132,13 @@
 													<button class="accordion-button collapsed" type="button"
 														data-bs-toggle="collapse" data-bs-target="#faq-content-5">
 														<i class="bi bi-question-circle question-icon"></i>
-														마지막 질문은 뭔가요?
+														챌린지 정보를 한눈에 보고 싶어요
 													</button>
 												</h3>
 												<div id="faq-content-5" class="accordion-collapse collapse"
 													data-bs-parent="#faqlist">
-													<div class="accordion-body">Molestie a iaculis at
-														erat pellentesque adipiscing commodo. Dignissim
-														suspendisse in est ante in. Nunc vel risus commodo viverra
-														maecenas accumsan. Sit amet nisl suscipit adipiscing
-														bibendum est. Purus gravida quis blandit turpis cursus in
+													<div class="accordion-body">'마이페이지 - 일정 관리' 탭을 통해서 회원님이 참여한 챌린지와
+														개설한 챌린지의 일정은 캘린더를 통해서 한눈에 볼 수 있어요
 													</div>
 												</div>
 											</div>
@@ -184,7 +165,7 @@
 <th:block layout:fragment="javascript">
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script>
-		$(document).ready(function() {
+		$(document).ready(function () {
 
 		});
 	</script>

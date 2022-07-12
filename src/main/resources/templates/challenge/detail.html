@@ -36,11 +36,14 @@
 									<span class="ch-detail-category" th:if="${challengeDetail.subcategory_id}==6">자기계발 >
 										외국어</span>
 									<span class="ch-detail-category" th:if="${challengeDetail.subcategory_id}==7">자기계발 >
-										운동</span>				
+										운동</span>
 									<div style="display: flex; justify-content: space-between;">
-										<h3 class="ch-detail-title" style="display: inline-block; line-height: 56px;" th:text="${challengeDetail.challenge_name}">
+										<h3 class="ch-detail-title" style="display: inline-block; line-height: 56px;"
+											th:text="${challengeDetail.challenge_name}">
 										</h3>
-										<button class="handa-btn" style="display:inline-block; margin-top: 0px; height: 56px;" id="challenge-amend">수정하기</button>
+										<button class="handa-btn"
+											style="display:inline-block; margin-top: 0px; height: 56px;"
+											id="challenge-amend">수정하기</button>
 									</div>
 									<!-- <div style="display: flex;">
 										<h3 class="ch-detail-title" th:text="${challengeDetail.challenge_name}">
@@ -115,7 +118,7 @@
 												<p class="price" th:if="${challengeDetail.challenge_type}=='무료'">무료 챌린지
 												</p>
 												<p class="price" th:if="${challengeDetail.challenge_type}=='유료'">
-													<span class="price-text">유료</span> 
+													<span class="price-text">유료</span>
 													<span>[[${challengeDetail.challenge_cost}]]</span>
 												</p>
 
@@ -141,8 +144,7 @@
 		</div>
 
 		<!-- 챌린지 상세 정보 영역 -->
-		<section id="service-details" class="service-details challenge-detail-section"
-			style="position: relative;">
+		<section id="service-details" class="service-details challenge-detail-section" style="position: relative;">
 			<div id="member"></div>
 			<div id="scroll-interval"></div>
 			<div class="container aos-init aos-animate" data-aos="fade-up">
@@ -231,15 +233,14 @@
 								<b id="caution">챌린지 주의사항</b>
 								<ul>
 									<li><i class="bi bi-check-circle"></i>
-										<span>이 부분은
-											모든 챌린지에 고정적으로 들어가는 부분입니다.</span>
+										<span>관리자 판단하에 부적격 챌린지는 강제 삭제될 수 있습니다.</span>
 									</li>
 									<li><i class="bi bi-check-circle"></i>
-										<span>챌린지
-											댓글은 참여자만 작성 가능합니다.</span>
+										<span>챌린지 참여시 작성했던 댓글은 탈퇴 후에도 남아있습니다. 삭제를 원하실 경우 직접 삭제해주세요</span>
 									</li>
 									<li><i class="bi bi-check-circle"></i>
-										<span>챌린지 주의사항 입니다.</span>
+										<span>
+											유료 챌린지 참여 시에는 개설자가 신뢰할 수 있는 사람인지 꼭 확인하세요</span>
 									</li>
 								</ul>
 							</div>
@@ -251,11 +252,11 @@
 				<hr>
 			</div>
 		</section>
-		
+
 		<!-- 댓글 영역 -->
 		<div id="comment"></div>
 		<section class="service-details" style="padding: 0;">
-			
+
 			<div class="container aos-init aos-animate" data-aos="fade-up">
 				<div style="padding-bottom: 10px; margin-top: 70px;">
 					<b id="comment">댓글</b>
@@ -298,7 +299,7 @@
 						<!-- 댓글 card 끝 -->
 					</div>
 				</div>
-				
+
 				<th:block sec:authorize="isAuthenticated()">
 					<input type="hidden" class="form-control price" name="member_id"
 						th:value='${#authentication.principal.Username}' readonly>
