@@ -1,5 +1,6 @@
 .breadcrumbs {
 	/* margin-bottom: 40px; */
+	
 }
 
 .testimonials {
@@ -11,16 +12,16 @@
 }
 
 .testimonials::before {
-    /* content: "";
+	/* content: "";
     position: absolute;
     inset: 0; */
-    background-color: rgba(14, 29, 52, 0);
+	background-color: rgba(14, 29, 52, 0);
 }
 
 .testimonials .swiper-pagination {
-    /* margin-top: 200px; */
-    position: relative;
-    bottom: 0;
+	/* margin-top: 200px; */
+	position: relative;
+	bottom: 0;
 }
 
 .swiper-pagination-bullets {
@@ -29,20 +30,20 @@
 
 .challenge-thumbnail {
 	width: 100% !important;
-} 
+}
 
 .testimonial-item, .testimonial-item h3, .testimonial-item h4 {
-	color: #616161!important;
+	color: #000 !important;
 }
 
 .testimonial-item button {
 	padding: 15px 30px;
 	border-radius: 50px;
-	border: 1px solid #616161;
+	border: 1px solid #000;
 	margin-top: 20px;
 	/* background-color: rgba(255, 255, 255, 0.4); */
 	background-color: rgba(255, 255, 255, 0);;
-	color: #616161;
+	color: #000;
 	font-weight: lighter;
 }
 
@@ -52,18 +53,18 @@
 }
 
 .main-banner .swiper-pagination .swiper-pagination-bullet {
-    width: 12px;
-    height: 12px;
-    background-color: rgba(0, 0, 0, 0.4);
-    opacity: 0.5;
-    border-radius: 0px;
-    width: 40px;
-    height: 2px;
+	width: 12px;
+	height: 12px;
+	background-color: rgba(0, 0, 0, 0.4);
+	opacity: 0.5;
+	border-radius: 0px;
+	width: 40px;
+	height: 2px;
 }
 
 .main-banner .swiper-pagination .swiper-pagination-bullet-active {
-    background-color: #616161;
-    opacity: 1;
+	background-color: #000;
+	opacity: 1;
 }
 
 .main-banner {
@@ -90,7 +91,7 @@
 .main-banner .swiper-container .slides-1 {
 	vertical-align: middle;
 	display: inline-block;
-	height: 400px;	
+	height: 400px;
 }
 
 .event-banner {
@@ -101,75 +102,70 @@
 }
 
 .event-banner .swiper-pagination .swiper-pagination-bullet {
-    width: 10px;
-    height: 10px;
-    background-color: rgba(255, 255, 255, 1);
-    /* opacity: 0.5; */
-    border-radius: 50px;
+	width: 10px;
+	height: 10px;
+	background-color: rgba(255, 255, 255, 1);
+	/* opacity: 0.5; */
+	border-radius: 50px;
 }
 
-
 .event-banner .swiper-pagination .swiper-pagination-bullet-active {
-    background-color: #616161;
-    opacity: 1;
+	background-color: #616161;
+	opacity: 1;
 }
 
 .testimonials .swiper-pagination {
-    margin-top: -40px;
-    position: relative;
-    bottom: 0;
-    height: 200px;
+	margin-top: -40px;
+	position: relative;
+	bottom: 0;
+	height: 200px;
 }
 
 .event-banner .testimonial-item {
 	height: 200px !important;
 }
 
+.slides-2 {
+	height: 200px;
+}
+
 /* 검색 */
-.form{
-
-    position: relative;
+.form {
+	position: relative;
 }
 
-.form .fa-search{
-
-    position: absolute;
-    top:20px;
-    left: 20px;
-    color: #9ca3af;
-
+.form .fa-search {
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	color: #9ca3af;
 }
 
-.form span{
-
-    position: absolute;
-    right: 17px;
-    top: 13px;
-    padding: 2px;
-    border-left: 1px solid #d1d5db;
-
+.form span {
+	position: absolute;
+	right: 17px;
+	top: 13px;
+	padding: 2px;
+	border-left: 1px solid #d1d5db;
 }
 
-.left-pan{
-    padding-left: 7px;
+.left-pan {
+	padding-left: 7px;
 }
 
-.left-pan i{
-   
-   padding-left: 10px;
+.left-pan i {
+	padding-left: 10px;
 }
 
-.form-input{
-
-    height: 55px;
-    text-indent: 33px;
-    border-radius: 10px;
+.form-input {
+	height: 55px;
+	text-indent: 33px;
+	border-radius: 10px;
 }
 
-.form-input:focus{
-
-    box-shadow: none;
-    border:1px solid #8c97a6;
+.form-input:focus {
+	box-shadow: none;
+	border: 1px solid #8c97a6;
 }
 
 .search-tag {
@@ -178,13 +174,13 @@
 	text-align: center;
 }
 
-.search-tag span{
+.search-tag span {
 	margin-right: 3px;
 	font-size: 14px;
 	color: #b0bac4;
 }
 
-.search-btn{
+.search-btn {
 	color: #686f75;
 }
 
@@ -193,11 +189,11 @@
 }
 
 .services .card {
-    border: 1px solid rgba(14, 29, 52, 0.15);
-    background: #fff;
-    position: relative;
-    border-radius: 5px;
-    height: 100%;
+	border: 1px solid rgba(14, 29, 52, 0.15);
+	background: #fff;
+	position: relative;
+	border-radius: 5px;
+	height: 100%;
 }
 
 .services .card .card-img {
@@ -214,10 +210,6 @@
 	font-size: 26px !important;
 }
 
-:root {
-    --swiper-theme-color: #808080;
-}
-
 .challenge-item {
 	width: auto;
 }
@@ -226,30 +218,37 @@
 	padding: 60px 0px;
 }
 
-@media (min-width: 1200px)
-.container, .container-lg, .container-md, .container-sm, .container-xl {
-    max-width: 100%;
+@media ( min-width : 1200px) {
+	.main-banner {
+		max-width: 100%;
+	}
 }
 
-@media (min-width: 992px)
-.container, .container-lg, .container-md, .container-sm {
-    max-width: 100%;
+@media ( min-width : 992px) {
+	.main-banner {
+		max-width: 100%;
+	}
 }
-@media (min-width: 768px)
-.container, .container-md, .container-sm {
-    max-width: 100%;
-}
-@media (min-width: 576px)
-.container, .container-sm {
-    max-width: 100%;
+
+@media ( min-width : 768px) {
+	.main-banner {
+		max-width: 100%;
+	}
+	@media ( min-width : 576px) {
+		.main-banner {
+			max-width: 100%;
+		}
+	}
 }
 
 .swiper-button-prev, .swiper-rtl .swiper-button-next {
-    left: 100px;
-    right: auto;
+	left: 100px;
+	right: auto;
+	color: #000;
 }
 
 .swiper-button-next, .swiper-rtl .swiper-button-prev {
-    right: 100px;
-    left: auto;
+	right: 100px;
+	left: auto;
+	color: #000;
 }

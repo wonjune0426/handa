@@ -11,7 +11,7 @@
 <div layout:fragment="content">
 	<main id="main">
 		<!-- ======= Services Section ======= -->
-		<section id="service-details" class="service-details challenge-detail-section"
+		<section id="service-details" class="service-details challenge-detail-section1"
 			style="position: relative;padding-bottom: 0;">
 			<div class="container aos-init aos-animate" data-aos="fade-up">
 				<div class="col-lg-12">
@@ -101,13 +101,15 @@
 											</span>
 											<p class="challenge-toast">url이 클립보드에 복사되었습니다.</p>
 										</div>
+										<hr>
 										<div class="price-div">
 											<p class="kind">챌린지 유형</p>
 											<div>
-												<p class="price" th:if="${challengeDetail.challenge_type}=='무료'">무료
+												<p class="price" th:if="${challengeDetail.challenge_type}=='무료'">무료 챌린지
 												</p>
 												<p class="price" th:if="${challengeDetail.challenge_type}=='유료'">
-													유료/[[${challengeDetail.challenge_cost}]]
+													<span class="price-text">유료</span> 
+													<span>[[${challengeDetail.challenge_cost}]]</span>
 												</p>
 
 											</div>
@@ -131,8 +133,9 @@
 
 		</div>
 
+		<!-- 챌린지 상세 정보 영역 -->
 		<section id="service-details" class="service-details challenge-detail-section"
-			style="position: relative;padding-bottom: 0;">
+			style="position: relative;">
 			<div id="member"></div>
 			<div id="scroll-interval"></div>
 			<div class="container aos-init aos-animate" data-aos="fade-up">
@@ -165,6 +168,9 @@
 									</P>
 									<P th:if="${joinMembers.position_id}==3" class="ch-j-detail ch-detail-position">
 										선임
+									</P>
+									<P th:if="${joinMembers.position_id}==4" class="ch-j-detail ch-detail-position">
+										팀장
 									</P>
 
 									<p th:if="${joinMembers.affiliates_id}==1" class="ch-j-detail ch-detail-aff">한솔
@@ -238,14 +244,19 @@
 				<hr>
 			</div>
 		</section>
+		
+		<!-- 댓글 영역 -->
 		<div id="comment"></div>
 		<section class="service-details" style="padding: 0;">
-			<br> <br> <br>
+			
 			<div class="container aos-init aos-animate" data-aos="fade-up">
+				<div style="padding-bottom: 10px; margin-top: 70px;">
+					<b id="comment">댓글</b>
+				</div>
 				<div class="row gy-4" id="comment-input">
 					<div class="row ch-comment-input-content">
 						<div class="col-lg-12">
-							<p id="comment">댓글 작성하기</p>
+							<p id="">댓글 작성하기</p>
 							<div class="form-group mt-3">
 								<textarea id="comment_content" class="form-control" name="message" rows="3"
 									placeholder="댓글을 작성하세요."></textarea>
@@ -254,7 +265,7 @@
 						<div class="col-lg-12">
 							<div class="form-group mt-3">
 								<div class="text-right ch-comment-create-div">
-									<button id="commentWrite" type="button" class="comment-btn">작성하기</button>
+									<button id="commentWrite" type="button" class="comment-btn handa-btn">작성하기</button>
 								</div>
 							</div>
 						</div>
@@ -265,9 +276,9 @@
 			</div>
 
 			<!-- 댓글 목록 -->
-			<div class="container mt-5">
+			<div class="container mt-5" style="padding-bottom: 60px;">
 
-				<div class="row  d-flex justify-content-center comment-content">
+				<div class="row d-flex justify-content-center comment-content">
 					<div class="col-md-12">
 						<div id="comment-info" class="headings d-flex justify-content-between align-items-center mb-3">
 							<h5 id="comment-count">댓글</h5>
@@ -281,13 +292,13 @@
 						<!-- 댓글 card 끝 -->
 					</div>
 				</div>
-				<br> <br>
+				
 				<th:block sec:authorize="isAuthenticated()">
 					<input type="hidden" class="form-control price" name="member_id"
 						th:value='${#authentication.principal.Username}' readonly>
 				</th:block>
 				<div class="ch-detail-to-list-btn" style="display: none;">
-					<a th:href="@{/list?sort_type=0}" class="comment-btn">목록</a>
+					<a th:href="@{/list?sort_type=0}" class="comment-btn handa-btn">목록</a>
 				</div>
 			</div>
 		</section>
@@ -496,7 +507,7 @@
 								position = "책임"
 							} else if (result.memberList[i].position_id == 3) {
 								position = "선임"
-							} else if (result.memberList[i].position_id == 3) {
+							} else if (result.memberList[i].position_id == 4) {
 								position = "팀장"
 							}
 							var img_src = result.memberList[i].profile_path + `/` + result.memberList[i].profile_uuid + `_` + result.memberList[i].profile_name;
@@ -562,13 +573,13 @@
 
 			//댓글 입력 방식 버튼 클릭/Enter키
 			$("#commentWrite").click(function () {
-				sweetAlert("댓글이 입력됬습니다.")
+				sweetAlert("댓글이 입력됐습니다.")
 				comment_ajax();
 			})
 
 			$("#comment_content").keydown(function (key) {
 				if (key.keyCode == 13) {
-					sweetAlert("댓글이 입력됬습니다.")
+					sweetAlert("댓글이 입력됐습니다.")
 					comment_ajax();
 				}
 			})

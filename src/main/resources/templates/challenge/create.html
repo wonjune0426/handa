@@ -154,7 +154,8 @@
 									</div>
 
 									<div class="col-md-12 text-center create-challenge">
-										<button type="button" id="create-challenge" class="handa-btn">챌린지
+										<button type="button" id="create-challenge" class="handa-btn"
+											style="width:15%">챌린지
 											생성</button>
 									</div>
 									<input type="hidden" class="form-control price" name="member_id"
@@ -202,16 +203,6 @@
 			yearSuffix: '년'
 		});
 
-		$("#modal-btn").hover(function () {
-			$(".searchimg").css("display", "block")
-			$(".defaultimg").css("opacity","0.6")
-			$(".profile-img").css("opacity","0.6")
-		}, function () {
-			$(".searchimg").css("display", "none")
-			$(".defaultimg").css("opacity","1")
-			$(".profile-img").css("opacity","1")
-		})
-
 
 		$("input[name=startdate]").datepicker({
 			dateFormat: 'yy-mm-dd'
@@ -220,6 +211,20 @@
 		$("input[name=enddate]").datepicker({
 			dateFormat: 'yy-mm-dd'
 		});
+
+
+
+
+		$("#modal-btn").hover(function () {
+			$(".searchimg").css("display", "block")
+			$(".defaultimg").css("opacity", "0.6")
+			$(".profile-img").css("opacity", "0.6")
+		}, function () {
+			$(".searchimg").css("display", "none")
+			$(".defaultimg").css("opacity", "1")
+			$(".profile-img").css("opacity", "1")
+		})
+
 
 		$("#challenge_type").change(function () {
 			if ($(this).val() == "유료") {
