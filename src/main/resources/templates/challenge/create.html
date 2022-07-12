@@ -15,9 +15,9 @@
 		<div class="breadcrumbs">
 			<div class="page-header d-flex align-items-center"
 				style="background-image: url('assets/img/page-header.jpg');">
-			
+
 			</div>
-			
+
 		</div>
 		<!-- End Breadcrumbs -->
 		<section class="sample-page" style="padding-top:20px">
@@ -45,7 +45,9 @@
 											style="display: inline-block; height: 100%; vertical-align: top; width:100%">
 											<button type="button" id="modal-btn" class="profile-btn"
 												data-toggle="modal"><img name="thumbnail" id="profile-img"
-													src="https://images.pexels.com/photos/461593/pexels-photo-461593.jpeg?auto=compress&cs=tinysrgb&h=350"></button>
+													class="defaultimg" src="../assets/img/defaultImg.png">
+												<img class="searchimg" src="../assets/img/searchimg.png">
+											</button>
 										</div>
 									</div>
 									<div class="col-md-6" style="padding-top: 35px">
@@ -55,67 +57,68 @@
 											</div>
 											<div class="col-10">
 												<input type="text" name="challenge_name" class="form-control "
-												placeholder="챌린지 이름" required="" >
+													placeholder="챌린지 이름" required="">
 											</div>
 										</div>
-										
+
 										<div class="form-group mt-5 row">
 											<div class="register-label-style col-2">
 												<label class="create-label">카테고리</label>
 											</div>
 											<div class="col-5">
-												<select class="main-category form-select" id="main-category" >
-												<option>카테고리(대)</option>
-												<option name="main_1">취미</option>
-												<option name="main_2">자기계발</option>
-											</select>
+												<select class="main-category form-select" id="main-category">
+													<option>카테고리(대)</option>
+													<option name="main_1">취미</option>
+													<option name="main_2">자기계발</option>
+												</select>
 											</div>
 											<div class="col-5">
-												<select class="form-select main-category" id="sub-category" name="sub-category">
+												<select class="form-select main-category" id="sub-category"
+													name="sub-category">
 													<option>카테고리(소)</option>
 												</select>
 											</div>
 										</div>
-										
+
 										<div class="form-group mt-5 row">
 											<div class="register-label-style col-2">
 												<label class="create-label">기간</label>
 											</div>
 											<div class="col-5">
 												<input type="text" name="startdate" class="form-control"
-												placeholder="시작날짜" required="">
+													placeholder="시작날짜" required="" autocomplete='off'>
 											</div>
-											
+
 											<div class="col-5">
 												<input type="text" class="form-control" name="enddate"
-												placeholder="종료날짜" required="">
+													placeholder="종료날짜" required="" autocomplete='off'>
 											</div>
 										</div>
-										
-										
-										
+
+
+
 										<div class="form-group mt-5 row">
 											<div class="register-label-style col-2">
 												<label class="create-label">유형</label>
 											</div>
 											<div class="col-10">
 												<div style="display: flex;">
-												<select class="form-select main-category" name="challenge_type"
-													id="challenge_type" style="width:50%">
-													<option value="무료">무료</option>
-													<option value="유료">유료</option>
-													<input type="text"
-														onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
-														style="width:60%;" name="challenge_cost" class="form-control"
-														id="challenge_cost"
-														placeholder="금액을 입력해주세요" disabled>
-													</input>
-												</select>
-											</div>
+													<select class="form-select main-category" name="challenge_type"
+														id="challenge_type" style="width:50%">
+														<option value="무료">무료</option>
+														<option value="유료">유료</option>
+														<input type="text"
+															onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
+															style="width:60%;" name="challenge_cost"
+															class="form-control" id="challenge_cost"
+															placeholder="금액을 입력해주세요" disabled>
+														</input>
+													</select>
+												</div>
 											</div>
 										</div>
 
-										
+
 									</div>
 									<div class="modal">
 										<div id="modal_body" class="check">
@@ -151,7 +154,7 @@
 									</div>
 
 									<div class="col-md-12 text-center create-challenge">
-										<button type="button" id="create-challenge" class="btn btn-primary">챌린지
+										<button type="button" id="create-challenge" class="handa-btn">챌린지
 											생성</button>
 									</div>
 									<input type="hidden" class="form-control price" name="member_id"
@@ -198,6 +201,17 @@
 			showMonthAfterYear: true,
 			yearSuffix: '년'
 		});
+
+		$("#modal-btn").hover(function () {
+			$(".searchimg").css("display", "block")
+			$(".defaultimg").css("opacity","0.6")
+			$(".profile-img").css("opacity","0.6")
+		}, function () {
+			$(".searchimg").css("display", "none")
+			$(".defaultimg").css("opacity","1")
+			$(".profile-img").css("opacity","1")
+		})
+
 
 		$("input[name=startdate]").datepicker({
 			dateFormat: 'yy-mm-dd'
@@ -274,6 +288,8 @@
 			$('#img-list').empty();
 			$('#search-word').val("");
 			$('#profile-img').attr("src", ch);
+			$("#profile-img").removeClass("defaultimg");
+			$("#profile-img").addClass("profile-img");
 		});
 
 		$("#main-category").change(function () {

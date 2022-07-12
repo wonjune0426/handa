@@ -584,17 +584,41 @@
 /* 챌린지 생성화면 css */
 
 .profile-btn{
-	width:581px;
+	position: relative;
+	width:95%;
 	height:438px;
 	border: 0;
 	margin:0px auto;
 	background-color: rgb(255, 255, 255);
 }
-#profile-img{
+.profile-img{
+	border-radius: 15px;
 	width:100%;
-	height: 100%;
+	height:100%;
 	display: block; 
 	margin: 0px auto;
+}
+
+.defaultimg{
+	position: absolute;
+	border-radius: 15px;
+	width:32%;
+	height:40%;
+	display: block; 
+	margin: 0px auto 80px;
+	left:34%;
+	bottom:18%;
+}
+.searchimg{
+	position: absolute;
+	border-radius: 15px;
+	width:15%;
+	height:20%;
+	display: block; 
+	margin: 0px auto 80px;
+	left:41%;
+	bottom:24%;
+	display: none;
 }
 
 
