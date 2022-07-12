@@ -103,7 +103,7 @@
 }
 
 .register-btn-div {
-	margin-.remember-div labeltop: 50px;
+	margin-top: 50px;
 }
 
 /* .register-btn-div button {
@@ -513,6 +513,11 @@
   border-radius: 50%;
   object-fit: cover;
   /* object-position: center right; */
+}
+
+.modal-body input {
+	height: 50px;
+	
 }
 
 
