@@ -150,8 +150,8 @@
 	</select>
 
 	<insert id="joinChallenge">
-		insert into challenge_join (challenge_id,member_id)
-		values(#{challenge_id},#{member_id})
+		insert into challenge_join (challenge_id,member_id,join_date)
+		values(#{challenge_id},#{member_id},now())
 	</insert>
 
 	<update id="updateChallenge" parameterType="ChallengeVO">
