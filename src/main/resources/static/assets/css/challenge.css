@@ -154,7 +154,14 @@
 
 /* ------------ 챌린지 상세 (기본정보 페이지 challenge/detail.html) -------------- */
 .challenge-detail-section {
-	margin-top: 60px;
+	/* margin-top: 60px; */
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+.challenge-detail-section1 {
+	margin-top: 150px;
+	padding-top: 0px;
 }
 /* 챌린지 상세 탭 (기본정보, 댓글) */
 
@@ -235,7 +242,7 @@
 /* 챌린지 제목 h3 태그 */
 .ch-detail-title {
 	margin: 0;
-	margin-bottom: 18px;
+	margin-bottom: 0px;
     font-size: 2rem;
     color: #1e1e1e;
     letter-spacing: -0.7px;
@@ -255,8 +262,10 @@
 .ch-detail-thumb {
 	/* height: 300px; */
 	/* --bs-gutter-x: initial; */
-	width: 100%;
 	/* border-radius: 6px; */
+	width: 100%;
+    height: 100%;
+    border-radius: 5px;
 }
 
 .challenge-summary {
@@ -355,7 +364,7 @@
 }
 
 .challenge-summary .create-user {
-	margin: 23px 0px; 
+	margin: 15px 0px 23px 0px; 
 }
 
 .challenge-summary .create-user small {
@@ -375,6 +384,11 @@
 	font-size: 13px;
 	color: #999;
 	margin: 0px;
+	margin-bottom: 8px;
+}
+
+.challenge-summary .price .price-text {
+	font-size: 18px;
 }
 
 .ch-detail-etc {
@@ -434,6 +448,10 @@
 	margin-bottom: 30px; 
 }
 
+.challenge-summary .date small, .challenge-summary .num small {
+	margin-right: 8px;
+}
+
 /* 챌린지 상세(기본정보) 반응형 css */
 @media ( max-width : 1200px) {
 	.ch-detail-thumb {
@@ -460,6 +478,12 @@
 	transition: 0.4s;
 	border-radius: 4px;
 	width: 10%;
+}
+
+.comment-btn:hover {
+	width: 10%;
+	border: 0;
+	padding: 10px 30px;
 }
 
 .ch-comment-input-content {
@@ -638,7 +662,7 @@
 .img-wrapper {
     width: 100%;
     text-align: left;
-    margin-top: 18px;
+    margin-top: 0px;
 }
 .image--cover {
   width: 50px;
@@ -646,6 +670,11 @@
   border-radius: 50%;
   object-fit: cover;
   /* object-position: center right; */
+  /* border: 3px solid #000; */
+}
+
+.img-wrapper span {
+	margin-left: 8px;
 }
 
 .comment-image{
@@ -656,6 +685,6 @@
 }
 
 .vertical-align-bottom{
-	vertical-align: bottom;
+	vertical-align: middle;
 }
 
