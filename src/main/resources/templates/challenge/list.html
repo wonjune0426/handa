@@ -45,14 +45,12 @@
 			<div class="container" data-aos="fade-up">
 
 				<div class="section-header">
-<!-- 					 <span>챌린지 리스트</span>
-          			 <h2>챌린지 리스트</h2> -->
 				</div>
 
 				<div class="row gy-4">
-					<div class="create-challenge-div">
+<!-- 					<div class="create-challenge-div">
 						<a href="/create" class="create-challenge-btn">챌린지 생성</a>
-					</div>
+					</div> -->
 					
 					<div class="row gy-4">
 						<div class="btn-group order-div col-2">
@@ -71,21 +69,29 @@
 							</select>
 						</div>
 						
-						<div class="col-5"></div>
+<!-- 						<div class="form-check form-switch col-3" >
+  							<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+  							<label class="form-check-label" for="flexSwitchCheckDefault"></label>
+						</div> -->
+						
+						<div class="col-3"></div>
 						<div class="search-div col-4">
 							<form id="search-form" th:action="@{/search}" class="form-search handa-search-form">
-								<input id="search" th:name="searchword" type="text" class="form-control" th:value="${searchWord}" placeholder="검색어를 입력하세요.">
+								<input id="search" th:name="searchword" type="text" class="form-control" 
+								th:value="${searchWord}" placeholder="검색어를 입력하세요." style="height: 50px; line-height: 50px;">
 								<input type="hidden" name="category" th:value="${categoryID}">
 								<input type="hidden" name="sort_type" th:value="${sortType}">
 								<input type="hidden" name="challenge_type" th:value="${challengeType}">
 
 								<button id="search-btn" type="submit"
-									class="btn btn-primary handa-outline-btn list-search-btn">검색</button>
+									class="btn btn-primary handa-outline-btn list-search-btn" style="height: 50px;">검색</button>
 							</form>
 						</div>
 						
-						<div></div><div></div>
-						
+						<div class="create-challenge-div col-2">
+							<a th:href="@{/create}" class="handa-btn" style="height: 50px; line-height: 50px; ">챌린지 생성</a>
+						</div>
+	
 						<div id ="list-container" class="row gy-4"></div>
 						
 						<div id="end"></div>
