@@ -232,5 +232,10 @@ public class ChallengeController {
 		model.addAttribute("joinMembers", userService.joinMembers(challengeVO.getChallenge_id()));
 		return "challenge/detail";
 	}
+	
+	@GetMapping("/qna")
+	public String qna() {
+		return "challenge/qna";
+	}
 
 }

@@ -46,6 +46,30 @@ document.addEventListener('DOMContentLoaded', () => {
       behavior: 'smooth'
     }));
   }
+  
+  const scrollTop2 = document.querySelector('.scroll-top2');
+  if (scrollTop2) {
+    const togglescrollTop = function() {
+      window.scrollY > 100 ? scrollTop2.classList.add('active') : scrollTop2.classList.remove('active');
+    }
+    window.addEventListener('load', togglescrollTop);
+    document.addEventListener('scroll', togglescrollTop);
+    scrollTop2.addEventListener('click', function() {
+		location.href="/create";
+	});
+  }
+  
+  const scrollTop3 = document.querySelector('.scroll-top3');
+  if (scrollTop3) {
+    const togglescrollTop = function() {
+      window.scrollY > 100 ? scrollTop3.classList.add('active') : scrollTop3.classList.remove('active');
+    }
+    window.addEventListener('load', togglescrollTop);
+    document.addEventListener('scroll', togglescrollTop);
+    scrollTop3.addEventListener('click', function() {
+		location.href="/qna";
+	});
+  }
 
   /**
    * Mobile nav toggle
@@ -114,6 +138,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const glightbox = GLightbox({
     selector: '.glightbox'
   });
+  
+  function swiperClick (activeBanner, bannerLink) {
+	
+	  // Swiper 클릭 이벤트
+	  $(".swiper-wrapper").on("click", function (e) {
+			e.preventDefault();			
+			 
+			 console.log('swiper click: ', bannerLink);
+			// 현재 띄워져있는 슬라이드의 링크로 이동
+			//location.href = bannerLink;
+		});	
+	}
 
   /**
    * Init swiper slider with 1 slide at once in desktop view
@@ -135,13 +171,14 @@ document.addEventListener('DOMContentLoaded', () => {
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
     },
-    
     on: {
 		slideChangeTransitionStart: function() {
 			//배너 이미지 변경 
 		  const activeBanner = document.querySelector('.swiper-slide-duplicate-active');
 		  const bannerImg = activeBanner.dataset.bannerImg;
 		  const changeBanner = document.querySelector('.main-banner .swiper-slide-active');
+		  
+		  const bannerLink = activeBanner.dataset.bannerLink;
 		  
 		  //console.log(activeBanner, bannerImg, changeBanner);
 		  
@@ -152,21 +189,15 @@ document.addEventListener('DOMContentLoaded', () => {
 		  // changeBanner.style.opacity = '0.3';
 		   
 		},
-		/*
-		slideChangeTransitionEnd: function() {
-			//배너 이미지 변경 
-		  const activeBanner = document.querySelector('.swiper-slide-duplicate-active');
-		  const bannerImg = activeBanner.dataset.bannerImg;
-		  const changeBanner = document.querySelector('.testimonials');
-		  
-		  changeBanner.style.background = 'url(' + bannerImg + ') no-repeat';
-		  changeBanner.style.backgroundSize = 'cover';
-		  changeBanner.style.backgroundPosition = 'center';
-		  changeBanner.style.transition = 'background-image opacity 0.5s ease';
-		  changeBanner.style.opacity = '1';
-		   
+		click: function() {
+			const activeBanner = document.querySelector('.swiper-slide-duplicate-active');
+			const bannerLink = activeBanner.dataset.bannerLink;
+			
+			// console.log(bannerLink);
+			
+			location.href = bannerLink;
 		},
-		*/
+
 	}
 	
   });
@@ -198,7 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		  const activeBannerColor = document.querySelector('.event-banner .swiper-slide-duplicate-active .testimonial-item');
 		  const changeBannerColor = document.querySelector('.event-banner');
 		  
-		  // console.log("change , ", activeBannerColor);
+		  // console.log("change , ", bannerLink);
 		  
 		  changeBannerColor.style.background = activeBannerColor.dataset.bannerColor;
 		  changeBanner.style.background = 'url(' + bannerImg + ') no-repeat';

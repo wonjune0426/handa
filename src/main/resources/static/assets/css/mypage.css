@@ -301,6 +301,11 @@
 	font-size: 13px !important;
 }
 
+.my-info-email i {
+	/* //word-wrap: normal; */
+	font-size: 15px !important;
+}
+
 .member-amend-btn {
 	margin-top: 15px;
 }

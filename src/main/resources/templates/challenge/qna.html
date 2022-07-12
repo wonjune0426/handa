@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
+
+<!-- include CSS File -->
+<th:block layout:fragment="css">
+	<!-- Handa Member CSS File -->
+	<link th:href="@{/assets/css/member.css}" rel="stylesheet">
+</th:block>
+
+<div layout:fragment="content">
+
+
+	<main id="main">
+
+		<!-- ======= Breadcrumbs ======= -->
+		<div class="breadcrumbs">
+			<div class="page-header d-flex align-items-center">
+				<div class="container position-relative">
+					<div class="row d-flex justify-content-center">
+						<div class="col-lg-6 text-center"></div>
+					</div>
+				</div>
+			</div>
+
+			<!-- <nav>
+		<div class="container">
+			<ol>
+				<li><a href="/">홈</a></li>
+				<li>회원가입</li>
+			</ol>
+		</div>
+	</nav> -->
+		</div>
+		<!-- End Breadcrumbs -->
+
+		<section class="sample-page register-padding-top-0">
+			<div class="container" data-aos="fade-up"></div>
+		</section>
+
+		<!-- ======= Services Section ======= -->
+		<section id="service" class="services pt-0">
+			<div class="container" data-aos="fade-up">
+
+				<div class="section-header">
+					<h2>자주 묻는 질문</h2>
+				</div>
+				<section id="contact" class="contact register-padding-top-30px">
+					<div class="text-center">
+
+						<!-- <div class="register-div">
+							<div class="line-div"></div>
+
+						</div> -->
+						<!-- 자주묻는 질문 section -->
+						<section id="faq" class="faq" style="padding: 0px;">
+							<div class="container aos-init aos-animate" data-aos="fade-up">
+								<div class="row justify-content-center aos-init aos-animate"
+									data-aos="fade-up" data-aos-delay="200">
+									<div class="col-lg-10">
+
+										<div class="accordion accordion-flush" id="faqlist">
+
+											<div class="accordion-item">
+												<h3 class="accordion-header">
+													<button class="accordion-button collapsed" type="button"
+														data-bs-toggle="collapse" data-bs-target="#faq-content-1">
+														<i class="bi bi-question-circle question-icon"></i> 
+														챌린지 참여는 어떻게 하나요?
+													</button>
+												</h3>
+												<div id="faq-content-1" class="accordion-collapse collapse"
+													data-bs-parent="#faqlist">
+													<div class="accordion-body">Feugiat pretium nibh
+														ipsum consequat. Tempus iaculis urna id volutpat lacus
+														laoreet non curabitur gravida. Venenatis lectus magna
+														fringilla urna porttitor rhoncus dolor purus non.</div>
+												</div>
+											</div>
+											<!-- # Faq item-->
+
+											<div class="accordion-item">
+												<h3 class="accordion-header">
+													<button class="accordion-button collapsed" type="button"
+														data-bs-toggle="collapse" data-bs-target="#faq-content-2">
+														<i class="bi bi-question-circle question-icon"></i>
+														챌린지 탈퇴는 어떻게 하나요?
+													</button>
+												</h3>
+												<div id="faq-content-2" class="accordion-collapse collapse"
+													data-bs-parent="#faqlist">
+													<div class="accordion-body">Dolor sit amet
+														consectetur adipiscing elit pellentesque habitant morbi.
+														Id interdum velit laoreet id donec ultrices. Fringilla
+														phasellus faucibus scelerisque eleifend donec pretium. Est
+														pellentesque elit ullamcorper dignissim. Mauris ultrices
+														eros in cursus turpis massa tincidunt dui.</div>
+												</div>
+											</div>
+											<!-- # Faq item-->
+
+											<div class="accordion-item">
+												<h3 class="accordion-header">
+													<button class="accordion-button collapsed" type="button"
+														data-bs-toggle="collapse" data-bs-target="#faq-content-3">
+														<i class="bi bi-question-circle question-icon"></i> 
+														유료 챌린지를 개설하려고 하는데 주의사항이 있나요?
+													</button>
+												</h3>
+												<div id="faq-content-3" class="accordion-collapse collapse"
+													data-bs-parent="#faqlist">
+													<div class="accordion-body">Eleifend mi in nulla
+														posuere sollicitudin aliquam ultrices sagittis orci.
+														Faucibus pulvinar elementum integer enim. Sem nulla
+														pharetra diam sit amet nisl suscipit. Rutrum tellus
+														pellentesque eu tincidunt. Lectus urna duis convallis
+														convallis tellus. Urna molestie at elementum eu facilisis
+														sed odio morbi quis</div>
+												</div>
+											</div>
+											<!-- # Faq item-->
+
+											<div class="accordion-item">
+												<h3 class="accordion-header">
+													<button class="accordion-button collapsed" type="button"
+														data-bs-toggle="collapse" data-bs-target="#faq-content-4">
+														<i class="bi bi-question-circle question-icon"></i> 
+														참여한 챌린지가 삭제 됐어요. 어떻게 하나요?
+													</button>
+												</h3>
+												<div id="faq-content-4" class="accordion-collapse collapse"
+													data-bs-parent="#faqlist">
+													<div class="accordion-body">
+														<i class="bi bi-question-circle question-icon"></i> Dolor
+														sit amet consectetur adipiscing elit pellentesque habitant
+														morbi. Id interdum velit laoreet id donec ultrices.
+														Fringilla phasellus faucibus scelerisque eleifend donec
+														pretium. Est pellentesque elit ullamcorper dignissim.
+														Mauris ultrices eros in cursus turpis massa tincidunt dui.
+													</div>
+												</div>
+											</div>
+											<!-- # Faq item-->
+
+											<div class="accordion-item">
+												<h3 class="accordion-header">
+													<button class="accordion-button collapsed" type="button"
+														data-bs-toggle="collapse" data-bs-target="#faq-content-5">
+														<i class="bi bi-question-circle question-icon"></i>
+														마지막 질문은 뭔가요?
+													</button>
+												</h3>
+												<div id="faq-content-5" class="accordion-collapse collapse"
+													data-bs-parent="#faqlist">
+													<div class="accordion-body">Molestie a iaculis at
+														erat pellentesque adipiscing commodo. Dignissim
+														suspendisse in est ante in. Nunc vel risus commodo viverra
+														maecenas accumsan. Sit amet nisl suscipit adipiscing
+														bibendum est. Purus gravida quis blandit turpis cursus in
+													</div>
+												</div>
+											</div>
+											<!-- # Faq item-->
+
+										</div>
+
+									</div>
+								</div>
+
+							</div>
+						</section>
+
+					</div>
+				</section>
+			</div>
+		</section>
+		<!-- End Services Section -->
+
+	</main>
+	<!-- End #main -->
+</div>
+
+<th:block layout:fragment="javascript">
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script>
+		$(document).ready(function() {
+
+		});
+	</script>
+</th:block>
+
+</html>
