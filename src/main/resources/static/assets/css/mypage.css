@@ -176,24 +176,24 @@
 .challenge-item{
 	width: 400px;
 }
-
-.state-list{
+/* 
+.state{
     padding: 0 15px 0 25px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: 25px;
     margin-top: 15px;
-}
+} */
 
-.state-list > div{
+/* .state > div{
 	border-radius: 4px;
     background: #ebebeb;
     padding: 3px 8px;
     font-size: 12px;
     font-weight: bold;
     color: #747474;
-}
+} */
  
 #card-p{
  	padding: 0 30px;
@@ -202,6 +202,7 @@
     font-size: 15px;
  }
  
+
 /* ------------마이페이지 - 일정관리 (mypage/calender.html)-------------- */
 /* 마이페이지 탭 활성화될 경우*/
 .mypage-detail-tab a.active {
@@ -392,6 +393,21 @@
 	font-size: 14px;
 }
 
+.challenge_cost{
+ 	height : 30px;
+ 	width : 30px;
+ 	margin-right : 10px;
+ 	float : right;
+ 	vertical-align: middle;
+ }
+ 
+.open-dt{
+ 	float : left;
+ }
+ 
+.state-label{
+ 	float: right;
+ } 
 .ch-card-btn-div {
 	text-align: right;
 }

@@ -53,6 +53,15 @@
 	vertical-align: middle;
 	border-radius: 0px 3px 3px 0px !important;
 	height: 100%;
+	margin-top: 0;
+}
+
+.list-search-btn:hover{
+	margin-left: -10px;
+	vertical-align: middle;
+	border-radius: 0px 3px 3px 0px !important;
+	height: 100%;
+	margin-top: 0;
 }
 
 /* 리스트 검색 form 태그 */
@@ -87,9 +96,9 @@
 
 .state{
     padding: 0 15px 0 25px;
-    display: flex;
+    /* display: flex; */
     flex-direction: row;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     margin-bottom: 25px;
     margin-top: 15px;
 }
@@ -101,6 +110,8 @@
     font-size: 12px;
     font-weight: bold;
     color: #747474;
+    
+    margin-top: 2px;
 }
  
 #card-p{
@@ -108,6 +119,22 @@
     margin-bottom: 10px;
     color: var(--color-secondary);
     font-size: 15px;
+ }
+ 
+ .challenge_cost{
+ 	height : 30px;
+ 	width : 30px;
+ 	margin-right : 10px;
+ 	float : right;
+ 	vertical-align: middle;
+ }
+ 
+ .open-dt{
+ 	float : left;
+ }
+ 
+ .state-label{
+ 	float: right;
  }
  
 /* ------------ 챌린지 생성 (challenge/create.html)-------------- */
