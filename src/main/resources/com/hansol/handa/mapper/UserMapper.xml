@@ -42,9 +42,9 @@
 	</update>
 	
 	<select id="joinMembers" resultType="UserVO">
-		SELECT * FROM member 
-		WHERE member_id IN
-		(SELECT member_id FROM challenge_join WHERE challenge_id=#{challenge_id})
+		SELECT member.* FROM member,challenge_join 
+		WHERE member.member_id=challenge_join.member_id and challenge_join.challenge_id=#{challenge_id}
+		ORDER BY challenge_join.join_date ASC
 	</select>
 	
 	<update id="updateToken">
