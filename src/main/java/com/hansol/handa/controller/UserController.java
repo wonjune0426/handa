@@ -33,6 +33,7 @@ public class UserController {
 	@Autowired
 	AuthenticationManager authenticationManager;
 
+	// 로그인 화면 호출
 	@GetMapping("/login")
 	public String login(String error, String logout, Integer challenge_id, Model model, RedirectAttributes rttr,
 			HttpServletRequest request) {
@@ -74,12 +75,14 @@ public class UserController {
 		return "member/login";
 	}
 
+	// 회원 가입 화면 호출
 	@GetMapping("/register")
 	public String register() {
 		log.info("register---------------------------------------");
 		return "member/register";
 	}
 
+	// 회원가입 기능
 	@PostMapping("/register")
 	public String registerPOST(UserVO userVO, RedirectAttributes rttr, Model model) {
 
@@ -111,6 +114,7 @@ public class UserController {
 
 	}
 
+	// 아이디 중복 체크 기능
 	@ResponseBody
 	@PostMapping("/idcheck")
 	public int idcheck(String member_id) {
@@ -124,6 +128,7 @@ public class UserController {
 		return userService.idcheck(member_id);
 	}
 
+	// 회원 정보 수정 화면 호출
 	@PreAuthorize("principal.Username == #memberId")
 	@GetMapping("/amend/{memberId}")
 	public String amendmember(@PathVariable("memberId") String memberId, Model model) {
@@ -137,6 +142,7 @@ public class UserController {
 		return "member/amend";
 	}
 
+	// 회원 정보 수정 기능
 	@PreAuthorize("principal.Username == #userVO.member_id")
 	@PostMapping("/amend/{memberId}")
 	public String amendmemberPOST(@PathVariable("memberId") String memberId, UserVO userVO, RedirectAttributes rttr) {
@@ -157,11 +163,14 @@ public class UserController {
 		return "redirect:/mypage?member_id=" + memberId;
 	}
 
+	
+	// 로그아웃
 	@GetMapping("/logout")
 	public void logout() {
 		log.info("logout-----------------------------------------");
 	}
 
+	// 권한 다를 경우
 	@GetMapping("/accessError")
 	public void accessDenied(Authentication auth, Model model) {
 
@@ -171,18 +180,21 @@ public class UserController {
 
 	}
 
+	// 메일 인증이 안되었을 경우
 	@GetMapping("/nonCertify")
 	public String nonCertify() {
 
 		return "member/nonCertify";
 	}
 
+	// 메일 인증하기 화면 호출
 	@GetMapping("/certifyEmail")
 	public String certifyEmail(HttpServletRequest request) {
 
 		return "member/certifyEmail";
 	}
 
+	// 메일 전송 기능
 	@PostMapping("/sendMail")
 	public String sendMail(UserVO user, Model model) throws MessagingException {
 
@@ -226,11 +238,13 @@ public class UserController {
 		return "redirect:/member/login";
 	}
 
+	// 메일 인증 완료 화면 호출
 	@GetMapping("/emailCheck")
 	public String emailCheck() {
 		return "member/emailCheck";
 	}
-
+	
+	// 아이디 찾기 기능
 	@PostMapping("/find/id")
 	public String findIDPOST(UserVO user, Model model) {
 
@@ -243,6 +257,7 @@ public class UserController {
 		return "member/find";
 	}
 
+	// 비밀번호 찾기 기능
 	@PostMapping("/find/pw")
 	public @ResponseBody String findPWPOST(String member_id, String e_mail, Model model) {
 
@@ -266,6 +281,7 @@ public class UserController {
 		}
 	}
 
+	// 비밀번호 재발급 메일 전송 기능
 	@PostMapping("/find/send-pw")
 	public @ResponseBody String sendPWPOST(String member_id, String e_mail, Model model) {
 
@@ -286,12 +302,16 @@ public class UserController {
 		return "member/find";
 	}
 
+	
+	// 아이디 비밀번호 찾기 화면 호출
 	@GetMapping("/find")
 	public String find() {
 
 		return "member/find";
 	}
 	
+	
+	// 비밀번호 변경 기능
 	@PostMapping("/change-pw")
 	public @ResponseBody String passwordChange(UserVO user) {
 		

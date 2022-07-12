@@ -35,7 +35,12 @@
 										자격증</span>
 									<span class="ch-detail-category" th:if="${challengeDetail.subcategory_id}==6">자기계발 >
 										외국어</span>
-									<div style="display: flex;">
+									<div style="display: flex; justify-content: space-between;">
+										<h3 class="ch-detail-title" style="display: inline-block; line-height: 56px;" th:text="${challengeDetail.challenge_name}">
+										</h3>
+										<button class="handa-btn" style="display: inline-block; margin-top: 0px; height: 56px;" id="challenge-amend">수정하기</button>
+									</div>
+									<!-- <div style="display: flex;">
 										<h3 class="ch-detail-title" th:text="${challengeDetail.challenge_name}">
 										</h3>
 										<div>
@@ -43,7 +48,7 @@
 												style="margin-left:150%;width:130px;height:50px;display:none;"
 												id="challenge-amend">수정하기</button>
 										</div>
-									</div>
+									</div> -->
 									<div class="create-user">
 										<div class="img-wrapper">
 											<img class="image--cover"
