@@ -38,7 +38,7 @@
 									<div style="display: flex; justify-content: space-between;">
 										<h3 class="ch-detail-title" style="display: inline-block; line-height: 56px;" th:text="${challengeDetail.challenge_name}">
 										</h3>
-										<button class="handa-btn" style="display: inline-block; margin-top: 0px; height: 56px;" id="challenge-amend">수정하기</button>
+										<button class="handa-btn" style="display:inline-block; margin-top: 0px; height: 56px;" id="challenge-amend">수정하기</button>
 									</div>
 									<!-- <div style="display: flex;">
 										<h3 class="ch-detail-title" th:text="${challengeDetail.challenge_name}">
@@ -347,13 +347,15 @@
 					$("#comment-input").css("display", "block")
 					if (login_memberId == createMember) {
 						$("#secession").css("display", "none")
-						$("#challenge-amend").css("display", "block")
+						$("#challenge-amend").css("display", "inline-block")
 					} else {
 						$("#secession").css("display", "block")
+						$("#challenge-amend").css("display", "none")
 					}
 					$("p[name='member-e_mail']").css("display", "block")
 					break;
 				} else {
+					$("#challenge-amend").css("display", "none")
 					$("p[name='member-e_mail']").css("display", "none")
 					$("#challenge-join").css("disabled", false)
 					$("#comment-input").css("display", "none")
