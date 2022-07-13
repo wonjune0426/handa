@@ -228,7 +228,7 @@
 .dday{
 	font-size: 15px;
     float: right;
-    color: rgb(253, 48, 73);
+    color: #FF8080;
     font-weight: 600;
     margin-right: 5px;
 }
@@ -239,6 +239,11 @@
     margin-right: 20px;
     color: rgb(253, 48, 73);
     font-weight: 600;
+}
+
+.cost-div a{
+	/* vertical-align:sub; */
+	padding-top: 3.5px;
 }
 
 /* ------------마이페이지 - 일정관리 (mypage/calender.html)-------------- */

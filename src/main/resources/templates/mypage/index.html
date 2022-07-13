@@ -34,7 +34,7 @@
 			<div class="container aos-init aos-animate" data-aos="fade-up">
 				<div class="row">
 					<div class="my-info col-3">
-						<b>내정보</b>
+						<b>내 정보</b>
 						<div class="my-info-content">
 							<br>
 								<div class="img-wrapper">
@@ -112,10 +112,12 @@
 								<th:block th:unless="${produceCount} == 0">
 									<div class="row challenge-card-div">
 										<div class="challenge-card col-4" th:each="produce: ${listProduce}">
-											<a th:href="@{/challenge/detail(challenge_id=${produce.challenge_id})}" 
-												th:text="'[' + ${produce.subcategory_name} + '] ' + ${produce.challenge_name}" class="ch-card-title"></a>
-											<img th:if="${produce.challenge_type} == '유료'" th:src="@{../assets/img/won.png}" alt=""
-													class="challenge_cost">
+											<div class="cost-div">
+												<a th:href="@{/challenge/detail(challenge_id=${produce.challenge_id})}" 
+													th:text="'[' + ${produce.subcategory_name} + '] ' + ${produce.challenge_name}" class="ch-card-title"></a>
+												<img th:if="${produce.challenge_type} == '유료'" th:src="@{../assets/img/won.png}" alt=""
+														class="challenge_cost">
+											</div>
 											<!-- <p th:text="${produce.startdate} + ' ~ ' + ${produce.enddate}"></p> -->
 											<div>
 												<p class="date" th:text="${produce.startdate} + ' ~ ' + ${produce.enddate}"></p>
@@ -160,10 +162,12 @@
 								<th:block th:unless="${partCount} == 0">
 									<div class="row challenge-card-div">
 										<div class="challenge-card col-4" th:each="part: ${listPart}">
-											<a th:href="@{/challenge/detail(challenge_id=${part.challenge_id})}" 
-												th:text="'[' + ${part.subcategory_name} + '] ' + ${part.challenge_name}" class="ch-card-title"></a>
-											<img th:if="${part.challenge_type} == '유료'" th:src="@{../assets/img/won.png}" alt=""
+											<div class="cost-div">
+												<a th:href="@{/challenge/detail(challenge_id=${part.challenge_id})}" 
+													th:text="'[' + ${part.subcategory_name} + '] ' + ${part.challenge_name}" class="ch-card-title"></a>
+												<img th:if="${part.challenge_type} == '유료'" th:src="@{../assets/img/won.png}" alt=""
 													class="challenge_cost">
+											</div>
 											<div>
 												<p class="date" th:text="${part.startdate} + ' ~ ' + ${part.enddate}"></p>
 												<span th:if="${part.challenge_state} == '모집중'" class="dday" th:text="'D-' + ${part.dday}"></span>

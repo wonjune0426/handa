@@ -14,6 +14,8 @@
 			<nav id="navbar" class="navbar">
 				<ul>
 					<!-- 카테고리 별 링크 적용 -->
+					<li><a th:href="@{/list}" class="nav-link">전체</a></li>
+					
 					<li class="dropdown"><a href="/list?category=1&sort_type=0"><span>취미</span> <i
 							class="bi bi-chevron-down dropdown-indicator"></i></a>
 						<ul>
@@ -30,7 +32,8 @@
 							<li><a th:href="@{/list?category=7&sort_type=0}">운동</a></li>
 							
 						</ul></li>
-
+					
+					
 					<!-- 회원인 경우 -->
 					<th:block sec:authorize="isAuthenticated()">
 					
