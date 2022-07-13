@@ -39,6 +39,7 @@
 				<when test="challenge_type == 1">AND challenge_type = "무료"</when>
 				<when test="challenge_type == 2">AND challenge_type = "유료"</when>
 			</choose>
+			<if test="challenge_state == 1">AND startdate > NOW()</if>
 	
 			<choose>
 				<!-- 최신순 -->
@@ -73,7 +74,8 @@
 				<when test="challenge_type == 1">AND challenge_type = "무료"</when>
 				<when test="challenge_type == 2">AND challenge_type = "유료"</when>
 			</choose>
-
+			<if test="challenge_state == 1">AND startdate > NOW()</if>
+			
 			<choose>
 				<!-- 최신순 -->
 				<when test="sortType == 0">
@@ -110,6 +112,7 @@
 			<when test="challengeType == 1">AND challenge_type = "무료"</when>
 			<when test="challengeType == 2">AND challenge_type = "유료"</when>
 		</choose>
+		<if test="challenge_state == 1">AND startdate > NOW()</if>
  	</select>
  	
  	<!-- 메인 페이지 인기 챌린지 조회 -->

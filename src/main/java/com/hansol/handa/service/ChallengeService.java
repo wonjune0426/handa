@@ -9,7 +9,8 @@ import com.hansol.handa.domain.ChallengeVO;
 public interface ChallengeService {
 	
 	/* 챌린지 리스트 조회 */
-	public List<ChallengeVO> selectChallegeList(String category, String sortType, String createdate, String count, String searchWord, String challengeType);
+	public List<ChallengeVO> selectChallegeList(String category, String sortType, String createdate, String count, 
+			String searchWord, String challengeType, int challenge_state);
 	
 	public Map<String, String> selectCategoryName(int categoryID);		// 카테고리 이름 조회
 	public int selectCount(HashMap<String, Object> countMap);			// 챌린지 개수 조회

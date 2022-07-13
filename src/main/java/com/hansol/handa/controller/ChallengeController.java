@@ -63,7 +63,7 @@ public class ChallengeController {
 	// 리스트 화면 호출
 	@GetMapping("/list")
 	public String list(@RequestParam(required = false) String category, @RequestParam(required = false) String sort_type,
-			 @RequestParam(required = false) String challenge_type, Model model) {
+			 @RequestParam(required = false) String challenge_type, @RequestParam(required = false) String challenge_state, Model model) {
 
 		Boolean isCategory = true;
 
@@ -88,12 +88,18 @@ public class ChallengeController {
 		// 챌린지 타입이 주어지지 않을 경우 (전체 조회)
 		if (challenge_type == null)
 			model.addAttribute("challengeType", challenge_type);
-	
 		else
 			model.addAttribute("challengeType", Integer.parseInt(challenge_type));
 
+		// 챌린지 상태가 주어지지 않은 경우 (전체 조회)
+		if(challenge_state == null)
+			model.addAttribute("challenge_state", challenge_state);
+		// 챌린지 상태가 주어진 경우 (모집중 조회)
+		else
+			model.addAttribute("challenge_state", Integer.parseInt(challenge_state));
+		
 		model.addAttribute("isCategory", isCategory);
-
+		
 		return "challenge/list";
 	}
 
@@ -103,7 +109,7 @@ public class ChallengeController {
 	public HashMap<String, Object> listView(@RequestParam(required = false) String category,
 			@RequestParam(required = false) String sortType, @RequestParam(required = false) String createdate,
 			@RequestParam(required = false) String count, @RequestParam(required = false) String searchWord,
-			@RequestParam(required = false) String challengeType, Model model) {
+			@RequestParam(required = false) String challengeType, @RequestParam(required = false) int challengeState, Model model) {
 
 		HashMap<String, Object> map = new HashMap<>();
 		HashMap<String, Object> countMap = new HashMap<>();
@@ -120,11 +126,12 @@ public class ChallengeController {
 
 		countMap.put("searchWord", searchWord);
 		countMap.put("challengeType", challengeType);
+		countMap.put("challenge_state", challengeState);
 
 		challengeCount = challengeService.selectCount(countMap);
 
 		List<ChallengeVO> challengeList = challengeService.selectChallegeList(category, sortType, createdate, count,
-				searchWord, challengeType);
+				searchWord, challengeType, challengeState);
 
 		map.put("challengeList", challengeList);
 		map.put("challengeCount", challengeCount);
@@ -137,7 +144,8 @@ public class ChallengeController {
 	// 챌린지 검색
 	@GetMapping("/search") 
 	public String search(@RequestParam(required = false) String category, @RequestParam(required = false) String sort_type, 
-			@RequestParam(required = false) String challenge_type, @RequestParam String searchword, Model model) {
+			@RequestParam(required = false) String challenge_type, @RequestParam String searchword, 
+				@RequestParam(required = false) String challenge_state, Model model) {
 	  
 		Boolean isCategory = true;
 
@@ -164,7 +172,14 @@ public class ChallengeController {
 			model.addAttribute("challengeType", 0);
 		else
 			model.addAttribute("challengeType", Integer.parseInt(challenge_type));
-
+		
+		// 챌린지 상태가 주어지지 않은 경우 (전체 조회)
+		if(challenge_state == null)
+			model.addAttribute("challenge_state", challenge_state);
+		// 챌린지 상태가 주어진 경우 (모집중 조회)
+		else
+			model.addAttribute("challenge_state", Integer.parseInt(challenge_state));
+		
 		model.addAttribute("searchWord", searchword);
 		model.addAttribute("isCategory", isCategory);
 	  

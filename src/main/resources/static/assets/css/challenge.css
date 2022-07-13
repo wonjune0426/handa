@@ -151,6 +151,10 @@
     margin-right: 40px;
  }
  
+ #toggle-input:checked{
+ 	background-color: #86a0e6;
+ }
+ 
 .date-p{
 	float:left;
 }

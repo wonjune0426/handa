@@ -1,7 +1,7 @@
 var challengeList = null;
 var challengeCount = null;
 
-function getList(category, sortType, createdate, count, searchWord, challengeType){
+function getList(category, sortType, createdate, count, searchWord, challengeType, challengeState){
 
 	$.ajax({
 		type : 'GET',
@@ -13,7 +13,8 @@ function getList(category, sortType, createdate, count, searchWord, challengeTyp
 			createdate : createdate,
 			count : count,
 			searchWord : searchWord,
-			challengeType : challengeType
+			challengeType : challengeType,
+			challengeState : challengeState
 		},  
 		contentType : 'application/json',
 		success: function(res){
@@ -80,7 +81,7 @@ function getList(category, sortType, createdate, count, searchWord, challengeTyp
 	});
 }
 
-function infiniteScroll(category, sortType, createdate, count, searchWord, challengeType){
+function infiniteScroll(category, sortType, createdate, count, searchWord, challengeType, challengeState){
 	
 	var page = 0;			// 현재 페이지
 	var challenge = 12;		// 한 페이지에 보여줄 챌린지 개수
@@ -89,7 +90,7 @@ function infiniteScroll(category, sortType, createdate, count, searchWord, chall
 	const observer = new IntersectionObserver((entries) => {
 		if(page < 1){
 			// 맨 처음 페이지
-			getList(category, sortType, createdate, count, searchWord, challengeType);
+			getList(category, sortType, createdate, count, searchWord, challengeType, challengeState);
 		}else{
 			// 총 페이지 개수
 			var pageTotal = ((challengeCount % challenge == 0) ? Math.round(challengeCount / challenge) : Math.round(challengeCount / challenge) + 1);
@@ -102,7 +103,7 @@ function infiniteScroll(category, sortType, createdate, count, searchWord, chall
 					$('#end').hide();
 				else
 					// 다음 페이지
-					getList(category, sortType, challengeList[length-1]['createdate'], challengeList[length-1]['joinVO']['count'], searchWord, challengeType);
+					getList(category, sortType, challengeList[length-1]['createdate'], challengeList[length-1]['joinVO']['count'], searchWord, challengeType, challengeState);
 			}else				
 				$('#end').hide();	// 요소 관찰 종료 (요소 숨김)
 		}
