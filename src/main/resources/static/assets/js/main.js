@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('load', togglescrollTop);
     document.addEventListener('scroll', togglescrollTop);
     scrollTop2.addEventListener('click', function() {
-		location.href="/create";
+		location.href="/challenge";
 	});
   }
   
