@@ -40,7 +40,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 			roleNames.add(authority.getAuthority());
 		});
 		
-		// 이전 링크가 detail인 경우
+		// 이전 링크가 detail인 경우 (상세 페이지에서 넘어온 경우)
 		Integer detail = (Integer)request.getSession().getAttribute("detail");
 
 		if (detail != null) {

@@ -49,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     	
     	http.csrf().disable();
     	
-    	// URL 별 권한관리 설정
+    	// URL 별 권한 설정
         http.authorizeRequests()
         .antMatchers(
         		"/", "/list", "/detail", "/comment", "/member/login", 
@@ -65,17 +65,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         		"/challenge/member"
         		).access("hasRole('ROLE_CERTIFY_USER')");
 
-        // 로그인 페이지 설정
+        // 로그인 설정
         http.formLogin()
         .loginPage("/member/login")
         .loginProcessingUrl("/login")
         .successHandler(loginSuccessHandler());
         
+        // 로그아웃 설정
         http.logout()
         .logoutUrl("/member/logout")
         .invalidateHttpSession(true)
         .deleteCookies("remember-me", "JSESSIONID");
         
+        // 자동 로그인 설정
         http.rememberMe()
 	      .key("handa")
 	      .tokenRepository(persistentTokenRepository())

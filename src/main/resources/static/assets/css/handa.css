@@ -71,6 +71,7 @@
 .main-banner {
 	padding: 0px;
 	height: 400px;
+	cursor: pointer;
 }
 
 .main-banner .testimonial-item {

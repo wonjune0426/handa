@@ -18,14 +18,6 @@ public class CustomUser extends User {
 
 	private UserVO user;
 
-	private String testParam;
-
-	/*
-	 * public CustomUser(String username, String password, Collection<? extends
-	 * GrantedAuthority> authorities, UserVO vo) { super(username, password,
-	 * authorities); this.user = vo; }
-	 */
-
 	public CustomUser(UserVO vo, Collection<? extends GrantedAuthority> authorities) {
 
 		super(vo.getMember_id(), vo.getPassword(), authorities);

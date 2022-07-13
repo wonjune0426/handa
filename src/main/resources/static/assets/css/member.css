@@ -342,6 +342,16 @@
 	font-size: 15px;
 }
 
+.id-check:hover {
+	background: var(--color-primary);
+	border: 1px solid var(--color-primary);
+	border-radius: 5px;
+	padding: 5px;
+	color: #fff;
+	font-size: 15px;
+	transition: .5s;	
+}
+
 .register-form input.form-control {
 	padding: 10px !important;
 	font-size: 15px;

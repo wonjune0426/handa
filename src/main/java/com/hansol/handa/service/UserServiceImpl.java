@@ -202,6 +202,7 @@ public class UserServiceImpl implements UserService {
 		return false;
 	}
 	
+	// 임시 비밀번호 메일 전송
 	@Override
 	public void sendPWMail(UserVO user) throws MessagingException {
 		// 2. 메일로 임시비밀번호 발급
@@ -252,6 +253,7 @@ public class UserServiceImpl implements UserService {
 		return password.toString(); 
 	}
 
+	// 비밀번호 변경
 	@Override
 	public void updatePW(UserVO vo) {
 		
