@@ -118,6 +118,10 @@
 	height: 200px;
 }
 
+.event-banner .container {
+	padding: 0px;
+}
+
 .event-banner .swiper-pagination .swiper-pagination-bullet {
 	width: 10px;
 	height: 10px;
