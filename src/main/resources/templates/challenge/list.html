@@ -24,28 +24,26 @@
 					</div>
 				</div>
 			</div>
-<!-- 			<nav>
-				<div class="container">
-					<ol>
-						<li><a th:href="@{/}">홈</a></li>
-						<li th:unless="${not #strings.isEmpty(mainCategoryName)}">챌린지 리스트</li>
-						<li th:if="${not #strings.isEmpty(mainCategoryName)}"><a th:href="@{/list}">챌린지 리스트</a></li>
-
-						카테고리 조회일 경우에만 표시
-						<li th:if="${not #strings.isEmpty(mainCategoryName)}" th:text=${mainCategoryName}></li>
-						<li th:if="${not #strings.isEmpty(subCategoryName)}" th:text=${subCategoryName}></li>
-					</ol>
-				</div>
-			</nav> -->
-		</div>
+				<nav>
+					<div class="container">
+						<ol>
+							<li><a th:href="@{/}"><i class="fa-solid fa-house-chimney"></i></a></li>
+							
+							<!-- 전체 조회일 경우에만 표시 -->
+							<li th:if="${#strings.isEmpty(subCategoryName)}" th:text="전체"></li>
+							
+							<!-- 카테고리 조회일 경우에만 표시 -->
+							<li th:if="${not #strings.isEmpty(mainCategoryName)}" th:text=${mainCategoryName}></li>
+							<li th:if="${not #strings.isEmpty(subCategoryName)}" th:text=${subCategoryName}></li>
+						</ol>
+					</div>
+				</nav>
+			</div>
 		<!-- End Breadcrumbs -->
 
 		<!-- ======= Services Section ======= -->
 		<section id="service" class="services pt-0">
 			<div class="container" data-aos="fade-up">
-
-				<div class="section-header">
-				</div>
 
 				<div class="row gy-4">
 <!-- 					<div class="create-challenge-div">
@@ -69,37 +67,47 @@
 							</select>
 						</div>
 						
-						<div class="toggle-div form-check form-switch col-2" >
-							<!-- 체크 전 스위치 -->
+						<div class="btn-group order-div col-1">
+							<select id="challengeTypeSelect" name="challengeTypeSelect" class="form-select" onchange="selectType()" style="width: 95px;">
+								<option th:value="0" th:text="전체" th:selected="${challengeType} == '0'"></option>
+								<option th:value="1" th:text="모집중" th:selected="${challengeType} == '1'"></option>
+								<option th:value="2" th:text="유료" th:selected="${challengeType} == '2'"></option>
+							</select>
+						</div>
+						
+						<!-- <div class="toggle-div form-check form-switch col-2" >
+							체크 전 스위치
 							<th:block th:unless="${challenge_state} == 1">
   								<input id="toggle-input" class="form-check-input" type="checkbox" role="switch">
   								<label class="form-check-label" for="flexSwitchCheckDefault" th:text="전체"></label>
   							</th:block>
-  							<!-- 체크 후 스위치 -->
+  							체크 후 스위치
   							<th:block th:if="${challenge_state} == 1" >
   								<input id="toggle-input" class="form-check-input" type="checkbox" role="switch" checked>
   								<label class="form-check-label" for="flexSwitchCheckDefault" th:text="모집중"></label>
   							</th:block>
-						</div>
+						</div> -->
 						
 						<!-- <div class="col-3"></div> -->
-						<div class="search-div col-4">
-							<form id="search-form" th:action="@{/search}" class="form-search handa-search-form">
-								<input id="search" th:name="searchword" type="text" class="form-control" 
-								th:value="${searchWord}" placeholder="검색어를 입력하세요.">
-								<input type="hidden" name="category" th:value="${categoryID}">
-								<input type="hidden" name="sort_type" th:value="${sortType}">
-								<input type="hidden" name="challenge_type" th:value="${challengeType}">
-								<input th:if="${challenge_state} == 1" type="hidden" name="challenge_state" th:value="${challenge_state}">
-
-								<button id="search-btn" type="submit"
-									class="btn btn-primary handa-outline-btn list-search-btn">검색</button>
-							</form>
+						<div class="search-div col-8" style="padding-right: 40px;">
+							<!-- <div class=""> -->
+								<form id="search-form" th:action="@{/search}" class="form-search handa-search-form">
+									<input id="search" th:name="searchword" type="text" class="form-control" 
+									th:value="${searchWord}" placeholder="검색어를 입력하세요.">
+									<input type="hidden" name="category" th:value="${categoryID}">
+									<input type="hidden" name="sort_type" th:value="${sortType}">
+									<input type="hidden" name="challenge_type" th:value="${challengeType}">
+									<input th:if="${challenge_state} == 1" type="hidden" name="challenge_state" th:value="${challenge_state}">
+	
+									<button id="search-btn" type="submit"
+										class="handa-outline-btn list-search-btn">검색</button>
+								</form>
+							<!-- </div>
+							<div class="create-challenge-div"> -->
+								<a th:href="@{/create}" class="handa-btn create-btn">챌린지 생성</a>
+							<!-- </div> -->
 						</div>
 						
-						<div class="create-challenge-div col-2">
-							<a th:href="@{/create}" class="handa-btn create-btn">챌린지 생성</a>
-						</div>
 	
 						<div id ="list-container" class="row gy-4"></div>
 						

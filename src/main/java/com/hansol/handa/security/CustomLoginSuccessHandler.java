@@ -63,7 +63,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 			String prePage = (String) request.getSession().getAttribute("prePage");
 			
 
-			log.info("이전 페이지: " + prePage);
+			// log.info("이전 페이지: " + prePage);
 
 			if (prePage != null) {
 				request.getSession().removeAttribute("prePage");

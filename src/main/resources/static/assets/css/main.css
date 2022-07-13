@@ -205,7 +205,7 @@ section {
 .breadcrumbs nav ol li+li::before {
   display: inline-block;
   padding-right: 10px;
-  color: #4278cc;
+  /* color: #4278cc; */
   content: "/";
 }
 
@@ -2111,4 +2111,9 @@ textarea:focus {
 .form-select {
 	height: 50px !important;
 	font-size: 15px;
+}
+
+/* 헤더 전체 링크 */
+#header-all-link{
+	margin-right : 10px;	
 }
