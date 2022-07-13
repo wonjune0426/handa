@@ -22,6 +22,8 @@ public class ChallengeVO {
 	 private int dday;
 	 
 	 private String subcategory_name;
+	 private String maincategory_name;
+	 
 	 private int count;
 	 private JoinVO joinVO;
 }

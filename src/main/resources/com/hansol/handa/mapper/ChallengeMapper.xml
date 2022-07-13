@@ -27,7 +27,7 @@
 	<select id="selectChallengeList" parameterType="hashmap" resultMap="challengeMap">
 
 		SELECT challenge.challenge_id, challenge_name, thumbnail, startdate, enddate, 
-				createdate, challenge.member_id, subcategory_id, challenge_type, count, sub_category_name 
+				createdate, challenge.member_id, subcategory_id, challenge_type, count, sub_category_name
 		from challenge, sub_category, (SELECT challenge.challenge_id, COUNT(*) as count  
 										from challenge, challenge_join
 										WHERE challenge.challenge_id = challenge_join.challenge_id
@@ -62,8 +62,8 @@
 	
 	<!-- 카테고리 별 리스트 조회 -->
 	<select id="selectChallegeListCategory" parameterType="hashmap" resultMap="challengeMap">
-		SELECT challenge.challenge_id, challenge_name, thumbnail, startdate, enddate,  
-				createdate, challenge.member_id, subcategory_id, challenge_type, count, sub_category_name 
+		SELECT challenge.challenge_id, challenge_name, thumbnail, startdate, enddate, 
+				createdate, challenge.member_id, subcategory_id, challenge_type, count, sub_category_name
 		from challenge, sub_category, (SELECT challenge.challenge_id, COUNT(*) as count  
 										from challenge, challenge_join
 										WHERE challenge.challenge_id = challenge_join.challenge_id

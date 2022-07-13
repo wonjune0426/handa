@@ -20,6 +20,7 @@
 		<result column="subcategory_id" property="subcategory_id"></result>
 		<result column="challenge_type" property="challenge_type"></result>
 		<result column="sub_category_name" property="subcategory_name"></result>
+		<result column="main_category_name" property="maincategory_name"></result>
 		<collection property="joinVO" resultMap="joinVO" />
 	</resultMap>
 	
@@ -48,27 +49,27 @@
 	<!-- 마이페이지 생성 챌린지 조회 -->
 	<select id="selectProdece" parameterType="hashmap" resultMap="challengeMap">
 		SELECT challenge.challenge_id, challenge_name, startdate, enddate,  
-			createdate, challenge.member_id, subcategory_id, challenge_type, count, sub_category_name <if test="mypage == false">, thumbnail</if>    
-		from challenge, sub_category, (SELECT challenge.challenge_id, COUNT(*) as count  
+			createdate, challenge.member_id, subcategory_id, challenge_type, count, sub_category_name, main_category_name <if test="mypage == false">, thumbnail</if>    
+		from challenge, sub_category, main_category, (SELECT challenge.challenge_id, COUNT(*) as count  
 													from challenge, challenge_join
 													WHERE challenge.challenge_id = challenge_join.challenge_id
 													GROUP BY challenge.challenge_id) count_table
-		WHERE challenge.challenge_id = count_table.challenge_id AND challenge.subcategory_id = sub_category.sub_category_id AND member_id = #{member_id}
+		WHERE challenge.challenge_id = count_table.challenge_id AND challenge.subcategory_id = sub_category.sub_category_id AND member_id = #{member_id} AND sub_category.main_category_id = main_category.main_category_id
 		GROUP BY challenge.challenge_id order by createdate DESC <if test="mypage == true">LIMIT 3</if>;
 	</select>
 	
 	<!-- 마이페이지 참여 챌린지 조회 -->
 	<select id="selectPart" parameterType="hashmap" resultMap="challengeMap">
 		SELECT challenge.challenge_id, challenge_name, startdate, enddate,  
-			createdate, challenge.member_id, subcategory_id, challenge_type, count, sub_category_name <if test="mypage == false">, thumbnail</if>
-		from challenge, sub_category, (SELECT challenge.challenge_id, COUNT(*) as COUNT
+			createdate, challenge.member_id, subcategory_id, challenge_type, count, sub_category_name, main_category_name <if test="mypage == false">, thumbnail</if>
+		from challenge, sub_category, main_category, (SELECT challenge.challenge_id, COUNT(*) as COUNT
 													from challenge, challenge_join
 													WHERE challenge.challenge_id = challenge_join.challenge_id
 													GROUP BY challenge.challenge_id) count_table,
 												(SELECT challenge.challenge_id
 													FROM challenge, challenge_join
 													where challenge.challenge_id = challenge_join.challenge_id AND challenge_join.member_id = #{member_id}) AS join_table
-		WHERE challenge.challenge_id = count_table.challenge_id AND challenge.subcategory_id = sub_category.sub_category_id AND challenge.challenge_id = join_table.challenge_id AND member_id != #{member_id}																		
+		WHERE challenge.challenge_id = count_table.challenge_id AND challenge.subcategory_id = sub_category.sub_category_id AND challenge.challenge_id = join_table.challenge_id AND member_id != #{member_id} AND sub_category.main_category_id = main_category.main_category_id																	
 		GROUP BY challenge.challenge_id order by createdate DESC <if test="mypage == true">LIMIT 3</if>;
 	</select>
 </mapper>

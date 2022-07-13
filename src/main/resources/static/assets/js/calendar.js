@@ -38,24 +38,46 @@ function addCalendar(member_id){
 					
 					// 생성 챌린지 추가
 					for(var i = 0; i < listProduce.length; i++){
-						events.push({
-							title : '[' + listProduce[i]['subcategory_name'] + '] ' + listProduce[i]['challenge_name'],
-							start: listProduce[i]['startdate'],
-							end: listProduce[i]['enddate'],
-							color: '#86a0e6',
-							url: '/challenge/detail?challenge_id=' + listProduce[i]['challenge_id'] 
-						});
+						if(listProduce[i]['maincategory_name'] == "취미"){
+							events.push({
+								title : '[' + listProduce[i]['subcategory_name'] + '] ' + listProduce[i]['challenge_name'],
+								start: listProduce[i]['startdate'],
+								end: listProduce[i]['enddate'],
+								color: '#80caa2',//'#8cc084',
+								url: '/challenge/detail?challenge_id=' + listProduce[i]['challenge_id'] 
+							});
+						}
+						else{
+							events.push({
+								title : '[' + listProduce[i]['subcategory_name'] + '] ' + listProduce[i]['challenge_name'],
+								start: listProduce[i]['startdate'],
+								end: listProduce[i]['enddate'],
+								color: '#86a0e6',
+								url: '/challenge/detail?challenge_id=' + listProduce[i]['challenge_id'] 
+							});
+						}
 					}
 					
 					// 참여 챌린지 추가
 					for(var i = 0; i < listPart.length; i++){
-						events.push({
-							title : '[' + listPart[i]['subcategory_name'] + '] ' + listPart[i]['challenge_name'],
-							start: listPart[i]['startdate'],
-							end: listPart[i]['enddate'],
-							color: '#8cc084',
-							url: '/challenge/detail?challenge_id=' + listPart[i]['challenge_id'] 
-						})
+						if(listPart[i]['maincategory_name'] == "취미"){
+							events.push({
+								title : '[' + listPart[i]['subcategory_name'] + '] ' + listPart[i]['challenge_name'],
+								start: listPart[i]['startdate'],
+								end: listPart[i]['enddate'],
+								color: '#80caa2',//'#8cc084',
+								url: '/challenge/detail?challenge_id=' + listPart[i]['challenge_id'] 
+							});
+						}
+						else{
+							events.push({
+								title : '[' + listPart[i]['subcategory_name'] + '] ' + listPart[i]['challenge_name'],
+								start: listPart[i]['startdate'],
+								end: listPart[i]['enddate'],
+								color: '#86a0e6',
+								url: '/challenge/detail?challenge_id=' + listPart[i]['challenge_id'] 
+							});
+						}
 					}
 					successCallback(events);
 				}
