@@ -37,11 +37,20 @@
 					</ol>
 				</div>
 			</nav> -->
+				<nav>
+					<div class="container">
+						<ol>
+							<li><a th:href="@{/}"><i class="fa-solid fa-house-chimney"></i></a></li>
+							<li>마이페이지</li>
+							<li>참여 챌린지</li>
+						</ol>
+					</div>
+				</nav>
 		</div>
 		<!-- End Breadcrumbs -->
 		
 		<!-- ======= Services Section ======= -->
-				<section id="service-details-list" class="services service-details">
+		<section id="service-details-list" class="services service-details">
 			<div class="container aos-init aos-animate" data-aos="fade-up">
 				<div class="row gy-4">
 						<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100" th:each="part : ${partList}">
@@ -73,7 +82,7 @@
               							th:challenge_id="${part.challenge_id}" 
 											onclick="secession(this.getAttribute('challenge_id'))">탈퇴</button>
               					</div>
- 
+							 </div>
           				</div><!-- End Card Item -->
       			</div>
       		</div>

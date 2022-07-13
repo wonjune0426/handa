@@ -229,7 +229,7 @@
 	font-size: 15px;
     float: right;
     color: #FF8080;
-    font-weight: 600;
+    font-weight: bold;
     margin-right: 5px;
 }
 
@@ -237,13 +237,17 @@
 	font-size: 15px;
     float: right;
     margin-right: 20px;
-    color: rgb(253, 48, 73);
-    font-weight: 600;
+    color: #FF8080;
+    font-weight: bold;
 }
 
 .cost-div a{
 	/* vertical-align:sub; */
 	padding-top: 3.5px;
+}
+
+.breadcrumbs nav {
+	background-color: #fff;
 }
 
 /* ------------마이페이지 - 일정관리 (mypage/calender.html)-------------- */
