@@ -245,8 +245,8 @@
 						<!-- 챌린지 리스트 -->
 						<div class="col-lg-4 col-md-6" data-aos="fade-up"
 							data-aos-delay="100" th:each="cost:${costChallenge}">
-							<div class="card challenge-item">
-								<div class="card-img">
+							<div id="cost-challenge-item" class="card challenge-item">
+								<div id="cost-card-img" class="card-img">
 									<img th:src="${cost.thumbnail}" alt=""
 										class="img-fluid challenge-thumbnail">
 								</div>
