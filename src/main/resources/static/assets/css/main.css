@@ -205,7 +205,7 @@ section {
 .breadcrumbs nav ol li+li::before {
   display: inline-block;
   padding-right: 10px;
-  color: #4278cc;
+  /* color: #4278cc; */
   content: "/";
 }
 
