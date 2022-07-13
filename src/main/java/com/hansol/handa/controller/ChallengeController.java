@@ -196,7 +196,7 @@ public class ChallengeController {
 	}
 
 //create 화면으로 이동
-	@GetMapping("/create")
+	@GetMapping("/challenge")
 	public String create() {
 		return "challenge/create";
 	}

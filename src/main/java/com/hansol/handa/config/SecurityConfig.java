@@ -59,7 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         		).permitAll()
         .antMatchers(
         		"/mypage/**",
-        		"/create", 
+        		"/challenge", 
         		"/member/amend/**",
         		"/challenge-amend/**",
         		"/challenge/member"
