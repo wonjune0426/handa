@@ -66,11 +66,12 @@ public class UserController {
 			request.getSession().setAttribute("prePage", uri);
 		}
 
-		if (uri != null && !uri.contains("/challenge/detail")) {
-			request.getSession().setAttribute("prePage", uri);
-
-			// log.info("refer challenge detail");
-		}
+		/*
+		 * if (uri != null && !uri.contains("/challenge/detail")) {
+		 * request.getSession().setAttribute("prePage", uri);
+		 * 
+		 * // log.info("refer challenge detail"); }
+		 */
 
 		return "member/login";
 	}
@@ -163,7 +164,6 @@ public class UserController {
 		return "redirect:/mypage?member_id=" + memberId;
 	}
 
-	
 	// 로그아웃
 	@GetMapping("/logout")
 	public void logout() {
@@ -243,7 +243,7 @@ public class UserController {
 	public String emailCheck() {
 		return "member/emailCheck";
 	}
-	
+
 	// 아이디 찾기 기능
 	@PostMapping("/find/id")
 	public String findIDPOST(UserVO user, Model model) {
@@ -253,6 +253,8 @@ public class UserController {
 		model.addAttribute("userList", userService.findID(user));
 
 		model.addAttribute("msg", "find-result");
+
+		model.addAttribute("type", "id");
 
 		return "member/find";
 	}
@@ -269,6 +271,8 @@ public class UserController {
 		user.setE_mail(e_mail);
 
 		boolean result = userService.findPW(user);
+
+		model.addAttribute("type", "pw");
 
 		if (result) {
 			model.addAttribute("pw-result", "이메일로 임시 비밀번호를 발급했습니다. 발급받은 비밀번호로 로그인을 진행해주세요.");
@@ -302,23 +306,32 @@ public class UserController {
 		return "member/find";
 	}
 
-	
-	// 아이디 비밀번호 찾기 화면 호출
-	@GetMapping("/find")
-	public String find() {
+	// 아이디 찾기 화면 호출
+	@GetMapping("/find/id")
+	public String findID(Model model) {
+
+		model.addAttribute("type", "id");
 
 		return "member/find";
 	}
-	
-	
+
+	// 비밀번호 찾기 화면 호출
+	@GetMapping("/find/pw")
+	public String findPW(Model model) {
+
+		model.addAttribute("type", "pw");
+
+		return "member/find";
+	}
+
 	// 비밀번호 변경 기능
 	@PostMapping("/change-pw")
 	public @ResponseBody String passwordChange(UserVO user) {
-		
+
 		log.info("change password:" + user.getPassword());
-		
+
 		userService.updatePW(user);
-		
+
 		return "change";
 	}
 }

@@ -203,7 +203,31 @@
 	</div>
 </body>
 <th:block layout:fragment="javascript">
-	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-	<script th:src='@{/assets/js/member-amend.js}'></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script th:src='@{/assets/js/member-amend.js}'></script>
+<script>
+$("#member-call").keyup(function(e) {
+	const target = $(this)[0];
+	// console.log(target);
+	target.value = target.value
+	   .replace(/[^0-9]/g, '')
+	  .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
+});
+
+$("#e-mail").keyup(function(e) {
+	const target = $(this);
+	const regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+	
+	
+	if (regExp.test(target.val())) {				
+		console.log('올바른 이메일 형식입니다.');
+		$("#e-mail-check").text('올바른 이메일 형식입니다.');
+		$("#e-mail-check").css('color', 'green');
+	} else {
+		$("#e-mail-check").text('이메일 형식이 올바르지 않습니다.');
+		$("#e-mail-check").css('color', 'red');
+	}
+});
+</script>
 </th:block>
 </html>

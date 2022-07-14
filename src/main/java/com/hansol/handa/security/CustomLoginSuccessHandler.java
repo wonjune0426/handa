@@ -53,6 +53,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 			response.sendRedirect("/member/nonCertify");
 		}
 
+		// 메일 인증된 유저인 경우
 		if (roleNames.contains("ROLE_CERTIFY_USER")) {
 
 			SavedRequest savedRequest = requestCache.getRequest(request, response);
@@ -82,8 +83,6 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 				// 회원가입 -> 로그인으로 넘어온 경우 "/"로 redirect
 				if (prePage.contains("/member/register")) {
 					uri = "/";
-				} else if (prePage.contains("/challenge/detail")) {
-					uri = "/challenge/detail";
 				} else {
 					uri = prePage;
 				}

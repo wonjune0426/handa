@@ -31,30 +31,38 @@
 					<div class="col-lg-5 find-content find-form">
 						<!-- 메뉴 탭 -->
 						<div class="find-tab">
-							<a href="" data-type="find-id" class="find-tab-menu find-id-menu active">아이디 찾기</a> 
-							<a href="" data-type="find-pw" class="find-tab-menu find-pw-menu">비밀번호 찾기</a>
+							<a href="/member/find/id" data-type="find-id" th:class="${type=='id' ? 'find-tab-menu find-id-menu active' : 'find-tab-menu find-id-menu'}">아이디 찾기</a> 
+							<a href="/member/find/pw" data-type="find-pw" th:class="${type=='pw' ? 'find-tab-menu find-pw-menu active' : 'find-tab-menu find-pw-menu'}">비밀번호 찾기</a>
 						</div>
 						
+						<th:block th:if="${type == 'id'}">
 						<!-- 아이디/비밀번호 찾기 폼 -->
 						<div class="find-id">
 							<p>아이디를 잊으셨나요? 아래의 정보를 입력해주세요.</p>
-							<form action="/member/find/id" method="post">
+							<form action="/member/find/id" method="post" id="find-id-form">
 								<input class="form-control mt-3" type="hidden" name="type" value="id">
 								<input class="form-control mt-2" type="text" name="member_name" placeholder="이름을 입력하세요.">
+								<span id="member-check"></span>
 								<input class="form-control" type="text" name="e_mail" placeholder="이메일을 입력하세요.">
-								<button type="submit" class="handa-btn"  id="find-id">아이디 찾기</button>
+								<span id="e-mail-check"></span>
+								<button type="button" class="handa-btn" id="find-id">아이디 찾기</button>
 							</form>
 						</div>
+						</th:block>
 						
-						<div class="find-pw" style="display: none;">
+						<th:block th:if="${type == 'pw'}">
+						<div class="find-pw">
 							<p>비밀번호를 잊으셨나요? 아래의 정보를 입력해주세요.</p>
 							<form action="/member/find/pw" method="post">
 								<input class="form-control mt-3" type="hidden" name="type" value="pw">
-								<input class="form-control mt-2" type="text" name="member_id" placeholder="아이디를 입력하세요.">
+								<input class="form-control mt-2 member_id" type="text" name="member_id" placeholder="아이디를 입력하세요.">
+								<span id="member-check"></span>
 								<input class="form-control" type="text" name="e_mail" id="pw_email" placeholder="이메일을 입력하세요.">
+								<span id="e-mail-check"></span>
 								<button type="button" class="handa-btn" id="find-pw">비밀번호 찾기</button>
 							</form>
 						</div>
+						</th:block>
 						
 					</div>
 					</th:block>
@@ -64,21 +72,18 @@
 						<div class="col-lg-6 find-content find-result">
 							<!-- 메뉴 탭 -->
 							<div class="find-tab">
-								<a href="/member/find" data-type="find-id" class=" find-id-menu active">아이디 찾기</a> 
-								<a href="/member/find" data-type="find-pw" class=" find-pw-menu">비밀번호 찾기</a>
+								<a href="/member/find/id" data-type="find-id" class=" find-id-menu active">아이디 찾기</a> 
+								<a href="/member/find/pw" data-type="find-pw" class=" find-pw-menu">비밀번호 찾기</a>
 							</div>
 							<h4>아이디 찾기 결과입니다.</h4>
 							<div th:each="user : ${userList}" class="user-list">
 								<div>
-								<span>아이디</span>
-								<p th:text="${user.member_id}"></p>
+								<span>아이디: </span>
+								<p th:text="${user.member_id}" class="mem_id"></p>
 								</div>
-								<span>이름</span>
-								<span th:text="${user.member_name}"></span>
-								<span>이메일</span>
-								<span th:text="${user.e_mail}"></span>
-								<span th:text="${#strings.substring(user.createdate, 0, 10)}"></span>
-								<span>가입</span>
+								<p th:text="${'이름: ' + user.member_name}"></p>
+								<p th:text="${'이메일: ' + user.e_mail}"></p>
+								<p class="createdate" th:text="${#strings.substring(user.createdate, 0, 10) + ' 가입'}"></p>
 							</div>
 							<div class="text-center">
 								<a href="/member/login" th:if="${!#lists.isEmpty(userList)}">로그인하러 가기</a>
@@ -92,8 +97,8 @@
 					<div class="col-lg-6 find-content find-result" style="display: none;">
 						<!-- 메뉴 탭 -->
 						<div class="find-tab">
-							<a href="/member/find" data-type="find-id" class=" find-id-menu active">아이디 찾기</a> 
-							<a href="/member/find" data-type="find-pw" class=" find-pw-menu">비밀번호 찾기</a>
+							<a href="/member/find/id" data-type="find-id" class=" find-id-menu">아이디 찾기</a> 
+							<a href="/member/find/pw" data-type="find-pw" class=" find-pw-menu active">비밀번호 찾기</a>
 						</div>
 						<h4>비밀번호 찾기 결과입니다.</h4>
 						<div th:each="user : ${userList}">
@@ -116,23 +121,6 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 $(document).ready(function(){
-	$(".find-tab-menu").on("click", function (e) {
-		 e.preventDefault();
-		 
-		 if ($(this).data('type') === "find-id") {
-			$('.find-id').css('display', 'block'); 
-			$('.find-pw').css('display', 'none');
-			$('.find-id-menu').addClass('active');
-			$('.find-pw-menu').removeClass('active');
-		 }
-		 
-		 if ($(this).data('type') === "find-pw") {
-				$('.find-id').css('display', 'none'); 
-				$('.find-pw').css('display', 'block');
-				$('.find-pw-menu').addClass('active');
-				$('.find-id-menu').removeClass('active');
-			 }
-	});	
 	
 	function sendPWMail(member_id, e_mail) {
 		$.ajax({
@@ -154,8 +142,83 @@ $(document).ready(function(){
 		});
 	}
 	
+	$("input[name=e_mail]").keyup(function(e) {
+		const target = $(this);
+		const regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+		
+		
+		if (regExp.test(target.val())) {				
+			console.log('올바른 이메일 형식입니다.');
+			$("#e-mail-check").text('올바른 이메일 형식입니다.');
+			$("#e-mail-check").css('color', 'green');
+		} else {
+			$("#e-mail-check").text('이메일 형식이 올바르지 않습니다.');
+			$("#e-mail-check").css('color', 'red');
+		}
+	});
+	
+	$("#find-id").on("click", function (e) {
+		e.preventDefault();
+		
+		if ($('input[name=member_name]').val() == "") {
+			$("#member-check").text('이름을 작성해주세요.');
+			$("#member-check").css('color', 'red');
+			
+			return;
+		}
+		
+		if ($('input[name=e_mail]').val() == "") {
+			$("#e-mail-check").text('이메일을 작성해주세요.');
+			$("#e-mail-check").css('color', 'red');
+			
+			return;
+		}
+		
+		const target =$('input[name=e_mail]');
+		const regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+		
+		
+		if (!regExp.test(target.val())) {				
+			
+			$("#e-mail-check").text('이메일 형식이 올바르지 않습니다.');
+			$("#e-mail-check").css('color', 'red');
+			
+			return;
+		}
+		
+		
+		
+		$("#find-id-form").submit();
+	});
+	
 	$("#find-pw").on("click", function (e) {
 		e.preventDefault();
+		
+		if ($('input[name=member_id]').val() == "") {
+			$("#member-check").text('아이디를 작성해주세요.');
+			$("#member-check").css('color', 'red');
+			
+			return;
+		}
+		
+		if ($('input[name=e_mail]').val() == "") {
+			$("#e-mail-check").text('이메일을 작성해주세요.');
+			$("#e-mail-check").css('color', 'red');
+			
+			return;
+		}
+		
+		const target =$('input[name=e_mail]');
+		const regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+		
+		
+		if (!regExp.test(target.val())) {				
+			
+			$("#e-mail-check").text('이메일 형식이 올바르지 않습니다.');
+			$("#e-mail-check").css('color', 'red');
+			
+			return;
+		}
 		
 		const member_id = $('input[name=member_id]').val();
 		const e_mail = $('#pw_email').val();

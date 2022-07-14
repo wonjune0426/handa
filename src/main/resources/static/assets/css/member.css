@@ -600,9 +600,19 @@
 	background: #f1f4fc;
 }
 
-.find-content .user-list p {
-	font-size: 16px;
+.find-content .user-list .mem_id {
 	font-weight: bold;
 	display: inline-block;
+}
+
+.find-content .user-list p {
+	font-size: 16px;
+	
+	margin-bottom: 5px;
+}
+
+.find-content .user-list .createdate {
+	font-size: 14px;
+	color: #909090;
 }
 
