@@ -56,7 +56,7 @@
 											</div>
 											<div class="col-10">
 												<input type="text" name="challenge_name" class="form-control "
-													placeholder="챌린지 이름" required="">
+													placeholder="챌린지 이름" maxlength="150" lrequired="">
 											</div>
 										</div>
 
@@ -106,7 +106,7 @@
 														id="challenge_type" style="width:50%">
 														<option value="무료">무료</option>
 														<option value="유료">유료</option>
-														<input type="text"
+														<input type="text" maxlength="20"
 															onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
 															style="width:60%;" name="challenge_cost"
 															class="form-control" id="challenge_cost"
@@ -212,6 +212,11 @@
 		});
 
 
+		var today = new Date();
+		var year = today.getFullYear();
+		var month = ('0' + (today.getMonth() + 1)).slice(-2);
+		var day = ('0' + today.getDate()).slice(-2);
+		var todaydate = year + '-' + month + '-' + day;
 
 
 		$("#modal-btn").hover(function () {
@@ -241,9 +246,10 @@
 			$('.modal').toggleClass('show')
 		});
 
+		var pattern_spc = /[~!@#$%^&*()_+|<>?:{}]/;
 		var searchEvent = function () {
 			$('#img-list').empty();
-			if ($('#search-word').val() != '') {
+			if ($('#search-word').val().length > 0 && $.trim($('#search-word').val()) != '' && !(pattern_spc.test($('#search-word').val()))) {
 				$.ajax({ // ajax 기본형태
 					//////////////////// send(가는것)
 					url: "http://localhost:8080/imagelist/" + $('#search-word').val(),
@@ -272,7 +278,7 @@
 			} else {
 				Swal.fire({
 					icon: 'error',
-					text: '검색어를 입력해주세요',
+					text: '공백과 특수문자를 제외한 검색어를 입력해주세요',
 					allowEnterKey: false
 				})
 			}
@@ -322,11 +328,11 @@
 			var enddate = $("input[name=enddate]").val()
 			var dateRegexp = /[0-9]{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])/;
 
-			if ($("input[name=challenge_name]").val() == null || $("input[name=challenge_name]").val() == "" || $("input[name=challenge_name]").val().length > 25) {
+			if ($("input[name=challenge_name]").val().length<=0||$.trim($("input[name=challenge_name]").val())==''|| $("input[name=challenge_name]").val().length > 50) {
 				$("input[name=challenge_name]").focus()
 				Swal.fire({
 					icon: 'warning',
-					text: '제목이 없거나 25자 이상입니다.',
+					text: '제목은 공백, 특수문자 제외 50자입니다.',
 				})
 
 			} else if ($("#profile-img").attr("src") == "../assets/img/defaultImg.png") {
@@ -347,6 +353,13 @@
 					icon: 'warning',
 					text: '카테고리는 필수항목 입니다.'
 				});
+			} else if (todaydate>=startdate) {
+				$("input[name=startdate]").focus()
+				Swal.fire({
+					icon: 'warning',
+					text: '오늘날짜는 시작날짜 설정이 불가능합니다.'
+				})
+
 			} else if (!dateRegexp.test(startdate) || !dateRegexp.test(enddate)) {
 				$("input[name=startdate]").focus()
 				Swal.fire({

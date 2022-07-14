@@ -65,7 +65,8 @@
 											</div>
 											<div class="col-10">
 												<input type="text" name="challenge_name" class="form-control "
-													placeholder="챌린지 이름" th:value="${challenge.challenge_name}">
+													placeholder="챌린지 이름" maxlength="150"
+													th:value="${challenge.challenge_name}">
 											</div>
 										</div>
 
@@ -90,7 +91,7 @@
 												<label class="create-label">기간</label>
 											</div>
 											<div class="col-5">
-												<input type="text"  name="startdate" class="form-control"
+												<input type="text" name="startdate" class="form-control"
 													placeholder="시작날짜" required="" th:value="${challenge.startdate}">
 											</div>
 											<div class="col-5">
@@ -176,12 +177,18 @@
 <!-- End #main -->
 </div>
 <th:block layout:fragment="javascript">
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="/build/ckeditor.js"></script>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 	<script th:inline="javascript">
 
+		var today = new Date();
+		var year = today.getFullYear();
+		var month = ('0' + (today.getMonth() + 1)).slice(-2);
+		var day = ('0' + today.getDate()).slice(-2);
+		var todaydate = year + '-' + month + '-' + day;
 
 		let editor;
 		ClassicEditor
@@ -220,7 +227,6 @@
 			$("input[name=enddate]").datepicker({
 				dateFormat: 'yy-mm-dd'
 			});
-
 
 
 			$("#modal-btn").hover(function () {
@@ -262,7 +268,7 @@
 					$("input[name=sub_category]").attr("value", "운동")
 					$("input[name=main_category]").attr("value", "자기계발")
 					break;
-					
+
 			}
 			switch (challenge_type) {
 				case "유료":
@@ -296,7 +302,7 @@
 
 		var searchEvent = function () {
 			$('#img-list').empty();
-			if ($('#search-word').val() != '') {
+			if ($('#search-word').val().length > 0 && $.trim($('#search-word').val()) != '' && !(pattern_spc.test($('#search-word').val()))) {
 				$.ajax({ // ajax 기본형태
 					//////////////////// send(가는것)
 					url: "http://localhost:8080/imagelist/" + $('#search-word').val(),
@@ -347,14 +353,50 @@
 			var dateRegexp = /[0-9]{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])/;
 
 
-			if ($("input[name=challenge_name]").val() == null || $("input[name=challenge_name]").val() == "" || $("input[name=challenge_name]").val().length > 25) {
-				alert("제목없거나 너무 김");
-			} else if (editor.getData().length > 1000) {
-				alert("내용 입력 값 초과");
+			if ($("input[name=challenge_name]").val().length <= 0 || $.trim($("input[name=challenge_name]").val()) == '' || $("input[name=challenge_name]").val().length > 50) {
+				$("input[name=challenge_name]").focus()
+				Swal.fire({
+					icon: 'warning',
+					text: '제목은 공백, 특수문자 제외 50자입니다.',
+				})
+
+			} else if ($("#profile-img").attr("src") == "../assets/img/defaultImg.png") {
+				$("#modal-btn").focus()
+				Swal.fire({
+					icon: "warning",
+					text: "썸네일 이미지를 선택해주세요."
+				})
+
+			} else if (editor.getData().length > 3000) {
+				Swal.fire({
+					icon: 'warning',
+					text: '내용이 너무 길어요'
+				})
+			}
+			else if (todaydate >= startdate) {
+				$("input[name=startdate]").focus()
+				Swal.fire({
+					icon: 'warning',
+					text: '오늘날짜는 시작날짜 설정이 불가능합니다.'
+				})
+
 			} else if (!dateRegexp.test(startdate) || !dateRegexp.test(enddate)) {
-				alert("날짜형식 오류")
+				$("input[name=startdate]").focus()
+				Swal.fire({
+					icon: 'warning',
+					text: '날짜의 형식이 맞지 않아요'
+				})
 			} else if (startdate > enddate) {
-				alert("종료날짜 설정 오류")
+				$("input[name=enddate]").focus()
+				Swal.fire({
+					icon: 'warning',
+					text: '종료날짜 설정이 잘못되었어요'
+				})
+			} else if ($("#challenge_type").val() == "유료" && $("input[name=challenge_cost]").val() == "") {
+				Swal.fire({
+					icon: 'warning',
+					text: '챌린지 금액을 입력해 주세요'
+				})
 			} else {
 				cost = $("input[name=challenge_cost]").val().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
 				$.ajax({
