@@ -353,11 +353,11 @@
 			var dateRegexp = /[0-9]{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])/;
 
 
-			if ($("input[name=challenge_name]").val().length <= 0 || $.trim($("input[name=challenge_name]").val()) == '' || $("input[name=challenge_name]").val().length > 150) {
+			if ($("input[name=challenge_name]").val().length <= 0 || $.trim($("input[name=challenge_name]").val()) == '' || $("input[name=challenge_name]").val().length > 50) {
 				$("input[name=challenge_name]").focus()
 				Swal.fire({
 					icon: 'warning',
-					text: '제목은 공백, 특수문자 제외 150자입니다.',
+					text: '제목은 공백, 특수문자 제외 50자입니다.',
 				})
 
 			} else if ($("#profile-img").attr("src") == "../assets/img/defaultImg.png") {
