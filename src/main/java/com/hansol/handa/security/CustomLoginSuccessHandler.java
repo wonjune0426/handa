@@ -54,7 +54,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 		}
 
 		// 메일 인증된 유저인 경우
-		if (roleNames.contains("ROLE_CERTIFY_USER")) {
+		//if (roleNames.contains("ROLE_CERTIFY_USER")) {
 
 			SavedRequest savedRequest = requestCache.getRequest(request, response);
 
@@ -63,9 +63,6 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 			// 기존 Session의 prePage attribute 제거
 			String prePage = (String) request.getSession().getAttribute("prePage");
 			
-
-			// log.info("이전 페이지: " + prePage);
-
 			if (prePage != null) {
 				request.getSession().removeAttribute("prePage");
 			}
@@ -73,12 +70,18 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 			
 
 			// 기본 uri
-			String uri = "/";
+			String uri = "";
+			
+			log.info("prePage: " + prePage);
+			log.info("savedRequest: " + savedRequest);
 
-			// savedRequest 가 존재하는 경우 = 인증 권한이 없는 페이지 접근
+			// savedRequest 가 존재하는 경우 = 인증 권한이 있는 페이지 접근
 			// Security Filter가 인터셉트하여 savedRquest에 세션 저장
 			if (savedRequest != null) {
 				uri = savedRequest.getRedirectUrl();
+				
+				log.info("인터셉트한 uri: " + uri);
+				
 			} else if (prePage != null && !prePage.equals("")) {
 				// 회원가입 -> 로그인으로 넘어온 경우 "/"로 redirect
 				if (prePage.contains("/member/register")) {
@@ -89,7 +92,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 			}
 
 			redirectStrategy.sendRedirect(request, response, uri);
-		}
+		//}
 
 	}
 

@@ -39,9 +39,7 @@ public class UserController {
 			HttpServletRequest request) {
 		log.info("login---------------------------------------");
 
-		// log.info("error:" + error);
-		// log.info("logout:" + logout);
-
+		// 아이디 비밀번호 입력 오류
 		if (error != null) {
 
 			rttr.addFlashAttribute("error", "아이디 또는 비밀번호를 잘못 입력했습니다.\n" + "입력하신 내용을 다시 확인해주세요.");
@@ -54,24 +52,20 @@ public class UserController {
 			model.addAttribute("logout", "Logout");
 		}
 
+		// 챌린지 참여하기에서 넘어온 경우
 		if (challenge_id != null) {
 			log.info("" + challenge_id);
 			request.getSession().setAttribute("detail", challenge_id);
 		}
 
 		// 로그인 후 이전 페이지로 이동 - 이전 페이지로 되돌아가기 위한 Refer 헤더 값을 세션의 prePage attribute 로 저장
-		String uri = request.getHeader("Refer");
-		// log.info("refer: " + uri);
+		String uri = request.getHeader("Referer");
+		
+		log.info("로그인 전 Refer: " + uri);
+		
 		if (uri != null && !uri.contains("/login")) {
 			request.getSession().setAttribute("prePage", uri);
 		}
-
-		/*
-		 * if (uri != null && !uri.contains("/challenge/detail")) {
-		 * request.getSession().setAttribute("prePage", uri);
-		 * 
-		 * // log.info("refer challenge detail"); }
-		 */
 
 		return "member/login";
 	}
