@@ -114,8 +114,8 @@
 											<div class="cost-div">
 												<a th:href="@{/challenge/detail(challenge_id=${produce.challenge_id})}" 
 													th:text="'[' + ${produce.subcategory_name} + '] ' + ${produce.challenge_name}" class="ch-card-title"></a>
-												<img th:if="${produce.challenge_type} == '유료'" th:src="@{../assets/img/won.png}" alt=""
-														class="challenge_cost">
+<!-- 												<img th:if="${produce.challenge_type} == '유료'" th:src="@{../assets/img/won.png}" alt=""
+														class="challenge_cost"> -->
 											</div>
 											<!-- <p th:text="${produce.startdate} + ' ~ ' + ${produce.enddate}"></p> -->
 											<div>
@@ -125,7 +125,10 @@
 											<p th:text="'참여인원 ' + ${produce.joinVO.count} + '명'"></p>
 											<div class="state">
 												<div class="open-dt" th:text="${produce.createdate} + ' 생성'"></div>
+												
 												<div class="state-label" th:text="${produce.challenge_state}"></div>
+												<img th:if="${produce.challenge_type} == '유료'" th:src="@{../assets/img/won.png}" alt=""
+														class="challenge_cost">
 											</div>
 											<div class="ch-card-btn-div">
 												<button id="challenge-amend" th:challenge_id="${produce.challenge_id}"

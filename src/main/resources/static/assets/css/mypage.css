@@ -445,6 +445,7 @@
  	width : 30px;
  	float : right;
  	vertical-align: middle;
+ 	margin-right: 10px;
  }
  
 .ch-card-btn-div {
@@ -459,11 +460,12 @@
 }
 
 .challenge-card .state {
-    display: flex;
+    /* display: flex; */
     flex-direction: row;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     font-size: 14px;
     margin: 10px 0px 15px 0px;
+    height: 30px;
 }
 
 .challenge-card .state > div {
@@ -473,7 +475,15 @@
     font-size: 12px;
     color: #747474;
     
-    margin-top:2px;
+    margin-top:3px;
+}
+
+.challenge-card .open-dt {
+	float : left;
+}
+
+.challenge-card .state-label {
+	float : right;
 }
 
 .calender-content {
