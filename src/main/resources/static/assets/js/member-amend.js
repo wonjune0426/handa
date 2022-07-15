@@ -58,7 +58,7 @@ $(document).ready(function() {
 
 	$("#ex_filename").change(function() {
 
-		console.log('버튼 동작확인'); // 로그 찍힘
+		// console.log('버튼 동작확인'); // 로그 찍힘
 
 		const uploadFile = $('input[name=uploadFile]')[0].files[0];
 
@@ -161,7 +161,7 @@ $(document).ready(function() {
 				'member_id': $("#member_id").val()
 			},
 			success: function(data) {
-				console.log(data);
+				// console.log(data);
 				
 				Swal.fire({
 					icon: 'success',

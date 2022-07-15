@@ -25,7 +25,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 
 	private final RequestCache requestCache = new HttpSessionRequestCache();
 	private final RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
-	
+
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication auth)
 			throws IOException, ServletException {
@@ -54,7 +54,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 		}
 
 		// 메일 인증된 유저인 경우
-		//if (roleNames.contains("ROLE_CERTIFY_USER")) {
+		if (roleNames.contains("ROLE_CERTIFY_USER")) {
 
 			SavedRequest savedRequest = requestCache.getRequest(request, response);
 
@@ -83,16 +83,20 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 				log.info("인터셉트한 uri: " + uri);
 				
 			} else if (prePage != null && !prePage.equals("")) {
+				
+				uri = prePage;
+				
 				// 회원가입 -> 로그인으로 넘어온 경우 "/"로 redirect
-				if (prePage.contains("/member/register")) {
+				if (prePage.contains("/member") || prePage.contains("/mypage") || prePage.contains("/challenge-amend")) {
 					uri = "/";
-				} else {
-					uri = prePage;
-				}
+				} 
+				
+					
+				
 			}
 
 			redirectStrategy.sendRedirect(request, response, uri);
-		//}
+		}
 
 	}
 
