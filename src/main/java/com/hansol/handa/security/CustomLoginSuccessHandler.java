@@ -42,26 +42,32 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 		
 		// 이전 링크가 detail인 경우 (상세 페이지에서 넘어온 경우)
 		Integer detail = (Integer)request.getSession().getAttribute("detail");
-
-		if (detail != null) {
-			response.sendRedirect("/challenge/detail?challenge_id=" + detail);
-			
-			return;
-		}
 		
+		SavedRequest savedRequest = requestCache.getRequest(request, response);
+
+		String prePage = (String) request.getSession().getAttribute("prePage");
+
+		
+		// 메일 미인증 유저
 		if (roleNames.contains("ROLE_USER")) {
-			response.sendRedirect("/member/nonCertify");
+		
+			// 메인, 리스트, 상세 제외하고 모두 인증화면으로 이동하기
+			response.sendRedirect("/member/nonCertify");					
 		}
 
 		// 메일 인증된 유저인 경우
 		if (roleNames.contains("ROLE_CERTIFY_USER")) {
+			
+			if (detail != null) {
+				response.sendRedirect("/challenge/detail?challenge_id=" + detail);
+				
+				return;
+			}
 
-			SavedRequest savedRequest = requestCache.getRequest(request, response);
 
 			// 로그인 후 직전 페이지로 이동
 			// prePage가 존재하는 경우 사용자가 직접 /member/login 경로로 로그인 요청
 			// 기존 Session의 prePage attribute 제거
-			String prePage = (String) request.getSession().getAttribute("prePage");
 			
 			if (prePage != null) {
 				request.getSession().removeAttribute("prePage");
