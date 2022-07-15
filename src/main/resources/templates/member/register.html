@@ -415,13 +415,12 @@
 
 				}
 
-				// 전화번호 작성여부 확인 & 중간에 '-' 표시 넣기
-				if (memberCall == "") {
+				// 전화번호 작성여부 확인 & 중간에 '-' 표시 넣기 & 전화번호 길이 확인
+				if (memberCall == "" || memberCall.length != 13) {
 
 					loadSwal('전화번호를 작성 해주세요.');
 
 					return;
-
 				}
 
 				// email 작성여부 확인 & 형식에 맞게 작성했는지 확인
@@ -431,6 +430,15 @@
 
 					return;
 
+				}
+				
+				const regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+				
+				if (!regExp.test(memberEmail)) {
+					
+					loadSwal('이메일을 형식에 맞게 작성 해주세요.');
+
+					return;
 				}
 
 				// 성별 버튼 클릭 안되어있으면 경고창 표시

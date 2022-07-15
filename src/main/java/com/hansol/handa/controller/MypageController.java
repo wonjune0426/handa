@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +30,7 @@ public class MypageController {
 	
 	
 	// 마이 페이지 화면
+	@PreAuthorize("principal.Username == #member_id")
 	@GetMapping("")
 	public String getIndex(@RequestParam String member_id, Model model) {
 		UserVO memberInfo = mypageService.selectMemberInfo(member_id);					// 내 정보 조회
