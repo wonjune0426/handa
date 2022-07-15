@@ -222,7 +222,7 @@
 								</div>
 							</div>
 
-							<div style="padding-bottom: 50px;">
+							<div id="description" style="padding-bottom: 50px;">
 								<b id="explanation">챌린지 설명</b>
 								<br>
 								<p th:utext="${challengeDetail.description}"></p>
@@ -326,11 +326,12 @@
 			createMember =/*[[${createMember.member_id}]]*/'default';
 			/*]]>*/
 
+			$('#description a').attr("target","_blank")
+			
 			function sweetAlert(msg) {
 				Swal.fire({
 					icon: 'success',
-					text: msg,
-					allowEnterKey: false
+					text: msg
 				})
 			}
 
@@ -585,12 +586,6 @@
 				comment_ajax();
 			})
 
-			$("#comment_content").keydown(function (key) {
-				if (key.keyCode == 13) {
-					sweetAlert("댓글이 입력됐습니다.")
-					comment_ajax();
-				}
-			})
 
 			//댓글 입력 ajax
 			var comment_ajax = function () {
@@ -679,43 +674,6 @@
 					Swal.fire({
 						icon: 'warning',
 						text: "내용을 입력해주세요",
-						allowEnterKey: false
-					})
-				}
-			})
-
-			$(document).on("keydown", ".update-content", function (key) {
-				if (key.keyCode == 13 && $(this).parent().parent().parent().find('.update-content').val().length > 0 && $.trim($(this).parent().parent().parent().find('.update-content').val()) != '') {
-					$.ajax({
-						url: "/comment-amend",
-						method: "POST",
-						async: false,
-						data: {
-							member_id: login_memberId,
-							challenge_id: challenge_id,
-							comment_id: $(this).parent().parent().parent().find('.comment-id').val(),
-							comment_content: $(this).parent().parent().parent().find('.update-content').val()
-						},
-						//////////////////// recv
-						success: function () {
-							commnet_read();
-						},
-						error: function (xhr, status, error) { // (파라미터 생략가능)
-							alert("error");
-						}
-						////////////////////
-					})
-					sweetAlert("댓글이 수정되었습니다")
-				} else if (key.keyCode == 13 && ($(this).parent().parent().parent().find('.update-content').val().length <= 0 || $.trim($(this).parent().parent().parent().find('.update-content').val()) == '')) {
-					Swal.fire({
-						icon: 'warning',
-						text: "내용을 입력해주세요",
-						allowEnterKey: false
-					})
-				} else if ($(this).parent().parent().parent().find('.update-content').val().length > 150) {
-					Swal.fire({
-						icon: 'warning',
-						text: "댓글은 150자 이내로 작성해주세요",
 						allowEnterKey: false
 					})
 				}
