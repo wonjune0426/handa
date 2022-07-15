@@ -165,6 +165,8 @@
 								<div class="state">
 									<div class="open-dt" th:text="${popular.createdate} + ' 생성'"></div>
 									<div class="state-label" th:text="${popular.challenge_state}"></div>
+									<img th:if="${popular.challenge_type} == '유료'" th:src="@{../assets/img/won.png}" alt=""
+										class="challenge_cost">
 								</div>
 							</div>
 						</div>
