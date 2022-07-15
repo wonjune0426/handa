@@ -106,7 +106,7 @@
 														id="challenge_type" style="width:50%">
 														<option value="무료">무료</option>
 														<option value="유료">유료</option>
-														<input type="text" maxlength="20"
+														<input type="text" maxlength="10"
 															onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
 															style="width:60%;" name="challenge_cost"
 															class="form-control" id="challenge_cost"
@@ -357,7 +357,7 @@
 				$("input[name=startdate]").focus()
 				Swal.fire({
 					icon: 'warning',
-					text: '오늘날짜는 시작날짜 설정이 불가능합니다.'
+					text: '시작일은 '+todaydate+' 이후로 설정해주세요'
 				})
 
 			} else if (!dateRegexp.test(startdate) || !dateRegexp.test(enddate)) {
