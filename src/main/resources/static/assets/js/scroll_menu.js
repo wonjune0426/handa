@@ -12,7 +12,7 @@ $('.detail_menu').each(function(index){
 
 $(function() {
         var scrollMenu = $("#scrollMenu").offset().top;
-        
+
         $("#scrollMenu").click(function(){
 			$("#scrollMenu").addClass("fixed");
 		})
@@ -26,4 +26,5 @@ $(function() {
           }
         })
       });
+
       

@@ -146,7 +146,6 @@ public class ChallengeController {
 		countMap.put("challenge_state", challengeState);
 
 		challengeCount = challengeService.selectCount(countMap);
-		logger.info(challengeCount + "개수");
 		
 		List<ChallengeVO> challengeList = challengeService.selectChallegeList(category, sortType, createdate, count,
 				searchWord, challengeType, challengeState);
