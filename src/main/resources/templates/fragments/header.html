@@ -37,7 +37,7 @@
 					<!-- 회원인 경우 -->
 					<th:block sec:authorize="isAuthenticated()">
 					
-						<li class="nav-link"><a href="" class="nav-link">
+						<li class="nav-link"><a class="nav-link">
 						<th:block th:text="${#authentication.principal.user.member_name + ' 님'}"></th:block>
 						</a></li>
 
