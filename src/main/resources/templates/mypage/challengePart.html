@@ -13,8 +13,8 @@
 		<link th:href="@{/assets/css/mypage.css}" rel="stylesheet">
 	</th:block>
 </head>
-<div layout:fragment="content">
 
+<div layout:fragment="content">
 	<main id="main">
 		<!-- ======= Breadcrumbs ======= -->
 		<div class="breadcrumbs">
@@ -27,24 +27,16 @@
 					</div>
 				</div>
 			</div>
-<!-- 			<nav>
+			
+			<nav>
 				<div class="container">
 					<ol>
-						<li><a th:href="@{/}">홈</a></li>
-            			<li><a th:href="@{/mypage?member_id=} + ${#authentication.principal.Username}">마이페이지</a></li>
-            			<li>참여 챌린지</li>
+						<li><a th:href="@{/}"><i class="fa-solid fa-house-chimney"></i></a></li>
+						<li>마이페이지</li>
+						<li>참여 챌린지</li>
 					</ol>
 				</div>
-			</nav> -->
-				<nav>
-					<div class="container">
-						<ol>
-							<li><a th:href="@{/}"><i class="fa-solid fa-house-chimney"></i></a></li>
-							<li>마이페이지</li>
-							<li>참여 챌린지</li>
-						</ol>
-					</div>
-				</nav>
+			</nav>
 		</div>
 		<!-- End Breadcrumbs -->
 		
@@ -52,42 +44,41 @@
 		<section id="service-details-list" class="services service-details">
 			<div class="container aos-init aos-animate" data-aos="fade-up">
 				<div class="row gy-4">
-						<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100" th:each="part : ${partList}">
-							<div class="card challenge-item">
-								<div class="card-img">
-									<img th:src="${part.thumbnail}" alt=""
-										class="img-fluid challenge-thumbnail">
-								</div>
-									<h3>
-										<a th:href="@{/challenge/detail(challenge_id=${part.challenge_id})}"
-											th:text="'[' + ${part.subcategory_name} + '] ' + ${part.challenge_name}"></a>
-									</h3>
-									<!-- <p id="card-p" th:text="${part.startdate} + ' ~ ' + ${part.enddate}"></p> -->
-									<div>
-										<p id="card-p" class="date" th:text="${part.startdate} + ' ~ ' + ${part.enddate}"></p>
-										<span th:if="${part.challenge_state} == '모집중'" class="dday-list" th:text="'D-' + ${part.dday}"></span>
-									</div>
-									<p id="card-p" th:text="'참여인원 ' + ${part.joinVO.count} + '명'"></p>
-									<div class="state-list">
-										<div class="open-dt" th:text="${part.createdate} + ' 생성'"></div>
-										<div class="state-label" th:text="${part.challenge_state}"></div>
-										<img th:if="${part.challenge_type} == '유료'" th:src="@{../assets/img/won.png}" alt=""
-													class="challenge_cost">
-									</div>
+					<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100" th:each="part : ${partList}">
+						<div class="card challenge-item">
+							<div class="card-img">
+								<img th:src="${part.thumbnail}" alt="" class="img-fluid challenge-thumbnail">
+							</div>
+							<h3>
+								<a th:href="@{/challenge/detail(challenge_id=${part.challenge_id})}"
+									th:text="'[' + ${part.subcategory_name} + '] ' + ${part.challenge_name}"></a>
+							</h3>
+							
+							<div>
+								<p id="card-p" class="date" th:text="${part.startdate} + ' ~ ' + ${part.enddate}"></p>
+								<span th:if="${part.challenge_state} == '모집중'" class="dday-list" th:text="'D-' + ${part.dday}"></span>
+							</div>
+									
+							<p id="card-p" th:text="'참여인원 ' + ${part.joinVO.count} + '명'"></p>
+							<div class="state-list">
+								<div class="open-dt" th:text="${part.createdate} + ' 생성'"></div>
+								<div class="state-label" th:text="${part.challenge_state}"></div>
+								<img th:if="${part.challenge_type} == '유료'" th:src="@{../assets/img/won.png}" alt="" class="challenge_cost">
+							</div>
 								
-              					<!-- 챌린지 탈퇴 버튼 -->
-              					<div class="mypage-btn-div">
-              						<button id="challenge-secession" class="handa-outline-btn"
-              							th:challenge_id="${part.challenge_id}" 
-											onclick="secession(this.getAttribute('challenge_id'))">탈퇴</button>
-              					</div>
-							 </div>
-          				</div><!-- End Card Item -->
+              				<!-- 챌린지 탈퇴 버튼 -->
+              				<div class="mypage-btn-div">
+              					<button id="challenge-secession" class="handa-outline-btn"
+              						th:challenge_id="${part.challenge_id}" onclick="secession(this.getAttribute('challenge_id'))">탈퇴</button>
+              				</div>
+						</div>
+          			</div><!-- End Card Item -->
       			</div>
       		</div>
 		</section>
 	</main>
 	<!-- End #main -->
+	
 <th:block layout:fragment="javascript">
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js'></script>

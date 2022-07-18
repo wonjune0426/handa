@@ -15,6 +15,7 @@ public interface ChallengeMapper {
 	/* 챌린지 리스트 조회 */
 	List<ChallengeVO> selectChallengeList(Map<String, Object> map);				// 전체 리스트 조회
 	List<ChallengeVO> selectChallegeListCategory(Map<String, Object> map);		// 카테고리 별 리스트 조회
+	List<ChallengeVO> selectChallegeListMainCategory(Map<String, Object> map);	// 대 카테고리 별 리스트 조회
 	
 	Map<String, String> selectCategoryName(int sub_category_id);				// 카테고리 이름 조회
 	int selectCount(HashMap<String, Object> countMap);							// 챌린지 개수 조회

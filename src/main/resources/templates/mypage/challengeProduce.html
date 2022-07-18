@@ -16,27 +16,19 @@
 
 <body>
 	<div layout:fragment="content">
-	<main id="main">
-		<!-- ======= Breadcrumbs ======= -->
-		<div class="breadcrumbs">
-			<div class="page-header d-flex align-items-center">
-				<div class="container position-relative">
-					<div class="row d-flex justify-content-center">
-						<div class="col-lg-6 text-center">
-							<h2>My Page</h2>
+		<main id="main">
+			<!-- ======= Breadcrumbs ======= -->
+			<div class="breadcrumbs">
+				<div class="page-header d-flex align-items-center">
+					<div class="container position-relative">
+						<div class="row d-flex justify-content-center">
+							<div class="col-lg-6 text-center">
+								<h2>My Page</h2>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-<!-- 			<nav>
-				<div class="container">
-					<ol>
-						<li><a th:href="@{/}">홈</a></li>
-            			<li><a th:href="@{/mypage?member_id=} + ${#authentication.principal.Username}">마이페이지</a></li>
-            			<li>생성 챌린지</li>
-					</ol>
-				</div>
-			</nav> -->
+				
 				<nav>
 					<div class="container">
 						<ol>
@@ -46,60 +38,57 @@
 						</ol>
 					</div>
 				</nav>
-		</div>
-		<!-- End Breadcrumbs -->
+			</div>
+			<!-- End Breadcrumbs -->
 
-		<!-- ======= Services Section ======= -->
-		<section id="service-details-list" class="services service-details">
-			<div class="container aos-init aos-animate" data-aos="fade-up">
-				<div class="row gy-4">
+			<!-- ======= Services Section ======= -->
+			<section id="service-details-list" class="services service-details">
+				<div class="container aos-init aos-animate" data-aos="fade-up">
+					<div class="row gy-4">
 						<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100" th:each="produce : ${produceList}">
 							<div class="card challenge-item">
 								<div class="card-img">
 									<img th:src="${produce.thumbnail}" alt="" class="img-fluid challenge-thumbnail">
 								</div>
-									<h3>
-										<a th:href="@{/challenge/detail(challenge_id=${produce.challenge_id})}"
-											th:text="'[' + ${produce.subcategory_name} + '] ' + ${produce.challenge_name}"></a>
-									</h3>
-									<!-- <p id="card-p" th:text="${produce.startdate} + ' ~ ' + ${produce.enddate}"></p> -->
-									<div>
-										<p id="card-p" class="date" th:text="${produce.startdate} + ' ~ ' + ${produce.enddate}"></p>
-										<span th:if="${produce.challenge_state} == '모집중'" class="dday-list" th:text="'D-' + ${produce.dday}"></span>
-									</div>
-									<p id="card-p" th:text="'참여인원 ' + ${produce.joinVO.count} + '명'"></p>
-									<div class="state-list">
-										<div class="open-dt" th:text="${produce.createdate} + ' 생성'"></div>
-										<div class="state-label" th:text="${produce.challenge_state}"></div>
-										<img th:if="${produce.challenge_type} == '유료'" th:src="@{../assets/img/won.png}" alt=""
-													class="challenge_cost">
-									</div>
-								
-              					<!-- 챌린지 수정, 삭제 버튼 -->
-              					<div class="mypage-btn-div">
-              						<button class="handa-outline-btn left" th:challenge_id="${produce.challenge_id}" 
-              							onclick="amend(this.getAttribute('challenge_id'))">수정</button>
-									<button class="handa-outline-btn right" th:challenge_id="${produce.challenge_id}"
-										onclick="remove(this.getAttribute('challenge_id'))">삭제</button>
+									
+								<h3>
+									<a th:href="@{/challenge/detail(challenge_id=${produce.challenge_id})}"
+										th:text="'[' + ${produce.subcategory_name} + '] ' + ${produce.challenge_name}"></a>
+								</h3>
+
+								<div>
+									<p id="card-p" class="date" th:text="${produce.startdate} + ' ~ ' + ${produce.enddate}"></p>
+									<span th:if="${produce.challenge_state} == '모집중'" class="dday-list" th:text="'D-' + ${produce.dday}"></span>
 								</div>
-            				</div>
-          				</div><!-- End Card Item -->
-      			</div>
-      		</div>
-		</section>
+									
+								<p id="card-p" th:text="'참여인원 ' + ${produce.joinVO.count} + '명'"></p>
+								
+								<div class="state-list">
+									<div class="open-dt" th:text="${produce.createdate} + ' 생성'"></div>
+										<div class="state-label" th:text="${produce.challenge_state}"></div>
+											<img th:if="${produce.challenge_type} == '유료'" th:src="@{../assets/img/won.png}" alt="" class="challenge_cost">
+										</div>
+										
+              							<!-- 챌린지 수정, 삭제 버튼 -->
+              							<div class="mypage-btn-div">
+              								<button class="handa-outline-btn left" th:challenge_id="${produce.challenge_id}" 
+              									onclick="amend(this.getAttribute('challenge_id'))">수정</button>
+											<button class="handa-outline-btn right" th:challenge_id="${produce.challenge_id}"
+												onclick="remove(this.getAttribute('challenge_id'))">삭제</button>
+										</div>
+            						</div>
+          						</div><!-- End Card Item -->
+      						</div>
+      					</div>
+				</section>
 		
-		<div id="modal">
+				<div id="modal"></div>
+			</main>
+			<!-- End #main -->
 			
-		</div>
-	</main>
-	<!-- End #main -->
 <th:block layout:fragment="javascript">
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js'></script>
-    
-<!--     <script src='https://unpkg.com/popper.js/dist/umd/popper.min.js'></script> -->
-<!-- 	<script src='https://unpkg.com/tooltip.js/dist/umd/tooltip.min.js'></script> -->
-	
 <script src='../assets/js/calendar.js'></script>
 <script th:inline="javascript">
 
@@ -118,11 +107,11 @@ function remove(challenge_id){
 		title: '삭제하시겠습니까?',
 		icon: 'warning',
 
-		showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
-		confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
-		cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
-		confirmButtonText: '삭제', // confirm 버튼 텍스트 지정
-		cancelButtonText: '취소', // cancel 버튼 텍스트 지정
+		showCancelButton: true, 		// cancel버튼 보이기. 기본은 원래 없음
+		confirmButtonColor: '#3085d6', 	// confrim 버튼 색깔 지정
+		cancelButtonColor: '#d33', 		// cancel 버튼 색깔 지정
+		confirmButtonText: '삭제', 		// confirm 버튼 텍스트 지정
+		cancelButtonText: '취소', 		// cancel 버튼 텍스트 지정
 
 	}).then(result => {
 		if (result.isConfirmed) {
@@ -138,7 +127,7 @@ function remove(challenge_id){
 				success: function () {
 					location.reload();
 				},
-				error: function (xhr, status, error) { // (파라미터 생략가능)
+				error: function (xhr, status, error) { 		// (파라미터 생략가능)
 					alert("error");
 				}
 

@@ -94,7 +94,7 @@ function infiniteScroll(category, sortType, createdate, count, searchWord, chall
 		}else{
 			// 총 페이지 개수
 			var pageTotal = ((challengeCount % challenge == 0) ? Math.round(challengeCount / challenge) : Math.round(challengeCount / challenge) + 1);
-			//console.log(challengeCount);
+			console.log(challengeCount);
 
 			// 마지막 페이지 까지
 			if(page != pageTotal){

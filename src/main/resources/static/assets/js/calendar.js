@@ -1,12 +1,14 @@
 /**
 *	마이페이지의 일정 관리(달력)
 */
-	
+
 function addCalendar(member_id){
+	// 캘린더 div
 	var calendarEl = document.getElementById('calendar');
-		// full-calendar 생성하기      
-		var calendar = new FullCalendar.Calendar(calendarEl, {
-		        		  
+		
+	// full-calendar 생성하기      
+	var calendar = new FullCalendar.Calendar(calendarEl, {
+				  
 		 // 해더에 표시할 툴바        
 		 headerToolbar: {          
 		 	left: 'prev,next today',          
@@ -21,7 +23,7 @@ function addCalendar(member_id){
 		 dayMaxEvents: true, 				// 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)        
 		 locale: 'ko', 						// 한국어 설정  
 
-		 events: function(info, successCallback, failureCallback){
+		 events: function(_info, successCallback, _failureCallback){
 			$.ajax({
 				type: 'GET',
 				url: "/mypage/challenge-all",
@@ -37,45 +39,45 @@ function addCalendar(member_id){
 					var events = [];
 					
 					// 생성 챌린지 추가
-					for(var i = 0; i < listProduce.length; i++){
-						if(listProduce[i]['maincategory_name'] == "취미"){
+					for(const produce of listProduce){
+						if(produce['maincategory_name'] == "취미"){
 							events.push({
-								title : '[' + listProduce[i]['subcategory_name'] + '] ' + listProduce[i]['challenge_name'],
-								start: listProduce[i]['startdate'],
-								end: listProduce[i]['enddate'],
-								color: '#80caa2',//'#8cc084',
-								url: '/challenge/detail?challenge_id=' + listProduce[i]['challenge_id'] 
+								title : '[' + produce['subcategory_name'] + '] ' + produce['challenge_name'],
+								start: produce['startdate'],
+								end: produce['enddate'],
+								color: '#80caa2',
+								url: '/challenge/detail?challenge_id=' + produce['challenge_id'] 
 							});
 						}
 						else{
 							events.push({
-								title : '[' + listProduce[i]['subcategory_name'] + '] ' + listProduce[i]['challenge_name'],
-								start: listProduce[i]['startdate'],
-								end: listProduce[i]['enddate'],
+								title : '[' + produce['subcategory_name'] + '] ' + produce['challenge_name'],
+								start: produce['startdate'],
+								end: produce['enddate'],
 								color: '#86a0e6',
-								url: '/challenge/detail?challenge_id=' + listProduce[i]['challenge_id'] 
+								url: '/challenge/detail?challenge_id=' + produce['challenge_id'] 
 							});
 						}
 					}
 					
 					// 참여 챌린지 추가
-					for(var i = 0; i < listPart.length; i++){
-						if(listPart[i]['maincategory_name'] == "취미"){
+					for(var j = 0; j < listPart.length; j++){
+						if(listPart[j]['maincategory_name'] == "취미"){
 							events.push({
-								title : '[' + listPart[i]['subcategory_name'] + '] ' + listPart[i]['challenge_name'],
-								start: listPart[i]['startdate'],
-								end: listPart[i]['enddate'],
+								title : '[' + listPart[j]['subcategory_name'] + '] ' + listPart[j]['challenge_name'],
+								start: listPart[j]['startdate'],
+								end: listPart[j]['enddate'],
 								color: '#80caa2',//'#8cc084',
-								url: '/challenge/detail?challenge_id=' + listPart[i]['challenge_id'] 
+								url: '/challenge/detail?challenge_id=' + listPart[j]['challenge_id'] 
 							});
 						}
 						else{
 							events.push({
-								title : '[' + listPart[i]['subcategory_name'] + '] ' + listPart[i]['challenge_name'],
-								start: listPart[i]['startdate'],
-								end: listPart[i]['enddate'],
+								title : '[' + listPart[j]['subcategory_name'] + '] ' + listPart[j]['challenge_name'],
+								start: listPart[j]['startdate'],
+								end: listPart[j]['enddate'],
 								color: '#86a0e6',
-								url: '/challenge/detail?challenge_id=' + listPart[i]['challenge_id'] 
+								url: '/challenge/detail?challenge_id=' + listPart[j]['challenge_id'] 
 							});
 						}
 					}

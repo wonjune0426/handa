@@ -95,6 +95,45 @@
 			</choose>
 	</select>
 	 
+	<!-- 대 카테고리 별 조회 -->
+	<select id="selectChallegeListMainCategory" parameterType="hashmap" resultMap="challengeMap">
+		SELECT challenge.challenge_id, challenge_name, thumbnail, startdate, enddate, 
+				createdate, challenge.member_id, subcategory_id, challenge_type, count, sub_category_name
+		from challenge, sub_category, main_category, (SELECT challenge.challenge_id, COUNT(*) as count  
+										from challenge, challenge_join
+										WHERE challenge.challenge_id = challenge_join.challenge_id
+										GROUP BY challenge.challenge_id) count_table
+		WHERE challenge.subcategory_id = sub_category.sub_category_id AND challenge.challenge_id = count_table.challenge_id AND sub_category.main_category_id = main_category.main_category_id
+			<choose>
+				<when test="category_id == 8"> AND main_category_name = '취미'</when>
+				<when test="category_id == 9"> AND main_category_name = '자기계발'</when>
+			</choose>
+			<if test = "searchWord != 'search'"> AND challenge_name like CONCAT('%', #{searchWord}, '%')</if>
+			<choose>
+				<when test="challenge_type == 1">AND challenge_type = "무료"</when>
+				<when test="challenge_type == 2">AND challenge_type = "유료"</when>
+			</choose>
+			<if test="challenge_state != 1">AND startdate > NOW()</if>
+			
+			<choose>
+				<!-- 최신순 -->
+				<when test="sortType == 0">
+					<if test="createdate != '0000-00-00 00:00:00'"><![CDATA[ AND createdate < #{createdate} ]]></if>
+					GROUP BY challenge.challenge_id order by createdate DESC LIMIT 12;
+				</when>
+				<!-- 오래된순 -->
+				<when test="sortType == 1">
+					<if test="createdate != '0000-00-00 00:00:00'"> AND createdate > #{createdate}</if>
+					GROUP BY challenge.challenge_id order by createdate ASC LIMIT 12;
+				</when>
+				<!-- 참여인원 순 -->
+				<when test="sortType == 2"> 
+					<if test="count != 0"><![CDATA[ AND if(#{count} = '1', count < 2 and createdate < #{createdate}, count < #{count} and createdate < #{createdate})]]></if>
+					GROUP BY challenge.challenge_id order by count desc, createdate DESC LIMIT 12;
+				</when>
+			</choose>
+	</select>
+	
 	<!-- 카테고리 이름 조회 -->
 	<select id="selectCategoryName" parameterType="int" resultType="map">
 		select sub_category.sub_category_name, main_category.main_category_name FROM sub_category, main_category 
@@ -105,8 +144,15 @@
 	<select id="selectCount" parameterType="hashmap" resultType="int">
 		SELECT COUNT(*) AS count
 		FROM challenge
-		<if test="sub_category_id != null or searchWord != 'search' or challengeType != 0">WHERE 1=1</if> 
+		<if test="main_category_id != null">, sub_category, main_category</if>
+		<if test="sub_category_id != null or searchWord != 'search' or challengeType != 0 or main_category_id != null">WHERE 1=1</if> 
+		<if test = "main_category_id != null">and challenge.subcategory_id = sub_category.sub_category_id 
+			AND sub_category.main_category_id = main_category.main_category_id </if>
 		<if test="sub_category_id != null">and subcategory_id = #{sub_category_id}</if>
+		<choose>
+			<when test="main_category_id == 8">AND main_category_name = "취미" </when>
+			<when test="main_category_id == 9">AND main_category_name = "자기계발" </when>
+		</choose>
 		<if test="searchWord != 'search'">and challenge_name like CONCAT('%', #{searchWord}, '%')</if>
 		<choose>
 			<when test="challengeType == 1">AND challenge_type = "무료"</when>

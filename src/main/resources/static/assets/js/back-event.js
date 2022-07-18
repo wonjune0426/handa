@@ -8,8 +8,11 @@ window.onpageshow = function(event) {
 		//var referrer = document.referrer;
 		//window.location.href = referrer;
 		//console.log(LogcalStorage.getItem('sort'));
-		
-		//localStorage.setItem("sort", '1');
+		////localStorage.setItem("sort", '');
+		//var test = localStorage.getItem('sort');
+		//console.log(test);
+	//	localStorage.setItem("sort", $('sortTypeSelect').value);
+	//	console.log(test);
 		//console.log(referrer);
 		//document.
 	}

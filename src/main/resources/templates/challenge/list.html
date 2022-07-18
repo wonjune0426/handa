@@ -23,32 +23,28 @@
 					</div>
 				</div>
 			</div>
-				<nav>
-					<div class="container">
-						<ol>
-							<li><a th:href="@{/}"><i class="fa-solid fa-house-chimney"></i></a></li>
+			<nav>
+				<div class="container">
+					<ol>
+						<li><a th:href="@{/}"><i class="fa-solid fa-house-chimney"></i></a></li>
+						
+						<!-- 전체 조회일 경우에만 표시 -->
+						<li th:if="${#strings.isEmpty(mainCategoryName)}" th:text="전체"></li>
 							
-							<!-- 전체 조회일 경우에만 표시 -->
-							<li th:if="${#strings.isEmpty(subCategoryName)}" th:text="전체"></li>
-							
-							<!-- 카테고리 조회일 경우에만 표시 -->
-							<li th:if="${not #strings.isEmpty(mainCategoryName)}" th:text=${mainCategoryName}></li>
-							<li th:if="${not #strings.isEmpty(subCategoryName)}" th:text=${subCategoryName}></li>
-						</ol>
-					</div>
-				</nav>
-			</div>
+						<!-- 카테고리 조회일 경우에만 표시 -->
+						<li th:if="${not #strings.isEmpty(mainCategoryName)}" th:text=${mainCategoryName}></li>
+						<li th:if="${not #strings.isEmpty(subCategoryName)}" th:text=${subCategoryName}></li>
+						
+					</ol>
+				</div>
+			</nav>
+		</div>
 		<!-- End Breadcrumbs -->
 
 		<!-- ======= Services Section ======= -->
 		<section id="service" class="services pt-0">
 			<div class="container" data-aos="fade-up">
-
 				<div class="row gy-4">
-<!-- 					<div class="create-challenge-div">
-						<a href="/create" class="create-challenge-btn">챌린지 생성</a>
-					</div> -->
-					
 					<div class="row gy-4">
 						<div class="btn-group order-div col-2">
 							<select id="sortTypeSelect" name="sortTypeSelect" class="form-select" onchange="select()">
@@ -74,41 +70,36 @@
 						</div>
 
 						<div class="search-div col-8" style="padding-right: 40px;">
-							<!-- <div class=""> -->
-								<form id="search-form" th:action="@{/search}" class="form-search handa-search-form">
-									<input id="search" th:name="searchword" type="text" class="form-control" 
+							<form id="search-form" th:action="@{/search}" class="form-search handa-search-form">
+								<input id="search" th:name="searchword" type="text" class="form-control" 
 									th:value="${searchWord}" placeholder="검색어를 입력하세요.">
-									<input type="hidden" name="category" th:value="${categoryID}">
-									<input type="hidden" name="sort_type" th:value="${sortType}">
-									<input type="hidden" name="challenge_type" th:value="${challengeType}">
-									<input th:if="${challenge_state} == 1" type="hidden" name="challenge_state" th:value="${challenge_state}">
+								<input type="hidden" name="category" th:value="${categoryID}">
+								<input type="hidden" name="sort_type" th:value="${sortType}">
+								<input type="hidden" name="challenge_type" th:value="${challengeType}">
+								<input th:if="${challenge_state} == 1" type="hidden" name="challenge_state" th:value="${challenge_state}">
 	
-									<button id="search-btn" type="submit"
-										class="handa-outline-btn list-search-btn">검색</button>
-								</form>
-							<!-- </div>
-							<div class="create-challenge-div"> -->
-								<a th:href="@{/challenge}" class="handa-btn create-btn">챌린지 생성</a>
-							<!-- </div> -->
+								<button id="search-btn" type="submit" class="handa-outline-btn list-search-btn">검색</button>
+							</form>
+
+							<a th:href="@{/challenge}" class="handa-btn create-btn">챌린지 생성</a>
 						</div>
 						
-	
 						<div id ="list-container" class="row gy-4"></div>
 						
 						<div id="end"></div>
-						</div>
 					</div>
 				</div>
+			</div>
 		</section>
 		<!-- End Services Section -->
 	</main>
 	<!-- End #main -->
 </div>
+
 <!-- include JS Script -->
 <th:block layout:fragment="javascript">
 	<script src='../assets/js/infinite-scroll.js'></script>
 	<script src="../assets/js/back-event.js"></script>
-	<!-- <script src='../assets/js/search_handling.js'></script> -->
 	<script th:inline="javascript">	
 
 		$(document).ready(function(){

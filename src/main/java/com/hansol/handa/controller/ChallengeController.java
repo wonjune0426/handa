@@ -56,7 +56,9 @@ public class ChallengeController {
 	}
 
 	/**
-	 * @param category : 카테고리 ID (1 ~ 6)
+	 * @param category : 카테고리 ID (1 ~ 7)
+	 * 					 추가 (8 : 취미 / 9 : 자기계발)
+	 * 
 	 * @param sort_type : 정렬 타입 (0: 최신 순, 1: 오래된 순, 2: 참여 인원 순)
 	 */
 
@@ -78,11 +80,19 @@ public class ChallengeController {
 			isCategory = false;
 		else {
 			int categoryID = Integer.parseInt(category);
-			Map<String, String> categoryName = challengeService.selectCategoryName(categoryID);
-
 			model.addAttribute("categoryID", categoryID);
-			model.addAttribute("subCategoryName", categoryName.get("sub_category_name"));
-			model.addAttribute("mainCategoryName", categoryName.get("main_category_name"));
+			// 소 카테고리 조회일 경우
+			if(categoryID < 8) {
+				Map<String, String> categoryName = challengeService.selectCategoryName(categoryID);
+
+				model.addAttribute("mainCategoryName", categoryName.get("main_category_name"));
+				model.addAttribute("subCategoryName", categoryName.get("sub_category_name"));
+			}
+			// 대 카테고리 조회일 경우
+			else {
+				if(categoryID == 8) model.addAttribute("mainCategoryName", "취미");
+				if(categoryID == 9) model.addAttribute("mainCategoryName", "자기계발");
+			}
 		}
 
 		// 챌린지 타입이 주어지지 않을 경우 (전체 조회)
@@ -120,8 +130,15 @@ public class ChallengeController {
 			int categoryID = Integer.parseInt(category);
 			Map<String, String> categoryName = challengeService.selectCategoryName(categoryID);
 
-			countMap.put("sub_category_id", categoryID);
-			map.put("subCategoryName", categoryName.get("sub_category_name"));
+			if(categoryID < 8) {
+				countMap.put("sub_category_id", categoryID);
+				map.put("subCategoryName", categoryName.get("sub_category_name"));
+			}
+			else {		
+				countMap.put("main_category_id", categoryID);
+				if(categoryID == 8) map.put("mainCategoryName", "취미");
+				if(categoryID == 9) map.put("mainCategoryName", "자기계발");
+			}
 		}
 
 		countMap.put("searchWord", searchWord);
@@ -129,7 +146,8 @@ public class ChallengeController {
 		countMap.put("challenge_state", challengeState);
 
 		challengeCount = challengeService.selectCount(countMap);
-
+		logger.info(challengeCount + "개수");
+		
 		List<ChallengeVO> challengeList = challengeService.selectChallegeList(category, sortType, createdate, count,
 				searchWord, challengeType, challengeState);
 
@@ -161,10 +179,16 @@ public class ChallengeController {
 		else {
 			int categoryID = Integer.parseInt(category);
 			Map<String, String> categoryName = challengeService.selectCategoryName(categoryID);
-
 			model.addAttribute("categoryID", categoryID);
-			model.addAttribute("subCategoryName", categoryName.get("sub_category_name"));
-			model.addAttribute("mainCategoryName", categoryName.get("main_category_name"));
+			
+			if(categoryID < 8) {
+				model.addAttribute("subCategoryName", categoryName.get("sub_category_name"));
+				model.addAttribute("mainCategoryName", categoryName.get("main_category_name"));
+			}
+			else {
+				if(categoryID == 8) model.addAttribute("mainCategoryName", "취미");
+				if(categoryID == 9) model.addAttribute("mainCategoryName", "자기계발");
+			}
 		}
 
 		// 챌린지 타입이 주어지지 않을 경우
