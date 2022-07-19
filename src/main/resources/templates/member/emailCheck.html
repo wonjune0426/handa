@@ -70,8 +70,13 @@
 							<div class="line-div">
 							</div>
 							<div class="before-send register-btn-div">
-								<p>메일 인증이 완료되었습니다. 로그인 하여 한다 서비스를 이용하세요.</p>
-								<a href="/member/login">로그인 하기</a> 
+								<th:block th:if="${msg == 'certify-success'}">
+									<p>메일 인증이 완료되었습니다. 로그인 하여 한다 서비스를 이용하세요.</p>
+									<a href="/member/login">로그인 하기</a>
+								</th:block> 
+								<th:block th:if="${msg == 'certify-fail'}">
+									<p>메일 인증에 실패했습니다. 메일 인증을 다시 진행해주세요.</p>
+								</th:block>
 							</div>
 						</div>
 						<!-- End Contact Form -->

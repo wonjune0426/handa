@@ -222,14 +222,13 @@ public class UserController {
 			rttr.addFlashAttribute("msg", "certify-success");
 			rttr.addFlashAttribute("memberId", vo.getMember_id());
 
-			return "redirect:/member/emailCheck";
 
 		} else { // 인증 실패
 			rttr.addFlashAttribute("msg", "certify-fail");
 			rttr.addFlashAttribute("error", "메일 인증에 실패하였습니다. 인증을 다시 진행해주세요.");
+			
 		}
-
-		return "redirect:/member/login";
+		return "redirect:/member/emailCheck";
 	}
 
 	// 메일 인증 완료 화면 호출
