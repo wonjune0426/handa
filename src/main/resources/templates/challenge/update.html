@@ -300,6 +300,7 @@
 			}
 		})
 
+		var pattern_spc = /[~!@#$%^&*()_+|<>?:{}]/;
 		var searchEvent = function () {
 			$('#img-list').empty();
 			if ($('#search-word').val().length > 0 && $.trim($('#search-word').val()) != '' && !(pattern_spc.test($('#search-word').val()))) {
@@ -317,7 +318,10 @@
 								)
 							}
 						} else {
-							alert("검색결과가 없습니다");
+							Swal.fire({
+								icon: 'error',
+								text: '검색결과가 없어요.'
+							})
 						}
 					},
 					error: function (xhr, status, error) { // (파라미터 생략가능)
@@ -377,7 +381,7 @@
 				$("input[name=startdate]").focus()
 				Swal.fire({
 					icon: 'warning',
-					text: '시작일은 '+todaydate+' 이후로 설정해주세요'
+					text: '시작일은 ' + todaydate + ' 이후로 설정해주세요'
 				})
 
 			} else if (!dateRegexp.test(startdate) || !dateRegexp.test(enddate)) {
