@@ -39,7 +39,7 @@
 										<div class="form-group mt-3">
 											<div class="img-wrapper">
 												<img alt="프로필 이미지" class="image--cover"
-													th:src="|${'http://172.27.0.174:8080/viewFile?fname=' + user.profile_path + '/' + user.profile_uuid + '_' + user.profile_name}|">
+													th:src="|${'/viewFile?fname=' + user.profile_path + '/' + user.profile_uuid + '_' + user.profile_name}|">
 											</div>
 											<h3 th:text="${user.member_name}" style="margin-top: 20px;">김한솔</h3>
 											<p th:text="${'(' + user.member_id + ')'}">(hansol)</p>

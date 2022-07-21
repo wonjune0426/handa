@@ -57,7 +57,7 @@
 									<div class="create-user">
 										<div class="img-wrapper">
 											<img class="image--cover"
-												th:src="|${'http://172.27.0.174:8080/viewFile?fname=' +createMember.profile_path + '/' + createMember.profile_uuid + '_' + createMember.profile_name}|">
+												th:src="|${'/viewFile?fname=' +createMember.profile_path + '/' + createMember.profile_uuid + '_' + createMember.profile_name}|">
 											<span class="vertical-align-bottom">[[${createMember.member_name}]]</span>
 											<small class="vertical-align-bottom"
 												th:if="${createMember.position_id}==1">수석</small>
@@ -525,7 +525,7 @@
 									`<div class="card p-3 mt-2">
 										<div class="d-flex justify-content-between align-items-center">
 											<div class="user d-flex flex-row align-items-center">
-												<img class='comment-image' src="http://172.27.0.174:8080/viewFile?fname=`+ img_src + `"> 
+												<img class='comment-image' src="/viewFile?fname=`+ img_src + `"> 
 													<span style="padding-left:10px"> 
 														<input class="comment-id" value="`+ result.commentList[i].comment_id + `" style="display:none"></input>
 														<small class="font-weight-bold text-primary">`+ result.memberList[i].member_name + `</small>
@@ -555,7 +555,7 @@
 									`<div class="card p-3 mt-2">
 										<div class="d-flex justify-content-between align-items-center">
 											<div class="user d-flex flex-row align-items-center">
-												<img class='comment-image' src="http://172.27.0.174:8080/viewFile?fname=`+ img_src + `">
+												<img class='comment-image' src="/viewFile?fname=`+ img_src + `">
 													<span style="padding-left:10px"> 
 														<small class="font-weight-bold text-primary">`+ result.memberList[i].member_name + `</small>
 														<small class="font-weight-bold">`+ position + `</small>

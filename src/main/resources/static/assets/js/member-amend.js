@@ -84,7 +84,7 @@ $(document).ready(function() {
 
 		$.ajax({
 			type: "POST",
-			url: "http://172.27.0.174:8080/uploadFile",
+			url: "/uploadFile",
 			data: formData,
 			dataType: "json",
 			contentType: false,
@@ -92,7 +92,7 @@ $(document).ready(function() {
 			success: function(data) {
 				const uploadPath = data.profile_path.replace(/\\/gi, "/");
 
-				const profileURL = "http://172.27.0.174:8080/viewFile?fname="
+				const profileURL = "/viewFile?fname="
 					+ uploadPath
 					+ "/"
 					+ data.profile_uuid
@@ -166,6 +166,7 @@ $(document).ready(function() {
 				Swal.fire({
 					icon: 'success',
 					title: '변경이 완료되었습니다.',
+					showConfirmButton: false,
 					timer: 800,
 					didOpen: () => {
 					timerInterval = setInterval(() => {

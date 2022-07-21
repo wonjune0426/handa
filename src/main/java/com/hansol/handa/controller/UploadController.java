@@ -108,7 +108,7 @@ public class UploadController {
 	@ResponseBody
 	public ResponseEntity<byte[]> viewFile(String fname) {
 		log.info("fname : " + fname);
-
+		
 		File file = new File(uploadServerPath + fname);
 
 		log.info("file : " + file);
