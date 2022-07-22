@@ -232,7 +232,25 @@
 
 		$("#challenge_type").change(function () {
 			if ($(this).val() == "유료") {
-				$("input[name=challenge_cost]").prop("disabled", false)
+				Swal.fire({
+					title: '유료챌린지',
+					text: "유료챌린지는 삭제와 탈퇴가 불가능합니다.",
+					icon: 'warning',
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+					cancelButtonColor: '#d33',
+					confirmButtonText: '확인',
+					cancelButtonText: "취소"
+				}).then((result) => {
+					if (result.isConfirmed) {
+						$("input[name=challenge_cost]").prop("disabled", false)
+					}
+					else {
+						$(this).val("무료")
+						$("input[name=challenge_cost]").prop("disabled", true)
+						$("input[name=challenge_cost]").val("")
+					}
+				})
 			} else {
 				$("input[name=challenge_cost]").prop("disabled", true)
 				$("input[name=challenge_cost]").val("")
@@ -302,6 +320,8 @@
 			$("#profile-img").addClass("profile-img");
 		});
 
+
+
 		$("#main-category").change(function () {
 			var main = $("#main-category").val();
 			if (main == "취미") {
@@ -328,7 +348,7 @@
 			var enddate = $("input[name=enddate]").val()
 			var dateRegexp = /[0-9]{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])/;
 
-			if ($("input[name=challenge_name]").val().length<=0||$.trim($("input[name=challenge_name]").val())==''|| $("input[name=challenge_name]").val().length > 12) {
+			if ($("input[name=challenge_name]").val().length <= 0 || $.trim($("input[name=challenge_name]").val()) == '' || $("input[name=challenge_name]").val().length > 12) {
 				$("input[name=challenge_name]").focus()
 				Swal.fire({
 					icon: 'warning',
@@ -353,11 +373,11 @@
 					icon: 'warning',
 					text: '카테고리는 필수항목 입니다.'
 				});
-			} else if (todaydate>=startdate) {
+			} else if (todaydate >= startdate) {
 				$("input[name=startdate]").focus()
 				Swal.fire({
 					icon: 'warning',
-					text: '시작일은 '+todaydate+' 이후로 설정해주세요'
+					text: '시작일은 ' + todaydate + ' 이후로 설정해주세요'
 				})
 
 			} else if (!dateRegexp.test(startdate) || !dateRegexp.test(enddate)) {

@@ -106,14 +106,11 @@
 											</div>
 											<div class="col-10">
 												<div style="display: flex;">
-													<select class="form-control main-category" name="challenge_type"
-														id="challenge_type" style="width:50%">
-														<input type="text"
-															onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
-															style="width:60%;" name="challenge_cost"
-															class="form-control" placeholder="금액을 입력해주세요" disabled>
-														</input>
-													</select>
+													<input type="text" class="form-control" name="challnege_type"
+														placeholder="종료날짜" required="" th:value=${challenge.challenge_type} readonly>
+													<input type="text" class="form-control" name="challenge_cost"
+														placeholder="종료날짜" required="" th:value=${challenge.challenge_cost} readonly>
+
 												</div>
 											</div>
 										</div>
@@ -270,18 +267,6 @@
 					break;
 
 			}
-			switch (challenge_type) {
-				case "유료":
-					$("select[name=challenge_type]").append("<option>유료</option><option>무료</option>")
-					$("input[name=challenge_cost]").prop("disabled", false)
-					var change_cost = challenge_cost.replace("원", "")
-					change_cost = change_cost.replace(",", "")
-					$("input[name=challenge_cost]").val(change_cost)
-					break;
-				case "무료":
-					$("select[name=challenge_type]").append("<option>무료</option><option>유료</option>")
-					break;
-			}
 
 		})
 		$('#modal-btn').click(function () {
@@ -402,7 +387,7 @@
 					text: '챌린지 금액을 입력해 주세요'
 				})
 			} else {
-				cost = $("input[name=challenge_cost]").val().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
+				cost = $("input[name=challenge_cost]").val();
 				$.ajax({
 					url: "/challenge-amend",
 					type: "post",

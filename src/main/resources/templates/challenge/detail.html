@@ -324,10 +324,11 @@
 			startdate =/*[[${challengeDetail.startdate}]]*/'default';
 			enddate =/*[[${challengeDetail.enddate}]]*/ 'default';
 			createMember =/*[[${createMember.member_id}]]*/'default';
+			challengeDetail =/*[[${challengeDetail}]]*/'default'
 			/*]]>*/
 
-			$('#description a').attr("target","_blank")
-			
+			$('#description a').attr("target", "_blank")
+
 			function sweetAlert(msg) {
 				Swal.fire({
 					icon: 'success',
@@ -368,6 +369,11 @@
 			}
 
 
+			if (challengeDetail.challenge_type == "유료") {
+				$("#secession").css("display", "none")
+			}
+
+
 			//모집 진행 마감 버튼 처리
 			if (startdate > todaydate) {
 				$(".status").html("모집중");
@@ -383,43 +389,74 @@
 
 			//참여하기 버튼
 			$("#challenge-join").click(function () {
+				$(':focus').blur()
 				if (login_memberId == null) {
 					location.href = "/member/login?challenge_id=" + challenge_id;
 				} else {
-					Swal.fire({
-						title: '참여하시겠습니까?',
-						icon: 'question',
+					if (challengeDetail.challenge_type == "유료") {
+						Swal.fire({
+							title: '유료챌린지',
+							text: "유료챌린지는 참여시 탈퇴가 불가능합니다.",
+							icon: 'warning',
+							showCancelButton: true,
+							confirmButtonColor: '#3085d6',
+							cancelButtonColor: '#d33',
+							confirmButtonText: '확인',
+							cancelButtonText: "취소"
+						}).then((result) => {
+							if (result.isConfirmed) {
+								$.ajax({
+									url: "/challenge/member",
+									method: "POST",
+									data: {
+										member_id: $("input[name='member_id']").val(),
+										challenge_id: challenge_id
+									},
+									//////////////////// recv
+									success: function () {
+										location.reload();
+									},
+									error: function (xhr, status, error) { // (파라미터 생략가능)
+										alert("error");
+									}
+									////////////////////
+								})
+							}
+						})
+					} else {
+						Swal.fire({
+							title: '참여하시겠습니까?',
+							icon: 'question',
 
-						showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
-						confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
-						cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
-						confirmButtonText: '참여', // confirm 버튼 텍스트 지정
-						cancelButtonText: '취소', // cancel 버튼 텍스트 지정
+							showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
+							confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
+							cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
+							confirmButtonText: '참여', // confirm 버튼 텍스트 지정
+							cancelButtonText: '취소', // cancel 버튼 텍스트 지정
 
-					}).then(result => {
-						if (result.isConfirmed) {
-							$.ajax({
-								url: "/challenge/member",
-								method: "POST",
-								data: {
-									member_id: $("input[name='member_id']").val(),
-									challenge_id: challenge_id
-								},
-								//////////////////// recv
-								success: function () {
-									location.reload();
-								},
-								error: function (xhr, status, error) { // (파라미터 생략가능)
-									alert("error");
-								}
-								////////////////////
-							})
-						}
-
-					})
+						}).then(result => {
+							if (result.isConfirmed) {
+								$.ajax({
+									url: "/challenge/member",
+									method: "POST",
+									data: {
+										member_id: $("input[name='member_id']").val(),
+										challenge_id: challenge_id
+									},
+									//////////////////// recv
+									success: function () {
+										location.reload();
+									},
+									error: function (xhr, status, error) { // (파라미터 생략가능)
+										alert("error");
+									}
+									////////////////////
+								})
+							}
+						})
+					}
 				}
 			})
-
 
 			//url 공유하기 버튼 클릭
 			$(".share-link").on("click", function (e) {
