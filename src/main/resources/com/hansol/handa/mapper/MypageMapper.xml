@@ -19,6 +19,7 @@
 		<result column="member_id" property="member_id"></result>
 		<result column="subcategory_id" property="subcategory_id"></result>
 		<result column="challenge_type" property="challenge_type"></result>
+		<result column="limit_member" property="limit_member"></result>
 		<result column="sub_category_name" property="subcategory_name"></result>
 		<result column="main_category_name" property="maincategory_name"></result>
 		<collection property="joinVO" resultMap="joinVO" />
@@ -49,7 +50,7 @@
 	<!-- 마이페이지 생성 챌린지 조회 -->
 	<select id="selectProdece" parameterType="hashmap" resultMap="challengeMap">
 		SELECT challenge.challenge_id, challenge_name, startdate, enddate,  
-			createdate, challenge.member_id, subcategory_id, challenge_type, count, sub_category_name, main_category_name <if test="mypage == false">, thumbnail</if>    
+			createdate, challenge.member_id, subcategory_id, challenge_type, count, sub_category_name, main_category_name, limit_member <if test="mypage == false">, thumbnail</if>    
 		from challenge, sub_category, main_category, (SELECT challenge.challenge_id, COUNT(*) as count  
 													from challenge, challenge_join
 													WHERE challenge.challenge_id = challenge_join.challenge_id
@@ -61,7 +62,7 @@
 	<!-- 마이페이지 참여 챌린지 조회 -->
 	<select id="selectPart" parameterType="hashmap" resultMap="challengeMap">
 		SELECT challenge.challenge_id, challenge_name, startdate, enddate,  
-			createdate, challenge.member_id, subcategory_id, challenge_type, count, sub_category_name, main_category_name <if test="mypage == false">, thumbnail</if>
+			createdate, challenge.member_id, subcategory_id, challenge_type, count, sub_category_name, main_category_name, limit_member <if test="mypage == false">, thumbnail</if>
 		from challenge, sub_category, main_category, (SELECT challenge.challenge_id, COUNT(*) as COUNT
 													from challenge, challenge_join
 													WHERE challenge.challenge_id = challenge_join.challenge_id

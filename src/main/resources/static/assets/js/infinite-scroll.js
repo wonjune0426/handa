@@ -54,7 +54,7 @@ function getList(category, sortType, createdate, count, searchWord, challengeTyp
 					
 					data += "</div>";
 					
-					data += "<p id='card-p'> 참여인원 " + challengeList[i]['joinVO']['count'] + "명 </p>";
+					data += "<p id='card-p'> 모집인원 " + challengeList[i]['joinVO']['count'] + "/" + challengeList[i]['limit_member'] + "</p>";
 							
 					data += "<div class='state'>";
 					data += "<div class='open-dt'>" + challengeList[i]['createdate'].split(" ", 1) + " 생성 </div>"; 
