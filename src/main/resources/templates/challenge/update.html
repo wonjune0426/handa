@@ -216,7 +216,8 @@
 			var sub_category =/*[[${challenge.subcategory_id}]]*/'default';
 			challenge_type =/*[[${challenge.challenge_type}]]*/'default';
 			challenge_id =/*[[${challenge.challenge_id}]]*/'default';
-			challenge_cost =/*[[${challenge.challenge_cost}]]*/'dafault'
+			challenge_cost =/*[[${challenge.challenge_cost}]]*/'dafault';
+			count=/*[[${challenge.count}]]*/'default';
 			/*]]>*/
 
 			$.datepicker.setDefaults({
@@ -367,7 +368,13 @@
 					icon: 'warning',
 					text: '참여인원은 2명부터 최대 15명까지 가능합니다.'
 				})
-			} else if ($("#profile-img").attr("src") == "../assets/img/defaultImg.png") {
+			} else if(count>$("#limit_member").val()){
+				Swal.fire({
+					icon: 'warning',
+					text: '현재 '+count+"명이 참여 중이에요!"
+				})
+				
+			}else if ($("#profile-img").attr("src") == "../assets/img/defaultImg.png") {
 				$("#modal-btn").focus()
 				Swal.fire({
 					icon: "warning",
