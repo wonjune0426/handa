@@ -68,8 +68,9 @@
 								
               				<!-- 챌린지 탈퇴 버튼 -->
               				<div class="mypage-btn-div">
-              					<button id="challenge-secession" class="handa-outline-btn"
+              					<button th:unless="${part.challenge_type} == '유료'" id="challenge-secession" class="handa-outline-btn"
               						th:challenge_id="${part.challenge_id}" onclick="secession(this.getAttribute('challenge_id'))">탈퇴</button>
+              					<button th:if="${part.challenge_type} == '유료'" id="challenge-secession" class="part-cost-btn btn" disabled>탈퇴</button>
               				</div>
 						</div>
           			</div><!-- End Card Item -->

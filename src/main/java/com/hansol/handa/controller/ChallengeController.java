@@ -56,8 +56,8 @@ public class ChallengeController {
 	}
 
 	/**
-	 * @param category : 카테고리 ID (1 ~ 7)
-	 * 					 추가 (8 : 취미 / 9 : 자기계발)
+	 * @param category : 소 카테고리 ID (1 ~ 7)
+	 * 					 대 카테고리 (8 : 취미 / 9 : 자기계발)
 	 * 
 	 * @param sort_type : 정렬 타입 (0: 최신 순, 1: 오래된 순, 2: 참여 인원 순)
 	 */

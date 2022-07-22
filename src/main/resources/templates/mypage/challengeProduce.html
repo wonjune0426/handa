@@ -73,8 +73,11 @@
               							<div class="mypage-btn-div">
               								<button class="handa-outline-btn left" th:challenge_id="${produce.challenge_id}" 
               									onclick="amend(this.getAttribute('challenge_id'))">수정</button>
-											<button class="handa-outline-btn right" th:challenge_id="${produce.challenge_id}"
+              									
+											<button th:if="${produce.challenge_type} != '유료'"class="handa-outline-btn right" th:challenge_id="${produce.challenge_id}"
 												onclick="remove(this.getAttribute('challenge_id'))">삭제</button>
+											<button th:if="${produce.challenge_type} == '유료'" id="remove-cost-btn" class="produce-cost-btn right btn" disabled>삭제</button>
+												
 										</div>
             						</div>
           						</div><!-- End Card Item -->

@@ -96,6 +96,18 @@
 	float: left;
 }	
 
+#amend-cost-btn{
+	width: 100%;
+}
+
+.part-cost-btn:disabled{
+	color : #747474; 
+	margin-top: 6px; 
+	background-color: #fff !important; 
+	padding: 10px 35px; 
+	transition: 0.4s;     
+	border-radius: 5px;
+}
 
 /* ------------마이페이지 - 내가 생성한 챌린지 (mypage/challengeProduce.html)-------------- */
 /* 마이페이지 탭 활성화될 경우 */
@@ -162,6 +174,10 @@
 /* 탈퇴 버튼 */
 #challenge-secession{
 	width:100%;
+	font-size : 18px;
+}
+#remove-cost-btn{
+	font-size: 18px;
 }
 
 #service-details-list{
@@ -248,6 +264,15 @@
 
 .breadcrumbs nav {
 	background-color: #fff;
+}
+
+.produce-cost-btn:disabled{
+	color : #747474; 
+	margin-top: 10px; 
+	background-color: #fff !important; 
+	padding: 10px 35px; 
+	transition: 0.4s;     
+	border-radius: 5px;
 }
 
 /* ------------마이페이지 - 일정관리 (mypage/calender.html)-------------- */
@@ -450,6 +475,10 @@
  
 .ch-card-btn-div {
 	text-align: right;
+}
+
+#remove-cost-btn :disabled{
+	color : #747474;
 }
 
 .ch-card-title {
