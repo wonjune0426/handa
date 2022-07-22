@@ -19,6 +19,7 @@
 		<result column="member_id" property="member_id"></result>
 		<result column="subcategory_id" property="subcategory_id"></result>
 		<result column="challenge_type" property="challenge_type"></result>
+		<result column="limit_member" property="limit_member"></result>
 		<result column="sub_category_name" property="subcategory_name"></result>
 		<collection property="joinVO" resultMap="joinVO" />
 	</resultMap>
@@ -27,19 +28,18 @@
 	<select id="selectChallengeList" parameterType="hashmap" resultMap="challengeMap">
 
 		SELECT challenge.challenge_id, challenge_name, thumbnail, startdate, enddate, 
-				createdate, challenge.member_id, subcategory_id, challenge_type, count, sub_category_name
+				createdate, challenge.member_id, subcategory_id, challenge_type, count, sub_category_name, limit_member
 		from challenge, sub_category, (SELECT challenge.challenge_id, COUNT(*) as count  
 										from challenge, challenge_join
 										WHERE challenge.challenge_id = challenge_join.challenge_id
 										GROUP BY challenge.challenge_id) count_table
 		WHERE challenge.subcategory_id = sub_category.sub_category_id AND challenge.challenge_id = count_table.challenge_id
-			<!-- <if test = "searchWord != 'search'"> AND challenge_name like CONCAT('%', #{searchWord}, '%')</if> -->
 			<if test = "searchWord != null"> AND challenge_name like CONCAT('%', #{searchWord}, '%')</if>
 			<choose>
 				<when test="challenge_type == 1">AND challenge_type = "무료"</when>
 				<when test="challenge_type == 2">AND challenge_type = "유료"</when>
 			</choose>
-			<if test="challenge_state != 1">AND startdate > NOW()</if>
+			<if test="challenge_state != 1">AND startdate > NOW() AND limit_member > count </if>
 	
 			<choose>
 				<!-- 최신순 -->
@@ -63,7 +63,7 @@
 	<!-- 카테고리 별 리스트 조회 -->
 	<select id="selectChallegeListCategory" parameterType="hashmap" resultMap="challengeMap">
 		SELECT challenge.challenge_id, challenge_name, thumbnail, startdate, enddate, 
-				createdate, challenge.member_id, subcategory_id, challenge_type, count, sub_category_name
+				createdate, challenge.member_id, subcategory_id, challenge_type, count, sub_category_name, limit_member
 		from challenge, sub_category, (SELECT challenge.challenge_id, COUNT(*) as count  
 										from challenge, challenge_join
 										WHERE challenge.challenge_id = challenge_join.challenge_id
@@ -74,7 +74,7 @@
 				<when test="challenge_type == 1">AND challenge_type = "무료"</when>
 				<when test="challenge_type == 2">AND challenge_type = "유료"</when>
 			</choose>
-			<if test="challenge_state != 1">AND startdate > NOW()</if>
+			<if test="challenge_state != 1">AND startdate > NOW() AND limit_member > count</if>
 			
 			<choose>
 				<!-- 최신순 -->
@@ -98,7 +98,7 @@
 	<!-- 대 카테고리 별 조회 -->
 	<select id="selectChallegeListMainCategory" parameterType="hashmap" resultMap="challengeMap">
 		SELECT challenge.challenge_id, challenge_name, thumbnail, startdate, enddate, 
-				createdate, challenge.member_id, subcategory_id, challenge_type, count, sub_category_name
+				createdate, challenge.member_id, subcategory_id, challenge_type, count, sub_category_name, limit_member
 		from challenge, sub_category, main_category, (SELECT challenge.challenge_id, COUNT(*) as count  
 										from challenge, challenge_join
 										WHERE challenge.challenge_id = challenge_join.challenge_id
@@ -113,7 +113,7 @@
 				<when test="challenge_type == 1">AND challenge_type = "무료"</when>
 				<when test="challenge_type == 2">AND challenge_type = "유료"</when>
 			</choose>
-			<if test="challenge_state != 1">AND startdate > NOW()</if>
+			<if test="challenge_state != 1">AND startdate > NOW() AND limit_member > count</if>
 			
 			<choose>
 				<!-- 최신순 -->
@@ -143,7 +143,10 @@
 	<!-- 챌린지 개수 조회 -->
 	<select id="selectCount" parameterType="hashmap" resultType="int">
 		SELECT COUNT(*) AS count
-		FROM challenge
+		FROM challenge <if test="challenge_state != 1">, (SELECT challenge.challenge_id, challenge.startdate, challenge.limit_member, COUNT(*) as challenge_count
+										from challenge, challenge_join
+										WHERE challenge.challenge_id = challenge_join.challenge_id
+										GROUP BY challenge.challenge_id) count_table </if>
 		<if test="main_category_id != null">, sub_category, main_category</if>
 		<if test="sub_category_id != null or searchWord != 'search' or challengeType != 0 or main_category_id != null">WHERE 1=1</if> 
 		<if test = "main_category_id != null">and challenge.subcategory_id = sub_category.sub_category_id 
@@ -158,30 +161,30 @@
 			<when test="challengeType == 1">AND challenge_type = "무료"</when>
 			<when test="challengeType == 2">AND challenge_type = "유료"</when>
 		</choose>
-		<if test="challenge_state != 1">AND startdate > NOW()</if>
+		<if test="challenge_state != 1">and challenge.challenge_id = count_table.challenge_id and count_table.startdate > NOW() AND count_table.limit_member > challenge_count</if>
  	</select>
  	
  	<!-- 메인 페이지 인기 챌린지 조회 -->
  	<select id="selectPopular" resultMap="challengeMap">
  		SELECT challenge.challenge_id, challenge_name, thumbnail, startdate, enddate,  
-			createdate, challenge.member_id, subcategory_id, challenge_type, count, sub_category_name   
+			createdate, challenge.member_id, subcategory_id, challenge_type, count, sub_category_name, limit_member   
 		from challenge, sub_category, (SELECT challenge.challenge_id, COUNT(*) as count  
 										from challenge, challenge_join
 										WHERE challenge.challenge_id = challenge_join.challenge_id
 										GROUP BY challenge.challenge_id) count_table
-		WHERE challenge.subcategory_id = sub_category.sub_category_id AND challenge.challenge_id = count_table.challenge_id AND enddate >= NOW()
+		WHERE challenge.subcategory_id = sub_category.sub_category_id AND challenge.challenge_id = count_table.challenge_id AND enddate >= NOW() AND limit_member > count
 			GROUP BY challenge.challenge_id order by COUNT desc, challenge.createdate desc LIMIT 8;
  	</select>
 	
 	<!-- 메인 페이지 유료 챌린지 조회 -->
 	<select id="selectCost" resultMap="challengeMap">
 		SELECT challenge.challenge_id, challenge_name, thumbnail, startdate, enddate,  
-			createdate, challenge.member_id, subcategory_id, challenge_type, count, sub_category_name   
+			createdate, challenge.member_id, subcategory_id, challenge_type, count, sub_category_name, limit_member 
 		from challenge, sub_category, (SELECT challenge.challenge_id, COUNT(*) as count  
 										from challenge, challenge_join
 										WHERE challenge.challenge_id = challenge_join.challenge_id
 										GROUP BY challenge.challenge_id) count_table
-		WHERE challenge.subcategory_id = sub_category.sub_category_id AND challenge.challenge_id = count_table.challenge_id and challenge_type = "유료" AND enddate >= NOW()
+		WHERE challenge.subcategory_id = sub_category.sub_category_id AND challenge.challenge_id = count_table.challenge_id and challenge_type = "유료" AND enddate >= NOW() AND limit_member > count
 			GROUP BY challenge.challenge_id order by challenge.createdate desc LIMIT 6;
 	</select>
 	
