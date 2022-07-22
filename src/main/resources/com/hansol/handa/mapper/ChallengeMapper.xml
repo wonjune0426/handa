@@ -211,7 +211,8 @@
 		enddate=IFNULL(#{enddate},enddate),
 		description=IFNULL(#{description},description),
 		challenge_type=IFNULL(#{challenge_type},challenge_type),
-		challenge_cost=IFNULL(#{challenge_cost},challenge_cost)
+		challenge_cost=IFNULL(#{challenge_cost},challenge_cost),
+		limit_member=IFNULL(#{limit_member},limit_member)
 		where
 		challenge_id=#{challenge_id} and member_id=#{member_id}
 	</update>

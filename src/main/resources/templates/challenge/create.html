@@ -35,7 +35,7 @@
 							<form action="/challenge" method="post" class="php-email-form" id="challenge_create"
 								style="background:white;">
 								<div class="row gy-4">
-									<div class="col-md-6">
+									<div class="col-md-6" style="padding-top:19px">
 										<label for="main-category">
 											<label class="create-label">Thumbnail</label>
 										</label>
@@ -49,7 +49,7 @@
 											</button>
 										</div>
 									</div>
-									<div class="col-md-6" style="padding-top: 35px">
+									<div class="col-md-6" style="padding-top: 20px">
 										<div class="form-group mt-5 row">
 											<div class="col-2 register-label-style">
 												<label class="create-label">챌린지 이름</label>
@@ -100,72 +100,80 @@
 											<div class="register-label-style col-2">
 												<label class="create-label">유형</label>
 											</div>
-											<div class="col-10">
-												<div style="display: flex;">
-													<select class="form-select main-category" name="challenge_type"
-														id="challenge_type" style="width:50%">
-														<option value="무료">무료</option>
-														<option value="유료">유료</option>
-														<input type="text" maxlength="10"
-															onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
-															style="width:60%;" name="challenge_cost"
-															class="form-control" id="challenge_cost"
-															placeholder="금액을 입력해주세요" disabled>
-														</input>
-													</select>
-												</div>
+											<div class="col-5" style="display: flex;">
+												<select class="form-select main-category" name="challenge_type"
+													id="challenge_type">
+													<option value="무료">무료</option>
+													<option value="유료">유료</option>
+												</select>
+											</div>
+											<div class="col-5">
+												<input type="text" maxlength="10"
+													onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
+													name="challenge_cost" class="form-control" id="challenge_cost"
+													placeholder="금액을 입력해주세요" disabled>
+												</input>
 											</div>
 										</div>
 
-
-									</div>
-									<div class="modal">
-										<div id="modal_body" class="check">
-											<div style="text-align: right;" class="check">
-												<button type="button" class="btn-close" aria-label="Close"
-													id="modal-close"></button>
+										<div class="form-group mt-5 row">
+											<div class="register-label-style col-2">
+												<label class="create-label">모집 인원</label>
 											</div>
-											<div style="padding:5px 30px 30px 30px" class="check">
-												<label for="main-category">
-													<h3>이미지 검색</h3>
-												</label>
-											</div>
-											<div class="input-group mb-3" style="padding:0px 30% 30px 30%">
-												<input type="text" class="form-control" placeholder="검색어를 입력해주세요"
-													aria-label="검색어를 입력해주세요" aria-describedby="basic-addon2"
-													id="search-word">
-												<div class="input-group-append">
-													<button class="btn btn-primary" type="button" style="height: 50px;"
-														id="image-search-btn">검색</button>
-												</div>
-											</div>
-											<div id="img-list">
-
+											<div class="col-5">
+												<input type="number" min="2" max="15" maxlength="2" class="form-control"
+													id="limit_member" placeholder="참여 제한 인원" oninput="maxLengthCheck(this)">
+												</input>
 											</div>
 										</div>
 									</div>
-
-									<div class="col-md-12">
-										<label class="create-label">설명</label>
-										<div>
-											<textarea id="editor" name></textarea>
-										</div>
-									</div>
-
-									<div class="col-md-12 text-center create-challenge">
-										<button type="button" id="create-challenge" class="handa-btn"
-											style="width:15%">챌린지
-											생성</button>
-									</div>
-									<input type="hidden" class="form-control price" name="member_id"
-										th:value='${#authentication.principal.Username}' readonly>
 								</div>
-							</form>
+								<div class="modal">
+									<div id="modal_body" class="check">
+										<div style="text-align: right;" class="check">
+											<button type="button" class="btn-close" aria-label="Close"
+												id="modal-close"></button>
+										</div>
+										<div style="padding:5px 30px 30px 30px" class="check">
+											<label for="main-category">
+												<h3>이미지 검색</h3>
+											</label>
+										</div>
+										<div class="input-group mb-3" style="padding:0px 30% 30px 30%">
+											<input type="text" class="form-control" placeholder="검색어를 입력해주세요"
+												aria-label="검색어를 입력해주세요" aria-describedby="basic-addon2"
+												id="search-word">
+											<div class="input-group-append">
+												<button class="btn btn-primary" type="button" style="height: 50px;"
+													id="image-search-btn">검색</button>
+											</div>
+										</div>
+										<div id="img-list">
+
+										</div>
+									</div>
+								</div>
+
+								<div class="col-md-12">
+									<label class="create-label">설명</label>
+									<div>
+										<textarea id="editor" name></textarea>
+									</div>
+								</div>
+
+								<div class="col-md-12 text-center create-challenge">
+									<button type="button" id="create-challenge" class="handa-btn" style="width:15%">챌린지
+										생성</button>
+								</div>
+								<input type="hidden" class="form-control price" name="member_id"
+									th:value='${#authentication.principal.Username}' readonly>
 						</div>
-						<!-- End Quote Form -->
+						</form>
 					</div>
+					<!-- End Quote Form -->
 			</div>
-		</section>
+</div>
+</section>
 </div>
 </section>
 <!-- End Services Section -->
@@ -342,6 +350,12 @@
 			}
 		})
 
+		function maxLengthCheck(object) {
+			if (object.value.length > object.maxLength) {
+				object.value = object.value.slice(0, object.maxLength);
+			}
+		}
+
 		$('#create-challenge').click(function () {
 			var select_sub = $("#sub-category").val();
 			var startdate = $("input[name=startdate]").val()
@@ -355,6 +369,11 @@
 					text: '제목은 공백, 특수문자 제외 12자입니다.',
 				})
 
+			} else if ($("#limit_member").val() < 2 || $("#limit_member").val() > 15) {
+				Swal.fire({
+					icon: 'warning',
+					text: '참여인원은 2명부터 최대 15명까지 가능합니다.'
+				})
 			} else if ($("#profile-img").attr("src") == "../assets/img/defaultImg.png") {
 				$("#modal-btn").focus()
 				Swal.fire({
@@ -412,7 +431,8 @@
 						description: editor.getData(),
 						challenge_type: $("select[name=challenge_type]").val(),
 						member_id: $("input[name=member_id]").val(),
-						challenge_cost: cost
+						challenge_cost: cost,
+						limit_member: $("#limit_member").val()
 					},
 					dataType: "text",
 					//////////////////// recv

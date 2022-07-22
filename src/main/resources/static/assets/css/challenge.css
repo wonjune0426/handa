@@ -227,11 +227,11 @@
 }
 
 #challenge_type {
-	border-radius: 4px 0px 0px 4px;
+	border-radius: 4px;
 }
 
 #challenge_cost {
-	border-radius: 0px 4px 4px 0px;
+	border-radius: 4px;
 }
 
 .create-label {
@@ -700,10 +700,12 @@
 /* 챌린지 생성화면 css */
 
 .profile-btn{
+	padding:0px;
+	border-radius: 15px;
+    border: solid;
 	position: relative;
-	width:95%;
-	height:438px;
-	border: 0;
+	width:96%;
+	height:474px;
 	margin:0px auto;
 	background-color: rgb(255, 255, 255);
 }
