@@ -36,6 +36,7 @@
 					<h2>챌린지 수정</h2>
 				</div>
 				<section id="contact" class="contact">
+					<div class="line-div">설명을 제외한 모든 부분은 필수 입력 입니다</div>
 					<div class="container aos-init aos-animate" data-aos="fade-up" id="show_modal">
 						<div class="row g-0">
 							<form action="/challenge" method="post" class="php-email-form"
@@ -137,8 +138,8 @@
 								<div class="modal">
 									<div id="modal_body" class="check">
 										<div style="text-align: right;" class="check">
-											<button type="button" class="btn-close" aria-label="Close"
-												id="modal-close" style="padding:1.25em 1.25em"></button>
+											<button type="button" class="btn-close" aria-label="Close" id="modal-close"
+												style="padding:1.25em 1.25em"></button>
 										</div>
 										<div style="padding:5px 30px 30px 30px" class="check">
 											<label for="main-category">
@@ -217,7 +218,7 @@
 			challenge_type =/*[[${challenge.challenge_type}]]*/'default';
 			challenge_id =/*[[${challenge.challenge_id}]]*/'default';
 			challenge_cost =/*[[${challenge.challenge_cost}]]*/'dafault';
-			count=/*[[${challenge.count}]]*/'default';
+			count =/*[[${challenge.count}]]*/'default';
 			/*]]>*/
 
 			$.datepicker.setDefaults({
@@ -341,7 +342,7 @@
 			$('#search-word').val("");
 			$('#profile-img').attr("src", ch);
 		});
-		
+
 		function maxLengthCheck(object) {
 			if (object.value.length > object.maxLength) {
 				object.value = object.value.slice(0, object.maxLength);
@@ -368,12 +369,12 @@
 					icon: 'warning',
 					text: '참여인원은 2명부터 최대 15명까지 가능합니다.'
 				})
-			} else if(count>$("#limit_member").val()){
+			} else if (count > $("#limit_member").val()) {
 				Swal.fire({
 					icon: 'warning',
-					text: '현재 '+count+"명이 참여 중이에요!"
+					text: '현재 ' + count + "명이 참여 중이에요!"
 				})
-			}else if ($("#profile-img").attr("src") == "../assets/img/defaultImg.png") {
+			} else if ($("#profile-img").attr("src") == "../assets/img/defaultImg.png") {
 				$("#modal-btn").focus()
 				Swal.fire({
 					icon: "warning",
@@ -426,7 +427,7 @@
 						challenge_type: $("select[name=challenge_type]").val(),
 						member_id: member_id,
 						challenge_cost: cost,
-						limit_member:$("#limit_member").val()
+						limit_member: $("#limit_member").val()
 					},
 					dataType: "text",
 					//////////////////// recv

@@ -375,7 +375,7 @@
 
 			
 			//모집 진행 마감 버튼 처리
-			if(challengeDetail.count==challengeDetail.limit_member){
+			if(challengeDetail.count==challengeDetail.limit_member&&todaydate<startdate){
 				$(".status").html("인원 마감");
 				$("#challenge-join").html("인원 마감")
 				$("#challenge-join").prop("disabled", true)

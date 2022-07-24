@@ -29,7 +29,9 @@
 					<!-- <span>챌린지 생성</span> -->
 					<h2>챌린지 생성</h2>
 				</div>
+
 				<section id="contact" class="contact">
+					<div class="line-div">설명을 제외한 모든 부분은 필수 입력 입니다</div>
 					<div class="container aos-init aos-animate" data-aos="fade-up" id="show_modal">
 						<div class="row g-0">
 							<form action="/challenge" method="post" class="php-email-form" id="challenge_create"
@@ -122,18 +124,19 @@
 											</div>
 											<div class="col-5">
 												<input type="number" min="2" max="15" maxlength="2" class="form-control"
-													id="limit_member" placeholder="참여 제한 인원" oninput="maxLengthCheck(this)">
+													id="limit_member" placeholder="참여 제한 인원"
+													oninput="maxLengthCheck(this)">
 												</input>
 											</div>
 										</div>
 									</div>
 								</div>
-								
+
 								<div class="modal">
 									<div id="modal_body" class="check">
 										<div style="text-align: right;" class="check">
-											<button type="button" class="btn-close" aria-label="Close"
-												id="modal-close" style="padding:1.25em 1.25em"></button>
+											<button type="button" class="btn-close" aria-label="Close" id="modal-close"
+												style="padding:1.25em 1.25em"></button>
 										</div>
 										<div style="padding:5px 30px 30px 30px" class="check">
 											<label for="main-category">

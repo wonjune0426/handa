@@ -788,3 +788,9 @@
 	vertical-align: middle;
 }
 
+.line-div{
+	padding-right: 10px;
+	text-align: right;
+	border-bottom: 1px solid #888888;
+}
+
