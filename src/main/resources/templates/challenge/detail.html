@@ -153,7 +153,7 @@
 						<div class="col-lg-12">
 							<div class="col-12 challenge-join-member">
 								<p class="join-member-text">
-									참여 인원 <span class="join-member-num">([[${challengeDetail.count}]]명)</span>
+									참여 인원 <span class="join-member-num">([[${challengeDetail.count}]]/[[${challengeDetail.limit_member}]])</span>
 									<button type="button" id="secession" class="btn btn-primary btn-sm"
 										style="float:right;">탈퇴하기</button>
 								</p>
@@ -373,17 +373,22 @@
 				$("#secession").css("display", "none")
 			}
 
-
+			
 			//모집 진행 마감 버튼 처리
-			if (startdate > todaydate) {
+			if(challengeDetail.count==challengeDetail.limit_member){
+				$(".status").html("인원 마감");
+				$("#challenge-join").html("인원 마감")
+				$("#challenge-join").prop("disabled", true)
+			}
+			else if (startdate > todaydate) {
 				$(".status").html("모집중");
-			} else if (startdate <= todaydate && todaydate <= enddate) {
+			}else if (startdate <= todaydate && todaydate <= enddate) {
 				$(".status").html("진행중");
 				$("#challenge-join").html("진행 중")
 				$("#challenge-join").prop("disabled", true)
 			} else if (todaydate > enddate) {
-				$(".status").html("마감");
-				$("#challenge-join").html("마감")
+				$(".status").html("종료");
+				$("#challenge-join").html("종료")
 				$("#challenge-join").prop("disabled", true)
 			}
 
