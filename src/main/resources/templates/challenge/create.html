@@ -373,6 +373,13 @@
 					text: '제목은 공백, 특수문자 제외 12자입니다.',
 				})
 
+			} else if (todaydate >= startdate) {
+				$("input[name=startdate]").focus()
+				Swal.fire({
+					icon: 'warning',
+					text: '시작일은 ' + todaydate + ' 이후로 설정해주세요'
+				})
+
 			} else if ($("#limit_member").val() < 2 || $("#limit_member").val() > 15) {
 				Swal.fire({
 					icon: 'warning',
@@ -396,13 +403,6 @@
 					icon: 'warning',
 					text: '카테고리는 필수항목 입니다.'
 				});
-			} else if (todaydate >= startdate) {
-				$("input[name=startdate]").focus()
-				Swal.fire({
-					icon: 'warning',
-					text: '시작일은 ' + todaydate + ' 이후로 설정해주세요'
-				})
-
 			} else if (!dateRegexp.test(startdate) || !dateRegexp.test(enddate)) {
 				$("input[name=startdate]").focus()
 				Swal.fire({
