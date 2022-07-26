@@ -55,7 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         		"/", "/list", "/detail", "/comment", "/member/login", 
         		"/member/register", "/assets/**", "/smarteditor/**",
         		"/member/index", "/member/sendMail", "/member/certifyEmail", 
-        		"/member/nonCertify", "/qna"
+        		"/member/nonCertify", "/qna", "/error"
         		).permitAll()
         .antMatchers(
         		"/mypage/**",
