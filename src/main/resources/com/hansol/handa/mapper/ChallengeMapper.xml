@@ -191,9 +191,9 @@
 	<insert id="createChallenge" parameterType="ChallengeVO"
 		useGeneratedKeys="true" keyProperty="challenge_id">
 		insert into
-		challenge(challenge_name,thumbnail,startdate,enddate,description,member_id,subcategory_id,challenge_type,createdate,challenge_cost)
+		challenge(challenge_name,thumbnail,startdate,enddate,description,member_id,subcategory_id,challenge_type,createdate,challenge_cost,limit_member)
 		values
-		(#{challenge_name},IFNULL(#{thumbnail},NULL),IFNULL(#{startdate},NULL),IFNULL(#{enddate},NULL),IFNULL(#{description},NULL),#{member_id},#{subcategory_id},#{challenge_type},now(),#{challenge_cost})
+		(#{challenge_name},IFNULL(#{thumbnail},NULL),IFNULL(#{startdate},NULL),IFNULL(#{enddate},NULL),IFNULL(#{description},NULL),#{member_id},#{subcategory_id},#{challenge_type},now(),#{challenge_cost},#{limit_member})
 	</insert>
 
 	<select id="getChallenge" resultType="ChallengeVO">
