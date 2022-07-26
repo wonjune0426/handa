@@ -2,12 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/layout}">
-	
+
 <!-- include CSS File -->
 <th:block layout:fragment="css">
 	<!-- Handa Member CSS File -->
 	<!-- 이런 식으로 css 링크를 작성하시면 됩니다. -->
-	<!-- <link th:href="@{/assets/css/member.css}" rel="stylesheet"> -->
+	<link th:href="@{/assets/css/member.css}" rel="stylesheet">
 </th:block>
 
 <!-- start Content  -->
@@ -31,17 +31,79 @@
 
 		<!-- ======= Services Section ======= -->
 		<section>
-			<div class="text-center" style="margin-top: 200px; margin-bottom: 200px;">
-				<h1 th:text="${code}">ERROR</h1>
-				<p th:text="${msg}"></p>
-				<a href="/">홈으로 돌아가기</a>
+			<div class="text-center"
+				style="margin-top: 200px; margin-bottom: 200px;">
+				<th:block sec:authorize="isAnonymous()">
+					<h1 th:text="${code}">ERROR</h1>
+					<p th:text="${msg}"></p>
+					<a href="/">홈으로 돌아가기</a>
+				</th:block>
+
+				<th:block sec:authorize="isAuthenticated()">
+
+
+					<th:block
+						th:if="${#strings.equals(#authentication.principal.user.auth, 'ROLE_USER')}">
+						<div class="section-header">
+							<h2>회원가입</h2>
+						</div>
+						<section id="contact" class="contact register-padding-top-30px">
+							<div class="text-center">
+								<div class="stepper-wrapper">
+									<div class="stepper-item">
+										<div class="step-counter">
+											<i class="fa-solid fa-pen"></i>
+										</div>
+										<div class="step-name">정보입력</div>
+									</div>
+									<div class="stepper-item">
+										<div class="">></div>
+									</div>
+									<div class="stepper-item completed">
+										<div class="step-counter">
+											<i class="fa-solid fa-envelope"></i>
+										</div>
+										<div class="step-name">메일인증</div>
+									</div>
+								</div>
+								<div class="register-div">
+									<div class="line-div"></div>
+									<br>
+									<div class="before-send">
+										<p>
+											[[${#authentication.principal.user.member_name}]]([[${#authentication.principal.user.member_id}]])
+											님 <b>메일 인증</b>을 완료하셔야 <br> 한다의 모든 서비스를 이용하실 수 있습니다.
+
+										</p>
+
+										<p>가입 이메일: [[${#authentication.principal.user.e_mail}]]</p>
+									</div>
+
+									<!-- End Contact Form -->
+									<input type="hidden" th:value="${msg}" class="register-result" />
+								</div>
+							</div>
+						</section>
+
+
+					</th:block>
+
+					<th:block
+						th:if="${!#strings.equals(#authentication.principal.user.auth, 'ROLE_USER')}">
+						<h1 th:text="${code}">ERROR</h1>
+						<p th:text="${msg}"></p>
+						<a href="/">홈으로 돌아가기</a>
+
+					</th:block>
+				</th:block>
 			</div>
 		</section>
 		<!-- End Services Section -->
 
 	</main>
 	<!-- End #main -->
-</div> <!-- end Content -->
+</div>
+<!-- end Content -->
 
 <!-- include JS Script -->
 <th:block layout:fragment="javascript">
