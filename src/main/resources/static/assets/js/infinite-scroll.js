@@ -43,9 +43,6 @@ function getList(category, sortType, createdate, count, searchWord, challengeTyp
 					}
 	
 					data += "</h3>";
-			
-					//data += "<p id='card-p'>" + challengeList[i]['startdate'] + " ~ " + challengeList[i]['enddate'] + "</p>";
-
 					data += "<div>";
 					data += "<p id='card-p' class='date-p'>" + challengeList[i]['startdate'] + " ~ " + challengeList[i]['enddate'] + "</p>";
 					
