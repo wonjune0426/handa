@@ -23,7 +23,7 @@ http://172.27.0.174:8080
 ## 📃ERD
 
 [HansolHanda (erdcloud.com)](https://www.erdcloud.com/d/mmLojnftsdFF4n3SR)
-
+![image](https://github.com/wonjune0426/handa/assets/97424544/793b97e7-8a4e-41cc-862a-aa1be55627a3)
 
 ## 🧾구현기능
 
