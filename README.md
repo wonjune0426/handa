@@ -24,7 +24,6 @@ http://172.27.0.174:8080
 
 [HansolHanda (erdcloud.com)](https://www.erdcloud.com/d/mmLojnftsdFF4n3SR)
 
-![ERD.PNG](/uploads/1a0554be1950ae61439a2a8d2da382e6/ERD.PNG.png)
 
 ## 🧾구현기능
 
