@@ -18,7 +18,7 @@ http://172.27.0.174:8080
 
 ## 🧩와이어프레임
 
-![와프.PNG](/uploads/c099ed66c9be1a6009803c3c4314ec57/와프.PNG.png)
+![image](https://github.com/wonjune0426/handa/assets/97424544/ed6d6247-a9d7-4276-ab32-c38dfb7a6132)
 
 ## 📃ERD
 
