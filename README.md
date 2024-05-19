@@ -99,7 +99,7 @@ http://172.27.0.174:8080
 
 ## ⚒  개발환경
 
-![기술_스택.PNG](/uploads/afbcbabd14d5c88bb02ee5981396a249/기술_스택.PNG.png)
+![image](https://github.com/wonjune0426/handa/assets/97424544/e71cfaa6-3389-4cc0-960f-389afd34404d)
 
 ## 📆 WBS
 
